@@ -244,6 +244,8 @@
                                 <select id="topic-select" class="w-full bg-slate-900 border border-slate-700 text-slate-200 text-xs rounded-lg p-2.5 outline-none focus:border-amber-500">
                                     <option value="preguntas-a1.json">Test A1 (preguntas-a1.json)</option>
                                     <option value="preguntas-a2.json">Test A1 (preguntas-a2.json)</option>
+                                    <option value="preguntas-a3.json">Test A1 (preguntas-a3.json)</option>
+                                    <option value="preguntas-a4.json">Test A1 (preguntas-a4.json)</option>
                                     <!-- Pots afegir més opcions si crees més fitxers en el futur -->
                                 </select>
                             </div>
@@ -439,7 +441,7 @@
 
         async function loadQuestionsFromJsonFile() {
             try {
-                const fitxersTemes = ['preguntas-a1.json', 'preguntas-a2.json']; 
+                const fitxersTemes = ['preguntas-a1.json', 'preguntas-a2.json', 'preguntas-a3.json', 'preguntas-a4.json']; 
                 let allQuestions = [];
                 for (const fitxer of fitxersTemes) {
                     try {
