@@ -588,28 +588,10 @@
         </div>
     </div>
 
-    <!-- FIREBASE MODULE (CORRECTAMENT EXPOSAT A WINDOW) -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-        import { getFirestore, doc, setDoc, getDoc, collection, getDocs, query, where } from "https://www.gstatic.com/firebasejs/10.8.0/firestore.js";
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyAK8r_-CMw1626LIFnrn9NcVkIcvYv2Elo",
-            authDomain: "oppostest.firebaseapp.com",
-            projectId: "oppostest",
-            storageBucket: "oppostest.firebasestorage.app",
-            messagingSenderId: "738546966243",
-            appId: "1:738546966243:web:58b4277287a97d6e036fd6",
-            measurementId: "G-XT9FSLFHSB"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
+    <!-- SCRIPT GLOBAL PER FUNCIONS D'AUTENTICACIÓ -->
+    <script>
         let isRegisterMode = false;
 
-        // Exposar funcions a window perquè funcionin amb els onclick del HTML
         window.openAuthModal = function(mode = 'login') {
             isRegisterMode = (mode === 'register');
             updateAuthModalUI();
@@ -641,6 +623,27 @@
                 document.getElementById('auth-switch-btn').innerText = "Registra't";
             }
         }
+    </script>
+
+    <!-- FIREBASE MODULE -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+        import { getFirestore, doc, setDoc, getDoc, collection, getDocs, query, where } from "https://www.gstatic.com/firebasejs/10.8.0/firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAK8r_-CMw1626LIFnrn9NcVkIcvYv2Elo",
+            authDomain: "oppostest.firebaseapp.com",
+            projectId: "oppostest",
+            storageBucket: "oppostest.firebasestorage.app",
+            messagingSenderId: "738546966243",
+            appId: "1:738546966243:web:58b4277287a97d6e036fd6",
+            measurementId: "G-XT9FSLFHSB"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
 
         function getSpanishDateStr() {
             const now = new Date();
@@ -658,13 +661,13 @@
             const username = document.getElementById('auth-username').value.trim();
             const dob = document.getElementById('auth-dob').value;
 
-            if (!email || !password || (isRegisterMode && (!username || !dob))) {
+            if (!email || !password || (window.isRegisterMode && (!username || !dob))) {
                 if (window.showToast) window.showToast("Si us plau, omple tots els camps obligatoris.", "error");
                 return;
             }
 
             try {
-                if (isRegisterMode) {
+                if (window.isRegisterMode) {
                     const usernamesRef = collection(db, "users");
                     const q = query(usernamesRef, where("username", "==", username));
                     const querySnapshot = await getDocs(q);
