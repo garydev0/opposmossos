@@ -7,16 +7,19 @@ exports.handler = async (event) => {
 
   try {
     const questions = JSON.parse(event.body);
-    const store = getStore({ name: 'questions-db' });
+    // Inicialización automática de Netlify Blobs para Functions
+    const store = getStore('questions-db');
     await store.setJSON('questions', questions);
 
     return {
       statusCode: 200,
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ success: true })
     };
   } catch (error) {
     return {
       statusCode: 500,
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ error: error.message })
     };
   }
