@@ -59,13 +59,10 @@
                     <i class="fa-solid fa-chart-pie mr-2"></i>Inici & Stats
                 </button>
                 <button onclick="switchTab('exam')" id="nav-exam" class="tab-btn px-4 py-2 rounded-lg text-sm font-medium transition-all text-slate-300 hover:text-white hover:bg-slate-700/50">
-                    <i class="fa-solid fa-file-pen mr-2"></i>Simulacre Test
+                    <i class="fa-solid fa-file-pen mr-2"></i>Tests
                 </button>
                 <button onclick="switchTab('guide')" id="nav-guide" class="tab-btn px-4 py-2 rounded-lg text-sm font-medium transition-all text-slate-300 hover:text-white hover:bg-slate-700/50">
                     <i class="fa-solid fa-book-bookmark mr-2"></i>Guia d'Estudi
-                </button>
-                <button onclick="switchTab('add-questions')" id="nav-add-questions" class="tab-btn px-4 py-2 rounded-lg text-sm font-medium transition-all text-slate-300 hover:text-white hover:bg-slate-700/50">
-                    <i class="fa-solid fa-pen-to-square mr-2"></i>Gestió / Exportar
                 </button>
             </nav>
 
@@ -82,13 +79,10 @@
                 <i class="fa-solid fa-chart-pie text-base"></i><span>Inici</span>
             </button>
             <button onclick="switchTab('exam')" class="flex flex-col items-center py-1 text-slate-400">
-                <i class="fa-solid fa-file-pen text-base"></i><span>Test</span>
+                <i class="fa-solid fa-file-pen text-base"></i><span>Tests</span>
             </button>
             <button onclick="switchTab('guide')" class="flex flex-col items-center py-1 text-slate-400">
                 <i class="fa-solid fa-book-bookmark text-base"></i><span>Guia</span>
-            </button>
-            <button onclick="switchTab('add-questions')" class="flex flex-col items-center py-1 text-slate-400">
-                <i class="fa-solid fa-pen-to-square text-base"></i><span>Gestió</span>
             </button>
         </div>
     </header>
@@ -107,8 +101,8 @@
                         Benvingut/da al teu centre de preparació personalitzat per als <strong>Mossos d'Esquadra</strong>. Practica amb el banc de preguntes global, reforça els punts febles i posa a prova els teus coneixements.
                     </p>
                     <div class="mt-6 flex flex-wrap gap-3">
-                        <button onclick="startFullExam()" class="px-5 py-2.5 bg-brand-600 hover:bg-brand-500 text-white font-semibold rounded-xl shadow-lg shadow-brand-600/30 transition-all flex items-center">
-                            <i class="fa-solid fa-play mr-2"></i> Iniciar Simulacre d'Examen
+                        <button onclick="switchTab('exam')" class="px-5 py-2.5 bg-brand-600 hover:bg-brand-500 text-white font-semibold rounded-xl shadow-lg shadow-brand-600/30 transition-all flex items-center">
+                            <i class="fa-solid fa-play mr-2"></i> Anar a Secció de Tests
                         </button>
                     </div>
                 </div>
@@ -132,7 +126,7 @@
                 <div class="bg-slate-800/80 rounded-xl p-5 border border-slate-700/60 shadow-sm">
                     <div class="flex justify-between items-start">
                         <div>
-                            <p class="text-slate-400 text-xs uppercase font-bold tracking-wider">Simulacres Fets</p>
+                            <p class="text-slate-400 text-xs uppercase font-bold tracking-wider">Tests Fets</p>
                             <h3 id="stat-exams-done" class="text-3xl font-bold text-white mt-1">0</h3>
                         </div>
                         <div class="p-3 bg-emerald-500/10 text-emerald-400 rounded-lg">
@@ -194,49 +188,122 @@
             </div>
         </section>
 
-        <!-- EXAM SECTION -->
+        <!-- EXAM / TESTS SECTION -->
         <section id="sec-exam" class="tab-content hidden space-y-6">
-            <div id="exam-header" class="bg-slate-800 rounded-xl p-4 border border-slate-700 flex flex-wrap items-center justify-between gap-4">
-                <div>
-                    <span id="exam-progress-text" class="text-xs font-bold text-brand-400 uppercase tracking-wider">Pregunta 1 de 10</span>
-                    <h2 id="exam-title" class="text-lg font-bold text-white">Simulacre d'Examen</h2>
+            
+            <!-- MENU DE SELECCIÓ DE TIPUS DE TEST -->
+            <div id="exam-menu-container" class="space-y-6">
+                <div class="bg-slate-800 rounded-2xl p-6 border border-slate-700 shadow-xl">
+                    <h2 class="text-xl font-bold text-white mb-2"><i class="fa-solid fa-list-check text-brand-400 mr-2"></i>Selecciona el tipus de test</h2>
+                    <p class="text-slate-300 text-sm">Tria una modalitat per començar a practicar o avaluar els teus coneixements.</p>
                 </div>
-                <div class="flex items-center space-x-4">
-                    <div class="w-32 bg-slate-700 h-2.5 rounded-full overflow-hidden">
-                        <div id="exam-progress-bar" class="bg-brand-500 h-full w-0 transition-all duration-300"></div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Modalitat 1: Simulacre Oficial -->
+                    <div class="bg-slate-800/90 rounded-2xl p-6 border border-slate-700 shadow-xl flex flex-col justify-between hover:border-brand-500 transition-all">
+                        <div>
+                            <div class="w-12 h-12 rounded-xl bg-brand-500/10 text-brand-400 flex items-center justify-center text-xl mb-4">
+                                <i class="fa-solid fa-clock"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-white">Simulacre Oficial</h3>
+                            <p class="text-slate-300 text-xs mt-2 leading-relaxed">Examen cronometrat amb 30 preguntes barrejades de tots els temes i límit de 30 minuts.</p>
+                        </div>
+                        <button onclick="startSimulacre()" class="mt-6 w-full py-2.5 bg-brand-600 hover:bg-brand-500 text-white font-semibold rounded-xl text-xs transition-all shadow-md">
+                            Començar Simulacre
+                        </button>
                     </div>
-                    <button onclick="finishExamEarly()" class="text-xs px-3 py-1.5 bg-red-900/40 text-red-300 border border-red-700/50 rounded-lg hover:bg-red-900/60">
-                        Finalitzar Test
-                    </button>
+
+                    <!-- Modalitat 2: Pràctica Lliure -->
+                    <div class="bg-slate-800/90 rounded-2xl p-6 border border-slate-700 shadow-xl flex flex-col justify-between hover:border-emerald-500 transition-all">
+                        <div>
+                            <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xl mb-4">
+                                <i class="fa-solid fa-graduation-cap"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-white">Pràctica Lliure</h3>
+                            <p class="text-slate-300 text-xs mt-2 leading-relaxed">Sense límit de temps. Tria quantes preguntes vols practicar barrejades de tots els temes.</p>
+                            <div class="mt-4 flex gap-2">
+                                <button onclick="setPracticeCount(10)" id="p-btn-10" class="practice-count-btn flex-1 py-1.5 bg-emerald-600 text-white rounded-lg text-xs font-semibold">10</button>
+                                <button onclick="setPracticeCount(30)" id="p-btn-30" class="practice-count-btn flex-1 py-1.5 bg-slate-900 text-slate-300 border border-slate-700 rounded-lg text-xs font-semibold">30</button>
+                                <button onclick="setPracticeCount(50)" id="p-btn-50" class="practice-count-btn flex-1 py-1.5 bg-slate-900 text-slate-300 border border-slate-700 rounded-lg text-xs font-semibold">50</button>
+                            </div>
+                        </div>
+                        <button onclick="startPractice()" class="mt-6 w-full py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-xl text-xs transition-all shadow-md">
+                            Començar Pràctica
+                        </button>
+                    </div>
+
+                    <!-- Modalitat 3: Exàmens per Temes -->
+                    <div class="bg-slate-800/90 rounded-2xl p-6 border border-slate-700 shadow-xl flex flex-col justify-between hover:border-amber-500 transition-all">
+                        <div>
+                            <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-xl mb-4">
+                                <i class="fa-solid fa-folder-open"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-white">Exàmens per Temes</h3>
+                            <p class="text-slate-300 text-xs mt-2 leading-relaxed">Selecciona un fitxer o tema específic per avaluar els teus coneixements de manera orientada.</p>
+                            <div class="mt-4">
+                                <select id="topic-select" class="w-full bg-slate-900 border border-slate-700 text-slate-200 text-xs rounded-lg p-2.5 outline-none focus:border-amber-500">
+                                    <option value="preguntas-a1.json">Test A1 (preguntas-a1.json)</option>
+                                    <!-- Pots afegir més opcions si crees més fitxers en el futur -->
+                                </select>
+                            </div>
+                        </div>
+                        <button onclick="startTopicExam()" class="mt-6 w-full py-2.5 bg-amber-600 hover:bg-amber-500 text-white font-semibold rounded-xl text-xs transition-all shadow-md">
+                            Iniciar Test per Tema
+                        </button>
+                    </div>
                 </div>
             </div>
 
-            <div id="exam-card-container" class="bg-slate-800/90 rounded-2xl p-6 sm:p-8 border border-slate-700 shadow-2xl relative">
-                <div id="question-text" class="text-lg sm:text-xl font-semibold text-white mb-6 leading-relaxed">
-                    Carregant preguntes del test...
+            <!-- INTERFÍCIE DE L'EXAMEN EN CURS -->
+            <div id="exam-active-container" class="hidden space-y-6">
+                <div id="exam-header" class="bg-slate-800 rounded-xl p-4 border border-slate-700 flex flex-wrap items-center justify-between gap-4">
+                    <div>
+                        <span id="exam-progress-text" class="text-xs font-bold text-brand-400 uppercase tracking-wider">Pregunta 1 de 10</span>
+                        <h2 id="active-exam-title" class="text-lg font-bold text-white">Test en curs</h2>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <!-- Cronòmetre (si aplica) -->
+                        <div id="timer-box" class="hidden items-center space-x-1.5 px-3 py-1 bg-red-950/60 border border-red-700/50 rounded-lg text-red-300 text-xs font-bold">
+                            <i class="fa-solid fa-stopwatch"></i>
+                            <span id="timer-display">30:00</span>
+                        </div>
+                        <div class="w-32 bg-slate-700 h-2.5 rounded-full overflow-hidden">
+                            <div id="exam-progress-bar" class="bg-brand-500 h-full w-0 transition-all duration-300"></div>
+                        </div>
+                        <button onclick="exitExamToMenu()" class="text-xs px-3 py-1.5 bg-slate-700 text-slate-300 border border-slate-600 rounded-lg hover:bg-slate-600">
+                            Sortir
+                        </button>
+                    </div>
                 </div>
 
-                <div id="options-container" class="space-y-3"></div>
+                <div id="exam-card-container" class="bg-slate-800/90 rounded-2xl p-6 sm:p-8 border border-slate-700 shadow-2xl relative">
+                    <div id="question-text" class="text-lg sm:text-xl font-semibold text-white mb-6 leading-relaxed">
+                        Carregant preguntes del test...
+                    </div>
 
-                <div id="explanation-box" class="hidden mt-6 p-4 rounded-xl border transition-all text-sm">
-                    <div class="font-bold flex items-center gap-2 mb-1" id="explanation-title"></div>
-                    <p id="explanation-text" class="text-slate-300 leading-relaxed"></p>
-                </div>
+                    <div id="options-container" class="space-y-3"></div>
 
-                <div class="mt-8 flex justify-between items-center pt-4 border-t border-slate-700/80">
-                    <button id="btn-prev-q" onclick="navigateQuestion(-1)" class="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-slate-300 rounded-xl text-sm font-medium transition-all disabled:opacity-40">
-                        <i class="fa-solid fa-arrow-left mr-2"></i> Anterior
-                    </button>
-                    <button id="btn-next-q" onclick="navigateQuestion(1)" class="px-6 py-2.5 bg-brand-600 hover:bg-brand-500 text-white font-semibold rounded-xl text-sm transition-all shadow-lg">
-                        Següent <i class="fa-solid fa-arrow-right ml-2"></i>
-                    </button>
+                    <div id="explanation-box" class="hidden mt-6 p-4 rounded-xl border transition-all text-sm">
+                        <div class="font-bold flex items-center gap-2 mb-1" id="explanation-title"></div>
+                        <p id="explanation-text" class="text-slate-300 leading-relaxed"></p>
+                    </div>
+
+                    <div class="mt-8 flex justify-between items-center pt-4 border-t border-slate-700/80">
+                        <button id="btn-prev-q" onclick="navigateQuestion(-1)" class="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-slate-300 rounded-xl text-sm font-medium transition-all disabled:opacity-40">
+                            <i class="fa-solid fa-arrow-left mr-2"></i> Anterior
+                        </button>
+                        <button id="btn-next-q" onclick="navigateQuestion(1)" class="px-6 py-2.5 bg-brand-600 hover:bg-brand-500 text-white font-semibold rounded-xl text-sm transition-all shadow-lg">
+                            Següent <i class="fa-solid fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
 
+            <!-- RESULTATS DEL TEST -->
             <div id="exam-results-container" class="hidden bg-slate-800 rounded-2xl p-6 sm:p-8 border border-slate-700 shadow-2xl space-y-6">
                 <div class="text-center space-y-2">
                     <div id="result-icon-badge" class="w-16 h-16 rounded-full mx-auto flex items-center justify-center text-3xl"></div>
-                    <h2 class="text-2xl font-extrabold text-white">Resultats del Simulacre</h2>
+                    <h2 class="text-2xl font-extrabold text-white">Resultats del Test</h2>
                     <p id="result-score-text" class="text-slate-300 text-lg"></p>
                 </div>
 
@@ -261,8 +328,8 @@
                 </div>
 
                 <div class="flex justify-center gap-4 pt-4">
-                    <button onclick="startFullExam()" class="px-6 py-2.5 bg-brand-600 hover:bg-brand-500 text-white font-semibold rounded-xl text-sm transition-all shadow-lg">
-                        <i class="fa-solid fa-rotate-right mr-2"></i> Repetir Simulacre
+                    <button onclick="switchTab('exam')" class="px-6 py-2.5 bg-brand-600 hover:bg-brand-500 text-white font-semibold rounded-xl text-sm transition-all shadow-lg">
+                        <i class="fa-solid fa-rotate-right mr-2"></i> Tornar al Menú de Tests
                     </button>
                     <button onclick="switchTab('dashboard')" class="px-6 py-2.5 bg-slate-700 hover:bg-slate-600 text-slate-200 font-medium rounded-xl text-sm">
                         Tornar a l'Inici
@@ -330,19 +397,6 @@
             </div>
         </section>
 
-        <!-- EXPORT / MANAGEMENT SECTION -->
-        <section id="sec-add-questions" class="tab-content hidden space-y-6">
-            <div class="bg-slate-800 rounded-2xl p-6 border border-slate-700 space-y-4 shadow-xl max-w-xl mx-auto">
-                <h3 class="text-lg font-bold text-white flex items-center">
-                    <i class="fa-solid fa-file-arrow-down text-emerald-400 mr-2"></i> Exportar Banc de Preguntes Global
-                </h3>
-                <p class="text-xs text-slate-400">Pots descarregar el fitxer JSON combinat actual per tenir una còpia de seguretat o modificar-lo còmodament al teu ordinador.</p>
-                <button onclick="exportQuestionsJSON()" class="w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-xl text-xs transition-all flex items-center justify-center">
-                    <i class="fa-solid fa-download mr-2"></i> Descarregar Banc de Preguntes
-                </button>
-            </div>
-        </section>
-
     </main>
 
     <!-- CUSTOM TOAST NOTIFICATION CONTAINER -->
@@ -371,6 +425,10 @@
         let currentQuestionIdx = 0;
         let userAnswers = {};
         let examHistory = { done: 0, totalCorrect: 0, totalQuestions: 0 };
+        
+        let practiceSelectedCount = 10;
+        let activeTimerInterval = null;
+        let timeLeftSeconds = 0;
 
         // Inicialització principal
         document.addEventListener('DOMContentLoaded', () => {
@@ -378,12 +436,9 @@
             loadStatsFromStorage();
         });
 
-        // --- CARREGA AUTOMÀTICA DE DIVERSOS FITXERS DE TEMES JSON ---
         async function loadQuestionsFromJsonFile() {
             try {
-                // Afegeix aquí tants fitxers de temes com vagis creant (ex: 'preguntas-a1.json', 'preguntas-a2.json')
                 const fitxersTemes = ['preguntas-a1.json']; 
-                
                 let allQuestions = [];
                 for (const fitxer of fitxersTemes) {
                     try {
@@ -399,7 +454,6 @@
                     }
                 }
 
-                // Fallback retrocompatible per si encara mantens el fitxer antic 'preguntas.json'
                 if (allQuestions.length === 0) {
                     try {
                         const fallbackResponse = await fetch('./preguntas.json');
@@ -439,7 +493,6 @@
             }
         }
 
-        // UI Toast Helpers
         function showToast(message, type = 'info') {
             const container = document.getElementById('toast-container');
             const toast = document.createElement('div');
@@ -499,7 +552,6 @@
             btnCancel.addEventListener('click', handleCancel);
         }
 
-        // Navigation
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
             document.querySelectorAll('.tab-btn').forEach(btn => {
@@ -513,6 +565,17 @@
                 activeBtn.classList.add('bg-brand-600', 'text-white', 'shadow-md');
                 activeBtn.classList.remove('text-slate-300');
             }
+
+            if (tabId === 'exam') {
+                resetExamViewToMenu();
+            }
+        }
+
+        function resetExamViewToMenu() {
+            if (activeTimerInterval) clearInterval(activeTimerInterval);
+            document.getElementById('exam-menu-container').classList.remove('hidden');
+            document.getElementById('exam-active-container').classList.add('hidden');
+            document.getElementById('exam-results-container').classList.add('hidden');
         }
 
         function updateQuestionCountBadge() {
@@ -528,24 +591,108 @@
             document.getElementById('stat-accuracy').innerText = `${accuracy}%`;
         }
 
-        // Exam Engine
-        function startFullExam() {
+        // Selecció de quantitat per pràctica lliure
+        function setPracticeCount(count) {
+            practiceSelectedCount = count;
+            document.querySelectorAll('.practice-count-btn').forEach(btn => {
+                btn.className = "practice-count-btn flex-1 py-1.5 bg-slate-900 text-slate-300 border border-slate-700 rounded-lg text-xs font-semibold";
+            });
+            const activeBtn = document.getElementById(`p-btn-${count}`);
+            if (activeBtn) {
+                activeBtn.className = "practice-count-btn flex-1 py-1.5 bg-emerald-600 text-white rounded-lg text-xs font-semibold";
+            }
+        }
+
+        // --- INICIALITZACIÓ DE MÒDULS DE TEST ---
+        function startSimulacre() {
             if (questionBank.length === 0) {
-                showToast("El banc de preguntes global està buit o carregant...", "error");
+                showToast("El banc de preguntes global està buit...", "error");
                 return;
             }
-
-            const limit = Math.min(questionBank.length, 10);
+            const limit = Math.min(questionBank.length, 30);
             currentExam = [...questionBank].sort(() => 0.5 - Math.random()).slice(0, limit);
+            
+            launchExamSession("Simulacre Oficial (30 min)", true, 30 * 60);
+        }
+
+        function startPractice() {
+            if (questionBank.length === 0) {
+                showToast("El banc de preguntes global està buit...", "error");
+                return;
+            }
+            const limit = Math.min(questionBank.length, practiceSelectedCount);
+            currentExam = [...questionBank].sort(() => 0.5 - Math.random()).slice(0, limit);
+            
+            launchExamSession(`Pràctica Lliure (${limit} preguntes)`, false, 0);
+        }
+
+        async function startTopicExam() {
+            const selectFile = document.getElementById('topic-select').value;
+            try {
+                const res = await fetch(selectFile);
+                if (!res.ok) throw new Error("No s'ha pogut carregar el fitxer del tema");
+                const topicData = await res.json();
+                if (!Array.isArray(topicData) || topicData.length === 0) {
+                    showToast("El fitxer del tema està buit.", "error");
+                    return;
+                }
+                currentExam = [...topicData].sort(() => 0.5 - Math.random());
+                launchExamSession(`Examen per Tema (${selectFile})`, false, 0);
+            } catch (err) {
+                showToast("Error carregant el tema seleccionat.", "error");
+            }
+        }
+
+        function launchExamSession(titleText, hasTimer, seconds) {
             currentQuestionIdx = 0;
             userAnswers = {};
 
-            document.getElementById('exam-card-container').classList.remove('hidden');
+            document.getElementById('exam-menu-container').classList.add('hidden');
             document.getElementById('exam-results-container').classList.add('hidden');
-            document.getElementById('exam-header').classList.remove('hidden');
+            document.getElementById('exam-active-container').classList.remove('hidden');
+            document.getElementById('active-exam-title').innerText = titleText;
 
-            switchTab('exam');
+            const timerBox = document.getElementById('timer-box');
+            if (hasTimer) {
+                timerBox.classList.remove('hidden');
+                timerBox.classList.add('flex');
+                timeLeftSeconds = seconds;
+                startCountdownTimer();
+            } else {
+                timerBox.classList.add('hidden');
+                timerBox.classList.remove('flex');
+            }
+
             renderQuestion();
+        }
+
+        function startCountdownTimer() {
+            if (activeTimerInterval) clearInterval(activeTimerInterval);
+            updateTimerDisplay();
+
+            activeTimerInterval = setInterval(() => {
+                timeLeftSeconds--;
+                updateTimerDisplay();
+                if (timeLeftSeconds <= 0) {
+                    clearInterval(activeTimerInterval);
+                    showToast("S'ha acabat el temps del simulacre!", "error");
+                    showExamResults();
+                }
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const mins = Math.floor(timeLeftSeconds / 60);
+            const secs = timeLeftSeconds % 60;
+            document.getElementById('timer-display').innerText = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+        }
+
+        function exitExamToMenu() {
+            showConfirm(
+                "Sortir del Test",
+                "Segur que vols sortir? Es perderà el progrés d'aquest test.",
+                () => resetExamViewToMenu()
+            );
         }
 
         function renderQuestion() {
@@ -630,15 +777,9 @@
             renderQuestion();
         }
 
-        function finishExamEarly() {
-            showConfirm(
-                "Finalitzar Simulacre",
-                "Segur que vols finalitzar el simulacre ara i veure els teus resultats?",
-                () => showExamResults()
-            );
-        }
-
         function showExamResults() {
+            if (activeTimerInterval) clearInterval(activeTimerInterval);
+
             let correctCount = 0;
             let reviewHTML = '';
 
@@ -665,8 +806,7 @@
             saveStatsToStorage();
             updateStats();
 
-            document.getElementById('exam-card-container').classList.add('hidden');
-            document.getElementById('exam-header').classList.add('hidden');
+            document.getElementById('exam-active-container').classList.add('hidden');
             document.getElementById('exam-results-container').classList.remove('hidden');
 
             document.getElementById('res-correct').innerText = correctCount;
@@ -678,7 +818,7 @@
             if (score10 >= 5) {
                 iconBadge.className = "w-16 h-16 rounded-full mx-auto flex items-center justify-center text-3xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/40";
                 iconBadge.innerHTML = `<i class="fa-solid fa-trophy"></i>`;
-                document.getElementById('result-score-text').innerText = "Molt bé! Hauries superat aquesta prova del simulacre!";
+                document.getElementById('result-score-text').innerText = "Molt bé! Hauries superat aquesta prova!";
             } else {
                 iconBadge.className = "w-16 h-16 rounded-full mx-auto flex items-center justify-center text-3xl bg-red-500/20 text-red-400 border border-red-500/40";
                 iconBadge.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i>`;
@@ -686,15 +826,6 @@
             }
 
             document.getElementById('results-review-list').innerHTML = reviewHTML;
-        }
-
-        function exportQuestionsJSON() {
-            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(questionBank, null, 2));
-            const dlAnchorElem = document.createElement('a');
-            dlAnchorElem.setAttribute("href", dataStr);
-            dlAnchorElem.setAttribute("download", "banc_preguntes_complet.json");
-            dlAnchorElem.click();
-            showToast("Descarregant el fitxer JSON...", "info");
         }
     </script>
 </body>
