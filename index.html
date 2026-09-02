@@ -70,7 +70,7 @@
                     <label class="text-xs font-semibold text-slate-300 block mb-1">Contrasenya</label>
                     <input type="password" id="auth-password" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-sm text-white outline-none focus:border-brand-500 transition-all" placeholder="••••••••">
                 </div>
-                <button onclick="handleAuthSubmit()" id="auth-submit-btn" class="w-full py-3 bg-brand-600 hover:bg-brand-500 text-white font-semibold rounded-xl text-sm transition-all shadow-lg shadow-brand-600/30">
+                <button type="button" onclick="handleAuthSubmit()" id="auth-submit-btn" class="w-full py-3 bg-brand-600 hover:bg-brand-500 text-white font-semibold rounded-xl text-sm transition-all shadow-lg shadow-brand-600/30">
                     Iniciar Sessió
                 </button>
             </div>
@@ -78,9 +78,9 @@
             <div class="flex items-center justify-between text-xs text-slate-400 pt-2 border-t border-slate-800">
                 <div>
                     <span id="auth-switch-text">No tens compte?</span>
-                    <button onclick="toggleAuthMode()" id="auth-switch-btn" class="text-brand-400 font-semibold hover:underline ml-1">Registra't</button>
+                    <button type="button" onclick="toggleAuthMode()" id="auth-switch-btn" class="text-brand-400 font-semibold hover:underline ml-1">Registra't</button>
                 </div>
-                <button onclick="closeAuthModal()" class="text-slate-500 hover:text-slate-300">Tancar</button>
+                <button type="button" onclick="closeAuthModal()" class="text-slate-500 hover:text-slate-300">Tancar</button>
             </div>
         </div>
     </div>
@@ -114,25 +114,16 @@
             </nav>
 
             <div class="flex items-center space-x-3">
-                <span id="question-count-badge" class="px-3 py-1 bg-brand-900/80 text-brand-400 border border-brand-500/30 rounded-full text-xs font-semibold">
-                    Carregant...
-                </span>
-                
-                <div id="user-auth-area" class="flex items-center space-x-2 border-l border-slate-800 pl-3">
-                    <button onclick="openAuthModal('login')" id="btn-open-login" class="px-3 py-1.5 bg-brand-600 text-white rounded-xl text-xs font-semibold hover:bg-brand-500 transition-all">
+                <div id="user-auth-area" class="flex items-center space-x-2 pl-3">
+                    <button type="button" onclick="openAuthModal('login')" id="btn-open-login" class="px-3 py-1.5 bg-brand-600 text-white rounded-xl text-xs font-semibold hover:bg-brand-500 transition-all cursor-pointer">
                         <i class="fa-solid fa-user mr-1"></i> Iniciar Sessió
                     </button>
                     <div id="user-logged-info" class="hidden items-center space-x-2">
                         <span id="user-email-display" class="text-xs text-slate-300 hidden xl:inline"></span>
-                        <button onclick="logoutUser()" title="Tancar Sessió" class="px-2.5 py-1.5 bg-red-600/20 text-red-400 border border-red-500/30 rounded-xl text-xs font-semibold hover:bg-red-600/30 transition-all">
+                        <button type="button" onclick="logoutUser()" title="Tancar Sessió" class="px-2.5 py-1.5 bg-red-600/20 text-red-400 border border-red-500/30 rounded-xl text-xs font-semibold hover:bg-red-600/30 transition-all">
                             <i class="fa-solid fa-power-off"></i>
                         </button>
                     </div>
-                </div>
-
-                <div class="hidden lg:flex flex-col items-end border-l border-slate-800 pl-3">
-                    <span class="text-[9px] uppercase tracking-widest text-slate-400 font-semibold">Desenvolupat per</span>
-                    <span class="text-xs font-bold text-brand-400">GERARD APP'S</span>
                 </div>
             </div>
         </div>
@@ -499,6 +490,19 @@
 
     </main>
 
+    <!-- FOOTER INFERIOR -->
+    <footer class="bg-slate-900 border-t border-slate-800 mt-auto py-6">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
+            <div id="footer-social-area" class="flex items-center space-x-4 text-slate-400">
+                <!-- Espai reservat per a xarxes socials i enllaços addicionals -->
+            </div>
+            <div class="flex flex-col items-end">
+                <span class="text-[9px] uppercase tracking-widest text-slate-400 font-semibold">Desenvolupat per</span>
+                <span class="text-xs font-bold text-brand-400">GERARD APP'S</span>
+            </div>
+        </div>
+    </footer>
+
     <!-- BANNER DE COOKIES -->
     <div id="cookie-banner" class="fixed bottom-0 left-0 right-0 z-50 bg-slate-900 border-t border-slate-800 p-4 shadow-2xl hidden">
         <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
@@ -506,7 +510,7 @@
                 Utilitzem cookies pròpies i de tercers per millorar la teva experiència d'ús i analitzar el rendiment de la plataforma. Pots acceptar-les per continuar navegant.
             </p>
             <div class="flex items-center gap-3 shrink-0">
-                <button onclick="acceptCookies()" class="px-4 py-2 bg-brand-600 hover:bg-brand-500 text-white font-semibold rounded-lg transition-all shadow-md">
+                <button type="button" onclick="acceptCookies()" class="px-4 py-2 bg-brand-600 hover:bg-brand-500 text-white font-semibold rounded-lg transition-all shadow-md">
                     Acceptar Cookies
                 </button>
             </div>
@@ -522,10 +526,10 @@
             <h3 id="confirm-modal-title" class="text-lg font-bold text-white">Confirmació</h3>
             <p id="confirm-modal-msg" class="text-sm text-slate-300 leading-relaxed"></p>
             <div class="flex justify-end space-x-3 pt-2">
-                <button id="confirm-modal-cancel" class="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-slate-200 rounded-xl text-xs font-semibold transition-all">
+                <button type="button" id="confirm-modal-cancel" class="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-slate-200 rounded-xl text-xs font-semibold transition-all">
                     Cancel·lar
                 </button>
-                <button id="confirm-modal-ok" class="px-4 py-2 bg-red-600 hover:bg-red-500 text-white rounded-xl text-xs font-semibold transition-all">
+                <button type="button" id="confirm-modal-ok" class="px-4 py-2 bg-red-600 hover:bg-red-500 text-white rounded-xl text-xs font-semibold transition-all">
                     Confirmar
                 </button>
             </div>
@@ -608,7 +612,6 @@
 
             try {
                 if (isRegisterMode) {
-                    // Comprovar si el nom d'usuari ja existeix a Firestore
                     const usernamesRef = collection(db, "users");
                     const q = query(usernamesRef, where("username", "==", username));
                     const querySnapshot = await getDocs(q);
@@ -620,7 +623,6 @@
                     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
                     const user = userCredential.user;
 
-                    // Crear perfil d'usuari a Firestore
                     await setDoc(doc(db, "users", user.uid), {
                         username: username,
                         email: email,
@@ -652,7 +654,6 @@
             );
         }
 
-        // Actualitzar punts d'usuari a Firestore
         window.updateUserScoreInFirestore = async function(correctCount) {
             const user = auth.currentUser;
             if (!user) return;
@@ -672,7 +673,6 @@
                     }
                 }
 
-                // Si ha canviat de dia (s'ha passat de les 12 de la nit), reiniciem a 0
                 if (lastReset !== today) {
                     currentScore = 0;
                     lastReset = today;
@@ -691,7 +691,6 @@
             }
         }
 
-        // Carregar el Ranking Global
         window.loadGlobalRanking = async function() {
             const tableBody = document.getElementById('ranking-table-body');
             tableBody.innerHTML = `<tr><td colspan="3" class="p-6 text-center text-slate-400">Carregant ranking...</td></tr>`;
@@ -705,7 +704,6 @@
                 querySnapshot.forEach((docSnap) => {
                     const data = docSnap.data();
                     let score = data.score || 0;
-                    // Si el seu lastResetDate no és avui, mostrem 0 per reset diari
                     if (data.lastResetDate !== today) {
                         score = 0;
                     }
@@ -715,7 +713,6 @@
                     });
                 });
 
-                // Ordenar de major a menor puntuació
                 usersList.sort((a, b) => b.score - a.score);
 
                 if (usersList.length === 0) {
@@ -793,7 +790,6 @@
             startMidnightCountdown();
         });
 
-        // Comptador fins a les 12 de la nit hora espanyola
         function startMidnightCountdown() {
             const countdownEl = document.getElementById('ranking-countdown');
             if (!countdownEl) return;
@@ -954,7 +950,6 @@
         }
 
         function updateQuestionCountBadge() {
-            document.getElementById('question-count-badge').innerText = `${questionBank.length} Preguntes`;
             document.getElementById('stat-total-q').innerText = questionBank.length;
         }
 
@@ -1080,6 +1075,7 @@
 
             q.options.forEach((opt, idx) => {
                 const btn = document.createElement('button');
+                btn.type = "button";
                 btn.className = `w-full text-left p-4 rounded-xl border text-sm font-medium transition-all flex items-center justify-between `;
                 
                 if (!isAnswered) {
@@ -1177,7 +1173,6 @@
             saveStatsToStorage();
             updateStats();
 
-            // Enviar punts a Firestore si l'usuari està loguejat
             if (window.updateUserScoreInFirestore && correctCount > 0) {
                 window.updateUserScoreInFirestore(correctCount);
             }
