@@ -97,7 +97,7 @@
                 </div>
             </div>
 
-            <!-- Navigation Tabs -->
+            <!-- Navigation Tabs (Central / Esquerra) -->
             <nav class="hidden md:flex space-x-1 bg-slate-800/60 p-1 rounded-xl border border-slate-700/50">
                 <button onclick="switchTab('dashboard')" id="nav-dashboard" class="tab-btn px-4 py-2 rounded-lg text-sm font-medium transition-all bg-brand-600 text-white shadow-md">
                     <i class="fa-solid fa-chart-pie mr-2"></i>Inici & Stats
@@ -113,11 +113,13 @@
                 </button>
             </nav>
 
-            <div class="flex items-center space-x-3">
-                <div id="user-auth-area" class="flex items-center space-x-2 pl-3">
-                    <button type="button" onclick="openAuthModal('login')" id="btn-open-login" class="px-3 py-1.5 bg-brand-600 text-white rounded-xl text-xs font-semibold hover:bg-brand-500 transition-all cursor-pointer">
-                        <i class="fa-solid fa-user mr-1"></i> Iniciar Sessió
-                    </button>
+            <!-- Pestanya de Perfil / Iniciar Sessió a la Cantonada (Escriptori) -->
+            <div class="hidden md:flex items-center space-x-3">
+                <button onclick="switchTab('profile')" id="nav-profile" class="tab-btn px-4 py-2 rounded-xl text-sm font-medium transition-all text-slate-300 hover:text-white bg-slate-800/80 border border-slate-700 hover:border-brand-500 shadow-sm flex items-center space-x-2">
+                    <i class="fa-solid fa-user-circle text-brand-400"></i>
+                    <span id="desktop-profile-label">El meu Perfil / Iniciar Sessió</span>
+                </button>
+                <div id="user-auth-area" class="flex items-center space-x-2">
                     <div id="user-logged-info" class="hidden items-center space-x-2">
                         <span id="user-email-display" class="text-xs text-slate-300 hidden xl:inline"></span>
                         <button type="button" onclick="logoutUser()" title="Tancar Sessió" class="px-2.5 py-1.5 bg-red-600/20 text-red-400 border border-red-500/30 rounded-xl text-xs font-semibold hover:bg-red-600/30 transition-all">
@@ -126,21 +128,36 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Botó per obrir modal auth mòbil ràpid si cal -->
+            <div class="flex md:hidden items-center space-x-2">
+                <button type="button" onclick="openAuthModal('login')" id="btn-open-login-mobile" class="px-3 py-1.5 bg-brand-600 text-white rounded-xl text-xs font-semibold hover:bg-brand-500 transition-all">
+                    <i class="fa-solid fa-user mr-1"></i>
+                </button>
+                <div id="user-logged-info-mobile" class="hidden items-center">
+                    <button type="button" onclick="logoutUser()" title="Tancar Sessió" class="px-2.5 py-1.5 bg-red-600/20 text-red-400 border border-red-500/30 rounded-xl text-xs font-semibold">
+                        <i class="fa-solid fa-power-off"></i>
+                    </button>
+                </div>
+            </div>
         </div>
 
-        <!-- Mobile Navigation bar -->
-        <div class="md:hidden flex justify-around bg-slate-900 border-t border-slate-800 py-2 px-2 text-xs">
-            <button onclick="switchTab('dashboard')" class="flex flex-col items-center py-1 text-brand-400">
+        <!-- Mobile Navigation bar (Integrant Perfil a la Cantonada/Final) -->
+        <div class="md:hidden grid grid-cols-5 bg-slate-900 border-t border-slate-800 py-2 px-1 text-xs text-center">
+            <button onclick="switchTab('dashboard')" id="nav-mob-dashboard" class="flex flex-col items-center py-1 text-brand-400">
                 <i class="fa-solid fa-chart-pie text-base"></i><span>Inici</span>
             </button>
-            <button onclick="switchTab('exam')" class="flex flex-col items-center py-1 text-slate-400">
+            <button onclick="switchTab('exam')" id="nav-mob-exam" class="flex flex-col items-center py-1 text-slate-400">
                 <i class="fa-solid fa-file-pen text-base"></i><span>Tests</span>
             </button>
-            <button onclick="switchTab('ranking')" class="flex flex-col items-center py-1 text-slate-400">
+            <button onclick="switchTab('ranking')" id="nav-mob-ranking" class="flex flex-col items-center py-1 text-slate-400">
                 <i class="fa-solid fa-trophy text-base"></i><span>Ranking</span>
             </button>
-            <button onclick="switchTab('guide')" class="flex flex-col items-center py-1 text-slate-400">
+            <button onclick="switchTab('guide')" id="nav-mob-guide" class="flex flex-col items-center py-1 text-slate-400">
                 <i class="fa-solid fa-book-bookmark text-base"></i><span>Guia</span>
+            </button>
+            <button onclick="switchTab('profile')" id="nav-mob-profile" class="flex flex-col items-center py-1 text-slate-400 border-l border-slate-800">
+                <i class="fa-solid fa-user-circle text-base text-brand-400"></i><span class="truncate w-full px-0.5">Perfil</span>
             </button>
         </div>
     </header>
@@ -242,6 +259,44 @@
                         <p class="font-medium text-slate-200 mt-1">Síndic de Greuges</p>
                         <p class="text-slate-400 text-xs mt-1">Elegit per majoria de <strong>3/5 parts dels diputats</strong> del Parlament.</p>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROFILE SECTION -->
+        <section id="sec-profile" class="tab-content hidden space-y-6">
+            <div class="bg-slate-800 rounded-2xl p-6 sm:p-8 border border-slate-700 shadow-xl max-w-2xl mx-auto space-y-6">
+                <div class="flex items-center space-x-4 border-b border-slate-700 pb-6">
+                    <div class="w-16 h-16 rounded-2xl bg-brand-600/20 text-brand-400 border border-brand-500/30 flex items-center justify-center text-3xl font-bold">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-xl font-bold text-white" id="profile-card-title">El meu Perfil</h2>
+                        <p class="text-xs text-slate-400 mt-1" id="profile-card-subtitle">Gestiona el teu compte i sessió d'usuari</p>
+                    </div>
+                </div>
+
+                <div id="profile-not-logged" class="space-y-4 text-center py-6">
+                    <p class="text-sm text-slate-300">No has iniciat sessió actualment o necessites accedir amb el teu compte per veure les teves dades i puntuacions.</p>
+                    <button onclick="openAuthModal('login')" class="px-6 py-3 bg-brand-600 hover:bg-brand-500 text-white font-semibold rounded-xl text-sm shadow-lg shadow-brand-600/30 transition-all">
+                        <i class="fa-solid fa-right-to-bracket mr-2"></i> Iniciar Sessió / Registrar-se
+                    </button>
+                </div>
+
+                <div id="profile-logged-content" class="hidden space-y-4">
+                    <div class="bg-slate-900/80 p-4 rounded-xl border border-slate-700 space-y-3">
+                        <div class="flex justify-between text-sm">
+                            <span class="text-slate-400">Correu electrònic:</span>
+                            <span id="profile-email-val" class="font-semibold text-white">--</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-slate-400">Puntuació al Ranking Avui:</span>
+                            <span id="profile-score-val" class="font-semibold text-brand-400">0 pts</span>
+                        </div>
+                    </div>
+                    <button onclick="logoutUser()" class="w-full py-3 bg-red-600/20 hover:bg-red-600/30 text-red-400 border border-red-500/30 font-semibold rounded-xl text-sm transition-all flex items-center justify-center">
+                        <i class="fa-solid fa-power-off mr-2"></i> Tancar Sessió
+                    </button>
                 </div>
             </div>
         </section>
@@ -557,7 +612,6 @@
         const db = getFirestore(app);
         let isRegisterMode = false;
 
-        // EXPONEMOS LA FUNCIÓN A WINDOW AQUÍ:
         window.openAuthModal = function(mode = 'login') {
             isRegisterMode = (mode === 'register');
             updateAuthModalUI();
@@ -687,6 +741,7 @@
                 }, { merge: true });
 
                 loadGlobalRanking();
+                updateProfileViewData(user, currentScore);
             } catch (err) {
                 console.error("Error actualitzant puntuació:", err);
             }
@@ -746,24 +801,60 @@
             }
         }
 
-        onAuthStateChanged(auth, (user) => {
-            const btnLogin = document.getElementById('btn-open-login');
-            const userLoggedInfo = document.getElementById('user-logged-info');
-            const emailDisplay = document.getElementById('user-email-display');
-            const savePrompt = document.getElementById('save-prompt-box');
+        async function updateProfileViewData(user, scoreOverride = null) {
+            const notLoggedDiv = document.getElementById('profile-not-logged');
+            const loggedDiv = document.getElementById('profile-logged-content');
+            const emailVal = document.getElementById('profile-email-val');
+            const scoreVal = document.getElementById('profile-score-val');
+            const desktopLabel = document.getElementById('desktop-profile-label');
 
             if (user) {
-                btnLogin.classList.add('hidden');
-                userLoggedInfo.classList.remove('hidden');
-                userLoggedInfo.classList.add('flex');
+                notLoggedDiv.classList.add('hidden');
+                loggedDiv.classList.remove('hidden');
+                emailVal.innerText = user.email;
+                if (desktopLabel) desktopLabel.innerText = "El meu Perfil";
+
+                let currentScore = scoreOverride;
+                if (currentScore === null) {
+                    try {
+                        const userRef = doc(db, "users", user.uid);
+                        const docSnap = await getDoc(userRef);
+                        if (docSnap.exists()) {
+                            const data = docSnap.data();
+                            const today = getSpanishDateStr();
+                            currentScore = (data.lastResetDate === today) ? (data.score || 0) : 0;
+                        } else {
+                            currentScore = 0;
+                        }
+                    } catch (e) {
+                        currentScore = 0;
+                    }
+                }
+                scoreVal.innerText = `${currentScore} pts`;
+            } else {
+                notLoggedDiv.classList.remove('hidden');
+                loggedDiv.classList.add('hidden');
+                if (desktopLabel) desktopLabel.innerText = "Iniciar Sessió";
+            }
+        }
+
+        onAuthStateChanged(auth, async (user) => {
+            const emailDisplay = document.getElementById('user-email-display');
+            const savePrompt = document.getElementById('save-prompt-box');
+            const userLoggedInfoMobile = document.getElementById('user-logged-info-mobile');
+            const btnOpenLoginMobile = document.getElementById('btn-open-login-mobile');
+
+            if (user) {
                 if (emailDisplay) emailDisplay.innerText = user.email;
                 if (savePrompt) savePrompt.classList.add('hidden');
+                if (userLoggedInfoMobile) userLoggedInfoMobile.classList.remove('hidden');
+                if (btnOpenLoginMobile) btnOpenLoginMobile.classList.add('hidden');
             } else {
-                btnLogin.classList.remove('hidden');
-                userLoggedInfo.classList.remove('flex');
-                userLoggedInfo.classList.add('hidden');
                 if (emailDisplay) emailDisplay.innerText = '';
+                if (userLoggedInfoMobile) userLoggedInfoMobile.classList.add('hidden');
+                if (btnOpenLoginMobile) btnOpenLoginMobile.classList.remove('hidden');
             }
+            await updateProfileViewData(user);
             loadGlobalRanking();
         });
         
@@ -924,14 +1015,44 @@
 
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            
+            // Netejar estils de pestanyes centrals
             document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.classList.remove('bg-brand-600', 'text-white', 'shadow-md');
-                btn.classList.add('text-slate-300');
+                if(btn.id !== 'nav-profile') {
+                    btn.classList.remove('bg-brand-600', 'text-white', 'shadow-md');
+                    btn.classList.add('text-slate-300');
+                }
+            });
+
+            // Gestió pestanya perfil escriptori
+            const desktopProfileBtn = document.getElementById('nav-profile');
+            if (desktopProfileBtn) {
+                if (tabId === 'profile') {
+                    desktopProfileBtn.classList.add('border-brand-500', 'text-white', 'bg-slate-800');
+                    desktopProfileBtn.classList.remove('border-slate-700', 'text-slate-300');
+                } else {
+                    desktopProfileBtn.classList.remove('border-brand-500', 'text-white', 'bg-slate-800');
+                    desktopProfileBtn.classList.add('border-slate-700', 'text-slate-300');
+                }
+            }
+
+            // Gestió pestanya perfil mòbil
+            ['dashboard', 'exam', 'ranking', 'guide', 'profile'].forEach(t => {
+                const mobEl = document.getElementById('nav-mob-' + t);
+                if (mobEl) {
+                    if (t === tabId) {
+                        mobEl.classList.remove('text-slate-400');
+                        mobEl.classList.add('text-brand-400');
+                    } else {
+                        mobEl.classList.add('text-slate-400');
+                        mobEl.classList.remove('text-brand-400');
+                    }
+                }
             });
 
             document.getElementById('sec-' + tabId).classList.remove('hidden');
             const activeBtn = document.getElementById('nav-' + tabId);
-            if(activeBtn) {
+            if(activeBtn && tabId !== 'profile') {
                 activeBtn.classList.add('bg-brand-600', 'text-white', 'shadow-md');
                 activeBtn.classList.remove('text-slate-300');
             }
