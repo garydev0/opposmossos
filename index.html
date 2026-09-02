@@ -104,7 +104,7 @@
                 <div class="relative z-10 max-w-2xl">
                     <h2 class="text-2xl sm:text-3xl font-extrabold text-white">Hola, Opositor/a! 👋</h2>
                     <p class="text-slate-300 mt-2 text-sm sm:text-base">
-                        Benvingut/da al teu centre de preparació personalitzat per als **Mossos d'Esquadra**. Practica amb el banc de preguntes global, reforça els punts febles i posa a prova els teus coneixements.
+                        Benvingut/da al teu centre de preparació personalitzat per als <strong>Mossos d'Esquadra</strong>. Practica amb el banc de preguntes global, reforça els punts febles i posa a prova els teus coneixements.
                     </p>
                     <div class="mt-6 flex flex-wrap gap-3">
                         <button onclick="startFullExam()" class="px-5 py-2.5 bg-brand-600 hover:bg-brand-500 text-white font-semibold rounded-xl shadow-lg shadow-brand-600/30 transition-all flex items-center">
@@ -336,9 +336,9 @@
                 <h3 class="text-lg font-bold text-white flex items-center">
                     <i class="fa-solid fa-file-arrow-down text-emerald-400 mr-2"></i> Exportar Banc de Preguntes Global
                 </h3>
-                <p class="text-xs text-slate-400">Pots descarregar el fitxer JSON actual per tenir una còpia de seguridad o modificar-lo còmodament al teu ordinador.</p>
+                <p class="text-xs text-slate-400">Pots descarregar el fitxer JSON combinat actual per tenir una còpia de seguretat o modificar-lo còmodament al teu ordinador.</p>
                 <button onclick="exportQuestionsJSON()" class="w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-xl text-xs transition-all flex items-center justify-center">
-                    <i class="fa-solid fa-download mr-2"></i> Descarregar `preguntas.json`
+                    <i class="fa-solid fa-download mr-2"></i> Descarregar Banc de Preguntes
                 </button>
             </div>
         </section>
@@ -378,18 +378,42 @@
             loadStatsFromStorage();
         });
 
-        // --- CARREGA DES DE EL FITXER JSON GLOBAL DE GITHUB ---
+        // --- CARREGA AUTOMÀTICA DE DIVERSOS FITXERS DE TEMES JSON ---
         async function loadQuestionsFromJsonFile() {
             try {
-                const response = await fetch('./preguntas.json');
-                if (!response.ok) {
-                    throw new Error("No s'ha pogut carregar el fitxer preguntas.json");
+                // Afegeix aquí tants fitxers de temes com vagis creant (ex: 'preguntas-a1.json', 'preguntas-a2.json')
+                const fitxersTemes = ['./preguntas-a1.json',]; 
+                
+                let allQuestions = [];
+                for (const fitxer of fitxersTemes) {
+                    try {
+                        const response = await fetch(fitxer);
+                        if (response.ok) {
+                            const data = await response.json();
+                            if (Array.isArray(data)) {
+                                allQuestions = allQuestions.concat(data);
+                            }
+                        }
+                    } catch (e) {
+                        console.warn(`No s'ha trobat o carregat el fitxer: ${fitxer}`);
+                    }
                 }
-                questionBank = await response.json();
+
+                // Fallback retrocompatible per si encara mantens el fitxer antic 'preguntas.json'
+                if (allQuestions.length === 0) {
+                    try {
+                        const fallbackResponse = await fetch('./preguntas.json');
+                        if (fallbackResponse.ok) {
+                            allQuestions = await fallbackResponse.json();
+                        }
+                    } catch (e) {}
+                }
+
+                questionBank = allQuestions;
                 updateQuestionCountBadge();
             } catch (err) {
-                console.error("Error carregant el fitxer JSON:", err);
-                showToast("Error al carregar el banc de preguntes global.", "error");
+                console.error("Error carregant els fitxers JSON:", err);
+                showToast("Error al carregar el banc de preguntes.", "error");
                 questionBank = [];
                 updateQuestionCountBadge();
             }
@@ -668,7 +692,7 @@
             const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(questionBank, null, 2));
             const dlAnchorElem = document.createElement('a');
             dlAnchorElem.setAttribute("href", dataStr);
-            dlAnchorElem.setAttribute("download", "preguntas.json");
+            dlAnchorElem.setAttribute("download", "banc_preguntes_complet.json");
             dlAnchorElem.click();
             showToast("Descarregant el fitxer JSON...", "info");
         }
