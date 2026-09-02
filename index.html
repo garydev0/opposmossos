@@ -44,8 +44,9 @@
     <header class="bg-slate-900/90 backdrop-blur border-b border-slate-800 sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
             <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 rounded-lg bg-red-600 flex items-center justify-center shadow-lg shadow-red-900/40">
-                    <i class="fa-solid font-bold text-white text-xl">M</i>
+                <!-- LOGO CANVIAT PER IMATGE -->
+                <div class="w-10 h-10 rounded-lg overflow-hidden flex items-center justify-center shadow-lg bg-slate-800 border border-slate-700">
+                    <img src="logo.png" alt="Logo" class="w-full h-full object-cover" onerror="this.onerror=null; this.parentElement.innerHTML='<i class=\'fa-solid font-bold text-red-500 text-xl\'>M</i>';">
                 </div>
                 <div>
                     <h1 class="text-lg font-bold text-slate-100 leading-tight">OpposTest - Mossos d'Esquadra</h1>
@@ -66,10 +67,15 @@
                 </button>
             </nav>
 
-            <div class="flex items-center space-x-2">
+            <div class="flex items-center space-x-3">
                 <span id="question-count-badge" class="px-3 py-1 bg-brand-900/80 text-brand-400 border border-brand-500/30 rounded-full text-xs font-semibold">
                     Carregant...
                 </span>
+                <!-- TEXT EMPRESA ARRIBA A LA DRETA -->
+                <div class="hidden lg:flex flex-col items-end border-l border-slate-800 pl-3">
+                    <span class="text-[9px] uppercase tracking-widest text-slate-400 font-semibold">Desenvolupat per</span>
+                    <span class="text-xs font-bold text-brand-400">GERARD APP'S</span>
+                </div>
             </div>
         </div>
 
@@ -243,10 +249,9 @@
                             <div class="mt-4">
                                 <select id="topic-select" class="w-full bg-slate-900 border border-slate-700 text-slate-200 text-xs rounded-lg p-2.5 outline-none focus:border-amber-500">
                                     <option value="preguntas-a1.json">Test A1 (preguntas-a1.json)</option>
-                                    <option value="preguntas-a2.json">Test A1 (preguntas-a2.json)</option>
-                                    <option value="preguntas-a3.json">Test A1 (preguntas-a3.json)</option>
-                                    <option value="preguntas-a4.json">Test A1 (preguntas-a4.json)</option>
-                                    <!-- Pots afegir més opcions si crees més fitxers en el futur -->
+                                    <option value="preguntas-a2.json">Test A2 (preguntas-a2.json)</option>
+                                    <option value="preguntas-a3.json">Test A3 (preguntas-a3.json)</option>
+                                    <option value="preguntas-a4.json">Test A4 (preguntas-a4.json)</option>
                                 </select>
                             </div>
                         </div>
@@ -265,7 +270,6 @@
                         <h2 id="active-exam-title" class="text-lg font-bold text-white">Test en curs</h2>
                     </div>
                     <div class="flex items-center space-x-4">
-                        <!-- Cronòmetre (si aplica) -->
                         <div id="timer-box" class="hidden items-center space-x-1.5 px-3 py-1 bg-red-950/60 border border-red-700/50 rounded-lg text-red-300 text-xs font-bold">
                             <i class="fa-solid fa-stopwatch"></i>
                             <span id="timer-display">30:00</span>
@@ -402,6 +406,20 @@
 
     </main>
 
+    <!-- BANNER DE COOKIES OBLIGATORI -->
+    <div id="cookie-banner" class="fixed bottom-0 left-0 right-0 z-50 bg-slate-900 border-t border-slate-800 p-4 shadow-2xl hidden">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
+            <p class="text-slate-300 text-center sm:text-left">
+                Utilitzem cookies pròpies i de tercers per millorar la teva experiència d'ús i analitzar el rendiment de la plataforma. Pots acceptar-les per continuar navegant.
+            </p>
+            <div class="flex items-center gap-3 shrink-0">
+                <button onclick="acceptCookies()" class="px-4 py-2 bg-brand-600 hover:bg-brand-500 text-white font-semibold rounded-lg transition-all shadow-md">
+                    Acceptar Cookies
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- CUSTOM TOAST NOTIFICATION CONTAINER -->
     <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
 
@@ -437,7 +455,19 @@
         document.addEventListener('DOMContentLoaded', () => {
             loadQuestionsFromJsonFile();
             loadStatsFromStorage();
+            checkCookiesConsent();
         });
+
+        // Gestió de Cookies
+        function checkCookiesConsent() {
+            if (!localStorage.getItem('cookies_accepted')) {
+                document.getElementById('cookie-banner').classList.remove('hidden');
+            }
+        }
+        function acceptCookies() {
+            localStorage.setItem('cookies_accepted', 'true');
+            document.getElementById('cookie-banner').classList.add('hidden');
+        }
 
         async function loadQuestionsFromJsonFile() {
             try {
@@ -594,7 +624,6 @@
             document.getElementById('stat-accuracy').innerText = `${accuracy}%`;
         }
 
-        // Selecció de quantitat per pràctica lliure
         function setPracticeCount(count) {
             practiceSelectedCount = count;
             document.querySelectorAll('.practice-count-btn').forEach(btn => {
@@ -606,7 +635,6 @@
             }
         }
 
-        // --- INICIALITZACIÓ DE MÒDULS DE TEST ---
         function startSimulacre() {
             if (questionBank.length === 0) {
                 showToast("El banc de preguntes global està buit...", "error");
