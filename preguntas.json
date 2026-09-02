@@ -1,1 +1,14 @@
-
+[
+  {
+    "question": "Segons l'article 149.1.29a de la Constitució Espanyola, quina és la facultat exclusiva de l'Estat en matèria de seguretat?",
+    "options": ["La policia administrativa.", "La seguretat pública.", " La vigilància privada.", "El control de trànsit urbà."],
+    "correctAnswer": "La seguretat pública.",
+    "explanation": "L'article 149.1.29a de la Constitució reserva l'exclusivitat de la seguretat pública a l'Estat."
+  },
+  {
+    "question": "D'acord amb la Constitució Espanyola, quin és el termini màxim de la detenció preventiva?",
+    "options": ["24 hores.", "48 hores.", "72 hores.", "5 dies."],
+    "correctAnswer": "72 hores.",
+    "explanation": "L'art. 17 CE fixa un màxim de 72 hores."
+  }
+]
