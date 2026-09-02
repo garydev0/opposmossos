@@ -2,8 +2,11 @@ const { getStore } = require('@netlify/blobs');
 
 exports.handler = async () => {
   try {
-    // Inicialización automática de Netlify Blobs para Functions
-    const store = getStore('questions-db');
+    const store = getStore({
+      name: 'questions-db',
+      siteID: 'e7275bd0-c6f9-4c72-8f8d-a4f1c67dcb04',
+      token: 'nfp_YLmgfq6NCYwTv6UM7Z4RURDgMzWb5auR7833'
+    });
     const data = await store.get('questions', { type: 'json' });
 
     return {
