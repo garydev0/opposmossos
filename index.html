@@ -41,7 +41,37 @@
 </head>
 <body class="h-full flex flex-col font-sans antialiased overflow-x-hidden bg-slate-950 text-slate-100">
 
-    <header class="bg-slate-900/90 backdrop-blur border-b border-slate-800 sticky top-0 z-50">
+    <!-- SECCIÓ DE LOGIN / REGISTRE (Bloqueja la pantalla fins que l'usuari s'identifiqui) -->
+    <div id="auth-overlay" class="fixed inset-0 z-50 bg-slate-950/95 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-md w-full p-8 shadow-2xl space-y-6">
+            <div class="text-center space-y-2">
+                <div class="w-12 h-12 bg-brand-600 rounded-xl mx-auto flex items-center justify-center text-white text-xl font-bold shadow-lg shadow-brand-600/30">M</div>
+                <h2 id="auth-title" class="text-xl font-bold text-white">Inicia Sessió a OpposTest</h2>
+                <p class="text-xs text-slate-400">Accedeix al teu compte de Mossos d'Esquadra</p>
+            </div>
+
+            <div class="space-y-4">
+                <div>
+                    <label class="text-xs font-semibold text-slate-300 block mb-1">Correu electrònic</label>
+                    <input type="email" id="auth-email" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-sm text-white outline-none focus:border-brand-500 transition-all" placeholder="correu@exemple.com">
+                </div>
+                <div>
+                    <label class="text-xs font-semibold text-slate-300 block mb-1">Contrasenya</label>
+                    <input type="password" id="auth-password" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-sm text-white outline-none focus:border-brand-500 transition-all" placeholder="••••••••">
+                </div>
+                <button onclick="handleAuthSubmit()" id="auth-submit-btn" class="w-full py-3 bg-brand-600 hover:bg-brand-500 text-white font-semibold rounded-xl text-sm transition-all shadow-lg shadow-brand-600/30">
+                    Iniciar Sessió
+                </button>
+            </div>
+
+            <div class="text-center text-xs text-slate-400">
+                <span id="auth-switch-text">No tens compte?</span>
+                <button onclick="toggleAuthMode()" id="auth-switch-btn" class="text-brand-400 font-semibold hover:underline ml-1">Registra't</button>
+            </div>
+        </div>
+    </div>
+
+    <header class="bg-slate-900/90 backdrop-blur border-b border-slate-800 sticky top-0 z-40">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
             <div class="flex items-center space-x-3">
                 <!-- LOGO CANVIAT PER IMATGE -->
@@ -71,6 +101,15 @@
                 <span id="question-count-badge" class="px-3 py-1 bg-brand-900/80 text-brand-400 border border-brand-500/30 rounded-full text-xs font-semibold">
                     Carregant...
                 </span>
+                
+                <!-- BOTÓ / INFO D'USUARI I TANCAR SESSIÓ -->
+                <div class="flex items-center space-x-2 border-l border-slate-800 pl-3">
+                    <span id="user-email-display" class="text-xs text-slate-300 hidden xl:inline"></span>
+                    <button onclick="logoutUser()" title="Tancar Sessió" class="px-2.5 py-1.5 bg-red-600/20 text-red-400 border border-red-500/30 rounded-xl text-xs font-semibold hover:bg-red-600/30 transition-all">
+                        <i class="fa-solid fa-power-off"></i>
+                    </button>
+                </div>
+
                 <!-- TEXT EMPRESA ARRIBA A LA DRETA -->
                 <div class="hidden lg:flex flex-col items-end border-l border-slate-800 pl-3">
                     <span class="text-[9px] uppercase tracking-widest text-slate-400 font-semibold">Desenvolupat per</span>
@@ -438,6 +477,80 @@
             </div>
         </div>
     </div>
+
+    <!-- FIREBASE AUTHENTICATION MODULE -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAK8r_-CMw1626LIFnrn9NcVkIcvYv2Elo",
+            authDomain: "oppostest.firebaseapp.com",
+            projectId: "oppostest",
+            storageBucket: "oppostest.firebasestorage.app",
+            messagingSenderId: "738546966243",
+            appId: "1:738546966243:web:58b4277287a97d6e036fd6",
+            measurementId: "G-XT9FSLFHSB"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        let isRegisterMode = false;
+
+        window.toggleAuthMode = function() {
+            isRegisterMode = !isRegisterMode;
+            document.getElementById('auth-title').innerText = isRegisterMode ? "Crea un compte a OpposTest" : "Inicia Sessió a OpposTest";
+            document.getElementById('auth-submit-btn').innerText = isRegisterMode ? "Registrar-se" : "Iniciar Sessió";
+            document.getElementById('auth-switch-text').innerText = isRegisterMode ? "Ja tens compte?" : "No tens compte?";
+            document.getElementById('auth-switch-btn').innerText = isRegisterMode ? "Inicia sessió" : "Registra't";
+        }
+
+        window.handleAuthSubmit = async function() {
+            const email = document.getElementById('auth-email').value;
+            const password = document.getElementById('auth-password').value;
+
+            if (!email || !password) {
+                showToast("Si us plau, omple tots els camps.", "error");
+                return;
+            }
+
+            try {
+                if (isRegisterMode) {
+                    await createUserWithEmailAndPassword(auth, email, password);
+                    showToast("Compte creat i sessió iniciada!", "success");
+                } else {
+                    await signInWithEmailAndPassword(auth, email, password);
+                    showToast("Sessió iniciada amb èxit!", "success");
+                }
+            } catch (error) {
+                showToast("Error: " + error.message, "error");
+            }
+        }
+
+        window.logoutUser = function() {
+            showConfirm(
+                "Tancar Sessió",
+                "Estàs segur que vols tancar la sessió del teu compte?",
+                () => {
+                    signOut(auth).then(() => {
+                        showToast("Sessió tancada correctament.", "info");
+                    });
+                }
+            );
+        }
+
+        onAuthStateChanged(auth, (user) => {
+            const overlay = document.getElementById('auth-overlay');
+            const emailDisplay = document.getElementById('user-email-display');
+            if (user) {
+                overlay.classList.add('hidden');
+                if (emailDisplay) emailDisplay.innerText = user.email;
+            } else {
+                overlay.classList.remove('hidden');
+                if (emailDisplay) emailDisplay.innerText = '';
+            }
+        });
+    </script>
 
     <script>
         // Global State
