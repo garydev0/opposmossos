@@ -41,8 +41,8 @@
 </head>
 <body class="h-full flex flex-col font-sans antialiased overflow-x-hidden bg-slate-950 text-slate-100">
 
-    <!-- SECCIÓ DE LOGIN / REGISTRE (Bloqueja la pantalla fins que l'usuari s'identifiqui) -->
-    <div id="auth-overlay" class="fixed inset-0 z-50 bg-slate-950/95 backdrop-blur-md flex items-center justify-center p-4">
+    <!-- SECCIÓ DE LOGIN / REGISTRE (Oculta per defecte, s'obre si es vol registrar o guardar) -->
+    <div id="auth-overlay" class="fixed inset-0 z-50 bg-slate-950/95 backdrop-blur-md flex items-center justify-center p-4 hidden">
         <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-md w-full p-8 shadow-2xl space-y-6">
             <div class="text-center space-y-2">
                 <div class="w-12 h-12 bg-brand-600 rounded-xl mx-auto flex items-center justify-center text-white text-xl font-bold shadow-lg shadow-brand-600/30">M</div>
@@ -51,6 +51,18 @@
             </div>
 
             <div class="space-y-4">
+                <!-- Camps addicionals només per registre -->
+                <div id="register-extra-fields" class="space-y-4 hidden">
+                    <div>
+                        <label class="text-xs font-semibold text-slate-300 block mb-1">Nom d'usuari</label>
+                        <input type="text" id="auth-username" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-sm text-white outline-none focus:border-brand-500 transition-all" placeholder="El teu nom">
+                    </div>
+                    <div>
+                        <label class="text-xs font-semibold text-slate-300 block mb-1">Data de naixement</label>
+                        <input type="date" id="auth-dob" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-sm text-white outline-none focus:border-brand-500 transition-all text-slate-300">
+                    </div>
+                </div>
+
                 <div>
                     <label class="text-xs font-semibold text-slate-300 block mb-1">Correu electrònic</label>
                     <input type="email" id="auth-email" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-sm text-white outline-none focus:border-brand-500 transition-all" placeholder="correu@exemple.com">
@@ -64,9 +76,12 @@
                 </button>
             </div>
 
-            <div class="text-center text-xs text-slate-400">
-                <span id="auth-switch-text">No tens compte?</span>
-                <button onclick="toggleAuthMode()" id="auth-switch-btn" class="text-brand-400 font-semibold hover:underline ml-1">Registra't</button>
+            <div class="flex items-center justify-between text-xs text-slate-400 pt-2 border-t border-slate-800">
+                <div>
+                    <span id="auth-switch-text">No tens compte?</span>
+                    <button onclick="toggleAuthMode()" id="auth-switch-btn" class="text-brand-400 font-semibold hover:underline ml-1">Registra't</button>
+                </div>
+                <button onclick="closeAuthModal()" class="text-slate-500 hover:text-slate-300">Tancar</button>
             </div>
         </div>
     </div>
@@ -74,7 +89,6 @@
     <header class="bg-slate-900/90 backdrop-blur border-b border-slate-800 sticky top-0 z-40">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
             <div class="flex items-center space-x-3">
-                <!-- LOGO CANVIAT PER IMATGE -->
                 <div class="w-10 h-10 rounded-lg overflow-hidden flex items-center justify-center shadow-lg bg-slate-800 border border-slate-700">
                     <img src="logo.png" alt="Logo" class="w-full h-full object-cover" onerror="this.onerror=null; this.parentElement.innerHTML='<i class=\'fa-solid font-bold text-red-500 text-xl\'>M</i>';">
                 </div>
@@ -103,11 +117,16 @@
                 </span>
                 
                 <!-- BOTÓ / INFO D'USUARI I TANCAR SESSIÓ -->
-                <div class="flex items-center space-x-2 border-l border-slate-800 pl-3">
-                    <span id="user-email-display" class="text-xs text-slate-300 hidden xl:inline"></span>
-                    <button onclick="logoutUser()" title="Tancar Sessió" class="px-2.5 py-1.5 bg-red-600/20 text-red-400 border border-red-500/30 rounded-xl text-xs font-semibold hover:bg-red-600/30 transition-all">
-                        <i class="fa-solid fa-power-off"></i>
+                <div id="user-auth-area" class="flex items-center space-x-2 border-l border-slate-800 pl-3">
+                    <button onclick="openAuthModal('login')" id="btn-open-login" class="px-3 py-1.5 bg-brand-600 text-white rounded-xl text-xs font-semibold hover:bg-brand-500 transition-all">
+                        <i class="fa-solid fa-user mr-1"></i> Iniciar Sessió
                     </button>
+                    <div id="user-logged-info" class="hidden items-center space-x-2">
+                        <span id="user-email-display" class="text-xs text-slate-300 hidden xl:inline"></span>
+                        <button onclick="logoutUser()" title="Tancar Sessió" class="px-2.5 py-1.5 bg-red-600/20 text-red-400 border border-red-500/30 rounded-xl text-xs font-semibold hover:bg-red-600/30 transition-all">
+                            <i class="fa-solid fa-power-off"></i>
+                        </button>
+                    </div>
                 </div>
 
                 <!-- TEXT EMPRESA ARRIBA A LA DRETA -->
@@ -143,7 +162,7 @@
                 <div class="relative z-10 max-w-2xl">
                     <h2 class="text-2xl sm:text-3xl font-extrabold text-white">Hola, Opositor/a! 👋</h2>
                     <p class="text-slate-300 mt-2 text-sm sm:text-base">
-                        Benvingut/da al teu centre de preparació personalitzat per als <strong>Mossos d'Esquadra</strong>. Practica amb el banc de preguntes global, reforça els punts febles i posa a prova els teus coneixements.
+                        Benvingut/da al teu centre de preparació personalitzat per als <strong>Mossos d'Esquadra</strong>. Navega lliurement, practica amb el banc de preguntes i inicia sessió quan vulguis guardar el teu progrés.
                     </p>
                     <div class="mt-6 flex flex-wrap gap-3">
                         <button onclick="switchTab('exam')" class="px-5 py-2.5 bg-brand-600 hover:bg-brand-500 text-white font-semibold rounded-xl shadow-lg shadow-brand-600/30 transition-all flex items-center">
@@ -353,6 +372,13 @@
                     <p id="result-score-text" class="text-slate-300 text-lg"></p>
                 </div>
 
+                <div id="save-prompt-box" class="hidden bg-brand-950/60 border border-brand-500/40 p-4 rounded-xl text-center space-y-2">
+                    <p class="text-xs text-brand-200">Vols guardar aquest resultat al teu perfil personal?</p>
+                    <button onclick="openAuthModal('register')" class="px-4 py-2 bg-brand-600 text-white text-xs font-semibold rounded-lg hover:bg-brand-500">
+                        Registra't o Inicia Sessió per desar el progrés
+                    </button>
+                </div>
+
                 <div class="grid grid-cols-3 gap-4 max-w-md mx-auto text-center">
                     <div class="bg-slate-900/80 p-3 rounded-xl border border-slate-700">
                         <span class="text-xs text-slate-400 block">Correctes</span>
@@ -497,30 +523,58 @@
         const auth = getAuth(app);
         let isRegisterMode = false;
 
+        window.openAuthModal = function(mode = 'login') {
+            isRegisterMode = (mode === 'register');
+            updateAuthModalUI();
+            document.getElementById('auth-overlay').classList.remove('hidden');
+        }
+
+        window.closeAuthModal = function() {
+            document.getElementById('auth-overlay').classList.add('hidden');
+        }
+
         window.toggleAuthMode = function() {
             isRegisterMode = !isRegisterMode;
-            document.getElementById('auth-title').innerText = isRegisterMode ? "Crea un compte a OpposTest" : "Inicia Sessió a OpposTest";
-            document.getElementById('auth-submit-btn').innerText = isRegisterMode ? "Registrar-se" : "Iniciar Sessió";
-            document.getElementById('auth-switch-text').innerText = isRegisterMode ? "Ja tens compte?" : "No tens compte?";
-            document.getElementById('auth-switch-btn').innerText = isRegisterMode ? "Inicia sessió" : "Registra't";
+            updateAuthModalUI();
+        }
+
+        function updateAuthModalUI() {
+            const extraFields = document.getElementById('register-extra-fields');
+            if (isRegisterMode) {
+                extraFields.classList.remove('hidden');
+                document.getElementById('auth-title').innerText = "Crea un compte a OpposTest";
+                document.getElementById('auth-submit-btn').innerText = "Registrar-se";
+                document.getElementById('auth-switch-text').innerText = "Ja tens compte?";
+                document.getElementById('auth-switch-btn').innerText = "Inicia sessió";
+            } else {
+                extraFields.classList.add('hidden');
+                document.getElementById('auth-title').innerText = "Inicia Sessió a OpposTest";
+                document.getElementById('auth-submit-btn').innerText = "Iniciar Sessió";
+                document.getElementById('auth-switch-text').innerText = "No tens compte?";
+                document.getElementById('auth-switch-btn').innerText = "Registra't";
+            }
         }
 
         window.handleAuthSubmit = async function() {
             const email = document.getElementById('auth-email').value;
             const password = document.getElementById('auth-password').value;
+            const username = document.getElementById('auth-username').value;
+            const dob = document.getElementById('auth-dob').value;
 
-            if (!email || !password) {
-                showToast("Si us plau, omple tots els camps.", "error");
+            if (!email || !password || (isRegisterMode && (!username || !dob))) {
+                showToast("Si us plau, omple tots els camps obligatoris.", "error");
                 return;
             }
 
             try {
                 if (isRegisterMode) {
                     await createUserWithEmailAndPassword(auth, email, password);
-                    showToast("Compte creat i sessió iniciada!", "success");
+                    showToast(`Compte creat correctament, benvingut/da ${username}!`, "success");
+                    closeAuthModal();
                 } else {
                     await signInWithEmailAndPassword(auth, email, password);
                     showToast("Sessió iniciada amb èxit!", "success");
+                    closeAuthModal();
                 }
             } catch (error) {
                 showToast("Error: " + error.message, "error");
@@ -540,16 +594,28 @@
         }
 
         onAuthStateChanged(auth, (user) => {
-            const overlay = document.getElementById('auth-overlay');
+            const btnLogin = document.getElementById('btn-open-login');
+            const userLoggedInfo = document.getElementById('user-logged-info');
             const emailDisplay = document.getElementById('user-email-display');
+            const savePrompt = document.getElementById('save-prompt-box');
+
             if (user) {
-                overlay.classList.add('hidden');
+                btnLogin.classList.add('hidden');
+                userLoggedInfo.classList.remove('hidden');
+                userLoggedInfo.classList.add('flex');
                 if (emailDisplay) emailDisplay.innerText = user.email;
+                if (savePrompt) savePrompt.classList.add('hidden');
             } else {
-                overlay.classList.remove('hidden');
+                btnLogin.classList.remove('hidden');
+                userLoggedInfo.classList.remove('flex');
+                userLoggedInfo.classList.add('hidden');
                 if (emailDisplay) emailDisplay.innerText = '';
             }
         });
+        
+        window.getFirebaseCurrentUser = function() {
+            return auth.currentUser;
+        }
     </script>
 
     <script>
@@ -952,6 +1018,15 @@
 
             document.getElementById('exam-active-container').classList.add('hidden');
             document.getElementById('exam-results-container').classList.remove('hidden');
+
+            // Mostrar avís per guardar si no està loguejat
+            const currentUser = window.getFirebaseCurrentUser ? window.getFirebaseCurrentUser() : null;
+            const savePrompt = document.getElementById('save-prompt-box');
+            if (!currentUser) {
+                savePrompt.classList.remove('hidden');
+            } else {
+                savePrompt.classList.add('hidden');
+            }
 
             document.getElementById('res-correct').innerText = correctCount;
             document.getElementById('res-incorrect').innerText = currentExam.length - correctCount;
