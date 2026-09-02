@@ -65,7 +65,7 @@
                     <i class="fa-solid fa-book-bookmark mr-2"></i>Guia d'Estudi
                 </button>
                 <button onclick="switchTab('add-questions')" id="nav-add-questions" class="tab-btn px-4 py-2 rounded-lg text-sm font-medium transition-all text-slate-300 hover:text-white hover:bg-slate-700/50">
-                    <i class="fa-solid fa-lock mr-2"></i>Afegir / Importar
+                    <i class="fa-solid fa-pen-to-square mr-2"></i>Afegir / Importar
                 </button>
             </nav>
 
@@ -88,7 +88,7 @@
                 <i class="fa-solid fa-book-bookmark text-base"></i><span>Guia</span>
             </button>
             <button onclick="switchTab('add-questions')" class="flex flex-col items-center py-1 text-slate-400">
-                <i class="fa-solid fa-lock text-base"></i><span>Afegir</span>
+                <i class="fa-solid fa-pen-to-square text-base"></i><span>Afegir</span>
             </button>
         </div>
     </header>
@@ -336,25 +336,8 @@
         <!-- ADD / MANAGE QUESTIONS SECTION -->
         <section id="sec-add-questions" class="tab-content hidden space-y-6">
 
-            <!-- Auth Panel -->
-            <div id="auth-panel" class="max-w-md mx-auto bg-slate-800 rounded-2xl p-6 border border-slate-700 shadow-xl space-y-4 my-8">
-                <div class="text-center space-y-1">
-                    <div class="w-12 h-12 bg-brand-500/10 text-brand-400 rounded-xl flex items-center justify-center mx-auto text-xl mb-2">
-                        <i class="fa-solid fa-lock"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-white">Accés Restringit Administrador</h3>
-                    <p class="text-xs text-slate-400">Introdueix la clau d'administrador per crear o importar preguntes.</p>
-                </div>
-                <div class="space-y-3 pt-2">
-                    <input type="password" id="admin-sec-input" onkeyup="if(event.key==='Enter') verifyAdminKey()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-slate-100 outline-none focus:ring-2 focus:ring-brand-500" placeholder="Clau d'accés...">
-                    <button onclick="verifyAdminKey()" class="w-full py-2.5 bg-brand-600 hover:bg-brand-500 text-white font-semibold rounded-xl text-sm transition-all shadow-lg shadow-brand-600/30">
-                        Desbloquejar Panell
-                    </button>
-                </div>
-            </div>
-
-            <!-- Main Editor Area (Hidden until authenticated) -->
-            <div id="admin-editor-area" class="hidden grid grid-cols-1 lg:grid-cols-12 gap-6">
+            <!-- Main Editor Area -->
+            <div id="admin-editor-area" class="grid grid-cols-1 lg:grid-cols-12 gap-6">
                 <!-- Manual Add Form -->
                 <div class="lg:col-span-7 bg-slate-800 rounded-2xl p-6 border border-slate-700 space-y-5 shadow-xl">
                     <div class="border-b border-slate-700/80 pb-3 flex justify-between items-center">
@@ -364,9 +347,6 @@
                             </h3>
                             <p class="text-xs text-slate-400 mt-1">Escriu l'enunciat, les opcions de resposta, marca quina és la correcta i la seva justificació.</p>
                         </div>
-                        <button onclick="lockAdminPanel()" class="text-xs px-3 py-1.5 bg-slate-700 hover:bg-slate-600 text-slate-300 rounded-lg">
-                            <i class="fa-solid fa-lock mr-1"></i> Bloquejar
-                        </button>
                     </div>
 
                     <!-- Question text -->
@@ -427,7 +407,7 @@
                     </button>
                 </div>
 
-                <!-- Right Column: JSON Import/Export -->
+                <!-- Right Column: JSON Import/Export & Reset -->
                 <div class="lg:col-span-5 space-y-6">
                     <div class="bg-slate-800 rounded-2xl p-6 border border-slate-700 space-y-4 shadow-xl">
                         <h3 class="text-lg font-bold text-white flex items-center">
@@ -445,6 +425,16 @@
                                 <i class="fa-solid fa-download mr-1"></i> Exportar
                             </button>
                         </div>
+                    </div>
+
+                    <div class="bg-slate-800 rounded-2xl p-6 border border-slate-700 space-y-3 shadow-xl">
+                        <h3 class="text-sm font-bold text-red-400 flex items-center">
+                            <i class="fa-solid fa-trash-can mr-2"></i> Restablir Banc de Preguntes
+                        </h3>
+                        <p class="text-xs text-slate-400">Esborra les preguntes personalitzades i restableix el banc per defecte.</p>
+                        <button onclick="resetQuestionsToDefault()" class="w-full py-2 bg-red-900/40 border border-red-700/50 hover:bg-red-900/60 text-red-300 font-semibold rounded-xl text-xs transition-all">
+                            Restablir de Fàbrica
+                        </button>
                     </div>
                 </div>
             </div>
@@ -472,7 +462,7 @@
     </div>
 
     <script>
-        // Fallback local per defecte en cas de fallada
+        // Fallback local per defecte
         const defaultQuestions = [
             {
                 question: "Segons l'article 149.1.29a de la Constitució Espanyola, quina és la facultat exclusiva de l'Estat en matèria de seguretat?",
@@ -523,84 +513,71 @@
         let currentQuestionIdx = 0;
         let userAnswers = {};
         let examHistory = { done: 0, totalCorrect: 0, totalQuestions: 0 };
-        let isAuthenticated = false;
 
         // Inicialització principal
         document.addEventListener('DOMContentLoaded', () => {
-            loadQuestionsFromCloud();
-            updateStats();
+            loadQuestionsFromStorage();
+            loadStatsFromStorage();
         });
 
-        // --- CÀRREGA DE PREGUNTES DES DEL NÚVOL ---
-        async function loadQuestionsFromCloud() {
+        // --- MANEIG DE LOCALSTORAGE ---
+        function loadQuestionsFromStorage() {
             try {
-                const res = await fetch('/.netlify/functions/get-questions');
-                if (res.ok) {
-                    const data = await res.json();
-                    if (Array.isArray(data) && data.length > 0) {
-                        questionBank = data;
-                    } else {
-                        // Si el núvol està buit, carregar preguntes inicials
-                        questionBank = [...defaultQuestions];
-                        await saveQuestionsToCloud(questionBank);
-                    }
+                const stored = localStorage.getItem('oppos_question_bank');
+                if (stored) {
+                    questionBank = JSON.parse(stored);
                 } else {
                     questionBank = [...defaultQuestions];
+                    saveQuestionsToStorage(questionBank);
                 }
             } catch (err) {
-                console.error("Error carregant preguntes:", err);
+                console.error("Error carregant del LocalStorage:", err);
                 questionBank = [...defaultQuestions];
             }
             updateQuestionCountBadge();
         }
 
-        async function saveQuestionsToCloud(preguntas) {
+        function saveQuestionsToStorage(preguntas) {
             try {
-                const res = await fetch('/.netlify/functions/save-questions', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(preguntas)
-                });
-                return res.ok;
+                localStorage.setItem('oppos_question_bank', JSON.stringify(preguntas));
+                return true;
             } catch (err) {
-                console.error("Error desant preguntes:", err);
+                console.error("Error desant al LocalStorage:", err);
                 return false;
             }
         }
 
-        // Admin Auth Function
-        async function verifyAdminKey() {
-            const input = document.getElementById('admin-sec-input').value;
-            if (!input) return;
-
+        function loadStatsFromStorage() {
             try {
-                const res = await fetch('/.netlify/functions/check-auth', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ pass: input })
-                });
-
-                const data = await res.json();
-
-                if (res.ok && data.success) {
-                    isAuthenticated = true;
-                    document.getElementById('auth-panel').classList.add('hidden');
-                    document.getElementById('admin-editor-area').classList.remove('hidden');
-                    document.getElementById('admin-sec-input').value = '';
-                    showToast("Accés concedit. Panell desbloquejat.", "success");
-                } else {
-                    showToast("Clau incorrecta.", "error");
+                const storedStats = localStorage.getItem('oppos_exam_stats');
+                if (storedStats) {
+                    examHistory = JSON.parse(storedStats);
                 }
             } catch (err) {
-                showToast("Error de connexió amb el servidor.", "error");
+                console.error("Error carregant estadístiques:", err);
+            }
+            updateStats();
+        }
+
+        function saveStatsToStorage() {
+            try {
+                localStorage.setItem('oppos_exam_stats', JSON.stringify(examHistory));
+            } catch (err) {
+                console.error("Error desant estadístiques:", err);
             }
         }
 
-        function lockAdminPanel() {
-            isAuthenticated = false;
-            document.getElementById('admin-editor-area').classList.add('hidden');
-            document.getElementById('auth-panel').classList.remove('hidden');
-            showToast("Panell bloquejat de nou.", "info");
+        function resetQuestionsToDefault() {
+            showConfirm(
+                "Restablir Banc de Preguntes",
+                "Segur que vols esborrar les teves preguntes personalitzades i carregar el banc per defecte?",
+                () => {
+                    questionBank = [...defaultQuestions];
+                    saveQuestionsToStorage(questionBank);
+                    updateQuestionCountBadge();
+                    showToast("S'ha restablert el banc de preguntes per defecte.", "info");
+                }
+            );
         }
 
         // UI Toast Helpers
@@ -825,6 +802,7 @@
             examHistory.done += 1;
             examHistory.totalCorrect += correctCount;
             examHistory.totalQuestions += currentExam.length;
+            saveStatsToStorage();
             updateStats();
 
             document.getElementById('exam-card-container').classList.add('hidden');
@@ -851,9 +829,7 @@
         }
 
         // Questions Management: MANUAL ADD FORM
-        async function saveManualQuestion() {
-            if (!isAuthenticated) return;
-
+        function saveManualQuestion() {
             const qText = document.getElementById('input-q-text').value.trim();
             const opts = [
                 document.getElementById('input-opt-0').value.trim(),
@@ -890,22 +866,20 @@
             };
 
             questionBank.push(newQ);
-            const saved = await saveQuestionsToCloud(questionBank);
+            const saved = saveQuestionsToStorage(questionBank);
 
             if (saved) {
                 updateQuestionCountBadge();
                 document.getElementById('input-q-text').value = '';
                 opts.forEach((_, idx) => document.getElementById('input-opt-' + idx).value = '');
                 document.getElementById('input-q-explanation').value = '';
-                showToast("✨ Pregunta afegida i guardada al núvol!", "success");
+                showToast("✨ Pregunta afegida i guardada localment!", "success");
             } else {
-                showToast("Error al desar la pregunta al núvol.", "error");
+                showToast("Error en desar la pregunta.", "error");
             }
         }
 
-        async function importJSON() {
-            if (!isAuthenticated) return;
-
+        function importJSON() {
             const raw = document.getElementById('json-import-input').value.trim();
             if (!raw) {
                 showToast("Si us plau, enganxa contingut JSON vàlid.", "error");
@@ -934,14 +908,14 @@
                     }
                 });
 
-                const saved = await saveQuestionsToCloud(questionBank);
+                const saved = saveQuestionsToStorage(questionBank);
 
                 if (saved) {
                     updateQuestionCountBadge();
-                    showToast(`S'han importat i desat ${addedCount} preguntes al núvol!`, "success");
+                    showToast(`S'han importat i desat ${addedCount} preguntes!`, "success");
                     document.getElementById('json-import-input').value = '';
                 } else {
-                    showToast("Error al desar les preguntes importades al núvol.", "error");
+                    showToast("Error en desar les preguntes importades.", "error");
                 }
             } catch (err) {
                 showToast("Error al llegir el JSON. Revisa l'estructura i el format.", "error");
@@ -949,8 +923,6 @@
         }
 
         function exportQuestionsJSON() {
-            if (!isAuthenticated) return;
-
             const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(questionBank, null, 2));
             const dlAnchorElem = document.createElement('a');
             dlAnchorElem.setAttribute("href", dataStr);
