@@ -557,6 +557,7 @@
         const db = getFirestore(app);
         let isRegisterMode = false;
 
+        // EXPONEMOS LA FUNCIÓN A WINDOW AQUÍ:
         window.openAuthModal = function(mode = 'login') {
             isRegisterMode = (mode === 'register');
             updateAuthModalUI();
