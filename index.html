@@ -317,12 +317,23 @@
         <!-- PROFILE SECTION -->
         <section id="sec-profile" class="tab-content hidden space-y-6">
             <div class="bg-slate-800 rounded-2xl p-6 sm:p-8 border border-slate-700 shadow-xl max-w-2xl mx-auto space-y-6">
-                <div class="flex items-center space-x-4 border-b border-slate-700 pb-6">
+                <div class="flex items-center space-x-4 border-b border-slate-700 pb-6 mb-6">
                     <div class="w-16 h-16 rounded-2xl bg-brand-600/20 text-brand-400 border border-brand-500/30 flex items-center justify-center text-3xl font-bold"><i class="fa-solid fa-user"></i></div>
                     <div>
                         <h2 class="text-xl font-bold text-white" id="profile-card-title">El meu Perfil</h2>
                         <p class="text-xs text-slate-400 mt-1">Gestiona el teu compte i dades de l'oposició</p>
                     </div>
+                </div>
+
+                <!-- Efectes de So Toggle -->
+                <div class="bg-slate-900/80 p-4 rounded-xl border border-slate-700 flex justify-between items-center text-sm mb-6">
+                    <div>
+                        <h3 class="font-bold text-white"><i class="fa-solid fa-volume-high text-brand-400 mr-2"></i>Efectes de so</h3>
+                        <p class="text-xs text-slate-400">Sons en encertar o fallar preguntes</p>
+                    </div>
+                    <button onclick="toggleSound()" class="px-3 py-1.5 bg-slate-800 border border-slate-700 text-slate-300 rounded-lg text-xs font-semibold hover:bg-slate-700 transition-all">
+                        <span id="sound-status-text">Activat</span>
+                    </button>
                 </div>
 
                 <div id="profile-not-logged" class="space-y-4 text-center py-6">
@@ -836,7 +847,6 @@
                 if(notLogged) notLogged.classList.add('hidden');
                 if(logged) logged.classList.remove('hidden');
                 
-                // Mostrar botó d'admin només al teu correu
                 if(adminBtn) {
                     if (user.email === "gerardlopezgarcia1@gmail.com") {
                         adminBtn.classList.remove('hidden');
@@ -919,6 +929,9 @@
             loadStatsFromStorage();
             startMidnightCountdown();
             if(window.updateLocksUI) window.updateLocksUI(null);
+            
+            const txt = document.getElementById('sound-status-text');
+            if (txt) txt.innerText = soundEnabled ? 'Activat' : 'Desactivat';
         });
 
         function startMidnightCountdown() {
@@ -1299,6 +1312,10 @@
                     btn.onclick = () => {
                         const timeSpent = (Date.now() - questionStartTime) / 1000;
                         userAnswers[currentQuestionIdx] = { choice: idx, time: timeSpent };
+                        
+                        const isCorrect = (q.options[idx] === q.correctAnswer);
+                        playSound(isCorrect);
+                        
                         renderQuestion();
                     };
                 } else {
@@ -1395,6 +1412,46 @@
             document.getElementById('res-incorrect').innerText = currentExam.length - correct;
             document.getElementById('res-grade').innerText = `${grade} / 10`;
             document.getElementById('results-review-list').innerHTML = reviewHTML;
+        }
+
+        // SISTEMA DE SO (Web Audio API)
+        let soundEnabled = localStorage.getItem('oppos_sound') !== 'false';
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+        window.toggleSound = function() {
+            soundEnabled = !soundEnabled;
+            localStorage.setItem('oppos_sound', soundEnabled);
+            const txt = document.getElementById('sound-status-text');
+            if (txt) txt.innerText = soundEnabled ? 'Activat' : 'Desactivat';
+            if(soundEnabled) playSound(true);
+        }
+
+        function playSound(isCorrect) {
+            if (!soundEnabled) return;
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            
+            const osc = audioCtx.createOscillator();
+            const gainNode = audioCtx.createGain();
+            
+            osc.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+            
+            if (isCorrect) {
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(800, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(1200, audioCtx.currentTime + 0.1);
+                gainNode.gain.setValueAtTime(0.2, audioCtx.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+            } else {
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(150, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(100, audioCtx.currentTime + 0.2);
+                gainNode.gain.setValueAtTime(0.2, audioCtx.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+            }
+            
+            osc.start();
+            osc.stop(audioCtx.currentTime + 0.3);
         }
     </script>
 </body>
