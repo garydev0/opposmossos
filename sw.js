@@ -1,4 +1,4 @@
-const CACHE_NAME = 'oppostest-v2';
+const CACHE_NAME = 'oppostest-v3';
 const urlsToCache = [
     './',
     './index.html',
