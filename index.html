@@ -658,28 +658,58 @@
                 return;
             }
             const newUsername = document.getElementById('profile-username-input').value.trim();
-            const warningMsg = document.getElementById('username-warning-msg');
-            
             if (!newUsername) {
                 window.showToast("El nom d'usuari no pot estar buit.", "error");
                 return;
             }
 
             try {
-                // Comprovar si el nom ja existeix
-                const q = query(collection(db, "users"), where("username", "==", newUsername));
-                const snap = await getDocs(q);
-                if (!snap.empty) {
-                    // Si existeix però pertany a un altre usuari
-                    let duplicated = false;
-                    snap.forEach(docSnap => {
-                        if (docSnap.id !== user.uid) duplicated = true;
-                    });
-                    if (duplicated) {
-                        window.showToast("Aquest nom d'usuari ja està en ús.", "error");
+                const userRef = doc(db, "users", user.uid);
+                const userSnap = await getDoc(userRef);
+                const userData = userSnap.exists() ? userSnap.data() : {};
+                
+                // Comprovar si han passat 14 dies des de l'últim canvi
+                const lastChange = userData.lastUsernameChange ? new Date(userData.lastUsernameChange) : null;
+                const now = new Date();
+                
+                if (lastChange) {
+                    const diffTime = now - lastChange;
+                    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+                    if (diffDays < 14) {
+                        const daysLeft = 14 - diffDays;
+                        window.showToast(`Hauràs d'esperar ${daysLeft} dies més per tornar a canviar el nom.`, "error");
                         return;
                     }
                 }
+
+                // Comprovar si el nom ja existeix en un altre usuari
+                const q = query(collection(db, "users"), where("username", "==", newUsername));
+                const snap = await getDocs(q);
+                let duplicated = false;
+                snap.forEach(docSnap => {
+                    if (docSnap.id !== user.uid) duplicated = true;
+                });
+                if (duplicated) {
+                    window.showToast("Aquest nom d'usuari ja està en ús.", "error");
+                    return;
+                }
+
+                // Guardar nou nom i data actual
+                const todayISO = now.toISOString();
+                await setDoc(userRef, { 
+                    username: newUsername, 
+                    lastUsernameChange: todayISO 
+                }, { merge: true });
+                
+                const desktopLabel = document.getElementById('desktop-profile-label');
+                if (desktopLabel) desktopLabel.innerText = newUsername;
+                
+                window.showToast("Nom d'usuari actualitzat correctament!", "success");
+                if (window.loadGlobalRanking) window.loadGlobalRanking();
+            } catch (err) {
+                window.showToast("Error en actualitzar el nom: " + err.message, "error");
+            }
+        }
 
                 // Actualitzar a Firestore
                 await setDoc(doc(db, "users", user.uid), { username: newUsername }, { merge: true });
