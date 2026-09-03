@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tests Mossos d'Esquadra - Oposicions 2026 | OpposTest</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#2563eb">
+    <link rel="apple-touch-icon" href="logo.png">
     <meta name="description" content="Practica amb tests oficials per a les oposicions de Mossos d'Esquadra. Preguntes actualitzades, simulacres, estadística de punts febles i ranking.">
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -1460,6 +1463,15 @@
             
             osc.start();
             osc.stop(audioCtx.currentTime + 0.3);
+        }
+    </script>
+
+    <script>
+    if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                .catch(err => console.log('Error al registrar SW:', err));
+            });
         }
     </script>
 </body>
