@@ -259,7 +259,7 @@
                     </div>
                 </div>
 
-                <!-- CALENDARI DE PROXIMES DATES IMPORTANTS (UBICAT EN EL LLOC DEL WIDGET DE TEMA) -->
+                <!-- CALENDARI DE PROXIMES DATES IMPORTANTS -->
                 <div class="bg-slate-800/80 rounded-xl p-6 border border-slate-700 shadow-sm space-y-4 lg:col-span-2">
                     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
                         <div>
@@ -392,7 +392,7 @@
         <!-- EXAM SECTION -->
         <section id="sec-exam" class="tab-content hidden space-y-6">
             <div id="exam-menu-container" class="space-y-6">
-                <!-- ENTRENAR PUNTS DÈBILS (FUNCIONALITAT DESTACADA) -->
+                <!-- ENTRENAR PUNTS DÈBILS -->
                 <div id="weak-spots-box" class="bg-gradient-to-r from-amber-950/70 to-slate-900 rounded-2xl p-6 border border-amber-500/40 shadow-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 hidden">
                     <div class="space-y-1">
                         <div class="inline-flex items-center space-x-2 text-amber-400 font-bold text-sm">
@@ -534,7 +534,6 @@
                 </div>
 
                 <div class="flex justify-center gap-4 pt-4">
-                    <!-- BOTÓ ACTUALITZAT -->
                     <button onclick="backToExamMenu()" class="px-6 py-2.5 bg-brand-600 hover:bg-brand-500 text-white font-semibold rounded-xl text-sm transition-all shadow-lg">
                         <i class="fa-solid fa-rotate-right mr-2"></i> Tornar a Tests
                     </button>
@@ -552,16 +551,15 @@
                 <p class="text-slate-300 text-sm">Resum executiu i temari clau per a les oposicions.</p>
             </div>
 
-            <!-- Contingut buit per afegir més endavant -->
             <div class="bg-slate-800/60 rounded-xl border border-slate-700/80 p-8 text-center text-slate-400 space-y-3">
                 <i class="fa-solid fa-person-digging text-3xl text-brand-400"></i>
-                <p class="text-sm font-medium"> Contingut de la guia en construcció. Estarà disponible properament.</p>
+                <p class="text-sm font-medium">Contingut de la guia en construcció. Estarà disponible properament.</p>
             </div>
         </section>
 
     </main>
 
-    <!-- FOOTER AMB COLOR CANVIAT PER DIFERENCIAR-SE DEL FONS -->
+    <!-- FOOTER -->
     <footer class="bg-slate-900 border-t border-slate-800 mt-auto py-4">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-slate-400">
             <div>© 2026 OpposTest Mossos d'Esquadra. Tots els drets reservats.</div>
@@ -668,7 +666,6 @@
                 const userSnap = await getDoc(userRef);
                 const userData = userSnap.exists() ? userSnap.data() : {};
                 
-                // Comprovar si han passat 14 dies des de l'últim canvi
                 const lastChange = userData.lastUsernameChange ? new Date(userData.lastUsernameChange) : null;
                 const now = new Date();
                 
@@ -682,7 +679,6 @@
                     }
                 }
 
-                // Comprovar si el nom ja existeix en un altre usuari
                 const q = query(collection(db, "users"), where("username", "==", newUsername));
                 const snap = await getDocs(q);
                 let duplicated = false;
@@ -694,27 +690,12 @@
                     return;
                 }
 
-                // Guardar nou nom i data actual
                 const todayISO = now.toISOString();
                 await setDoc(userRef, { 
                     username: newUsername, 
                     lastUsernameChange: todayISO 
                 }, { merge: true });
                 
-                const desktopLabel = document.getElementById('desktop-profile-label');
-                if (desktopLabel) desktopLabel.innerText = newUsername;
-                
-                window.showToast("Nom d'usuari actualitzat correctament!", "success");
-                if (window.loadGlobalRanking) window.loadGlobalRanking();
-            } catch (err) {
-                window.showToast("Error en actualitzar el nom: " + err.message, "error");
-            }
-        }
-
-                // Actualitzar a Firestore
-                await setDoc(doc(db, "users", user.uid), { username: newUsername }, { merge: true });
-                
-                // Actualitzar la interfície
                 const desktopLabel = document.getElementById('desktop-profile-label');
                 if (desktopLabel) desktopLabel.innerText = newUsername;
                 
@@ -1102,7 +1083,6 @@
             document.getElementById('exam-active-container').classList.add('hidden');
         }
 
-        // FUNCIÓ ACTUALITZADA PER TORNAR AL MENÚ DE TESTS DES DE RESULTATS
         window.backToExamMenu = () => {
             document.getElementById('exam-results-container').classList.add('hidden');
             document.getElementById('exam-menu-container').classList.remove('hidden');
