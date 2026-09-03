@@ -247,7 +247,7 @@
                 </div>
             </div>
 
-            <!-- COMPARARTE CONTIGO MISMO & ESTADÍSTICAS POR TEMA -->
+            <!-- COMPARARTE CONTIGO MISMO & CALENDARI DE PROXIMES DATES -->
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 <div class="bg-slate-800/80 rounded-xl p-6 border border-slate-700 space-y-4">
                     <h3 class="text-base font-bold text-white flex items-center"><i class="fa-solid fa-chart-line text-brand-400 mr-2"></i> Comparativa Personal</h3>
@@ -259,63 +259,56 @@
                     </div>
                 </div>
 
-                <div class="bg-slate-800/80 rounded-xl p-6 border border-slate-700 space-y-4 lg:col-span-2">
-                    <h3 class="text-base font-bold text-white flex items-center"><i class="fa-solid fa-layer-group text-emerald-400 mr-2"></i> Porcentaje de aciertos por tema</h3>
-                    <div id="topics-breakdown-list" class="space-y-2.5 text-xs">
-                        <p class="text-slate-400">Fes tests per veure el desglossament per temes i indicadors 🟢 🟠 🔴.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- CALENDARI DE PROXIMES DATES IMPORTANTS -->
-            <div class="bg-slate-800/80 rounded-xl p-6 border border-slate-700 shadow-sm space-y-4">
-                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
-                    <div>
-                        <h3 class="text-base font-bold text-white flex items-center"><i class="fa-solid fa-calendar-days text-brand-400 mr-2"></i> Properes Dates Importants</h3>
-                        <p class="text-xs text-slate-400 mt-0.5">Calendari oficial d'esdeveniments i proves de l'oposició</p>
-                    </div>
-                </div>
-                <div class="space-y-3 pt-2">
-                    <div class="flex items-center justify-between p-3.5 bg-slate-900/80 rounded-xl border border-slate-700/80 hover:border-brand-500/50 transition-all">
-                        <div class="flex items-center space-x-4">
-                            <div class="bg-brand-600/20 text-brand-400 border border-brand-500/30 px-3 py-2 rounded-xl text-center font-bold min-w-[70px]">
-                                <span class="block text-xs uppercase">Oct</span>
-                                <span class="text-lg">17</span>
-                            </div>
-                            <div>
-                                <h4 class="text-sm font-bold text-white">Realització de la 1a prova</h4>
-                                <p class="text-xs text-slate-400 mt-0.5">Coneixements, aptitudinal i coneixements d’idiomes.</p>
-                            </div>
+                <!-- CALENDARI DE PROXIMES DATES IMPORTANTS (UBICAT EN EL LLOC DEL WIDGET DE TEMA) -->
+                <div class="bg-slate-800/80 rounded-xl p-6 border border-slate-700 shadow-sm space-y-4 lg:col-span-2">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
+                        <div>
+                            <h3 class="text-base font-bold text-white flex items-center"><i class="fa-solid fa-calendar-days text-brand-400 mr-2"></i> Properes Dates Importants</h3>
+                            <p class="text-xs text-slate-400 mt-0.5">Calendari oficial d'esdeveniments i proves de l'oposició</p>
                         </div>
-                        <span class="text-[11px] bg-brand-500/10 text-brand-400 px-2.5 py-1 rounded-lg font-semibold border border-brand-500/20 hidden sm:inline-block">Imminent</span>
                     </div>
-
-                    <div class="flex items-center justify-between p-3.5 bg-slate-900/80 rounded-xl border border-slate-700/80 hover:border-slate-600 transition-all">
-                        <div class="flex items-center space-x-4">
-                            <div class="bg-slate-800 text-slate-300 border border-slate-700 px-3 py-2 rounded-xl text-center font-bold min-w-[70px]">
-                                <span class="block text-xs uppercase">Nov</span>
-                                <span class="text-lg">12</span>
+                    <div class="space-y-3 pt-2">
+                        <div class="flex items-center justify-between p-3.5 bg-slate-900/80 rounded-xl border border-slate-700/80 hover:border-brand-500/50 transition-all">
+                            <div class="flex items-center space-x-4">
+                                <div class="bg-brand-600/20 text-brand-400 border border-brand-500/30 px-3 py-2 rounded-xl text-center font-bold min-w-[70px]">
+                                    <span class="block text-xs uppercase">Oct</span>
+                                    <span class="text-lg">17</span>
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-bold text-white">Realització de la 1a prova</h4>
+                                    <p class="text-xs text-slate-400 mt-0.5">Coneixements, aptitudinal i coneixements d’idiomes.</p>
+                                </div>
                             </div>
-                            <div>
-                                <h4 class="text-sm font-bold text-white">Publicació de resultats provisionals</h4>
-                                <p class="text-xs text-slate-400 mt-0.5">Període d'al·legacions i revisió d'exàmens.</p>
-                            </div>
+                            <span class="text-[11px] bg-brand-500/10 text-brand-400 px-2.5 py-1 rounded-lg font-semibold border border-brand-500/20 hidden sm:inline-block">Imminent</span>
                         </div>
-                        <span class="text-[11px] bg-slate-800 text-slate-400 px-2.5 py-1 rounded-lg font-semibold border border-slate-700 hidden sm:inline-block">Pròximament</span>
-                    </div>
 
-                    <div class="flex items-center justify-between p-3.5 bg-slate-900/80 rounded-xl border border-slate-700/80 hover:border-slate-600 transition-all">
-                        <div class="flex items-center space-x-4">
-                            <div class="bg-slate-800 text-slate-300 border border-slate-700 px-3 py-2 rounded-xl text-center font-bold min-w-[70px]">
-                                <span class="block text-xs uppercase">Des</span>
-                                <span class="text-lg">01</span>
+                        <div class="flex items-center justify-between p-3.5 bg-slate-900/80 rounded-xl border border-slate-700/80 hover:border-slate-600 transition-all">
+                            <div class="flex items-center space-x-4">
+                                <div class="bg-slate-800 text-slate-300 border border-slate-700 px-3 py-2 rounded-xl text-center font-bold min-w-[70px]">
+                                    <span class="block text-xs uppercase">Nov</span>
+                                    <span class="text-lg">12</span>
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-bold text-white">Publicació de resultats provisionals</h4>
+                                    <p class="text-xs text-slate-400 mt-0.5">Període d'al·legacions i revisió d'exàmens.</p>
+                                </div>
                             </div>
-                            <div>
-                                <h4 class="text-sm font-bold text-white">Inici de les proves físiques</h4>
-                                <p class="text-xs text-slate-400 mt-0.5">Circuit d'agilitat, pressió sobre banc i curs de l'navette.</p>
-                            </div>
+                            <span class="text-[11px] bg-slate-800 text-slate-400 px-2.5 py-1 rounded-lg font-semibold border border-slate-700 hidden sm:inline-block">Pròximament</span>
                         </div>
-                        <span class="text-[11px] bg-slate-800 text-slate-400 px-2.5 py-1 rounded-lg font-semibold border border-slate-700 hidden sm:inline-block">Futur</span>
+
+                        <div class="flex items-center justify-between p-3.5 bg-slate-900/80 rounded-xl border border-slate-700/80 hover:border-slate-600 transition-all">
+                            <div class="flex items-center space-x-4">
+                                <div class="bg-slate-800 text-slate-300 border border-slate-700 px-3 py-2 rounded-xl text-center font-bold min-w-[70px]">
+                                    <span class="block text-xs uppercase">Des</span>
+                                    <span class="text-lg">01</span>
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-bold text-white">Inici de les proves físiques</h4>
+                                    <p class="text-xs text-slate-400 mt-0.5">Circuit d'agilitat, pressió sobre banc i curs de l'navette.</p>
+                                </div>
+                            </div>
+                            <span class="text-[11px] bg-slate-800 text-slate-400 px-2.5 py-1 rounded-lg font-semibold border border-slate-700 hidden sm:inline-block">Futur</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -541,8 +534,9 @@
                 </div>
 
                 <div class="flex justify-center gap-4 pt-4">
-                    <button onclick="switchTab('exam')" class="px-6 py-2.5 bg-brand-600 hover:bg-brand-500 text-white font-semibold rounded-xl text-sm transition-all shadow-lg">
-                        <i class="fa-solid fa-rotate-right mr-2"></i> Tornar al Menú
+                    <!-- BOTÓ ACTUALITZAT -->
+                    <button onclick="backToExamMenu()" class="px-6 py-2.5 bg-brand-600 hover:bg-brand-500 text-white font-semibold rounded-xl text-sm transition-all shadow-lg">
+                        <i class="fa-solid fa-rotate-right mr-2"></i> Tornar a Tests
                     </button>
                     <button onclick="switchTab('dashboard')" class="px-6 py-2.5 bg-slate-700 hover:bg-slate-600 text-slate-200 font-medium rounded-xl text-sm">
                         Veure Estadístiques
@@ -567,7 +561,8 @@
 
     </main>
 
-    <footer class="bg-slate-950 border-t border-slate-800 mt-auto py-3">
+    <!-- FOOTER AMB COLOR CANVIAT PER DIFERENCIAR-SE DEL FONS -->
+    <footer class="bg-slate-900 border-t border-slate-800 mt-auto py-4">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-slate-400">
             <div>© 2026 OpposTest Mossos d'Esquadra. Tots els drets reservats.</div>
             <div>Desenvolupat per GERARD APP'S.</div>
@@ -869,11 +864,10 @@
                 diffEl.className = "font-bold text-red-400";
             }
 
-            renderTopicsBreakdownAndWeakSpots();
+            renderWeakSpots();
         }
 
-        function renderTopicsBreakdownAndWeakSpots() {
-            const listContainer = document.getElementById('topics-breakdown-list');
+        function renderWeakSpots() {
             const weakBox = document.getElementById('weak-spots-box');
             const weakTopicsListEl = document.getElementById('weak-spots-topics-list');
             const statWeakTopic = document.getElementById('stat-weak-topic');
@@ -882,35 +876,17 @@
             const keys = Object.keys(stats);
 
             if (keys.length === 0) {
-                listContainer.innerHTML = `<p class="text-slate-400">Encara no hi ha dades per temes. Fes algun test!</p>`;
                 weakBox.classList.add('hidden');
                 statWeakTopic.innerText = "Sense dades";
                 return;
             }
 
-            let html = '';
             let weakestTopicsArray = [];
-
             keys.forEach(topic => {
                 const tData = stats[topic];
                 const pct = tData.total > 0 ? Math.round((tData.correct / tData.total) * 100) : 0;
-                
-                let icon = '🟢';
-                let colorClass = 'text-emerald-400';
-                if (pct < 50) { icon = '🔴'; colorClass = 'text-red-400'; weakestTopicsArray.push(topic); }
-                else if (pct < 75) { icon = '🟠'; colorClass = 'text-amber-400'; weakestTopicsArray.push(topic); }
-
-                html += `
-                    <div class="flex items-center justify-between p-2.5 bg-slate-900/60 rounded-lg border border-slate-700/60">
-                        <span class="font-medium text-slate-200">${topic}</span>
-                        <div class="flex items-center space-x-2">
-                            <span class="font-bold ${colorClass}">${pct}% ${icon}</span>
-                        </div>
-                    </div>
-                `;
+                if (pct < 75) { weakestTopicsArray.push(topic); }
             });
-
-            listContainer.innerHTML = html;
 
             if (weakestTopicsArray.length > 0) {
                 weakBox.classList.remove('hidden');
@@ -1050,6 +1026,12 @@
             if (activeTimerInterval) clearInterval(activeTimerInterval);
             document.getElementById('exam-menu-container').classList.remove('hidden');
             document.getElementById('exam-active-container').classList.add('hidden');
+        }
+
+        // FUNCIÓ ACTUALITZADA PER TORNAR AL MENÚ DE TESTS DES DE RESULTATS
+        window.backToExamMenu = () => {
+            document.getElementById('exam-results-container').classList.add('hidden');
+            document.getElementById('exam-menu-container').classList.remove('hidden');
         }
 
         function renderQuestion() {
