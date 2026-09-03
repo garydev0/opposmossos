@@ -131,9 +131,6 @@
     <header class="bg-slate-900/90 backdrop-blur border-b border-slate-800 sticky top-0 z-40">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
             <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 rounded-lg overflow-hidden flex items-center justify-center shadow-lg bg-slate-800 border border-slate-700">
-                    <img src="logo.png" alt="Logo" class="w-full h-full object-cover" onerror="this.onerror=null; this.parentElement.innerHTML='<i class=\'fa-solid font-bold text-red-500 text-xl\'>M</i>';">
-                </div>
                 <div>
                     <h1 class="text-lg font-bold text-slate-100 leading-tight">OpposTest - Mossos d'Esquadra</h1>
                     <p class="text-xs text-slate-400">Tests oposicions Mossos i Guia d'Estudi</p>
@@ -205,7 +202,7 @@
 
             <!-- Stats Overview Grid -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                <div class="bg-slate-800/80 rounded-xl p-5 border border-slate-700/60 shadow-sm">
+                <div class="bg-slate-800/80 rounded-xl p-5 border border-slate-700/60 shadow-sm flex flex-col justify-center">
                     <div class="flex justify-between items-start">
                         <div>
                             <p class="text-slate-400 text-xs uppercase font-bold tracking-wider">Preguntes Fetes</p>
@@ -213,10 +210,9 @@
                         </div>
                         <div class="p-3 bg-brand-500/10 text-brand-400 rounded-lg"><i class="fa-solid fa-database text-xl"></i></div>
                     </div>
-                    <p class="text-xs text-slate-400 mt-3">Tests completats: <strong id="stat-exams-done" class="text-white">0</strong></p>
                 </div>
 
-                <div class="bg-slate-800/80 rounded-xl p-5 border border-slate-700/60 shadow-sm">
+                <div class="bg-slate-800/80 rounded-xl p-5 border border-slate-700/60 shadow-sm flex flex-col justify-center">
                     <div class="flex justify-between items-start">
                         <div>
                             <p class="text-slate-400 text-xs uppercase font-bold tracking-wider">Precisió & Nota Mitjana</p>
@@ -224,10 +220,10 @@
                         </div>
                         <div class="p-3 bg-emerald-500/10 text-emerald-400 rounded-lg"><i class="fa-solid fa-bullseye text-xl"></i></div>
                     </div>
-                    <p class="text-xs text-slate-400 mt-3">Nota mitjana: <strong id="stat-nota-mitjana" class="text-white">0.0 / 10</strong> (Màx: <span id="stat-millor-nota" class="text-emerald-400 font-semibold">0.0</span>)</p>
+                    <p class="text-xs text-slate-400 mt-2">Nota mitjana: <strong id="stat-nota-mitjana" class="text-white">0.0 / 10</strong> (Màx: <span id="stat-millor-nota" class="text-emerald-400 font-semibold">0.0</span>)</p>
                 </div>
 
-                <div class="bg-slate-800/80 rounded-xl p-5 border border-slate-700/60 shadow-sm">
+                <div class="bg-slate-800/80 rounded-xl p-5 border border-slate-700/60 shadow-sm flex flex-col justify-center">
                     <div class="flex justify-between items-start">
                         <div>
                             <p class="text-slate-400 text-xs uppercase font-bold tracking-wider">Temps Mitjà / Pregunta</p>
@@ -235,10 +231,9 @@
                         </div>
                         <div class="p-3 bg-amber-500/10 text-amber-400 rounded-lg"><i class="fa-solid fa-stopwatch text-xl"></i></div>
                     </div>
-                    <p class="text-xs text-slate-400 mt-3">Ritme estimat per test oficial</p>
                 </div>
 
-                <div class="bg-slate-800/80 rounded-xl p-5 border border-slate-700/60 shadow-sm">
+                <div class="bg-slate-800/80 rounded-xl p-5 border border-slate-700/60 shadow-sm flex flex-col justify-center">
                     <div class="flex justify-between items-start">
                         <div>
                             <p class="text-slate-400 text-xs uppercase font-bold tracking-wider">Punt Dèbil Setmana</p>
@@ -246,7 +241,6 @@
                         </div>
                         <div class="p-3 bg-red-500/10 text-red-400 rounded-lg"><i class="fa-solid fa-triangle-exclamation text-xl"></i></div>
                     </div>
-                    <p class="text-xs text-slate-400 mt-3">Actualitzat automàticament</p>
                 </div>
             </div>
 
@@ -254,7 +248,6 @@
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 <div class="bg-slate-800/80 rounded-xl p-6 border border-slate-700 space-y-4">
                     <h3 class="text-base font-bold text-white flex items-center"><i class="fa-solid fa-chart-line text-brand-400 mr-2"></i> Comparativa Personal</h3>
-                    <p class="text-xs text-slate-300">Compara el teu rendiment actual amb el de fa 30 dies per veure la teva progressió real:</p>
                     <div class="bg-slate-900/80 p-4 rounded-xl border border-slate-700 space-y-3 text-sm">
                         <div class="flex justify-between items-center"><span class="text-slate-400 text-xs">Fa 30 dies:</span> <span id="comp-past-score" class="font-bold text-slate-300">61%</span></div>
                         <div class="flex justify-between items-center"><span class="text-slate-400 text-xs">Ara mateix:</span> <span id="comp-now-score" class="font-bold text-white">0%</span></div>
@@ -267,7 +260,6 @@
                     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
                         <div>
                             <h3 class="text-base font-bold text-white flex items-center"><i class="fa-solid fa-calendar-days text-brand-400 mr-2"></i> Properes Dates Importants</h3>
-                            <p class="text-xs text-slate-400 mt-0.5">Calendari oficial d'esdeveniments i proves de l'oposició</p>
                         </div>
                     </div>
                     <div class="space-y-3 pt-2">
@@ -440,7 +432,6 @@
 
                 <div class="bg-slate-800 rounded-2xl p-6 border border-slate-700 shadow-xl">
                     <h2 class="text-xl font-bold text-white mb-2"><i class="fa-solid fa-list-check text-brand-400 mr-2"></i>Selecciona el tipus de test</h2>
-                    <p class="text-slate-300 text-sm">Tria una modalitat de test per practicar de manera òptima.</p>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -1022,7 +1013,9 @@
         }
 
         function updateStatsDashboardUI() {
-            document.getElementById('stat-exams-done').innerText = examHistory.done;
+            const statExamsDone = document.getElementById('stat-exams-done');
+            if (statExamsDone) statExamsDone.innerText = examHistory.done;
+            
             document.getElementById('stat-realitzades').innerText = examHistory.totalQuestions;
             
             const acc = examHistory.totalQuestions > 0 ? Math.round((examHistory.totalCorrect / examHistory.totalQuestions) * 100) : 0;
