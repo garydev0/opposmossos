@@ -408,7 +408,7 @@
                     </button>
                 </div>
 
-                <!-- ENTRENAR PUNTS DÈBILS -->
+                <!-- ENTRENAR PUNTS DÈBILS (BLOQUEJAT AMB CANDAT SI NO ES INICIA SESSIÓ) -->
                 <div id="weak-spots-box" class="bg-gradient-to-r from-amber-950/70 to-slate-900 rounded-2xl p-6 border border-amber-500/40 shadow-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 hidden">
                     <div class="space-y-1">
                         <div class="inline-flex items-center space-x-2 text-amber-400 font-bold text-sm">
@@ -418,8 +418,8 @@
                         <p class="text-xs text-slate-300">Hem detectat dificultats en els teus temes amb menor rendiment. Fes un test exprés:</p>
                         <p id="weak-spots-topics-list" class="text-xs font-semibold text-amber-200 pt-1"></p>
                     </div>
-                    <button onclick="startWeakSpotExam()" class="px-5 py-2.5 bg-amber-600 hover:bg-amber-500 text-white font-semibold rounded-xl text-xs transition-all shadow-lg shadow-amber-600/30 shrink-0">
-                        [COMENÇAR TEST]
+                    <button onclick="checkAuthAndRun(startWeakSpotExam)" class="px-5 py-2.5 bg-amber-600 hover:bg-amber-500 text-white font-semibold rounded-xl text-xs transition-all shadow-lg shadow-amber-600/30 shrink-0 flex items-center gap-1.5">
+                        <i class="fa-solid fa-lock text-[10px]"></i> <span>[COMENÇAR TEST]</span>
                     </button>
                 </div>
 
@@ -1118,11 +1118,6 @@
         }
 
         window.startWeakSpotExam = function() {
-            if (!window.getFirebaseCurrentUser()) {
-                window.showToast("Has d'iniciar sessió per accedir al test personalitzat.", "error");
-                openAuthModal('login');
-                return;
-            }
             const stats = examHistory.topicsStats || {};
             let weakQuestions = questionBank.filter(q => {
                 const t = q.topic || 'General';
