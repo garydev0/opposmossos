@@ -205,8 +205,8 @@
                 <div class="bg-slate-800/80 rounded-xl p-5 border border-slate-700/60 shadow-sm">
                     <div class="flex justify-between items-start">
                         <div>
-                            <p class="text-slate-400 text-xs uppercase font-bold tracking-wider">Total Preguntes / Fetes</p>
-                            <h3 id="stat-total-q" class="text-3xl font-bold text-white mt-1">0 <span class="text-xs text-slate-400 font-normal" id="stat-realitzades-sub">/ 0 fetes</span></h3>
+                            <p class="text-slate-400 text-xs uppercase font-bold tracking-wider">Preguntes Fetes</p>
+                            <h3 id="stat-realitzades" class="text-3xl font-bold text-white mt-1">0</h3>
                         </div>
                         <div class="p-3 bg-brand-500/10 text-brand-400 rounded-lg"><i class="fa-solid fa-database text-xl"></i></div>
                     </div>
@@ -402,7 +402,7 @@
                         <p class="text-xs text-slate-300">Hem detectat dificultats en els teus temes amb menor rendiment. Fes un test exprés:</p>
                         <p id="weak-spots-topics-list" class="text-xs font-semibold text-amber-200 pt-1"></p>
                     </div>
-                    <button onclick="startWeakSpotExam()" class="px-5 py-2.5 bg-amber-600 hover:bg-amber-500 text-white font-semibold rounded-xl text-xs transition-all shadow-lg shadow-amber-600/30 shrink-0">
+                    <button id="btn-start-weak" onclick="startWeakSpotExam()" class="px-5 py-2.5 bg-amber-600 hover:bg-amber-500 text-white font-semibold rounded-xl text-xs transition-all shadow-lg shadow-amber-600/30 shrink-0">
                         [COMENÇAR TEST]
                     </button>
                 </div>
@@ -419,7 +419,7 @@
                             <h3 class="text-lg font-bold text-white">Simulacre Oficial</h3>
                             <p class="text-slate-300 text-xs mt-2 leading-relaxed">Examen cronometrat amb 30 preguntes barrejades i límit de 30 minuts.</p>
                         </div>
-                        <button onclick="startSimulacre()" class="mt-6 w-full py-2.5 bg-brand-600 hover:bg-brand-500 text-white font-semibold rounded-xl text-xs transition-all shadow-md">Començar Simulacre</button>
+                        <button id="btn-start-simulacre" onclick="startSimulacre()" class="mt-6 w-full py-2.5 bg-brand-600 hover:bg-brand-500 text-white font-semibold rounded-xl text-xs transition-all shadow-md">Començar Simulacre</button>
                     </div>
 
                     <div class="bg-slate-800/90 rounded-2xl p-6 border border-slate-700 shadow-xl flex flex-col justify-between hover:border-emerald-500 transition-all">
@@ -433,7 +433,7 @@
                                 <button onclick="setPracticeCount(50)" id="p-btn-50" class="practice-count-btn flex-1 py-1.5 bg-slate-900 text-slate-300 border border-slate-700 rounded-lg text-xs font-semibold">50</button>
                             </div>
                         </div>
-                        <button onclick="startPractice()" class="mt-6 w-full py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-xl text-xs transition-all shadow-md">Començar Pràctica</button>
+                        <button id="btn-start-practice" onclick="startPractice()" class="mt-6 w-full py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-xl text-xs transition-all shadow-md">Començar Pràctica</button>
                     </div>
 
                     <div class="bg-slate-800/90 rounded-2xl p-6 border border-slate-700 shadow-xl flex flex-col justify-between hover:border-amber-500 transition-all">
@@ -453,7 +453,7 @@
                                 </select>
                             </div>
                         </div>
-                        <button onclick="startTopicExam()" class="mt-6 w-full py-2.5 bg-amber-600 hover:bg-amber-500 text-white font-semibold rounded-xl text-xs transition-all shadow-md">Iniciar Test per Tema</button>
+                        <button id="btn-start-topic" onclick="startTopicExam()" class="mt-6 w-full py-2.5 bg-amber-600 hover:bg-amber-500 text-white font-semibold rounded-xl text-xs transition-all shadow-md">Iniciar Test per Tema</button>
                     </div>
                 </div>
             </div>
@@ -473,7 +473,7 @@
                         <div class="w-32 bg-slate-700 h-2.5 rounded-full overflow-hidden">
                             <div id="exam-progress-bar" class="bg-brand-500 h-full w-0 transition-all duration-300"></div>
                         </div>
-                        <button onclick="confirmExitExam()" class="text-xs px-3 py-1.5 bg-red-600 hover:bg-red-500 text-white font-semibold rounded-lg shadow-md transition-all">Sortir</button>
+                        <button onclick="exitExamToMenu()" class="text-xs px-3 py-1.5 bg-slate-700 text-slate-300 border border-slate-600 rounded-lg hover:bg-slate-600">Sortir</button>
                     </div>
                 </div>
 
@@ -562,7 +562,7 @@
     <!-- FOOTER -->
     <footer class="bg-slate-900 border-t border-slate-800 mt-auto py-4">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-slate-400">
-            <div>© 2026 OpposTest Mossos d'Esquadra. Tots els drets reservats.</div>
+            <div>© 2026 OpposTest Mossos d'Esquadra. Tots els drets reservats. <span id="footer-total-q" class="ml-2 font-semibold text-slate-300"></span></div>
             <div>Desenvolupat per GERARD APP'S.</div>
         </div>
     </footer>
@@ -590,13 +590,6 @@
         const db = getFirestore(app);
         const googleProvider = new GoogleAuthProvider();
 
-        function getSpanishDateStr() {
-            const now = new Date();
-            const options = { timeZone: 'Europe/Madrid', year: 'numeric', month: '2-digit', day: '2-digit' };
-            const parts = new Intl.DateTimeFormat('es-ES', options).formatToParts(now);
-            return `${parts.find(p => p.type === 'year').value}-${parts.find(p => p.type === 'month').value}-${parts.find(p => p.type === 'day').value}`;
-        }
-
         window.handleAuthSubmit = async function() {
             const email = document.getElementById('auth-email').value;
             const password = document.getElementById('auth-password').value;
@@ -617,7 +610,7 @@
                         return;
                     }
                     const cred = await createUserWithEmailAndPassword(auth, email, password);
-                    await setDoc(doc(db, "users", cred.user.uid), { username, email, dob, score: 0, lastResetDate: getSpanishDateStr() });
+                    await setDoc(doc(db, "users", cred.user.uid), { username, email, dob, score: 0, lastResetDate: window.getSpanishDateStr() });
                     window.showToast("Compte creat correctament!", "success");
                     window.closeAuthModal();
                 } else {
@@ -636,7 +629,7 @@
                 const userRef = doc(db, "users", res.user.uid);
                 const snap = await getDoc(userRef);
                 if (!snap.exists()) {
-                    await setDoc(userRef, { username: res.user.displayName || res.user.email.split('@')[0], email: res.user.email, dob: "", score: 0, lastResetDate: getSpanishDateStr() });
+                    await setDoc(userRef, { username: res.user.displayName || res.user.email.split('@')[0], email: res.user.email, dob: "", score: 0, lastResetDate: window.getSpanishDateStr() });
                 }
                 window.showToast("Sessió iniciada amb Google!", "success");
                 window.closeAuthModal();
@@ -712,7 +705,7 @@
             const userRef = doc(db, "users", user.uid);
             try {
                 const snap = await getDoc(userRef);
-                const today = getSpanishDateStr();
+                const today = window.getSpanishDateStr();
                 let score = 0;
                 let lastReset = today;
                 if (snap.exists()) {
@@ -733,7 +726,7 @@
             try {
                 const snap = await getDocs(collection(db, "users"));
                 let list = [];
-                const today = getSpanishDateStr();
+                const today = window.getSpanishDateStr();
                 snap.forEach(d => {
                     const data = d.data();
                     let score = data.lastResetDate === today ? (data.score || 0) : 0;
@@ -772,7 +765,7 @@
                     if(desktopLabel) desktopLabel.innerText = d.username || 'Perfil';
                     document.getElementById('profile-username-input').value = d.username || '';
                     document.getElementById('profile-email-val').innerText = user.email;
-                    document.getElementById('profile-score-val').innerText = `${d.lastResetDate === getSpanishDateStr() ? (d.score || 0) : 0} pts`;
+                    document.getElementById('profile-score-val').innerText = `${d.lastResetDate === window.getSpanishDateStr() ? (d.score || 0) : 0} pts`;
                 }
             } else {
                 if(notLogged) notLogged.classList.remove('hidden');
@@ -780,6 +773,7 @@
                 if(desktopLabel) desktopLabel.innerText = "Iniciar Sessió";
             }
             if(window.loadGlobalRanking) window.loadGlobalRanking();
+            if(window.updateLocksUI) window.updateLocksUI(user);
         });
 
         window.getFirebaseCurrentUser = () => auth.currentUser;
@@ -811,6 +805,15 @@
         let questionStartTime = 0;
 
         let isRegisterMode = false;
+
+        // Data helpers accessible globalment
+        window.getSpanishDateStr = function() {
+            const now = new Date();
+            const options = { timeZone: 'Europe/Madrid', year: 'numeric', month: '2-digit', day: '2-digit' };
+            const parts = new Intl.DateTimeFormat('es-ES', options).formatToParts(now);
+            return `${parts.find(p => p.type === 'year').value}-${parts.find(p => p.type === 'month').value}-${parts.find(p => p.type === 'day').value}`;
+        }
+
         window.openAuthModal = (mode = 'login') => {
             isRegisterMode = (mode === 'register');
             document.getElementById('register-extra-fields').classList.toggle('hidden', !isRegisterMode);
@@ -826,6 +829,8 @@
             loadQuestionsFromJsonFile();
             loadStatsFromStorage();
             startMidnightCountdown();
+            // Inicialitzar candats com a bloquejats fins que Firebase validi sessió
+            if(window.updateLocksUI) window.updateLocksUI(null);
         });
 
         function startMidnightCountdown() {
@@ -869,7 +874,7 @@
                 ];
             }
             questionBank = all;
-            document.getElementById('stat-total-q').childNodes[0].nodeValue = questionBank.length + " ";
+            document.getElementById('footer-total-q').innerText = `| Total de preguntes a la plataforma: ${questionBank.length}`;
         }
 
         function loadStatsFromStorage() {
@@ -891,7 +896,7 @@
 
         function updateStatsDashboardUI() {
             document.getElementById('stat-exams-done').innerText = examHistory.done;
-            document.getElementById('stat-realitzades-sub').innerText = `/ ${examHistory.totalQuestions} fetes`;
+            document.getElementById('stat-realitzades').innerText = examHistory.totalQuestions;
             
             const acc = examHistory.totalQuestions > 0 ? Math.round((examHistory.totalCorrect / examHistory.totalQuestions) * 100) : 0;
             document.getElementById('stat-accuracy').innerText = `${acc}%`;
@@ -1000,7 +1005,55 @@
             }).sort(() => 0.5 - Math.random());
         }
 
+        // SISTEMA DE CANDATS I RESTRICCIONS
+        window.checkTestAccess = function(type) {
+            const logged = !!window.getFirebaseCurrentUser();
+            if (logged) return true; // Si està loguejat, accés total
+
+            if (type !== 'practice') {
+                window.showToast("🔒 Inicia sessió per accedir a aquesta modalitat.", "error");
+                window.openAuthModal('login');
+                return false;
+            }
+
+            const today = window.getSpanishDateStr();
+            if (localStorage.getItem('oppos_free_test_date') === today) {
+                window.showToast("🔒 Ja has fet el teu test de prova d'avui. Inicia sessió per fer-ne il·limitats!", "error");
+                window.openAuthModal('login');
+                return false;
+            }
+
+            return true;
+        }
+
+        window.updateLocksUI = function(user) {
+            const logged = !!user;
+            const today = window.getSpanishDateStr();
+            const freeTestDone = localStorage.getItem('oppos_free_test_date') === today;
+
+            const updateBtn = (id, isLocked, normalText, baseColorClass, hoverColorClass) => {
+                const btn = document.getElementById(id);
+                if (!btn) return;
+                
+                btn.classList.remove('bg-slate-700', 'hover:bg-slate-600', 'opacity-60', 'cursor-not-allowed', baseColorClass, hoverColorClass);
+                
+                if (isLocked) {
+                    btn.innerHTML = `<i class="fa-solid fa-lock mr-2"></i> ${normalText}`;
+                    btn.classList.add('bg-slate-700', 'hover:bg-slate-600', 'opacity-60');
+                } else {
+                    btn.innerHTML = normalText;
+                    btn.classList.add(baseColorClass, hoverColorClass);
+                }
+            };
+
+            updateBtn('btn-start-simulacre', !logged, 'Començar Simulacre', 'bg-brand-600', 'hover:bg-brand-500');
+            updateBtn('btn-start-topic', !logged, 'Iniciar Test per Tema', 'bg-amber-600', 'hover:bg-amber-500');
+            updateBtn('btn-start-weak', !logged, '[COMENÇAR TEST]', 'bg-amber-600', 'hover:bg-amber-500');
+            updateBtn('btn-start-practice', (!logged && freeTestDone), 'Començar Pràctica', 'bg-emerald-600', 'hover:bg-emerald-500');
+        }
+
         window.startSimulacre = function() {
+            if (!window.checkTestAccess('simulacre')) return;
             if (questionBank.length === 0) { window.showToast("Banc buit", "error"); return; }
             const subset = [...questionBank].slice(0, Math.min(questionBank.length, 30));
             currentExam = prepareShuffledExam(subset);
@@ -1008,6 +1061,7 @@
         }
 
         window.startPractice = function() {
+            if (!window.checkTestAccess('practice')) return;
             if (questionBank.length === 0) { window.showToast("Banc buit", "error"); return; }
             const subset = [...questionBank].sort(() => 0.5 - Math.random()).slice(0, practiceSelectedCount);
             currentExam = prepareShuffledExam(subset);
@@ -1015,6 +1069,7 @@
         }
 
         window.startTopicExam = async function() {
+            if (!window.checkTestAccess('topic')) return;
             const file = document.getElementById('topic-select').value;
             try {
                 const res = await fetch(file);
@@ -1030,11 +1085,7 @@
         }
 
         window.startWeakSpotExam = function() {
-            if (!window.getFirebaseCurrentUser()) {
-                window.showToast("Has d'iniciar sessió per accedir al test personalitzat.", "error");
-                openAuthModal('login');
-                return;
-            }
+            if (!window.checkTestAccess('weak')) return;
             const stats = examHistory.topicsStats || {};
             let weakQuestions = questionBank.filter(q => {
                 const t = q.topic || 'General';
@@ -1080,12 +1131,6 @@
                     showExamResults();
                 }
             }, 1000);
-        }
-
-        window.confirmExitExam = function() {
-            if (confirm("Estàs segur que vols sortir del test? Es perderà el progrés actual.")) {
-                exitExamToMenu();
-            }
         }
 
         window.exitExamToMenu = () => {
@@ -1205,6 +1250,12 @@
 
             saveStatsToStorage();
             if (window.updateUserScoreInFirestore && correct > 0) window.updateUserScoreInFirestore(correct);
+
+            // Bloquejar la pràctica si l'usuari no està loguejat i acaba de fer el seu intent gratuït
+            if (!window.getFirebaseCurrentUser()) {
+                localStorage.setItem('oppos_free_test_date', window.getSpanishDateStr());
+                if (window.updateLocksUI) window.updateLocksUI(null);
+            }
 
             document.getElementById('exam-active-container').classList.add('hidden');
             document.getElementById('exam-results-container').classList.remove('hidden');
