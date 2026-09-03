@@ -128,6 +128,9 @@
     <header class="bg-slate-900/90 backdrop-blur border-b border-slate-800 sticky top-0 z-40">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
             <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-lg overflow-hidden flex items-center justify-center shadow-lg bg-slate-800 border border-slate-700">
+                    <img src="logo.png" alt="Logo" class="w-full h-full object-cover" onerror="this.onerror=null; this.parentElement.innerHTML='<i class=\'fa-solid font-bold text-red-500 text-xl\'>M</i>';">
+                </div>
                 <div>
                     <h1 class="text-lg font-bold text-slate-100 leading-tight">OpposTest - Mossos d'Esquadra</h1>
                     <p class="text-xs text-slate-400">Tests oposicions Mossos i Guia d'Estudi</p>
@@ -202,8 +205,8 @@
                 <div class="bg-slate-800/80 rounded-xl p-5 border border-slate-700/60 shadow-sm">
                     <div class="flex justify-between items-start">
                         <div>
-                            <p class="text-slate-400 text-xs uppercase font-bold tracking-wider">Preguntes Fetes</p>
-                            <h3 id="stat-total-q" class="text-3xl font-bold text-white mt-1">0</h3>
+                            <p class="text-slate-400 text-xs uppercase font-bold tracking-wider">Total Preguntes / Fetes</p>
+                            <h3 id="stat-total-q" class="text-3xl font-bold text-white mt-1">0 <span class="text-xs text-slate-400 font-normal" id="stat-realitzades-sub">/ 0 fetes</span></h3>
                         </div>
                         <div class="p-3 bg-brand-500/10 text-brand-400 rounded-lg"><i class="fa-solid fa-database text-xl"></i></div>
                     </div>
@@ -389,22 +392,6 @@
         <!-- EXAM SECTION -->
         <section id="sec-exam" class="tab-content hidden space-y-6">
             <div id="exam-menu-container" class="space-y-6">
-                
-                <!-- BANNER TEST DE PROVA 24H (USUARIS NO LOGUEJATS) -->
-                <div id="free-trial-banner" class="bg-gradient-to-r from-blue-950/80 to-slate-900 rounded-2xl p-6 border border-blue-500/40 shadow-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                    <div class="space-y-1">
-                        <div class="inline-flex items-center space-x-2 text-blue-400 font-bold text-sm">
-                            <i class="fa-solid fa-gift text-blue-400"></i>
-                            <span>Examen de Prova Gratuït (10 preguntes)</span>
-                        </div>
-                        <p class="text-xs text-slate-300">Tens 1 test de prova disponible cada 24 hores sense iniciar sessió:</p>
-                        <p id="free-trial-status-text" class="text-xs font-semibold text-blue-300 pt-1">Estat: Disponible ara mateix</p>
-                    </div>
-                    <button id="btn-start-free-trial" onclick="startFreeTrialExam()" class="px-5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-xl text-xs transition-all shadow-lg shadow-blue-600/30 shrink-0">
-                        Fer Test de Prova Ara
-                    </button>
-                </div>
-
                 <!-- ENTRENAR PUNTS DÈBILS -->
                 <div id="weak-spots-box" class="bg-gradient-to-r from-amber-950/70 to-slate-900 rounded-2xl p-6 border border-amber-500/40 shadow-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 hidden">
                     <div class="space-y-1">
@@ -415,8 +402,8 @@
                         <p class="text-xs text-slate-300">Hem detectat dificultats en els teus temes amb menor rendiment. Fes un test exprés:</p>
                         <p id="weak-spots-topics-list" class="text-xs font-semibold text-amber-200 pt-1"></p>
                     </div>
-                    <button onclick="checkAuthAndRun(startWeakSpotExam)" class="px-5 py-2.5 bg-amber-600 hover:bg-amber-500 text-white font-semibold rounded-xl text-xs transition-all shadow-lg shadow-amber-600/30 shrink-0 flex items-center gap-1.5">
-                        <i class="fa-solid fa-bolt text-[10px]"></i> <span>Començar Test Exprés</span>
+                    <button onclick="startWeakSpotExam()" class="px-5 py-2.5 bg-amber-600 hover:bg-amber-500 text-white font-semibold rounded-xl text-xs transition-all shadow-lg shadow-amber-600/30 shrink-0">
+                        [COMENÇAR TEST]
                     </button>
                 </div>
 
@@ -426,66 +413,47 @@
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <!-- Simulacre Oficial -->
-                    <div class="bg-slate-900/50 rounded-2xl p-6 border border-slate-800 shadow-xl flex flex-col justify-between relative">
-                        <div class="space-y-4">
-                            <div class="flex justify-center py-4 text-brand-500">
-                                <i class="fa-solid fa-file-shield text-5xl"></i>
-                            </div>
-                            <div class="text-center space-y-1">
-                                <h3 class="text-lg font-bold text-white">Simulacre Oficial</h3>
-                                <p class="text-slate-400 text-xs leading-relaxed">Examen cronometrat amb 30 preguntes barrejades i límit de 30 minuts.</p>
-                            </div>
+                    <div class="bg-slate-800/90 rounded-2xl p-6 border border-slate-700 shadow-xl flex flex-col justify-between hover:border-brand-500 transition-all">
+                        <div>
+                            <div class="w-12 h-12 rounded-xl bg-brand-500/10 text-brand-400 flex items-center justify-center text-xl mb-4"><i class="fa-solid fa-clock"></i></div>
+                            <h3 class="text-lg font-bold text-white">Simulacre Oficial</h3>
+                            <p class="text-slate-300 text-xs mt-2 leading-relaxed">Examen cronometrat amb 30 preguntes barrejades i límit de 30 minuts.</p>
                         </div>
-                        <button onclick="startSimulacre()" class="mt-6 w-full py-2.5 bg-brand-600 hover:bg-brand-500 text-white font-semibold rounded-xl text-xs transition-all shadow-md flex items-center justify-center gap-1.5">
-                            <span>Començar Simulacre</span>
-                        </button>
+                        <button onclick="startSimulacre()" class="mt-6 w-full py-2.5 bg-brand-600 hover:bg-brand-500 text-white font-semibold rounded-xl text-xs transition-all shadow-md">Començar Simulacre</button>
                     </div>
 
-                    <!-- Pràctica Lliure -->
-                    <div class="bg-slate-900/50 rounded-2xl p-6 border border-slate-800 shadow-xl flex flex-col justify-between relative">
-                        <div class="space-y-4">
-                            <div class="flex justify-center py-4 text-emerald-500">
-                                <i class="fa-solid fa-list-check text-5xl"></i>
-                            </div>
-                            <div class="text-center space-y-1">
-                                <h3 class="text-lg font-bold text-white">Pràctica Lliure</h3>
-                                <p class="text-slate-400 text-xs leading-relaxed">Sense límit de temps. Tria quantes preguntes vols practicar.</p>
-                            </div>
-                            <div class="flex gap-1 pt-2">
-                                <button type="button" id="p-btn-10" onclick="setPracticeCount(10)" class="practice-count-btn flex-1 py-1.5 bg-emerald-600 text-white rounded-lg text-xs font-semibold">10</button>
-                                <button type="button" id="p-btn-20" onclick="setPracticeCount(20)" class="practice-count-btn flex-1 py-1.5 bg-slate-900 text-slate-300 border border-slate-700 rounded-lg text-xs font-semibold">20</button>
-                                <button type="button" id="p-btn-50" onclick="setPracticeCount(50)" class="practice-count-btn flex-1 py-1.5 bg-slate-900 text-slate-300 border border-slate-700 rounded-lg text-xs font-semibold">50</button>
+                    <div class="bg-slate-800/90 rounded-2xl p-6 border border-slate-700 shadow-xl flex flex-col justify-between hover:border-emerald-500 transition-all">
+                        <div>
+                            <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xl mb-4"><i class="fa-solid fa-graduation-cap"></i></div>
+                            <h3 class="text-lg font-bold text-white">Pràctica Lliure</h3>
+                            <p class="text-slate-300 text-xs mt-2 leading-relaxed">Sense límit de temps. Tria quantes preguntes vols practicar.</p>
+                            <div class="mt-4 flex gap-2">
+                                <button onclick="setPracticeCount(10)" id="p-btn-10" class="practice-count-btn flex-1 py-1.5 bg-emerald-600 text-white rounded-lg text-xs font-semibold">10</button>
+                                <button onclick="setPracticeCount(30)" id="p-btn-30" class="practice-count-btn flex-1 py-1.5 bg-slate-900 text-slate-300 border border-slate-700 rounded-lg text-xs font-semibold">30</button>
+                                <button onclick="setPracticeCount(50)" id="p-btn-50" class="practice-count-btn flex-1 py-1.5 bg-slate-900 text-slate-300 border border-slate-700 rounded-lg text-xs font-semibold">50</button>
                             </div>
                         </div>
-                        <button onclick="startPractice()" class="mt-6 w-full py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-xl text-xs transition-all shadow-md flex items-center justify-center gap-1.5">
-                            <span>Començar Pràctica</span>
-                        </button>
+                        <button onclick="startPractice()" class="mt-6 w-full py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-xl text-xs transition-all shadow-md">Començar Pràctica</button>
                     </div>
 
-                    <!-- Exàmens per Temes -->
-                    <div class="bg-slate-900/50 rounded-2xl p-6 border border-slate-800 shadow-xl flex flex-col justify-between relative">
-                        <div class="space-y-4">
-                            <div class="flex justify-center py-4 text-amber-500">
-                                <i class="fa-solid fa-book-tanakh text-5xl"></i>
-                            </div>
-                            <div class="text-center space-y-1">
-                                <h3 class="text-lg font-bold text-white">Exàmens per Temes</h3>
-                                <p class="text-slate-400 text-xs leading-relaxed">Selecciona un tema específic per avaluar els teus coneixements.</p>
-                            </div>
-                            <div>
-                                <select id="topic-select" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-2.5 text-xs text-white outline-none focus:border-brand-500">
-                                    <option value="all">Tots els temes barrejats</option>
-                                    <option value="CONSTITUCIÓ">Constitució i Marc Jurídic</option>
-                                    <option value="TRÀNSIT">Trànsit i Seguretat Viària</option>
-                                    <option value="DRET PENAL">Dret Penal</option>
-                                    <option value="SEGURETAT CIUTADANA">Seguretat Ciutadana</option>
+                    <div class="bg-slate-800/90 rounded-2xl p-6 border border-slate-700 shadow-xl flex flex-col justify-between hover:border-amber-500 transition-all">
+                        <div>
+                            <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-xl mb-4"><i class="fa-solid fa-folder-open"></i></div>
+                            <h3 class="text-lg font-bold text-white">Exàmens per Temes</h3>
+                            <p class="text-slate-300 text-xs mt-2 leading-relaxed">Selecciona un tema específic per avaluar els teus coneixements.</p>
+                            <div class="mt-4">
+                                <select id="topic-select" class="w-full bg-slate-900 border border-slate-700 text-slate-200 text-xs rounded-lg p-2.5 outline-none focus:border-amber-500">
+                                    <option value="preguntas-a1.json">Constitució i Marc Jurídic</option>
+                                    <option value="preguntas-a2.json">Estatut d'Autonomia</option>
+                                    <option value="preguntas-a3.json">Dret Penal</option>
+                                    <option value="preguntas-a4.json">Trànsit i Seguretat Viària</option>
+                                    <option value="preguntas-a5.json">Seguretat Ciutadana</option>
+                                    <option value="preguntas-a6.json">Organització Policial</option>
+                                    <option value="preguntas-a7.json">Deontologia i Altres</option>
                                 </select>
                             </div>
                         </div>
-                        <button onclick="startTopicExam()" class="mt-6 w-full py-2.5 bg-amber-600 hover:bg-amber-500 text-white font-semibold rounded-xl text-xs transition-all shadow-md flex items-center justify-center gap-1.5">
-                            <span>Començar per Tema</span>
-                        </button>
+                        <button onclick="startTopicExam()" class="mt-6 w-full py-2.5 bg-amber-600 hover:bg-amber-500 text-white font-semibold rounded-xl text-xs transition-all shadow-md">Iniciar Test per Tema</button>
                     </div>
                 </div>
             </div>
@@ -594,7 +562,7 @@
     <!-- FOOTER -->
     <footer class="bg-slate-900 border-t border-slate-800 mt-auto py-4">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-slate-400">
-            <div>© 2026 OpposTest Mossos d'Esquadra. Tots els drets reservats. (<span id="footer-total-q">0</span> preguntes totals al banc)</div>
+            <div>© 2026 OpposTest Mossos d'Esquadra. Tots els drets reservats.</div>
             <div>Desenvolupat per GERARD APP'S.</div>
         </div>
     </footer>
@@ -795,12 +763,9 @@
             const notLogged = document.getElementById('profile-not-logged');
             const logged = document.getElementById('profile-logged-content');
             const desktopLabel = document.getElementById('desktop-profile-label');
-            const freeTrialBanner = document.getElementById('free-trial-banner');
-            
             if (user) {
                 if(notLogged) notLogged.classList.add('hidden');
                 if(logged) logged.classList.remove('hidden');
-                if(freeTrialBanner) freeTrialBanner.classList.add('hidden');
                 const snap = await getDoc(doc(db, "users", user.uid));
                 if(snap.exists()) {
                     const d = snap.data();
@@ -812,9 +777,7 @@
             } else {
                 if(notLogged) notLogged.classList.remove('hidden');
                 if(logged) logged.classList.add('hidden');
-                if(freeTrialBanner) freeTrialBanner.classList.remove('hidden');
                 if(desktopLabel) desktopLabel.innerText = "Iniciar Sessió";
-                if(window.updateFreeTrialCountdown) window.updateFreeTrialCountdown();
             }
             if(window.loadGlobalRanking) window.loadGlobalRanking();
         });
@@ -859,60 +822,10 @@
             document.getElementById('register-extra-fields').classList.toggle('hidden', !isRegisterMode);
         };
 
-        window.checkAuthAndRun = function(callbackFn) {
-            callbackFn();
-        };
-
-        let freeTrialInterval = null;
-        window.updateFreeTrialCountdown = function() {
-            const lastTrialTime = localStorage.getItem('oppos_free_trial_timestamp');
-            const statusText = document.getElementById('free-trial-status-text');
-            const btnTrial = document.getElementById('btn-start-free-trial');
-            if (!statusText || !btnTrial) return;
-
-            if (!lastTrialTime) {
-                statusText.innerText = "Estat: Disponible ara mateix (10 preguntes de prova)";
-                btnTrial.disabled = false;
-                btnTrial.classList.remove('opacity-50', 'cursor-not-allowed');
-                return;
-            }
-
-            const now = Date.now();
-            const elapsed = now - parseInt(lastTrialTime, 10);
-            const twentyFourHours = 24 * 60 * 60 * 1000;
-
-            if (elapsed < twentyFourHours) {
-                const remaining = twentyFourHours - elapsed;
-                const h = Math.floor((remaining / (1000 * 60 * 60)) % 24);
-                const m = Math.floor((remaining / (1000 * 60)) % 60);
-                const s = Math.floor((remaining / 1000) % 60);
-                statusText.innerText = `Pròxim test de prova disponible en: ${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
-                btnTrial.disabled = true;
-                btnTrial.classList.add('opacity-50', 'cursor-not-allowed');
-                
-                if (!freeTrialInterval) {
-                    freeTrialInterval = setInterval(window.updateFreeTrialCountdown, 1000);
-                }
-            } else {
-                statusText.innerText = "Estat: Disponible ara mateix (10 preguntes de prova)";
-                btnTrial.disabled = false;
-                btnTrial.classList.remove('opacity-50', 'cursor-not-allowed');
-                if (freeTrialInterval) clearInterval(freeTrialInterval);
-            }
-        };
-
-        window.startFreeTrialExam = function() {
-            if (questionBank.length === 0) { window.showToast("Banc de preguntes buit", "error"); return; }
-            const subset = [...questionBank].sort(() => 0.5 - Math.random()).slice(0, 10);
-            currentExam = prepareShuffledExam(subset);
-            launchExamSession("Examen de Prova Gratuït (10 preguntes)", false, 0);
-        };
-
         document.addEventListener('DOMContentLoaded', () => {
             loadQuestionsFromJsonFile();
             loadStatsFromStorage();
             startMidnightCountdown();
-            window.updateFreeTrialCountdown();
         });
 
         function startMidnightCountdown() {
@@ -949,16 +862,14 @@
             }
             if (all.length === 0) {
                 all = [
-                    { topic: "CONSTITUCIÓ", question: "Quin és el termini màxim de la detenció preventiva segons la CE?", options: ["24 hores", "48 hores", "72 hores", "5 dies"], correctAnswer: "72 hores", explanation: "Article 17.2 de la Constitució Espanyola." },
-                    { topic: "TRÀNSIT", question: "Quina és la taxa d'alcoholèmia en aire per a conductors novells?", options: ["0,15 mg/l", "0,25 mg/l", "0,00 mg/l", "0,50 mg/l"], correctAnswer: "0,15 mg/l", explanation: "Durant els dos primers anys de carnet." },
-                    { topic: "DRET PENAL", question: "Com s'anomena el apoderament de cosa aliena emprant força?", options: ["Furt", "Robatori", "Estafa", "Apropament"], correctAnswer: "Robatori", explanation: "El robatori requereix força en les coses o violència." },
-                    { topic: "SEGURETAT CIUTADANA", question: "Qui elegeix el Síndic de Greuges a Catalunya?", options: ["El Govern", "El Parlament per majoria de 3/5", "El TSJC", "El President"], correctAnswer: "El Parlament per majoria de 3/5", explanation: "Requeriment de majoria qualificada." }
+                    { topic: "Constitució", question: "Quin és el termini màxim de la detenció preventiva segons la CE?", options: ["24 hores", "48 hores", "72 hores", "5 dies"], correctAnswer: "72 hores", explanation: "Article 17.2 de la Constitució Espanyola." },
+                    { topic: "Trànsit", question: "Quina és la taxa d'alcoholèmia en aire per a conductors novells?", options: ["0,15 mg/l", "0,25 mg/l", "0,00 mg/l", "0,50 mg/l"], correctAnswer: "0,15 mg/l", explanation: "Durant els dos primers anys de carnet." },
+                    { topic: "Dret penal", question: "Com s'anomena el apoderament de cosa aliena emprant força?", options: ["Furt", "Robatori", "Estafa", "Apropament"], correctAnswer: "Robatori", explanation: "El robatori requereix força en les coses o violència." },
+                    { topic: "Seguretat ciutadana", question: "Qui elegeix el Síndic de Greuges a Catalunya?", options: ["El Govern", "El Parlament per majoria de 3/5", "El TSJC", "El President"], correctAnswer: "El Parlament per majoria de 3/5", explanation: "Requeriment de majoria qualificada." }
                 ];
             }
             questionBank = all;
-            document.getElementById('stat-total-q').innerText = examHistory.totalQuestions;
-            const footerTotalEl = document.getElementById('footer-total-q');
-            if (footerTotalEl) footerTotalEl.innerText = questionBank.length;
+            document.getElementById('stat-total-q').childNodes[0].nodeValue = questionBank.length + " ";
         }
 
         function loadStatsFromStorage() {
@@ -980,7 +891,7 @@
 
         function updateStatsDashboardUI() {
             document.getElementById('stat-exams-done').innerText = examHistory.done;
-            document.getElementById('stat-total-q').innerText = examHistory.totalQuestions;
+            document.getElementById('stat-realitzades-sub').innerText = `/ ${examHistory.totalQuestions} fetes`;
             
             const acc = examHistory.totalQuestions > 0 ? Math.round((examHistory.totalCorrect / examHistory.totalQuestions) * 100) : 0;
             document.getElementById('stat-accuracy').innerText = `${acc}%`;
@@ -1104,20 +1015,26 @@
         }
 
         window.startTopicExam = async function() {
-            const topicVal = document.getElementById('topic-select').value;
-            let filtered = questionBank;
-            if (topicVal !== 'all') {
-                filtered = questionBank.filter(q => q.topic === topicVal);
-                if (filtered.length === 0) {
-                    window.showToast("No hi ha preguntes per a aquest tema, s'utilitzaran totes.", "info");
-                    filtered = questionBank;
-                }
+            const file = document.getElementById('topic-select').value;
+            try {
+                const res = await fetch(file);
+                if (!res.ok) throw new Error();
+                const data = await res.json();
+                currentExam = prepareShuffledExam(data);
+                launchExamSession("Examen per Tema", false, 0);
+            } catch(e) {
+                const filtered = questionBank;
+                currentExam = prepareShuffledExam(filtered);
+                launchExamSession("Examen per Tema", false, 0);
             }
-            currentExam = prepareShuffledExam(filtered);
-            launchExamSession(`Examen per Tema (${topicVal === 'all' ? 'Tots' : topicVal})`, false, 0);
         }
 
         window.startWeakSpotExam = function() {
+            if (!window.getFirebaseCurrentUser()) {
+                window.showToast("Has d'iniciar sessió per accedir al test personalitzat.", "error");
+                openAuthModal('login');
+                return;
+            }
             const stats = examHistory.topicsStats || {};
             let weakQuestions = questionBank.filter(q => {
                 const t = q.topic || 'General';
