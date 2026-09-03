@@ -477,13 +477,21 @@
                             <p class="text-slate-300 text-xs mt-2 leading-relaxed">Selecciona un tema específic per avaluar els teus coneixements.</p>
                             <div class="mt-4">
                                 <select id="topic-select" class="w-full bg-slate-900 border border-slate-700 text-slate-200 text-xs rounded-lg p-2.5 outline-none focus:border-amber-500">
-                                    <option value="preguntas-a1.json">Constitució i Marc Jurídic</option>
-                                    <option value="preguntas-a2.json">Estatut d'Autonomia</option>
-                                    <option value="preguntas-a3.json">Dret Penal</option>
-                                    <option value="preguntas-a4.json">Trànsit i Seguretat Viària</option>
-                                    <option value="preguntas-a5.json">Seguretat Ciutadana</option>
-                                    <option value="preguntas-a6.json">Organització Policial</option>
-                                    <option value="preguntas-a7.json">Deontologia i Altres</option>
+                                    <option value="preguntas-a1.json">A1. Història de Catalunya part I</option>
+                                    <option value="preguntas-a2.json">A2. Història de Catalunya part II</option>
+                                    <option value="preguntas-a3.json">A3. Història de la policia a Catalunya</option>
+                                    <option value="preguntas-a4.json">A4. Àmbit sociolingüístic</option>
+                                    <option value="preguntas-a5.json">A5. Marc geogràfic de Catalunya</option>
+                                    <option value="preguntas-a6.json">A6. Entorn social a Catalunya</option>
+                                    <option value="preguntas-a7.json">A7. Les tecnologies de la informació en el segle xxi</option>
+                                    <option value="preguntas-b1.json">B1. L’Estatut d’autonomia de Catalunya</option>
+                                    <option value="preguntas-b2.json">B2. Les institucions polítiques de Catalunya</option>
+                                    <option value="preguntas-b3.json">B3. L’ordenament jurídic de l’Estat</option>
+                                    <option value="preguntas-b4.json">B4. Els drets humans i els drets constitucionals</option>
+                                    <option value="preguntas-b5.json">B5. Les institucions polítiques de l’Estat</option>
+                                    <option value="preguntas-b6.json">B6. Els òrgans jurisdiccionals</option>
+                                    <option value="preguntas-b7.json">B7. L’organització territorial de l’Estat</option>
+                                    <option value="preguntas-b8.json">B8. La Unió Europea</option>
                                 </select>
                             </div>
                         </div>
@@ -966,7 +974,7 @@
         }
 
         async function loadQuestionsFromJsonFile() {
-            const files = ['preguntas-a1.json', 'preguntas-a2.json', 'preguntas-a3.json', 'preguntas-a4.json', 'preguntas-a5.json', 'preguntas-a6.json', 'preguntas-a7.json'];
+            const files = ['preguntas-a1.json', 'preguntas-a2.json', 'preguntas-a3.json', 'preguntas-a4.json', 'preguntas-a5.json', 'preguntas-a6.json', 'preguntas-a7.json', 'preguntas-b1.json', 'preguntas-b2.json', 'preguntas-b3.json', 'preguntas-b4.json', 'preguntas-b5.json', 'preguntas-b6.json', 'preguntas-b7.json', 'preguntas-b8.json'];
             let all = [];
             for (const f of files) {
                 try {
