@@ -351,10 +351,27 @@
                             <span id="profile-score-val" class="font-semibold text-brand-400">0 pts</span>
                         </div>
                     </div>
+                    
+                    <button id="btn-admin-panel" onclick="switchTab('admin'); loadAdminReports();" class="hidden w-full py-3 bg-purple-600 hover:bg-purple-500 text-white font-semibold rounded-xl text-sm transition-all flex items-center justify-center">
+                        <i class="fa-solid fa-user-shield mr-2"></i> Panell d'Administració
+                    </button>
+
                     <button onclick="logoutUser()" class="w-full py-3 bg-red-600/20 hover:bg-red-600/30 text-red-400 border border-red-500/30 font-semibold rounded-xl text-sm transition-all flex items-center justify-center">
                         <i class="fa-solid fa-power-off mr-2"></i> Tancar Sessió
                     </button>
                 </div>
+            </div>
+        </section>
+
+        <!-- ADMIN SECTION -->
+        <section id="sec-admin" class="tab-content hidden space-y-6">
+            <div class="bg-slate-800 rounded-2xl p-6 border border-purple-500 shadow-xl shadow-purple-500/10 max-w-2xl mx-auto">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-xl font-bold text-white"><i class="fa-solid fa-user-shield text-purple-400 mr-2"></i>Panell d'Administració</h2>
+                    <button onclick="switchTab('profile')" class="text-xs bg-slate-700 hover:bg-slate-600 px-3 py-1.5 rounded-lg text-white transition-all">Tornar</button>
+                </div>
+                <h3 class="font-bold text-slate-300 mb-4">Reportes d'Usuaris</h3>
+                <div id="admin-reports-list" class="space-y-3 max-h-[60vh] overflow-y-auto pr-2"></div>
             </div>
         </section>
 
@@ -580,7 +597,7 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
         import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
-        import { getFirestore, doc, setDoc, getDoc, collection, getDocs, query, where } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+        import { getFirestore, doc, setDoc, getDoc, collection, getDocs, query, where, addDoc } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyAK8r_-CMw1626LIFnrn9NcVkIcvYv2Elo",
@@ -758,13 +775,76 @@
             }
         }
 
+        window.submitQuestionReport = async () => {
+            const type = document.querySelector('input[name="report-type"]:checked').value;
+            const comment = document.getElementById('report-comment').value;
+            const questionText = document.getElementById('question-text').innerText;
+            const topicText = document.getElementById('question-topic-badge').innerText;
+
+            if (!questionText || questionText === "Carregant preguntes...") return window.showToast("Cap pregunta activa.", "error");
+
+            try {
+                await addDoc(collection(db, "reports"), {
+                    type,
+                    comment,
+                    question: questionText,
+                    topic: topicText,
+                    date: window.getSpanishDateStr()
+                });
+                window.showToast("Gràcies! S'ha enviat l'avís al panell d'administració.", "success");
+                window.closeReportModal();
+            } catch(e) {
+                window.showToast("Error en enviar l'avís: " + e.message, "error");
+            }
+        }
+
+        window.loadAdminReports = async function() {
+            const list = document.getElementById('admin-reports-list');
+            list.innerHTML = '<p class="text-slate-400 text-sm">Carregant reportes...</p>';
+            try {
+                const snap = await getDocs(collection(db, "reports"));
+                if(snap.empty) {
+                    list.innerHTML = '<p class="text-slate-500 text-sm">Tot net. No hi ha reportes pendents.</p>';
+                    return;
+                }
+                let html = '';
+                snap.forEach(doc => {
+                    const d = doc.data();
+                    html += `<div class="bg-slate-900 p-4 rounded-xl border border-slate-700">
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="text-[10px] font-bold uppercase bg-brand-500/20 text-brand-400 px-2 py-1 rounded">${d.topic}</span>
+                            <span class="text-xs text-slate-500">${d.date}</span>
+                        </div>
+                        <p class="text-sm text-red-400 font-bold mb-1"><i class="fa-solid fa-triangle-exclamation mr-1"></i>${d.type}</p>
+                        <p class="text-sm text-white font-medium mb-3 pb-3 border-b border-slate-800">${d.question}</p>
+                        <p class="text-xs text-slate-400"><strong class="text-slate-300">Comentari:</strong> ${d.comment || 'Sense comentari addicional'}</p>
+                    </div>`;
+                });
+                list.innerHTML = html;
+            } catch(e) {
+                list.innerHTML = `<p class="text-red-400 text-sm">Error carregant dades: ${e.message}</p>`;
+            }
+        }
+
         onAuthStateChanged(auth, async (user) => {
             const notLogged = document.getElementById('profile-not-logged');
             const logged = document.getElementById('profile-logged-content');
             const desktopLabel = document.getElementById('desktop-profile-label');
+            const adminBtn = document.getElementById('btn-admin-panel');
+            
             if (user) {
                 if(notLogged) notLogged.classList.add('hidden');
                 if(logged) logged.classList.remove('hidden');
+                
+                // Mostrar botó d'admin només al teu correu
+                if(adminBtn) {
+                    if (user.email === "gerardlopezgarcia1@gmail.com") {
+                        adminBtn.classList.remove('hidden');
+                    } else {
+                        adminBtn.classList.add('hidden');
+                    }
+                }
+
                 const snap = await getDoc(doc(db, "users", user.uid));
                 if(snap.exists()) {
                     const d = snap.data();
@@ -777,6 +857,7 @@
                 if(notLogged) notLogged.classList.remove('hidden');
                 if(logged) logged.classList.add('hidden');
                 if(desktopLabel) desktopLabel.innerText = "Iniciar Sessió";
+                if(adminBtn) adminBtn.classList.add('hidden');
             }
             if(window.loadGlobalRanking) window.loadGlobalRanking();
             if(window.updateLocksUI) window.updateLocksUI(user);
@@ -829,6 +910,9 @@
             isRegisterMode = !isRegisterMode;
             document.getElementById('register-extra-fields').classList.toggle('hidden', !isRegisterMode);
         };
+        
+        window.openReportModal = () => document.getElementById('report-modal').classList.remove('hidden');
+        window.closeReportModal = () => document.getElementById('report-modal').classList.add('hidden');
 
         document.addEventListener('DOMContentLoaded', () => {
             loadQuestionsFromJsonFile();
@@ -852,7 +936,7 @@
                 if (diff <= 0) { 
                     if (elRanking) elRanking.innerText = "00:00:00";
                     if (elFreeTest) elFreeTest.innerText = "00:00:00";
-                    // Reset automático si se pasa de medianoche sin recargar
+                    
                     if (!logged && localStorage.getItem('oppos_free_test_date') !== todayStr) {
                         if(window.updateLocksUI) window.updateLocksUI(null);
                     }
@@ -1001,7 +1085,7 @@
                 activeBtn.classList.add('bg-brand-600', 'text-white', 'shadow-md');
                 activeBtn.classList.remove('text-slate-300');
             }
-            if (tabId === 'ranking') loadGlobalRanking();
+            if (tabId === 'ranking') window.loadGlobalRanking && window.loadGlobalRanking();
             if (tabId === 'dashboard') updateStatsDashboardUI();
         }
 
@@ -1082,7 +1166,6 @@
             updateBtn('btn-start-weak', !logged, '[COMENÇAR TEST]', 'bg-amber-600', 'hover:bg-amber-500');
             updateBtn('btn-start-practice', (!logged && freeTestDone), 'Començar Pràctica', 'bg-emerald-600', 'hover:bg-emerald-500');
 
-            // Bloquejar 30 i 50 preguntes si no hi ha sessió
             const pBtn30 = document.getElementById('p-btn-30');
             const pBtn50 = document.getElementById('p-btn-50');
             if (!logged) {
@@ -1094,7 +1177,6 @@
                 pBtn50.disabled = false; pBtn50.classList.remove('opacity-40', 'cursor-not-allowed');
             }
 
-            // Mostrar temporitzador si no hi ha sessió i ja ha gastat el test
             const timerContainer = document.getElementById('free-test-timer-container');
             if (!logged && freeTestDone) {
                 timerContainer.classList.remove('hidden');
@@ -1313,13 +1395,6 @@
             document.getElementById('res-incorrect').innerText = currentExam.length - correct;
             document.getElementById('res-grade').innerText = `${grade} / 10`;
             document.getElementById('results-review-list').innerHTML = reviewHTML;
-        }
-
-        window.openReportModal = () => document.getElementById('report-modal').classList.remove('hidden');
-        window.closeReportModal = () => document.getElementById('report-modal').classList.add('hidden');
-        window.submitQuestionReport = () => {
-            window.showToast("Gràcies! S'ha enviat l'avís al panell d'administració.", "success");
-            closeReportModal();
         }
     </script>
 </body>
