@@ -430,58 +430,45 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <!-- Simulacre Oficial -->
-                    <div class="bg-slate-800/90 rounded-2xl p-6 border border-slate-700 shadow-xl flex flex-col justify-between hover:border-brand-500 transition-all relative">
-                        <div>
-                            <div class="absolute top-4 right-4 text-amber-400 bg-amber-500/10 border border-amber-500/30 px-2 py-1 rounded-lg text-xs font-bold logged-lock-badge flex items-center space-x-1">
-                                <i class="fa-solid fa-lock"></i><span>Pro</span>
+                    <div class="bg-slate-900/50 rounded-2xl p-6 border border-slate-800 shadow-xl flex flex-col justify-between relative">
+                        <div class="space-y-4">
+                            <div class="flex justify-center py-4">
+                                <i class="fa-solid fa-lock text-5xl text-slate-600"></i>
                             </div>
-                            <div class="w-12 h-12 rounded-xl bg-brand-500/10 text-brand-400 flex items-center justify-center text-xl mb-4"><i class="fa-solid fa-clock"></i></div>
-                            <h3 class="text-lg font-bold text-white">Simulacre Oficial</h3>
-                            <p class="text-slate-300 text-xs mt-2 leading-relaxed">Examen cronometrat amb 30 preguntes barrejades i límit de 30 minuts.</p>
+                            <div class="text-center space-y-1">
+                                <h3 class="text-lg font-bold text-white">Simulacre Oficial</h3>
+                                <p class="text-slate-400 text-xs leading-relaxed">Examen cronometrat amb 30 preguntes barrejades i límit de 30 minuts.</p>
+                            </div>
                         </div>
-                        <button onclick="checkAuthAndRun(startSimulacre)" class="mt-6 w-full py-2.5 bg-brand-600 hover:bg-brand-500 text-white font-semibold rounded-xl text-xs transition-all shadow-md">Començar Simulacre</button>
+                        <button onclick="checkAuthAndRun(startSimulacre)" class="mt-6 w-full py-2.5 bg-brand-600 hover:bg-brand-500 text-white font-semibold rounded-xl text-xs transition-all shadow-md">Inicia sessió per accedir</button>
                     </div>
 
                     <!-- Pràctica Lliure -->
-                    <div class="bg-slate-800/90 rounded-2xl p-6 border border-slate-700 shadow-xl flex flex-col justify-between hover:border-emerald-500 transition-all relative">
-                        <div>
-                            <div class="absolute top-4 right-4 text-amber-400 bg-amber-500/10 border border-amber-500/30 px-2 py-1 rounded-lg text-xs font-bold logged-lock-badge flex items-center space-x-1">
-                                <i class="fa-solid fa-lock"></i><span>Pro</span>
+                    <div class="bg-slate-900/50 rounded-2xl p-6 border border-slate-800 shadow-xl flex flex-col justify-between relative">
+                        <div class="space-y-4">
+                            <div class="flex justify-center py-4">
+                                <i class="fa-solid fa-lock text-5xl text-slate-600"></i>
                             </div>
-                            <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xl mb-4"><i class="fa-solid fa-graduation-cap"></i></div>
-                            <h3 class="text-lg font-bold text-white">Pràctica Lliure</h3>
-                            <p class="text-slate-300 text-xs mt-2 leading-relaxed">Sense límit de temps. Tria quantes preguntes vols practicar.</p>
-                            <div class="mt-4 flex gap-2">
-                                <button onclick="setPracticeCount(10)" id="p-btn-10" class="practice-count-btn flex-1 py-1.5 bg-emerald-600 text-white rounded-lg text-xs font-semibold">10</button>
-                                <button onclick="setPracticeCount(30)" id="p-btn-30" class="practice-count-btn flex-1 py-1.5 bg-slate-900 text-slate-300 border border-slate-700 rounded-lg text-xs font-semibold">30</button>
-                                <button onclick="setPracticeCount(50)" id="p-btn-50" class="practice-count-btn flex-1 py-1.5 bg-slate-900 text-slate-300 border border-slate-700 rounded-lg text-xs font-semibold">50</button>
+                            <div class="text-center space-y-1">
+                                <h3 class="text-lg font-bold text-white">Pràctica Lliure</h3>
+                                <p class="text-slate-400 text-xs leading-relaxed">Sense límit de temps. Tria quantes preguntes vols practicar.</p>
                             </div>
                         </div>
-                        <button onclick="checkAuthAndRun(startPractice)" class="mt-6 w-full py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-xl text-xs transition-all shadow-md">Començar Pràctica</button>
+                        <button onclick="checkAuthAndRun(startPractice)" class="mt-6 w-full py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-xl text-xs transition-all shadow-md">Inicia sessió per accedir</button>
                     </div>
 
                     <!-- Exàmens per Temes -->
-                    <div class="bg-slate-800/90 rounded-2xl p-6 border border-slate-700 shadow-xl flex flex-col justify-between hover:border-amber-500 transition-all relative">
-                        <div>
-                            <div class="absolute top-4 right-4 text-amber-400 bg-amber-500/10 border border-amber-500/30 px-2 py-1 rounded-lg text-xs font-bold logged-lock-badge flex items-center space-x-1">
-                                <i class="fa-solid fa-lock"></i><span>Pro</span>
+                    <div class="bg-slate-900/50 rounded-2xl p-6 border border-slate-800 shadow-xl flex flex-col justify-between relative">
+                        <div class="space-y-4">
+                            <div class="flex justify-center py-4">
+                                <i class="fa-solid fa-lock text-5xl text-slate-600"></i>
                             </div>
-                            <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-xl mb-4"><i class="fa-solid fa-folder-open"></i></div>
-                            <h3 class="text-lg font-bold text-white">Exàmens per Temes</h3>
-                            <p class="text-slate-300 text-xs mt-2 leading-relaxed">Selecciona un tema específic per avaluar els teus coneixements.</p>
-                            <div class="mt-4">
-                                <select id="topic-select" class="w-full bg-slate-900 border border-slate-700 text-slate-200 text-xs rounded-lg p-2.5 outline-none focus:border-amber-500">
-                                    <option value="preguntas-a1.json">Constitució i Marc Jurídic</option>
-                                    <option value="preguntas-a2.json">Estatut d'Autonomia</option>
-                                    <option value="preguntas-a3.json">Dret Penal</option>
-                                    <option value="preguntas-a4.json">Trànsit i Seguretat Viària</option>
-                                    <option value="preguntas-a5.json">Seguretat Ciutadana</option>
-                                    <option value="preguntas-a6.json">Organització Policial</option>
-                                    <option value="preguntas-a7.json">Deontologia i Altres</option>
-                                </select>
+                            <div class="text-center space-y-1">
+                                <h3 class="text-lg font-bold text-white">Exàmens per Temes</h3>
+                                <p class="text-slate-400 text-xs leading-relaxed">Selecciona un tema específic per avaluar els teus coneixements.</p>
                             </div>
                         </div>
-                        <button onclick="checkAuthAndRun(startTopicExam)" class="mt-6 w-full py-2.5 bg-amber-600 hover:bg-amber-500 text-white font-semibold rounded-xl text-xs transition-all shadow-md">Iniciar Test per Tema</button>
+                        <button onclick="checkAuthAndRun(startTopicExam)" class="mt-6 w-full py-2.5 bg-amber-600 hover:bg-amber-500 text-white font-semibold rounded-xl text-xs transition-all shadow-md">Inicia sessió per accedir</button>
                     </div>
                 </div>
             </div>
@@ -796,7 +783,7 @@
             if (user) {
                 if(notLogged) notLogged.classList.add('hidden');
                 if(logged) logged.classList.remove('hidden');
-                if(freeTrialBanner) freeTrialBanner.classList.add('hidden'); // Usuari loguejat té tot accessible
+                if(freeTrialBanner) freeTrialBanner.classList.add('hidden');
                 const snap = await getDoc(doc(db, "users", user.uid));
                 if(snap.exists()) {
                     const d = snap.data();
@@ -808,7 +795,7 @@
             } else {
                 if(notLogged) notLogged.classList.remove('hidden');
                 if(logged) logged.classList.add('hidden');
-                if(freeTrialBanner) freeTrialBanner.classList.remove('hidden'); // Mostrar test de prova gratuit
+                if(freeTrialBanner) freeTrialBanner.classList.remove('hidden');
                 if(desktopLabel) desktopLabel.innerText = "Iniciar Sessió";
                 if(window.updateFreeTrialCountdown) window.updateFreeTrialCountdown();
             }
@@ -855,7 +842,6 @@
             document.getElementById('register-extra-fields').classList.toggle('hidden', !isRegisterMode);
         };
 
-        // Funció per comprovar autenticació abans de deixar fer un test de pagament/pro
         window.checkAuthAndRun = function(callbackFn) {
             const user = window.getFirebaseCurrentUser ? window.getFirebaseCurrentUser() : null;
             if (!user) {
@@ -866,7 +852,6 @@
             callbackFn();
         };
 
-        // Gestió del Test de Prova Gratuit de 24h per a no loguejats
         let freeTrialInterval = null;
         window.updateFreeTrialCountdown = function() {
             const lastTrialTime = localStorage.getItem('oppos_free_trial_timestamp');
@@ -914,7 +899,6 @@
             }
             if (questionBank.length === 0) { window.showToast("Banc de preguntes buit", "error"); return; }
             
-            // Guardar timestamp actual
             localStorage.setItem('oppos_free_trial_timestamp', Date.now().toString());
             window.updateFreeTrialCountdown();
 
