@@ -4,16 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tests Mossos d'Esquadra - Oposicions 2026 | OpposTest</title>
+    
+    <!-- SEO & Meta Tags -->
+    <meta name="description" content="Practica amb tests oficials per a les oposicions de Mossos d'Esquadra. Preguntes actualitzades, simulacres, fòrum de dubtes, estadística de punts febles i ranking.">
+    <meta name="keywords" content="Mossos d'Esquadra, Oposicions Mossos, Test Mossos 2026, Simulacres Mossos, Temari Mossos, Catalunya, Policia de la Generalitat">
+    <meta name="author" content="Gerard App's">
+    <meta property="og:title" content="Tests Mossos d'Esquadra - Oposicions 2026 | OpposTest">
+    <meta property="og:description" content="Entrena els teus punts febles. 1 test oficial gratis cada dia per preparar l'oposició de Mossos d'Esquadra.">
+    <meta property="og:image" content="https://www.oppostest.cat/logo.png">
+    <meta property="og:url" content="https://www.oppostest.cat">
+    <meta property="og:type" content="website">
+
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#2563eb">
     <link rel="apple-touch-icon" href="logo.png">
-    <meta name="description" content="Practica amb tests oficials per a les oposicions de Mossos d'Esquadra. Preguntes actualitzades, simulacres, estadística de punts febles i ranking.">
+    
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <!-- Schema.org Structured Data -->
     <script type="application/ld+json">
     {
@@ -28,15 +40,14 @@
       }
     }
     </script>
+    
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: { sans: ['Inter', 'sans-serif'] },
                     colors: {
-                        brand: {
-                            50: '#f0f6ff', 100: '#e0edff', 500: '#2563eb', 600: '#1d4ed8', 700: '#1e40af', 900: '#0f172a', accent: '#dc2626'
-                        }
+                        brand: { 50: '#f0f6ff', 100: '#e0edff', 500: '#2563eb', 600: '#1d4ed8', 700: '#1e40af', 900: '#0f172a', accent: '#dc2626' }
                     }
                 }
             }
@@ -145,17 +156,20 @@
 
             <!-- Navigation Tabs -->
             <nav class="hidden md:flex space-x-1 bg-slate-800/60 p-1 rounded-xl border border-slate-700/50">
-                <button onclick="switchTab('dashboard')" id="nav-dashboard" class="tab-btn px-4 py-2 rounded-lg text-sm font-medium transition-all bg-brand-600 text-white shadow-md">
-                    <i class="fa-solid fa-chart-pie mr-2"></i>Inici & Stats
+                <button onclick="switchTab('dashboard')" id="nav-dashboard" class="tab-btn px-3 py-2 rounded-lg text-sm font-medium transition-all bg-brand-600 text-white shadow-md">
+                    <i class="fa-solid fa-chart-pie mr-1"></i>Inici
                 </button>
-                <button onclick="switchTab('exam')" id="nav-exam" class="tab-btn px-4 py-2 rounded-lg text-sm font-medium transition-all text-slate-300 hover:text-white hover:bg-slate-700/50">
-                    <i class="fa-solid fa-file-pen mr-2"></i>Tests
+                <button onclick="switchTab('exam')" id="nav-exam" class="tab-btn px-3 py-2 rounded-lg text-sm font-medium transition-all text-slate-300 hover:text-white hover:bg-slate-700/50">
+                    <i class="fa-solid fa-file-pen mr-1"></i>Tests
                 </button>
-                <button onclick="switchTab('ranking')" id="nav-ranking" class="tab-btn px-4 py-2 rounded-lg text-sm font-medium transition-all text-slate-300 hover:text-white hover:bg-slate-700/50">
-                    <i class="fa-solid fa-trophy mr-2"></i>Ranking Global
+                <button onclick="switchTab('forum')" id="nav-forum" class="tab-btn px-3 py-2 rounded-lg text-sm font-medium transition-all text-slate-300 hover:text-white hover:bg-slate-700/50">
+                    <i class="fa-solid fa-comments mr-1"></i>Fòrum
                 </button>
-                <button onclick="switchTab('guide')" id="nav-guide" class="tab-btn px-4 py-2 rounded-lg text-sm font-medium transition-all text-slate-300 hover:text-white hover:bg-slate-700/50">
-                    <i class="fa-solid fa-book-bookmark mr-2"></i>Guia d'Estudi
+                <button onclick="switchTab('ranking')" id="nav-ranking" class="tab-btn px-3 py-2 rounded-lg text-sm font-medium transition-all text-slate-300 hover:text-white hover:bg-slate-700/50">
+                    <i class="fa-solid fa-trophy mr-1"></i>Ranking
+                </button>
+                <button onclick="switchTab('guide')" id="nav-guide" class="tab-btn px-3 py-2 rounded-lg text-sm font-medium transition-all text-slate-300 hover:text-white hover:bg-slate-700/50">
+                    <i class="fa-solid fa-book-bookmark mr-1"></i>Guia
                 </button>
             </nav>
 
@@ -173,12 +187,13 @@
             </div>
         </div>
 
-        <div class="md:hidden grid grid-cols-5 bg-slate-900 border-t border-slate-800 py-2 px-1 text-xs text-center">
-            <button onclick="switchTab('dashboard')" id="nav-mob-dashboard" class="flex flex-col items-center py-1 text-brand-400"><i class="fa-solid fa-chart-pie text-base"></i><span>Inici</span></button>
-            <button onclick="switchTab('exam')" id="nav-mob-exam" class="flex flex-col items-center py-1 text-slate-400"><i class="fa-solid fa-file-pen text-base"></i><span>Tests</span></button>
-            <button onclick="switchTab('ranking')" id="nav-mob-ranking" class="flex flex-col items-center py-1 text-slate-400"><i class="fa-solid fa-trophy text-base"></i><span>Ranking</span></button>
-            <button onclick="switchTab('guide')" id="nav-mob-guide" class="flex flex-col items-center py-1 text-slate-400"><i class="fa-solid fa-book-bookmark text-base"></i><span>Guia</span></button>
-            <button onclick="switchTab('profile')" id="nav-mob-profile" class="flex flex-col items-center py-1 text-slate-400 border-l border-slate-800"><i class="fa-solid fa-user-circle text-base text-brand-400"></i><span class="truncate w-full px-0.5">Perfil</span></button>
+        <div class="md:hidden grid grid-cols-6 bg-slate-900 border-t border-slate-800 py-2 px-1 text-[10px] text-center">
+            <button onclick="switchTab('dashboard')" id="nav-mob-dashboard" class="flex flex-col items-center py-1 text-brand-400"><i class="fa-solid fa-chart-pie text-sm mb-0.5"></i><span>Inici</span></button>
+            <button onclick="switchTab('exam')" id="nav-mob-exam" class="flex flex-col items-center py-1 text-slate-400"><i class="fa-solid fa-file-pen text-sm mb-0.5"></i><span>Tests</span></button>
+            <button onclick="switchTab('forum')" id="nav-mob-forum" class="flex flex-col items-center py-1 text-slate-400"><i class="fa-solid fa-comments text-sm mb-0.5"></i><span>Fòrum</span></button>
+            <button onclick="switchTab('ranking')" id="nav-mob-ranking" class="flex flex-col items-center py-1 text-slate-400"><i class="fa-solid fa-trophy text-sm mb-0.5"></i><span>Ranking</span></button>
+            <button onclick="switchTab('guide')" id="nav-mob-guide" class="flex flex-col items-center py-1 text-slate-400"><i class="fa-solid fa-book-bookmark text-sm mb-0.5"></i><span>Guia</span></button>
+            <button onclick="switchTab('profile')" id="nav-mob-profile" class="flex flex-col items-center py-1 text-slate-400 border-l border-slate-800"><i class="fa-solid fa-user-circle text-sm text-brand-400 mb-0.5"></i><span class="truncate w-full px-0.5">Perfil</span></button>
         </div>
     </header>
 
@@ -250,7 +265,6 @@
                 </div>
             </div>
 
-            <!-- COMPARARTE CONTIGO MISMO & CALENDARI DE PROXIMES DATES -->
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 <div class="bg-slate-800/80 rounded-xl p-6 border border-slate-700 space-y-4">
                     <h3 class="text-base font-bold text-white flex items-center"><i class="fa-solid fa-chart-line text-brand-400 mr-2"></i> Comparativa Personal</h3>
@@ -261,7 +275,6 @@
                     </div>
                 </div>
 
-                <!-- CALENDARI DE PROXIMES DATES IMPORTANTS -->
                 <div class="bg-slate-800/80 rounded-xl p-6 border border-slate-700 shadow-sm space-y-4 lg:col-span-2">
                     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
                         <div>
@@ -282,7 +295,6 @@
                             </div>
                             <span class="text-[11px] bg-brand-500/10 text-brand-400 px-2.5 py-1 rounded-lg font-semibold border border-brand-500/20 hidden sm:inline-block">Imminent</span>
                         </div>
-
                         <div class="flex items-center justify-between p-3.5 bg-slate-900/80 rounded-xl border border-slate-700/80 hover:border-slate-600 transition-all">
                             <div class="flex items-center space-x-4">
                                 <div class="bg-slate-800 text-slate-300 border border-slate-700 px-3 py-2 rounded-xl text-center font-bold min-w-[70px]">
@@ -296,7 +308,6 @@
                             </div>
                             <span class="text-[11px] bg-slate-800 text-slate-400 px-2.5 py-1 rounded-lg font-semibold border border-slate-700 hidden sm:inline-block">Pròximament</span>
                         </div>
-
                         <div class="flex items-center justify-between p-3.5 bg-slate-900/80 rounded-xl border border-slate-700/80 hover:border-slate-600 transition-all">
                             <div class="flex items-center space-x-4">
                                 <div class="bg-slate-800 text-slate-300 border border-slate-700 px-3 py-2 rounded-xl text-center font-bold min-w-[70px]">
@@ -315,134 +326,28 @@
             </div>
         </section>
 
-        <!-- PROFILE SECTION -->
-        <section id="sec-profile" class="tab-content hidden space-y-6">
-            <div class="bg-slate-800 rounded-2xl p-6 sm:p-8 border border-slate-700 shadow-xl max-w-2xl mx-auto space-y-6">
-                <div class="flex items-center space-x-4 border-b border-slate-700 pb-6 mb-6">
-                    <div class="w-16 h-16 rounded-2xl bg-brand-600/20 text-brand-400 border border-brand-500/30 flex items-center justify-center text-3xl font-bold"><i class="fa-solid fa-user"></i></div>
-                    <div>
-                        <h2 class="text-xl font-bold text-white" id="profile-card-title">El meu Perfil</h2>
-                        <p class="text-xs text-slate-400 mt-1">Gestiona el teu compte i dades de l'oposició</p>
-                    </div>
-                </div>
-
-                <!-- Efectes de So Toggle -->
-                <div class="bg-slate-900/80 p-4 rounded-xl border border-slate-700 flex justify-between items-center text-sm mb-6">
-                    <div>
-                        <h3 class="font-bold text-white"><i class="fa-solid fa-volume-high text-brand-400 mr-2"></i>Efectes de so</h3>
-                        <p class="text-xs text-slate-400">Sons en encertar o fallar preguntes</p>
-                    </div>
-                    <button onclick="toggleSound()" class="px-3 py-1.5 bg-slate-800 border border-slate-700 text-slate-300 rounded-lg text-xs font-semibold hover:bg-slate-700 transition-all">
-                        <span id="sound-status-text">Activat</span>
-                    </button>
-                </div>
-
-                <div id="profile-not-logged" class="space-y-4 text-center py-6">
-                    <p class="text-sm text-slate-300">Inicia sessió per guardar les teves estadístiques al núvol i comparar-te al ranking.</p>
-                    <button onclick="openAuthModal('login')" class="px-6 py-3 bg-brand-600 hover:bg-brand-500 text-white font-semibold rounded-xl text-sm shadow-lg shadow-brand-600/30 transition-all">
-                        <i class="fa-solid fa-right-to-bracket mr-2"></i> Iniciar Sessió / Registrar-se
-                    </button>
-                </div>
-
-                <div id="profile-logged-content" class="hidden space-y-4">
-                    <div class="bg-slate-900/80 p-4 rounded-xl border border-slate-700 space-y-4 text-sm">
-                        <div>
-                            <label class="text-xs font-semibold text-slate-400 block mb-1">Nom d'usuari</label>
-                            <div class="flex gap-2">
-                                <input type="text" id="profile-username-input" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-2.5 text-xs text-white outline-none focus:border-brand-500">
-                                <button type="button" onclick="handleUpdateUsername()" class="px-4 py-2 bg-brand-600 hover:bg-brand-500 text-white font-semibold rounded-xl text-xs transition-all shrink-0">Guardar</button>
-                            </div>
-                            <p id="username-warning-msg" class="text-[11px] text-amber-400 mt-1 hidden"></p>
-                        </div>
-                        <div class="flex justify-between pt-2 border-t border-slate-800">
-                            <span class="text-slate-400">Correu electrònic:</span>
-                            <span id="profile-email-val" class="font-semibold text-white">--</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span class="text-slate-400">Punts avui al Ranking:</span>
-                            <span id="profile-score-val" class="font-semibold text-brand-400">0 pts</span>
-                        </div>
-                    </div>
-                    
-                    <button id="btn-admin-panel" onclick="initAdminPanel()" class="hidden w-full py-3 bg-purple-600 hover:bg-purple-500 text-white font-semibold rounded-xl text-sm transition-all flex items-center justify-center">
-                        <i class="fa-solid fa-user-shield mr-2"></i> Panell d'Administració
-                    </button>
-
-                    <button onclick="logoutUser()" class="w-full py-3 bg-red-600/20 hover:bg-red-600/30 text-red-400 border border-red-500/30 font-semibold rounded-xl text-sm transition-all flex items-center justify-center">
-                        <i class="fa-solid fa-power-off mr-2"></i> Tancar Sessió
-                    </button>
-                </div>
+        <!-- FÒRUM SECTION -->
+        <section id="sec-forum" class="tab-content hidden space-y-6">
+            <div class="bg-slate-800 rounded-2xl p-6 border border-slate-700 shadow-xl">
+                <h2 class="text-xl font-bold text-white flex items-center"><i class="fa-solid fa-comments text-brand-400 mr-2"></i>Fòrum d'Opositors</h2>
+                <p class="text-slate-300 text-sm mt-1">Comparteix dubtes i ajuda a altres companys.</p>
             </div>
-        </section>
 
-        <!-- ADMIN SECTION -->
-        <section id="sec-admin" class="tab-content hidden space-y-6">
-            <div class="bg-slate-800 rounded-2xl p-6 border border-purple-500 shadow-xl shadow-purple-500/10 max-w-4xl mx-auto space-y-6">
-                <div class="flex justify-between items-center border-b border-slate-700 pb-4">
-                    <h2 class="text-xl font-bold text-white"><i class="fa-solid fa-user-shield text-purple-400 mr-2"></i>Panell d'Administració</h2>
-                    <button onclick="switchTab('profile')" class="text-xs bg-slate-700 hover:bg-slate-600 px-3 py-1.5 rounded-lg text-white transition-all">Tornar al Perfil</button>
+            <!-- Fòrum No Loguejat -->
+            <div id="forum-unauth" class="bg-slate-800/80 rounded-2xl border border-slate-700 p-8 text-center hidden">
+                <i class="fa-solid fa-lock text-4xl text-slate-500 mb-3"></i>
+                <p class="text-slate-300 text-sm mb-4">Inicia sessió per llegir i participar al fòrum.</p>
+                <button onclick="openAuthModal('login')" class="px-6 py-2.5 bg-brand-600 hover:bg-brand-500 text-white font-semibold rounded-xl text-sm transition-all shadow-md">Iniciar Sessió</button>
+            </div>
+
+            <!-- Fòrum Loguejat -->
+            <div id="forum-auth" class="space-y-6 hidden">
+                <div class="bg-slate-900 rounded-2xl p-4 border border-slate-700 flex gap-3">
+                    <input type="text" id="forum-new-post" placeholder="Escriu la teva pregunta o comentari..." class="flex-1 bg-slate-950 border border-slate-800 rounded-xl p-3 text-sm text-white outline-none focus:border-brand-500">
+                    <button onclick="submitForumPost()" class="px-5 py-3 bg-brand-600 hover:bg-brand-500 text-white font-bold rounded-xl transition-all shadow-md"><i class="fa-solid fa-paper-plane"></i></button>
                 </div>
-
-                <!-- 1. Tauler / Mètriques -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <!-- Anuncis -->
-                    <div class="bg-slate-900 p-4 rounded-xl border border-slate-700">
-                        <h3 class="font-bold text-white mb-2"><i class="fa-solid fa-bullhorn text-brand-400 mr-2"></i>Tauler d'Anuncis</h3>
-                        <input type="text" id="admin-alert-msg" placeholder="Escriu una alerta global aquí..." class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-xs text-white outline-none focus:border-brand-500 mb-3">
-                        <div class="flex items-center justify-between">
-                            <label class="text-xs font-semibold text-slate-300 flex items-center gap-2 cursor-pointer">
-                                <input type="checkbox" id="admin-alert-active" class="w-4 h-4 accent-brand-500 rounded"> Activar Anunci
-                            </label>
-                            <button onclick="saveGlobalAlert()" class="px-4 py-2 bg-brand-600 hover:bg-brand-500 text-white rounded-lg text-xs font-bold transition-all shadow-md">Publicar</button>
-                        </div>
-                    </div>
-                    <!-- Mètriques (Avui) -->
-                    <div class="bg-slate-900 p-4 rounded-xl border border-slate-700 text-sm">
-                        <h3 class="font-bold text-white mb-3"><i class="fa-solid fa-chart-simple text-emerald-400 mr-2"></i>Mètriques (Avui)</h3>
-                        <div class="flex justify-between text-slate-300 mb-2"><span>Opositors Actius:</span> <span id="admin-active-users" class="font-bold text-white bg-slate-800 px-2 py-0.5 rounded">0</span></div>
-                        <div class="flex justify-between text-slate-300 mb-2"><span>Tests Fets Avui:</span> <span id="admin-tests-today" class="font-bold text-emerald-400 bg-slate-800 px-2 py-0.5 rounded">0</span></div>
-                        <div class="mt-3 pt-3 border-t border-slate-800 text-xs">
-                            <span class="text-slate-400 block mb-1">Pregunta Més Fallada (Històric):</span>
-                            <p id="admin-worst-q" class="text-red-400 font-semibold leading-relaxed bg-red-950/30 p-2 rounded border border-red-900/50">Carregant...</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 2. Usuaris / Moderació -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <!-- Usuaris Registrats -->
-                    <div class="bg-slate-900 p-4 rounded-xl border border-slate-700 flex flex-col">
-                        <h3 class="font-bold text-white mb-3"><i class="fa-solid fa-users text-amber-400 mr-2"></i>Gestió d'Usuaris</h3>
-                        <div class="overflow-y-auto max-h-48 border border-slate-800 rounded-lg">
-                            <table class="w-full text-left text-xs">
-                                <thead class="text-slate-400 sticky top-0 bg-slate-950"><tr><th class="p-2 font-semibold">Correu</th><th class="p-2 font-semibold">Últim Accés</th><th class="p-2 text-center font-semibold">Prem.</th><th class="p-2 text-center font-semibold">Bloq.</th></tr></thead>
-                                <tbody id="admin-users-tbody" class="divide-y divide-slate-800 text-slate-300 bg-slate-900">
-                                    <tr><td colspan="4" class="p-2 text-center">Carregant...</td></tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <!-- Moderació Rànquing -->
-                    <div class="bg-slate-900 p-4 rounded-xl border border-slate-700 flex flex-col">
-                        <div class="flex justify-between items-center mb-3">
-                            <h3 class="font-bold text-white"><i class="fa-solid fa-ranking-star text-purple-400 mr-2"></i>Moderar Rànquing</h3>
-                            <button onclick="resetGlobalRanking()" class="text-[10px] font-bold bg-red-900/80 text-red-200 border border-red-700 px-2.5 py-1 rounded hover:bg-red-700 transition-all shadow-sm">NETEJAR TOT</button>
-                        </div>
-                        <div class="overflow-y-auto max-h-48 border border-slate-800 rounded-lg">
-                            <table class="w-full text-left text-xs">
-                                <thead class="text-slate-400 sticky top-0 bg-slate-950"><tr><th class="p-2 font-semibold">Usuari</th><th class="p-2 font-semibold">Punts</th><th class="p-2 text-right font-semibold">Eliminar</th></tr></thead>
-                                <tbody id="admin-ranking-tbody" class="divide-y divide-slate-800 text-slate-300 bg-slate-900">
-                                    <tr><td colspan="3" class="p-2 text-center">Carregant...</td></tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Reportes -->
-                <div class="pt-4 border-t border-slate-700">
-                    <h3 class="font-bold text-slate-300 mb-3"><i class="fa-solid fa-bug text-red-400 mr-2"></i>Reportes de Preguntes</h3>
-                    <div id="admin-reports-list" class="space-y-2 max-h-48 overflow-y-auto pr-2"></div>
+                <div id="forum-posts-container" class="space-y-4">
+                    <p class="text-center text-slate-400 text-sm">Carregant missatges...</p>
                 </div>
             </div>
         </section>
@@ -651,6 +556,135 @@
             </div>
         </section>
 
+        <!-- PROFILE SECTION -->
+        <section id="sec-profile" class="tab-content hidden space-y-6">
+            <div class="bg-slate-800 rounded-2xl p-6 sm:p-8 border border-slate-700 shadow-xl max-w-2xl mx-auto space-y-6">
+                <div class="flex items-center space-x-4 border-b border-slate-700 pb-6 mb-6">
+                    <div class="w-16 h-16 rounded-2xl bg-brand-600/20 text-brand-400 border border-brand-500/30 flex items-center justify-center text-3xl font-bold"><i class="fa-solid fa-user"></i></div>
+                    <div>
+                        <h2 class="text-xl font-bold text-white" id="profile-card-title">El meu Perfil</h2>
+                        <p class="text-xs text-slate-400 mt-1">Gestiona el teu compte i dades de l'oposició</p>
+                    </div>
+                </div>
+
+                <!-- Efectes de So Toggle -->
+                <div class="bg-slate-900/80 p-4 rounded-xl border border-slate-700 flex justify-between items-center text-sm mb-6">
+                    <div>
+                        <h3 class="font-bold text-white"><i class="fa-solid fa-volume-high text-brand-400 mr-2"></i>Efectes de so</h3>
+                        <p class="text-xs text-slate-400">Sons en encertar o fallar preguntes</p>
+                    </div>
+                    <button onclick="toggleSound()" class="px-3 py-1.5 bg-slate-800 border border-slate-700 text-slate-300 rounded-lg text-xs font-semibold hover:bg-slate-700 transition-all">
+                        <span id="sound-status-text">Activat</span>
+                    </button>
+                </div>
+
+                <div id="profile-not-logged" class="space-y-4 text-center py-6">
+                    <p class="text-sm text-slate-300">Inicia sessió per guardar les teves estadístiques al núvol i comparar-te al ranking.</p>
+                    <button onclick="openAuthModal('login')" class="px-6 py-3 bg-brand-600 hover:bg-brand-500 text-white font-semibold rounded-xl text-sm shadow-lg shadow-brand-600/30 transition-all">
+                        <i class="fa-solid fa-right-to-bracket mr-2"></i> Iniciar Sessió / Registrar-se
+                    </button>
+                </div>
+
+                <div id="profile-logged-content" class="hidden space-y-4">
+                    <div class="bg-slate-900/80 p-4 rounded-xl border border-slate-700 space-y-4 text-sm">
+                        <div>
+                            <label class="text-xs font-semibold text-slate-400 block mb-1">Nom d'usuari</label>
+                            <div class="flex gap-2">
+                                <input type="text" id="profile-username-input" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-2.5 text-xs text-white outline-none focus:border-brand-500">
+                                <button type="button" onclick="handleUpdateUsername()" class="px-4 py-2 bg-brand-600 hover:bg-brand-500 text-white font-semibold rounded-xl text-xs transition-all shrink-0">Guardar</button>
+                            </div>
+                            <p id="username-warning-msg" class="text-[11px] text-amber-400 mt-1 hidden"></p>
+                        </div>
+                        <div class="flex justify-between pt-2 border-t border-slate-800">
+                            <span class="text-slate-400">Correu electrònic:</span>
+                            <span id="profile-email-val" class="font-semibold text-white">--</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-400">Punts avui al Ranking:</span>
+                            <span id="profile-score-val" class="font-semibold text-brand-400">0 pts</span>
+                        </div>
+                    </div>
+                    
+                    <button id="btn-admin-panel" onclick="initAdminPanel()" class="hidden w-full py-3 bg-purple-600 hover:bg-purple-500 text-white font-semibold rounded-xl text-sm transition-all flex items-center justify-center">
+                        <i class="fa-solid fa-user-shield mr-2"></i> Panell d'Administració
+                    </button>
+
+                    <button onclick="logoutUser()" class="w-full py-3 bg-red-600/20 hover:bg-red-600/30 text-red-400 border border-red-500/30 font-semibold rounded-xl text-sm transition-all flex items-center justify-center">
+                        <i class="fa-solid fa-power-off mr-2"></i> Tancar Sessió
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ADMIN SECTION -->
+        <section id="sec-admin" class="tab-content hidden space-y-6">
+            <div class="bg-slate-800 rounded-2xl p-6 border border-purple-500 shadow-xl shadow-purple-500/10 max-w-4xl mx-auto space-y-6">
+                <div class="flex justify-between items-center border-b border-slate-700 pb-4">
+                    <h2 class="text-xl font-bold text-white"><i class="fa-solid fa-user-shield text-purple-400 mr-2"></i>Panell d'Administració</h2>
+                    <button onclick="switchTab('profile')" class="text-xs bg-slate-700 hover:bg-slate-600 px-3 py-1.5 rounded-lg text-white transition-all">Tornar al Perfil</button>
+                </div>
+
+                <!-- 1. Tauler / Mètriques -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-slate-900 p-4 rounded-xl border border-slate-700">
+                        <h3 class="font-bold text-white mb-2"><i class="fa-solid fa-bullhorn text-brand-400 mr-2"></i>Tauler d'Anuncis</h3>
+                        <input type="text" id="admin-alert-msg" placeholder="Escriu una alerta global aquí..." class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-xs text-white outline-none focus:border-brand-500 mb-3">
+                        <div class="flex items-center justify-between">
+                            <label class="text-xs font-semibold text-slate-300 flex items-center gap-2 cursor-pointer">
+                                <input type="checkbox" id="admin-alert-active" class="w-4 h-4 accent-brand-500 rounded"> Activar Anunci
+                            </label>
+                            <button onclick="saveGlobalAlert()" class="px-4 py-2 bg-brand-600 hover:bg-brand-500 text-white rounded-lg text-xs font-bold transition-all shadow-md">Publicar</button>
+                        </div>
+                    </div>
+                    <div class="bg-slate-900 p-4 rounded-xl border border-slate-700 text-sm">
+                        <h3 class="font-bold text-white mb-3"><i class="fa-solid fa-chart-simple text-emerald-400 mr-2"></i>Mètriques (Avui)</h3>
+                        <div class="flex justify-between text-slate-300 mb-2"><span>Opositors Actius:</span> <span id="admin-active-users" class="font-bold text-white bg-slate-800 px-2 py-0.5 rounded">0</span></div>
+                        <div class="flex justify-between text-slate-300 mb-2"><span>Tests Fets Avui:</span> <span id="admin-tests-today" class="font-bold text-emerald-400 bg-slate-800 px-2 py-0.5 rounded">0</span></div>
+                        <div class="mt-3 pt-3 border-t border-slate-800 text-xs">
+                            <span class="text-slate-400 block mb-1">Pregunta Més Fallada (Històric):</span>
+                            <p id="admin-worst-q" class="text-red-400 font-semibold leading-relaxed bg-red-950/30 p-2 rounded border border-red-900/50">Carregant...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Usuaris / Moderació -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-slate-900 p-4 rounded-xl border border-slate-700 flex flex-col">
+                        <h3 class="font-bold text-white mb-3"><i class="fa-solid fa-users text-amber-400 mr-2"></i>Gestió d'Usuaris</h3>
+                        <input type="text" id="admin-search-user" onkeyup="filterAdminUsers()" placeholder="Cercar usuari (nom o email)..." class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 text-xs text-white outline-none focus:border-brand-500 mb-3">
+                        <div class="overflow-y-auto max-h-48 border border-slate-800 rounded-lg">
+                            <table class="w-full text-left text-xs">
+                                <thead class="text-slate-400 sticky top-0 bg-slate-950"><tr><th class="p-2 font-semibold">Correu</th><th class="p-2 font-semibold">Últim Accés</th><th class="p-2 text-center font-semibold">Prem.</th><th class="p-2 text-center font-semibold">Bloq.</th></tr></thead>
+                                <tbody id="admin-users-tbody" class="divide-y divide-slate-800 text-slate-300 bg-slate-900">
+                                    <tr><td colspan="4" class="p-2 text-center">Carregant...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="bg-slate-900 p-4 rounded-xl border border-slate-700 flex flex-col">
+                        <div class="flex justify-between items-center mb-3">
+                            <h3 class="font-bold text-white"><i class="fa-solid fa-ranking-star text-purple-400 mr-2"></i>Moderar Rànquing</h3>
+                            <button onclick="resetGlobalRanking()" class="text-[10px] font-bold bg-red-900/80 text-red-200 border border-red-700 px-2.5 py-1 rounded hover:bg-red-700 transition-all shadow-sm">NETEJAR TOT</button>
+                        </div>
+                        <div class="overflow-y-auto max-h-48 border border-slate-800 rounded-lg">
+                            <table class="w-full text-left text-xs">
+                                <thead class="text-slate-400 sticky top-0 bg-slate-950"><tr><th class="p-2 font-semibold">Usuari</th><th class="p-2 font-semibold">Punts</th><th class="p-2 text-right font-semibold">Eliminar</th></tr></thead>
+                                <tbody id="admin-ranking-tbody" class="divide-y divide-slate-800 text-slate-300 bg-slate-900">
+                                    <tr><td colspan="3" class="p-2 text-center">Carregant...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reportes -->
+                <div class="pt-4 border-t border-slate-700">
+                    <h3 class="font-bold text-slate-300 mb-3"><i class="fa-solid fa-bug text-red-400 mr-2"></i>Reportes de Preguntes i Fòrum</h3>
+                    <div id="admin-reports-list" class="space-y-2 max-h-48 overflow-y-auto pr-2"></div>
+                </div>
+            </div>
+        </section>
+
         <!-- GUIDE SECTION -->
         <section id="sec-guide" class="tab-content hidden space-y-6">
             <div class="bg-slate-800 rounded-xl p-6 border border-slate-700">
@@ -793,12 +827,21 @@
 
                 await setDoc(userRef, { username: newUsername, lastUsernameChange: now.toISOString() }, { merge: true });
                 const desktopLabel = document.getElementById('desktop-profile-label');
-                if (desktopLabel) desktopLabel.innerText = newUsername;
+                if (desktopLabel) desktopLabel.innerHTML = `${newUsername} ${window.getRoleBadge(userData)}`;
                 window.showToast("Nom d'usuari actualitzat correctament!", "success");
                 if (window.loadGlobalRanking) window.loadGlobalRanking();
             } catch (err) {
                 window.showToast("Error: " + err.message, "error");
             }
+        }
+
+        window.getRoleBadge = function(u) {
+            if (u.email === 'gerardlopezgarcia1@gmail.com') {
+                return '<span class="ml-2 inline-block bg-purple-600/20 border border-purple-500/50 text-purple-400 text-[9px] px-1.5 py-0.5 rounded uppercase font-bold tracking-wider align-middle">CEO</span>';
+            } else if (u.isPremium) {
+                return '<span class="ml-2 inline-block bg-brand-600/20 border border-brand-500/50 text-brand-400 text-[9px] px-1.5 py-0.5 rounded uppercase font-bold tracking-wider align-middle">PRO</span>';
+            }
+            return '';
         }
 
         window.updateUserScoreInFirestore = async function(correctCount) {
@@ -832,7 +875,7 @@
                     const data = d.data();
                     if (!data.isBlocked) {
                         let score = data.lastResetDate === today ? (data.score || 0) : 0;
-                        list.push({ username: data.username || 'Anònim', score });
+                        list.push({ username: data.username || 'Anònim', score, email: data.email, isPremium: data.isPremium });
                     }
                 });
                 list.sort((a, b) => b.score - a.score);
@@ -840,14 +883,94 @@
                 
                 let html = '';
                 list.forEach((u, i) => {
+                    let posColor = 'bg-slate-900 text-slate-300';
+                    if (i === 0) posColor = 'bg-yellow-400 text-yellow-900 font-extrabold shadow-[0_0_10px_rgba(250,204,21,0.5)]';
+                    else if (i === 1) posColor = 'bg-slate-300 text-slate-800 font-bold shadow-[0_0_8px_rgba(203,213,225,0.5)]';
+                    else if (i === 2) posColor = 'bg-amber-700 text-orange-100 font-bold shadow-[0_0_8px_rgba(180,83,9,0.5)]';
+
                     html += `<tr class="hover:bg-slate-900/40 transition-colors border-b border-slate-800">
-                        <td class="p-4 text-center font-bold"><span class="inline-block w-7 h-7 rounded-full text-xs leading-7 bg-slate-900 text-slate-300">${i + 1}</span></td>
-                        <td class="p-4 font-semibold text-white">${u.username}</td>
+                        <td class="p-4 text-center font-bold"><span class="inline-block w-7 h-7 rounded-full text-xs leading-7 ${posColor}">${i + 1}</span></td>
+                        <td class="p-4 font-semibold text-white flex items-center h-16">${u.username} ${window.getRoleBadge(u)}</td>
                         <td class="p-4 text-right font-bold text-brand-400">${u.score} pts</td>
                     </tr>`;
                 });
                 tableBody.innerHTML = html;
             } catch (e) { tableBody.innerHTML = `<tr><td colspan="3" class="p-6 text-center text-red-400">Error carregant ranking.</td></tr>`; }
+        }
+
+        // SISTEMA FÒRUM
+        const badWords = ['puta', 'joder', 'merda', 'gilipolles', 'cabron', 'hòstia', 'hostia', 'follar', 'collons', 'coño', 'mierda'];
+
+        window.submitForumPost = async () => {
+            const text = document.getElementById('forum-new-post').value.trim();
+            if (!text) return;
+
+            const textLower = text.toLowerCase();
+            if (badWords.some(bw => textLower.includes(bw))) {
+                return window.showToast("Llenguatge no permès. Revisa el teu missatge.", "error");
+            }
+
+            const user = window.getFirebaseCurrentUser();
+            if (!user) return;
+
+            try {
+                const uSnap = await getDoc(doc(db, "users", user.uid));
+                const uData = uSnap.exists() ? uSnap.data() : {};
+                
+                await addDoc(collection(db, "forum"), {
+                    text, authorUid: user.uid, authorName: uData.username || 'Anònim',
+                    authorEmail: uData.email, isPremium: uData.isPremium || false,
+                    timestamp: Date.now(), dateStr: window.getSpanishDateStr()
+                });
+                document.getElementById('forum-new-post').value = '';
+                window.loadForumPosts();
+                window.showToast("Missatge publicat al fòrum!", "success");
+            } catch(e) { window.showToast("Error en publicar: " + e.message, "error"); }
+        }
+
+        window.loadForumPosts = async function() {
+            const container = document.getElementById('forum-posts-container');
+            if(!container) return;
+            container.innerHTML = '<p class="text-center text-slate-400 text-sm">Carregant missatges...</p>';
+            try {
+                const snap = await getDocs(collection(db, "forum"));
+                let posts = [];
+                snap.forEach(d => posts.push({ id: d.id, ...d.data() }));
+                posts.sort((a, b) => b.timestamp - a.timestamp);
+
+                if(posts.length === 0) return container.innerHTML = '<p class="text-center text-slate-500 text-sm py-4">Cap missatge encara. Trenca el gel!</p>';
+
+                let html = '';
+                posts.forEach(p => {
+                    const dObj = new Date(p.timestamp);
+                    const timeStr = `${dObj.toLocaleDateString('es-ES')} ${dObj.getHours().toString().padStart(2,'0')}:${dObj.getMinutes().toString().padStart(2,'0')}`;
+                    
+                    html += `
+                    <div class="bg-slate-900 rounded-xl p-4 border border-slate-800">
+                        <div class="flex justify-between items-start mb-2">
+                            <div class="flex items-center">
+                                <span class="font-bold text-white text-sm">${p.authorName}</span>
+                                ${window.getRoleBadge({ email: p.authorEmail, isPremium: p.isPremium })}
+                                <span class="text-[10px] text-slate-500 ml-3">${timeStr}</span>
+                            </div>
+                            <button onclick="reportForumPost('${p.id}', '${p.text.replace(/'/g, "\\'")}')" class="text-slate-500 hover:text-red-400 transition-colors" title="Reportar"><i class="fa-solid fa-flag text-xs"></i></button>
+                        </div>
+                        <p class="text-slate-300 text-sm leading-relaxed">${p.text}</p>
+                    </div>`;
+                });
+                container.innerHTML = html;
+            } catch(e) { container.innerHTML = `<p class="text-center text-red-400 text-sm">Error carregant el fòrum.</p>`; }
+        }
+
+        window.reportForumPost = async (postId, postText) => {
+            if(!confirm("Vols reportar aquest missatge per llenguatge ofensiu o inadequat?")) return;
+            try {
+                await addDoc(collection(db, "reports"), {
+                    type: "Report Fòrum", comment: "Aquest missatge ha estat reportat pels usuaris.",
+                    question: postText, topic: "Fòrum", date: window.getSpanishDateStr()
+                });
+                window.showToast("Missatge reportat correctament.", "success");
+            } catch(e) { window.showToast("Error en reportar.", "error"); }
         }
 
         // PANELL D'ADMINISTRACIÓ
@@ -869,7 +992,7 @@
                 const u = d.data(); const uid = d.id;
                 if(u.lastLogin === today) activeToday++;
                 html += `<tr>
-                    <td class="p-2 text-xs truncate max-w-[100px] text-white">${u.email}</td>
+                    <td class="p-2 text-xs truncate max-w-[150px] text-white">${u.email}</td>
                     <td class="p-2 text-xs text-slate-400">${u.lastLogin || '-'}</td>
                     <td class="p-2 text-center"><button onclick="toggleUserStatus('${uid}', 'isPremium', ${!u.isPremium})" class="text-[10px] px-2 py-1 rounded text-white ${u.isPremium ? 'bg-amber-600' : 'bg-slate-700'}">${u.isPremium ? 'Sí' : 'No'}</button></td>
                     <td class="p-2 text-center"><button onclick="toggleUserStatus('${uid}', 'isBlocked', ${!u.isBlocked})" class="text-[10px] px-2 py-1 rounded text-white ${u.isBlocked ? 'bg-red-600' : 'bg-slate-700'}">${u.isBlocked ? 'Sí' : 'No'}</button></td>
@@ -877,6 +1000,17 @@
             });
             tbody.innerHTML = html;
             document.getElementById('admin-active-users').innerText = activeToday;
+        }
+
+        window.filterAdminUsers = function() {
+            const query = document.getElementById('admin-search-user').value.toLowerCase();
+            const rows = document.querySelectorAll('#admin-users-tbody tr');
+            rows.forEach(row => {
+                if (row.cells.length > 1) { 
+                    const text = row.innerText.toLowerCase();
+                    row.style.display = text.includes(query) ? '' : 'none';
+                }
+            });
         }
 
         window.toggleUserStatus = async function(uid, field, val) {
@@ -961,7 +1095,7 @@
                     </div>`;
                 });
                 list.innerHTML = html;
-            } catch(e) { list.innerHTML = `<p class="text-red-400 text-sm">Error: ${e.message}</p>`; }
+            } catch(e) { list.innerHTML = `<p class="text-red-400 text-sm">Error carregant dades: ${e.message}</p>`; }
         }
 
         window.initAdminPanel = async function() {
@@ -1005,12 +1139,18 @@
                     if(notLogged) notLogged.classList.add('hidden');
                     if(logged) logged.classList.remove('hidden');
                     
+                    // Mostrem seccions de fòrum
+                    const fUnauth = document.getElementById('forum-unauth');
+                    const fAuth = document.getElementById('forum-auth');
+                    if(fUnauth) fUnauth.classList.add('hidden');
+                    if(fAuth) { fAuth.classList.remove('hidden'); window.loadForumPosts(); }
+                    
                     if(adminBtn) {
                         if (user.email === "gerardlopezgarcia1@gmail.com") adminBtn.classList.remove('hidden');
                         else adminBtn.classList.add('hidden');
                     }
 
-                    if(desktopLabel) desktopLabel.innerText = d.username || 'Perfil';
+                    if(desktopLabel) desktopLabel.innerHTML = `${d.username || 'Perfil'} ${window.getRoleBadge(d)}`;
                     document.getElementById('profile-username-input').value = d.username || '';
                     document.getElementById('profile-email-val').innerText = user.email;
                     document.getElementById('profile-score-val').innerText = `${d.lastResetDate === today ? (d.score || 0) : 0} pts`;
@@ -1020,6 +1160,12 @@
                 if(logged) logged.classList.add('hidden');
                 if(desktopLabel) desktopLabel.innerText = "Iniciar Sessió";
                 if(adminBtn) adminBtn.classList.add('hidden');
+                
+                // Amaguem fòrum interactiu
+                const fUnauth = document.getElementById('forum-unauth');
+                const fAuth = document.getElementById('forum-auth');
+                if(fUnauth) fUnauth.classList.remove('hidden');
+                if(fAuth) fAuth.classList.add('hidden');
             }
             if(window.loadGlobalRanking) window.loadGlobalRanking();
             if(window.updateLocksUI) window.updateLocksUI(user);
@@ -1250,6 +1396,7 @@
                 activeBtn.classList.remove('text-slate-300');
             }
             if (tabId === 'ranking') window.loadGlobalRanking && window.loadGlobalRanking();
+            if (tabId === 'forum') window.loadForumPosts && window.loadForumPosts();
             if (tabId === 'dashboard') updateStatsDashboardUI();
         }
 
