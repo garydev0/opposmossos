@@ -790,9 +790,9 @@
 
     <!-- SCRIPT FIREBASE -->
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-        import { getFirestore, doc, setDoc, getDoc, updateDoc, collection, getDocs, query, where, addDoc, increment } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+        import { getFirestore, doc, setDoc, getDoc, updateDoc, collection, getDocs, query, where, addDoc, increment } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyAK8r_-CMw1626LIFnrn9NcVkIcvYv2Elo",
@@ -1852,7 +1852,7 @@
                 const today = window.getSpanishDateStr();
                 const metricsRef = window.dbRef;
                 
-                import("https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js").then(mod => {
+                import("https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js").then(mod => {
                     mod.setDoc(mod.doc(metricsRef, "metrics", today), { tests: mod.increment(1) }, { merge: true }).catch(()=>{});
                     if (Object.keys(failedQUpdates).length > 0) {
                         mod.setDoc(mod.doc(metricsRef, "metrics", "failed_qs"), failedQUpdates, {merge:true}).catch(()=>{});
