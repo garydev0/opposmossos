@@ -12,7 +12,7 @@
     <meta property="og:site_name" content="OpposTest">
     <meta property="og:title" content="Tests Mossos d'Esquadra - Oposicions 2026 | OpposTest">
     <meta property="og:description" content="Entrena els teus punts febles. 1 test oficial gratis cada dia per preparar l'oposició de Mossos d'Esquadra.">
-    <meta property="og:image" content="https://www.oppostest.cat/logoi.png">
+    <meta property="og:image" content="https://www.oppostest.cat/logo.png">
     <meta property="og:url" content="https://www.oppostest.cat">
     <meta property="og:type" content="website">
 
@@ -20,8 +20,8 @@
     <meta name="theme-color" content="#2563eb">
     
     <!-- Favicon per a Google i Navegadors -->
-    <link rel="icon" type="image/png" href="logoi.png">
-    <link rel="apple-touch-icon" href="logoi.png">
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="apple-touch-icon" href="logo.png">
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -232,27 +232,27 @@
                 </div>
             </div>
 
-            <!-- Stats Overview Grid -->
+            <!-- Stats Overview Grid (Actualitzat) -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 <div class="bg-slate-800/80 rounded-xl p-5 border border-slate-700/60 shadow-sm flex flex-col justify-center">
                     <div class="flex justify-between items-start">
                         <div>
-                            <p class="text-slate-400 text-xs uppercase font-bold tracking-wider">Preguntes Fetes</p>
-                            <h3 id="stat-realitzades" class="text-3xl font-bold text-white mt-1">0</h3>
+                            <p class="text-slate-400 text-xs uppercase font-bold tracking-wider">Precisió en preguntes</p>
+                            <h3 id="stat-accuracy" class="text-3xl font-bold text-white mt-1">0%</h3>
                         </div>
-                        <div class="p-3 bg-brand-500/10 text-brand-400 rounded-lg"><i class="fa-solid fa-database text-xl"></i></div>
+                        <div class="p-3 bg-emerald-500/10 text-emerald-400 rounded-lg"><i class="fa-solid fa-bullseye text-xl"></i></div>
                     </div>
                 </div>
 
                 <div class="bg-slate-800/80 rounded-xl p-5 border border-slate-700/60 shadow-sm flex flex-col justify-center">
                     <div class="flex justify-between items-start">
                         <div>
-                            <p class="text-slate-400 text-xs uppercase font-bold tracking-wider">Precisió & Nota Mitjana</p>
-                            <h3 id="stat-accuracy" class="text-3xl font-bold text-white mt-1">0%</h3>
+                            <p class="text-slate-400 text-xs uppercase font-bold tracking-wider">Nota Mitjana</p>
+                            <h3 id="stat-nota-mitjana" class="text-3xl font-bold text-white mt-1">0.0 / 10</h3>
                         </div>
-                        <div class="p-3 bg-emerald-500/10 text-emerald-400 rounded-lg"><i class="fa-solid fa-bullseye text-xl"></i></div>
+                        <div class="p-3 bg-brand-500/10 text-brand-400 rounded-lg"><i class="fa-solid fa-graduation-cap text-xl"></i></div>
                     </div>
-                    <p class="text-xs text-slate-400 mt-2">Nota mitjana: <strong id="stat-nota-mitjana" class="text-white">0.0 / 10</strong> (Màx: <span id="stat-millor-nota" class="text-emerald-400 font-semibold">0.0</span>)</p>
+                    <p class="text-xs text-slate-400 mt-2">Nota Màxima: <strong id="stat-millor-nota" class="text-emerald-400 font-semibold">0.0</strong></p>
                 </div>
 
                 <div class="bg-slate-800/80 rounded-xl p-5 border border-slate-700/60 shadow-sm flex flex-col justify-center">
@@ -341,7 +341,7 @@
                             <h3 class="text-lg font-bold text-white">El Penjat Legal</h3>
                             <p class="text-slate-300 text-xs mt-2 leading-relaxed">Endevina termes jurídics, institucions o lleis lletra per lletra guiant-te només per la seva definició. Tens 6 intents per paraula!</p>
                         </div>
-                        <button onclick="startHangman()" class="mt-6 w-full py-2.5 bg-amber-600 hover:bg-amber-500 text-white font-semibold rounded-xl text-xs transition-all shadow-md flex items-center justify-center">
+                        <button id="btn-start-hangman" onclick="startHangman()" class="mt-6 w-full py-2.5 bg-amber-600 hover:bg-amber-500 text-white font-semibold rounded-xl text-xs transition-all shadow-md flex items-center justify-center">
                             <i class="fa-solid fa-play mr-2"></i> Jugar al Penjat
                         </button>
                     </div>
@@ -353,7 +353,7 @@
                             <h3 class="text-lg font-bold text-white">Ruta de Patrulla</h3>
                             <p class="text-slate-300 text-xs mt-2 leading-relaxed">Atrapa el sospitós. Si encertes una pregunta oficial avances tu; si falles, el sospitós s'escapa. Arriba a ell abans que s'acabi el camí!</p>
                         </div>
-                        <button onclick="startPatrol()" class="mt-6 w-full py-2.5 bg-brand-600 hover:bg-brand-500 text-white font-semibold rounded-xl text-xs transition-all shadow-md flex items-center justify-center">
+                        <button id="btn-start-patrol" onclick="startPatrol()" class="mt-6 w-full py-2.5 bg-brand-600 hover:bg-brand-500 text-white font-semibold rounded-xl text-xs transition-all shadow-md flex items-center justify-center">
                             <i class="fa-solid fa-play mr-2"></i> Començar Persecució
                         </button>
                     </div>
@@ -368,6 +368,13 @@
                 </div>
 
                 <div class="bg-slate-800/90 rounded-2xl p-6 sm:p-8 border border-slate-700 shadow-xl flex flex-col items-center">
+                    
+                    <!-- Marcador de Punts -->
+                    <div class="flex justify-between items-center w-full max-w-2xl mx-auto mb-4 bg-slate-900/50 p-3 rounded-xl border border-slate-700">
+                        <span class="text-sm font-bold text-slate-300">Puntuació: <span id="hm-current-score" class="text-amber-400 text-lg ml-1">0</span></span>
+                        <span class="text-sm font-bold text-slate-300">Rècord: <span id="hm-high-score" class="text-emerald-400 text-lg ml-1">0</span></span>
+                    </div>
+
                     <div class="w-full text-center mb-6">
                         <span class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2 block">Definició / Pista</span>
                         <p id="hm-definition" class="text-lg font-medium text-white max-w-2xl mx-auto"></p>
@@ -388,7 +395,7 @@
                     <div id="hm-result-overlay" class="hidden w-full mt-6 p-6 rounded-xl border text-center">
                         <h3 id="hm-result-title" class="text-2xl font-bold mb-2"></h3>
                         <p id="hm-result-text" class="text-slate-300 mb-4"></p>
-                        <button onclick="startHangman()" class="px-6 py-2 bg-amber-600 hover:bg-amber-500 text-white font-bold rounded-xl transition-all shadow-md">Jugar següent paraula</button>
+                        <button id="hm-next-btn" onclick="startHangman()" class="px-6 py-2 bg-amber-600 hover:bg-amber-500 text-white font-bold rounded-xl transition-all shadow-md">Següent paraula</button>
                     </div>
                 </div>
             </div>
@@ -766,11 +773,11 @@
     <!-- TOAST CONTAINER -->
     <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
 
-    <!-- SCRIPT FIREBASE -->
+    <!-- SCRIPT FIREBASE (Versió fixada a 10.8.0) -->
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
-        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
-        import { getFirestore, doc, setDoc, getDoc, updateDoc, collection, getDocs, query, where, addDoc, increment } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+        import { getFirestore, doc, setDoc, getDoc, updateDoc, collection, getDocs, query, where, addDoc, increment } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyAK8r_-CMw1626LIFnrn9NcVkIcvYv2Elo",
@@ -1256,6 +1263,19 @@
 
         let isRegisterMode = false;
 
+        // Connexió a l'arxiu penjat.json de GitHub
+        let hmDict = [];
+        async function loadHangmanDict() {
+            try {
+                const res = await fetch('penjat.json');
+                if (res.ok) hmDict = await res.json();
+            } catch(e) {}
+            
+            if (hmDict.length === 0) {
+                hmDict = [{ word: "CARREGANT", def: "Si veus això, l'arxiu penjat.json encara no s'ha llegit bé." }];
+            }
+        }
+
         window.getSpanishDateStr = function() {
             const now = new Date();
             const options = { timeZone: 'Europe/Madrid', year: 'numeric', month: '2-digit', day: '2-digit' };
@@ -1279,6 +1299,7 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             loadQuestionsFromJsonFile();
+            loadHangmanDict(); // Càrrega el diccionari del penjat
             loadStatsFromStorage();
             startMidnightCountdown();
             if(window.updateLocksUI) window.updateLocksUI(null);
@@ -1361,35 +1382,39 @@
         }
 
         function updateStatsDashboardUI() {
-            const statExamsDone = document.getElementById('stat-exams-done');
-            if (statExamsDone) statExamsDone.innerText = examHistory.done;
-            
-            document.getElementById('stat-realitzades').innerText = examHistory.totalQuestions;
-            
             const acc = examHistory.totalQuestions > 0 ? Math.round((examHistory.totalCorrect / examHistory.totalQuestions) * 100) : 0;
-            document.getElementById('stat-accuracy').innerText = `${acc}%`;
+            const elAcc = document.getElementById('stat-accuracy');
+            if(elAcc) elAcc.innerText = `${acc}%`;
 
             const notaMitjana = examHistory.done > 0 ? (examHistory.gradesSum / examHistory.done).toFixed(1) : '0.0';
-            document.getElementById('stat-nota-mitjana').innerText = `${notaMitjana} / 10`;
-            document.getElementById('stat-millor-nota').innerText = `${(examHistory.bestGrade || 0).toFixed(1)}`;
+            const elNota = document.getElementById('stat-nota-mitjana');
+            if(elNota) elNota.innerText = `${notaMitjana} / 10`;
+            
+            const elMaxNota = document.getElementById('stat-millor-nota');
+            if(elMaxNota) elMaxNota.innerText = `${(examHistory.bestGrade || 0).toFixed(1)}`;
 
             const tempsMig = examHistory.totalQuestions > 0 ? Math.round(examHistory.totalTimeSeconds / examHistory.totalQuestions) : 0;
-            document.getElementById('stat-temps-mig').innerText = `${tempsMig}s`;
+            const elTemps = document.getElementById('stat-temps-mig');
+            if(elTemps) elTemps.innerText = `${tempsMig}s`;
 
-            document.getElementById('streak-text-counter').innerText = `🔥 ${examHistory.streakDays || 0} dies estudiant seguits`;
+            const elStreak = document.getElementById('streak-text-counter');
+            if(elStreak) elStreak.innerText = `🔥 ${examHistory.streakDays || 0} dies estudiant seguits`;
 
-            document.getElementById('comp-now-score').innerText = `${acc}%`;
-            const pastScore = 61; 
-            document.getElementById('comp-past-score').innerText = `${pastScore}%`;
-            const diff = acc - pastScore;
+            const compNow = document.getElementById('comp-now-score');
+            if(compNow) compNow.innerText = `${acc}%`;
             
-            const diffEl = document.getElementById('comp-diff-score');
-            diffEl.innerText = `${diff >= 0 ? '+' : ''}${diff}% ${diff >= 0 ? '📈' : '📉'}`;
-            
-            if (diff >= 0) {
-                diffEl.className = "font-bold text-emerald-400";
-            } else {
-                diffEl.className = "font-bold text-red-400";
+            const compPast = document.getElementById('comp-past-score');
+            if(compPast) {
+                const pastScore = 61; 
+                compPast.innerText = `${pastScore}%`;
+                const diff = acc - pastScore;
+                
+                const diffEl = document.getElementById('comp-diff-score');
+                if(diffEl) {
+                    diffEl.innerText = `${diff >= 0 ? '+' : ''}${diff}% ${diff >= 0 ? '📈' : '📉'}`;
+                    if (diff >= 0) diffEl.className = "font-bold text-emerald-400";
+                    else diffEl.className = "font-bold text-red-400";
+                }
             }
 
             renderWeakSpots();
@@ -1399,6 +1424,8 @@
             const weakBox = document.getElementById('weak-spots-box');
             const weakTopicsListEl = document.getElementById('weak-spots-topics-list');
             const statWeakTopic = document.getElementById('stat-weak-topic');
+
+            if(!weakBox || !statWeakTopic) return;
 
             const stats = examHistory.topicsStats || {};
             const keys = Object.keys(stats);
@@ -1544,7 +1571,7 @@
                 
                 if (isLocked) {
                     btn.innerHTML = `<i class="fa-solid fa-lock mr-2"></i> ${normalText}`;
-                    btn.classList.add('bg-slate-700', 'hover:bg-slate-600', 'opacity-60');
+                    btn.classList.add('bg-slate-700', 'hover:bg-slate-600', 'opacity-60', 'cursor-not-allowed');
                 } else {
                     btn.innerHTML = normalText;
                     btn.classList.add(baseColorClass, hoverColorClass);
@@ -1556,22 +1583,29 @@
             updateBtn('btn-start-weak', !logged, '[COMENÇAR TEST]', 'bg-amber-600', 'hover:bg-amber-500');
             updateBtn('btn-start-practice', (!logged && freeTestDone), 'Començar Pràctica', 'bg-emerald-600', 'hover:bg-emerald-500');
 
+            updateBtn('btn-start-hangman', !logged, '<i class="fa-solid fa-play mr-2"></i> Jugar al Penjat', 'bg-amber-600', 'hover:bg-amber-500');
+            updateBtn('btn-start-patrol', !logged, '<i class="fa-solid fa-play mr-2"></i> Començar Persecució', 'bg-brand-600', 'hover:bg-brand-500');
+
             const pBtn30 = document.getElementById('p-btn-30');
             const pBtn50 = document.getElementById('p-btn-50');
-            if (!logged) {
-                pBtn30.disabled = true; pBtn30.classList.add('opacity-40', 'cursor-not-allowed');
-                pBtn50.disabled = true; pBtn50.classList.add('opacity-40', 'cursor-not-allowed');
-                window.setPracticeCount(10);
-            } else {
-                pBtn30.disabled = false; pBtn30.classList.remove('opacity-40', 'cursor-not-allowed');
-                pBtn50.disabled = false; pBtn50.classList.remove('opacity-40', 'cursor-not-allowed');
+            if (pBtn30 && pBtn50) {
+                if (!logged) {
+                    pBtn30.disabled = true; pBtn30.classList.add('opacity-40', 'cursor-not-allowed');
+                    pBtn50.disabled = true; pBtn50.classList.add('opacity-40', 'cursor-not-allowed');
+                    window.setPracticeCount(10);
+                } else {
+                    pBtn30.disabled = false; pBtn30.classList.remove('opacity-40', 'cursor-not-allowed');
+                    pBtn50.disabled = false; pBtn50.classList.remove('opacity-40', 'cursor-not-allowed');
+                }
             }
 
             const timerContainer = document.getElementById('free-test-timer-container');
-            if (!logged && freeTestDone) {
-                timerContainer.classList.remove('hidden');
-            } else {
-                timerContainer.classList.add('hidden');
+            if (timerContainer) {
+                if (!logged && freeTestDone) {
+                    timerContainer.classList.remove('hidden');
+                } else {
+                    timerContainer.classList.add('hidden');
+                }
             }
         }
 
@@ -1791,7 +1825,7 @@
                 const today = window.getSpanishDateStr();
                 const metricsRef = window.dbRef;
                 
-                import("https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js").then(mod => {
+                import("https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js").then(mod => {
                     mod.setDoc(mod.doc(metricsRef, "metrics", today), { tests: mod.increment(1) }, { merge: true }).catch(()=>{});
                     if (Object.keys(failedQUpdates).length > 0) {
                         mod.setDoc(mod.doc(metricsRef, "metrics", "failed_qs"), failedQUpdates, {merge:true}).catch(()=>{});
@@ -1818,24 +1852,15 @@
         }
 
         // EL PENJAT LEGAL
-        const hmDict = [
-            { word: "CONSTITUCIO", def: "Norma suprema de l'ordenament jurídic espanyol, aprovada el 1978." },
-            { word: "GENERALITAT", def: "Sistema institucional en què s'organitza políticament l'autogovern de Catalunya." },
-            { word: "PARLAMENT", def: "Institució que representa el poble de Catalunya, exerceix la potestat legislativa i aprova pressupostos." },
-            { word: "HABEAS CORPUS", def: "Dret del detingut a ser posat a disposició judicial immediatament per determinar la legalitat del seu arrest." },
-            { word: "DIPUTACIO", def: "Òrgan de govern i administració d'una província." },
-            { word: "SINDICAT", def: "Associació de treballadors per defensar i promocionar els seus interessos econòmics i socials." },
-            { word: "AMNISTIA", def: "Llei que perdona de forma col·lectiva determinats delictes, eliminant-ne la responsabilitat penal." },
-            { word: "ESTATUT", def: "Norma institucional bàsica d'una comunitat autònoma." },
-            { word: "MOSSOS", def: "Cos de Policia de la Generalitat de Catalunya." },
-            { word: "MAGISTRAT", def: "Jutge d'un tribunal superior." }
-        ];
-
         let hmWord = "";
         let hmGuessed = [];
         let hmLives = 6;
+        let hmCurrentScore = 0;
+        let hmHighScore = parseInt(localStorage.getItem('oppos_hm_highscore')) || 0;
 
         window.startHangman = function() {
+            if (!window.checkTestAccess('hangman')) return;
+
             document.getElementById('minigames-menu').classList.add('hidden');
             document.getElementById('game-hangman').classList.remove('hidden');
             document.getElementById('hm-result-overlay').classList.add('hidden');
@@ -1848,6 +1873,8 @@
 
             document.getElementById('hm-definition').innerText = randomEntry.def;
             document.getElementById('hm-lives').innerText = hmLives;
+            document.getElementById('hm-current-score').innerText = hmCurrentScore;
+            document.getElementById('hm-high-score').innerText = hmHighScore;
 
             renderHmWord();
             renderHmKeyboard();
@@ -1910,21 +1937,33 @@
             const overlay = document.getElementById('hm-result-overlay');
             const title = document.getElementById('hm-result-title');
             const txt = document.getElementById('hm-result-text');
+            const nextBtn = document.getElementById('hm-next-btn');
             
             overlay.classList.remove('hidden', 'border-emerald-500', 'border-red-500', 'bg-emerald-950/30', 'bg-red-950/30');
             
             if(win) {
+                hmCurrentScore++;
+                if (hmCurrentScore > hmHighScore) {
+                    hmHighScore = hmCurrentScore;
+                    localStorage.setItem('oppos_hm_highscore', hmHighScore);
+                }
+                document.getElementById('hm-current-score').innerText = hmCurrentScore;
+                document.getElementById('hm-high-score').innerText = hmHighScore;
+
                 overlay.classList.add('border-emerald-500', 'bg-emerald-950/30');
                 title.className = "text-2xl font-bold mb-2 text-emerald-400";
                 title.innerHTML = "<i class='fa-solid fa-medal mr-2'></i> Correcte!";
                 txt.innerText = "Molt bé, has encertat la paraula.";
+                nextBtn.innerText = "Següent paraula";
                 if(window.getFirebaseCurrentUser()) window.updateUserScoreInFirestore(1); 
             } else {
+                hmCurrentScore = 0; 
                 overlay.classList.add('border-red-500', 'bg-red-950/30');
                 title.className = "text-2xl font-bold mb-2 text-red-400";
                 title.innerHTML = "<i class='fa-solid fa-skull mr-2'></i> Has perdut!";
                 txt.innerHTML = `La paraula correcta era: <strong class='text-white'>${hmWord}</strong>`;
                 document.getElementById('hm-word-display').innerText = hmWord.split("").join(" ");
+                nextBtn.innerText = "Tornar a començar des de 0";
             }
         }
 
@@ -1934,6 +1973,7 @@
         let patrolQ = null;
 
         window.startPatrol = function() {
+            if (!window.checkTestAccess('patrol')) return;
             if(questionBank.length === 0) return window.showToast("Banc buit", "error");
             
             document.getElementById('minigames-menu').classList.add('hidden');
@@ -1955,7 +1995,6 @@
         function nextPatrolQuestion() {
             patrolQ = questionBank[Math.floor(Math.random() * questionBank.length)];
             
-            // Barallar opcions
             let optsWithOrig = patrolQ.options.map(opt => ({ text: opt, isCorrect: opt === patrolQ.correctAnswer }));
             optsWithOrig.sort(() => 0.5 - Math.random());
             patrolQ.shuffledOpts = optsWithOrig;
