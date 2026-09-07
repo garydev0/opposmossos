@@ -12,7 +12,7 @@
     <meta property="og:site_name" content="OpposTest">
     <meta property="og:title" content="Tests Mossos d'Esquadra - Oposicions 2026 | OpposTest">
     <meta property="og:description" content="Entrena els teus punts febles. 1 test oficial gratis cada dia per preparar l'oposició de Mossos d'Esquadra.">
-    <meta property="og:image" content="https://www.oppostest.cat/logoi.png">
+    <meta property="og:image" content="https://www.oppostest.cat/logo.png">
     <meta property="og:url" content="https://www.oppostest.cat">
     <meta property="og:type" content="website">
 
@@ -20,8 +20,8 @@
     <meta name="theme-color" content="#2563eb">
     
     <!-- Favicon per a Google i Navegadors -->
-    <link rel="icon" type="image/png" href="logoi.png">
-    <link rel="apple-touch-icon" href="logoi.png">
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="apple-touch-icon" href="logo.png">
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -166,6 +166,9 @@
                 <button onclick="switchTab('exam')" id="nav-exam" class="tab-btn px-3 py-2 rounded-lg text-sm font-medium transition-all text-slate-300 hover:text-white hover:bg-slate-700/50">
                     <i class="fa-solid fa-file-pen mr-1"></i>Tests
                 </button>
+                <button onclick="switchTab('minigames')" id="nav-minigames" class="tab-btn px-3 py-2 rounded-lg text-sm font-medium transition-all text-slate-300 hover:text-white hover:bg-slate-700/50">
+                    <i class="fa-solid fa-gamepad mr-1"></i>Minijocs
+                </button>
                 <button onclick="switchTab('forum')" id="nav-forum" class="tab-btn px-3 py-2 rounded-lg text-sm font-medium transition-all text-slate-300 hover:text-white hover:bg-slate-700/50">
                     <i class="fa-solid fa-comments mr-1"></i>Fòrum
                 </button>
@@ -191,11 +194,12 @@
             </div>
         </div>
 
-        <div class="md:hidden grid grid-cols-6 bg-slate-900 border-t border-slate-800 py-2 px-1 text-[10px] text-center">
+        <div class="md:hidden grid grid-cols-7 bg-slate-900 border-t border-slate-800 py-2 px-1 text-[10px] text-center">
             <button onclick="switchTab('dashboard')" id="nav-mob-dashboard" class="mob-tab-btn flex flex-col items-center py-1 text-brand-400"><i class="fa-solid fa-chart-pie text-sm mb-0.5"></i><span>Inici</span></button>
             <button onclick="switchTab('exam')" id="nav-mob-exam" class="mob-tab-btn flex flex-col items-center py-1 text-slate-400"><i class="fa-solid fa-file-pen text-sm mb-0.5"></i><span>Tests</span></button>
+            <button onclick="switchTab('minigames')" id="nav-mob-minigames" class="mob-tab-btn flex flex-col items-center py-1 text-slate-400"><i class="fa-solid fa-gamepad text-sm mb-0.5"></i><span>Jocs</span></button>
             <button onclick="switchTab('forum')" id="nav-mob-forum" class="mob-tab-btn flex flex-col items-center py-1 text-slate-400"><i class="fa-solid fa-comments text-sm mb-0.5"></i><span>Fòrum</span></button>
-            <button onclick="switchTab('ranking')" id="nav-mob-ranking" class="mob-tab-btn flex flex-col items-center py-1 text-slate-400"><i class="fa-solid fa-trophy text-sm mb-0.5"></i><span>Ranking</span></button>
+            <button onclick="switchTab('ranking')" id="nav-mob-ranking" class="mob-tab-btn flex flex-col items-center py-1 text-slate-400"><i class="fa-solid fa-trophy text-sm mb-0.5"></i><span>Rànquing</span></button>
             <button onclick="switchTab('guide')" id="nav-mob-guide" class="mob-tab-btn flex flex-col items-center py-1 text-slate-400"><i class="fa-solid fa-book-bookmark text-sm mb-0.5"></i><span>Guia</span></button>
             <button onclick="switchTab('profile')" id="nav-mob-profile" class="mob-tab-btn flex flex-col items-center py-1 text-slate-400 border-l border-slate-800"><i class="fa-solid fa-user-circle text-sm text-brand-400 mb-0.5"></i><span class="truncate w-full px-0.5">Perfil</span></button>
         </div>
@@ -220,6 +224,9 @@
                     <div class="mt-6 flex flex-wrap gap-3">
                         <button onclick="switchTab('exam')" class="px-5 py-2.5 bg-brand-600 hover:bg-brand-500 text-white font-semibold rounded-xl shadow-lg shadow-brand-600/30 transition-all flex items-center">
                             <i class="fa-solid fa-play mr-2"></i> Anar a Secció de Tests
+                        </button>
+                        <button onclick="switchTab('minigames')" class="px-5 py-2.5 bg-purple-600 hover:bg-purple-500 text-white font-semibold rounded-xl shadow-lg shadow-purple-600/30 transition-all flex items-center">
+                            <i class="fa-solid fa-gamepad mr-2"></i> Minijocs Interactius
                         </button>
                     </div>
                 </div>
@@ -312,77 +319,121 @@
                             </div>
                             <span class="text-[11px] bg-slate-800 text-slate-400 px-2.5 py-1 rounded-lg font-semibold border border-slate-700 hidden sm:inline-block">Pròximament</span>
                         </div>
-                        <div class="flex items-center justify-between p-3.5 bg-slate-900/80 rounded-xl border border-slate-700/80 hover:border-slate-600 transition-all">
-                            <div class="flex items-center space-x-4">
-                                <div class="bg-slate-800 text-slate-300 border border-slate-700 px-3 py-2 rounded-xl text-center font-bold min-w-[70px]">
-                                    <span class="block text-xs uppercase">Des</span>
-                                    <span class="text-lg">01</span>
-                                </div>
-                                <div>
-                                    <h4 class="text-sm font-bold text-white">Inici de les proves físiques</h4>
-                                    <p class="text-xs text-slate-400 mt-0.5">Circuit d'agilitat, pressió sobre banc i curs de l'navette.</p>
-                                </div>
-                            </div>
-                            <span class="text-[11px] bg-slate-800 text-slate-400 px-2.5 py-1 rounded-lg font-semibold border border-slate-700 hidden sm:inline-block">Futur</span>
-                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- FÒRUM SECTION -->
-        <section id="sec-forum" class="tab-content hidden space-y-6">
-            <div class="bg-slate-800 rounded-2xl p-6 border border-slate-700 shadow-xl">
-                <h2 class="text-xl font-bold text-white flex items-center"><i class="fa-solid fa-comments text-brand-400 mr-2"></i>Fòrum d'Opositors</h2>
-                <p class="text-slate-300 text-sm mt-1">Comparteix dubtes i ajuda a altres companys.</p>
-            </div>
-
-            <!-- Fòrum No Loguejat -->
-            <div id="forum-unauth" class="bg-slate-800/80 rounded-2xl border border-slate-700 p-8 text-center hidden">
-                <i class="fa-solid fa-lock text-4xl text-slate-500 mb-3"></i>
-                <p class="text-slate-300 text-sm mb-4">Inicia sessió per llegir i participar al fòrum.</p>
-                <button onclick="openAuthModal('login')" class="px-6 py-2.5 bg-brand-600 hover:bg-brand-500 text-white font-semibold rounded-xl text-sm transition-all shadow-md">Iniciar Sessió</button>
-            </div>
-
-            <!-- Fòrum Loguejat -->
-            <div id="forum-auth" class="space-y-6 hidden">
-                <div class="bg-slate-900 rounded-2xl p-4 border border-slate-700 flex gap-3">
-                    <input type="text" id="forum-new-post" placeholder="Escriu la teva pregunta o comentari..." class="flex-1 bg-slate-950 border border-slate-800 rounded-xl p-3 text-sm text-white outline-none focus:border-brand-500">
-                    <button onclick="submitForumPost()" class="px-5 py-3 bg-brand-600 hover:bg-brand-500 text-white font-bold rounded-xl transition-all shadow-md"><i class="fa-solid fa-paper-plane"></i></button>
+        <!-- MINIGAMES SECTION -->
+        <section id="sec-minigames" class="tab-content hidden space-y-6">
+            <!-- Menú Principal de Minijocs -->
+            <div id="minigames-menu" class="space-y-6">
+                <div class="bg-slate-800 rounded-2xl p-6 border border-slate-700 shadow-xl">
+                    <h2 class="text-xl font-bold text-white mb-2"><i class="fa-solid fa-gamepad text-purple-400 mr-2"></i>Minijocs per a Opositors</h2>
+                    <p class="text-slate-300 text-sm">Gamifica el teu estudi. Entrena conceptes legals i posa a prova els teus reflexos.</p>
                 </div>
-                <div id="forum-posts-container" class="space-y-4">
-                    <p class="text-center text-slate-400 text-sm">Carregant missatges...</p>
-                </div>
-            </div>
-        </section>
 
-        <!-- RANKING SECTION -->
-        <section id="sec-ranking" class="tab-content hidden space-y-6">
-            <div class="bg-slate-800 rounded-2xl p-6 border border-slate-700 shadow-xl flex flex-col sm:flex-row items-center justify-between gap-4">
-                <div>
-                    <h2 class="text-xl font-bold text-white flex items-center"><i class="fa-solid fa-trophy text-amber-400 mr-2"></i>Ranking Global Diari</h2>
-                    <p class="text-slate-300 text-sm mt-1">Classificació d'usuaris segons preguntes encertades avui. S'actualitza automàticament.</p>
-                </div>
-                <div class="bg-slate-900 border border-slate-700 px-4 py-2.5 rounded-xl text-center shrink-0">
-                    <span class="text-[10px] uppercase font-bold text-slate-400 block">Temps restant pel reset</span>
-                    <span id="ranking-countdown" class="text-brand-400 font-mono font-bold text-base">--:--:--</span>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- El Penjat Legal -->
+                    <div class="bg-slate-800/90 rounded-2xl p-6 border border-slate-700 shadow-xl flex flex-col justify-between hover:border-amber-500 transition-all">
+                        <div>
+                            <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-xl mb-4"><i class="fa-solid fa-scale-balanced"></i></div>
+                            <h3 class="text-lg font-bold text-white">El Penjat Legal</h3>
+                            <p class="text-slate-300 text-xs mt-2 leading-relaxed">Endevina termes jurídics, institucions o lleis lletra per lletra guiant-te només per la seva definició. Tens 6 intents per paraula!</p>
+                        </div>
+                        <button onclick="startHangman()" class="mt-6 w-full py-2.5 bg-amber-600 hover:bg-amber-500 text-white font-semibold rounded-xl text-xs transition-all shadow-md flex items-center justify-center">
+                            <i class="fa-solid fa-play mr-2"></i> Jugar al Penjat
+                        </button>
+                    </div>
+
+                    <!-- Ruta de Patrulla -->
+                    <div class="bg-slate-800/90 rounded-2xl p-6 border border-slate-700 shadow-xl flex flex-col justify-between hover:border-brand-500 transition-all">
+                        <div>
+                            <div class="w-12 h-12 rounded-xl bg-brand-500/10 text-brand-400 flex items-center justify-center text-xl mb-4"><i class="fa-solid fa-car-on"></i></div>
+                            <h3 class="text-lg font-bold text-white">Ruta de Patrulla</h3>
+                            <p class="text-slate-300 text-xs mt-2 leading-relaxed">Atrapa el sospitós. Si encertes una pregunta oficial avances tu; si falles, el sospitós s'escapa. Arriba a ell abans que s'acabi el camí!</p>
+                        </div>
+                        <button onclick="startPatrol()" class="mt-6 w-full py-2.5 bg-brand-600 hover:bg-brand-500 text-white font-semibold rounded-xl text-xs transition-all shadow-md flex items-center justify-center">
+                            <i class="fa-solid fa-play mr-2"></i> Començar Persecució
+                        </button>
+                    </div>
                 </div>
             </div>
 
-            <div class="bg-slate-800/90 rounded-2xl border border-slate-700 overflow-hidden shadow-xl">
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left border-collapse">
-                        <thead>
-                            <tr class="bg-slate-900/80 text-slate-400 text-xs uppercase tracking-wider border-b border-slate-700">
-                                <th class="p-4 font-bold text-center w-16">Pos</th>
-                                <th class="p-4 font-bold">Usuari</th>
-                                <th class="p-4 font-bold text-right">Preguntes Acertades</th>
-                            </tr>
-                        </thead>
-                        <tbody id="ranking-table-body" class="divide-y divide-slate-700/60 text-sm">
-                            <tr><td colspan="3" class="p-6 text-center text-slate-400">Carregant ranking...</td></tr>
-                        </tbody>
-                    </table>
+            <!-- INTERFÍCIE: El Penjat Legal -->
+            <div id="game-hangman" class="hidden space-y-6">
+                <div class="bg-slate-800 rounded-xl p-4 border border-slate-700 flex justify-between items-center">
+                    <h2 class="text-lg font-bold text-amber-400"><i class="fa-solid fa-scale-balanced mr-2"></i> El Penjat Legal</h2>
+                    <button onclick="exitMinigame('game-hangman')" class="text-xs px-4 py-1.5 bg-slate-700 hover:bg-slate-600 text-white rounded-lg border border-slate-600 transition-all">Tornar al menú</button>
+                </div>
+
+                <div class="bg-slate-800/90 rounded-2xl p-6 sm:p-8 border border-slate-700 shadow-xl flex flex-col items-center">
+                    <div class="w-full text-center mb-6">
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2 block">Definició / Pista</span>
+                        <p id="hm-definition" class="text-lg font-medium text-white max-w-2xl mx-auto"></p>
+                    </div>
+
+                    <div class="mb-8 font-mono text-3xl sm:text-4xl tracking-widest font-bold text-amber-400 flex flex-wrap justify-center gap-y-4" id="hm-word-display">
+                        _ _ _ _ _
+                    </div>
+
+                    <div class="mb-6 bg-slate-900/50 p-4 rounded-xl border border-slate-700">
+                        <p class="text-sm font-semibold text-slate-300">Intents restants: <span id="hm-lives" class="text-red-400 font-bold text-lg">6</span> <i class="fa-solid fa-heart text-red-500 ml-1"></i></p>
+                    </div>
+
+                    <div id="hm-keyboard" class="grid grid-cols-7 sm:grid-cols-9 gap-2 max-w-2xl w-full">
+                        <!-- Teclat generat per JS -->
+                    </div>
+
+                    <div id="hm-result-overlay" class="hidden w-full mt-6 p-6 rounded-xl border text-center">
+                        <h3 id="hm-result-title" class="text-2xl font-bold mb-2"></h3>
+                        <p id="hm-result-text" class="text-slate-300 mb-4"></p>
+                        <button onclick="startHangman()" class="px-6 py-2 bg-amber-600 hover:bg-amber-500 text-white font-bold rounded-xl transition-all shadow-md">Jugar següent paraula</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- INTERFÍCIE: Ruta de Patrulla -->
+            <div id="game-patrol" class="hidden space-y-6">
+                <div class="bg-slate-800 rounded-xl p-4 border border-slate-700 flex justify-between items-center">
+                    <h2 class="text-lg font-bold text-brand-400"><i class="fa-solid fa-car-on mr-2"></i> Ruta de Patrulla</h2>
+                    <button onclick="exitMinigame('game-patrol')" class="text-xs px-4 py-1.5 bg-slate-700 hover:bg-slate-600 text-white rounded-lg border border-slate-600 transition-all">Tornar al menú</button>
+                </div>
+
+                <div class="bg-slate-800/90 rounded-2xl p-6 sm:p-8 border border-slate-700 shadow-xl space-y-6">
+                    <!-- Pista de persecució visual -->
+                    <div class="relative w-full h-16 bg-slate-900 rounded-full border-2 border-slate-700 overflow-hidden px-4 flex items-center">
+                        <div class="absolute inset-0 opacity-10 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+PGNpcmNsZSBjeD0iMTAiIGN5PSIxMCIgcj0iMiIgZmlsbD0iI2ZmZiIvPjwvc3ZnPg==')]"></div>
+                        
+                        <!-- Coche Policia -->
+                        <div id="patrol-police" class="absolute z-10 transition-all duration-500 ease-in-out text-brand-400 text-3xl" style="left: 0%;">
+                            <i class="fa-solid fa-car-side"></i>
+                        </div>
+                        
+                        <!-- Sospitós -->
+                        <div id="patrol-suspect" class="absolute z-10 transition-all duration-500 ease-in-out text-red-500 text-2xl" style="left: 30%;">
+                            <i class="fa-solid fa-person-running"></i>
+                        </div>
+                        
+                        <!-- Meta -->
+                        <div class="absolute right-4 text-emerald-500 text-2xl opacity-50">
+                            <i class="fa-solid fa-flag-checkered"></i>
+                        </div>
+                    </div>
+
+                    <div id="patrol-question-container" class="mt-8">
+                        <span id="patrol-topic" class="px-2.5 py-1 bg-slate-900 border border-slate-700 rounded-lg text-[11px] text-slate-300 font-semibold mb-3 inline-block">Tema</span>
+                        <h3 id="patrol-q-text" class="text-lg font-semibold text-white mb-6"></h3>
+                        <div id="patrol-options" class="space-y-3">
+                            <!-- Opcions JS -->
+                        </div>
+                    </div>
+
+                    <div id="patrol-result-overlay" class="hidden text-center mt-6 p-6 rounded-xl border">
+                        <h3 id="patrol-result-title" class="text-2xl font-bold mb-2"></h3>
+                        <p id="patrol-result-text" class="text-slate-300 mb-4"></p>
+                        <button onclick="startPatrol()" class="px-6 py-2 bg-brand-600 hover:bg-brand-500 text-white font-bold rounded-xl transition-all shadow-md">Nova Persecució</button>
+                    </div>
                 </div>
             </div>
         </section>
@@ -1416,6 +1467,13 @@
 
             document.getElementById('sec-' + tabId).classList.remove('hidden');
             
+            // Aturar jocs si canviem de pestanya
+            if(tabId !== 'minigames') {
+                document.getElementById('minigames-menu').classList.remove('hidden');
+                document.getElementById('game-hangman').classList.add('hidden');
+                document.getElementById('game-patrol').classList.add('hidden');
+            }
+
             if (tabId === 'ranking') window.loadGlobalRanking && window.loadGlobalRanking();
             if (tabId === 'forum') window.loadForumPosts && window.loadForumPosts();
             if (tabId === 'dashboard') updateStatsDashboardUI();
@@ -1750,6 +1808,221 @@
             document.getElementById('res-incorrect').innerText = currentExam.length - correct;
             document.getElementById('res-grade').innerText = `${grade} / 10`;
             document.getElementById('results-review-list').innerHTML = reviewHTML;
+        }
+
+        // --- SISTEMA MINIJOCS ---
+        
+        window.exitMinigame = function(containerId) {
+            document.getElementById(containerId).classList.add('hidden');
+            document.getElementById('minigames-menu').classList.remove('hidden');
+        }
+
+        // EL PENJAT LEGAL
+        const hmDict = [
+            { word: "CONSTITUCIO", def: "Norma suprema de l'ordenament jurídic espanyol, aprovada el 1978." },
+            { word: "GENERALITAT", def: "Sistema institucional en què s'organitza políticament l'autogovern de Catalunya." },
+            { word: "PARLAMENT", def: "Institució que representa el poble de Catalunya, exerceix la potestat legislativa i aprova pressupostos." },
+            { word: "HABEAS CORPUS", def: "Dret del detingut a ser posat a disposició judicial immediatament per determinar la legalitat del seu arrest." },
+            { word: "DIPUTACIO", def: "Òrgan de govern i administració d'una província." },
+            { word: "SINDICAT", def: "Associació de treballadors per defensar i promocionar els seus interessos econòmics i socials." },
+            { word: "AMNISTIA", def: "Llei que perdona de forma col·lectiva determinats delictes, eliminant-ne la responsabilitat penal." },
+            { word: "ESTATUT", def: "Norma institucional bàsica d'una comunitat autònoma." },
+            { word: "MOSSOS", def: "Cos de Policia de la Generalitat de Catalunya." },
+            { word: "MAGISTRAT", def: "Jutge d'un tribunal superior." }
+        ];
+
+        let hmWord = "";
+        let hmGuessed = [];
+        let hmLives = 6;
+
+        window.startHangman = function() {
+            document.getElementById('minigames-menu').classList.add('hidden');
+            document.getElementById('game-hangman').classList.remove('hidden');
+            document.getElementById('hm-result-overlay').classList.add('hidden');
+            document.getElementById('hm-keyboard').classList.remove('hidden');
+
+            const randomEntry = hmDict[Math.floor(Math.random() * hmDict.length)];
+            hmWord = randomEntry.word;
+            hmGuessed = [];
+            hmLives = 6;
+
+            document.getElementById('hm-definition').innerText = randomEntry.def;
+            document.getElementById('hm-lives').innerText = hmLives;
+
+            renderHmWord();
+            renderHmKeyboard();
+        }
+
+        function renderHmWord() {
+            let display = "";
+            for(let char of hmWord) {
+                if(char === " ") display += "&nbsp;&nbsp;";
+                else if(hmGuessed.includes(char)) display += char + " ";
+                else display += "_ ";
+            }
+            document.getElementById('hm-word-display').innerHTML = display;
+        }
+
+        function renderHmKeyboard() {
+            const kb = document.getElementById('hm-keyboard');
+            kb.innerHTML = "";
+            const letters = "ABCÇDEFGHIJKLMNÑOPQRSTUVWXYZ".split("");
+            letters.forEach(l => {
+                const btn = document.createElement('button');
+                btn.innerText = l;
+                btn.className = "p-2 sm:py-3 rounded-lg font-bold text-sm sm:text-base transition-all bg-slate-700 hover:bg-slate-600 text-white shadow";
+                btn.onclick = () => guessHmLetter(l, btn);
+                kb.appendChild(btn);
+            });
+        }
+
+        function guessHmLetter(letter, btn) {
+            btn.disabled = true;
+            hmGuessed.push(letter);
+            
+            if(hmWord.includes(letter)) {
+                btn.classList.replace('bg-slate-700', 'bg-emerald-600');
+                btn.classList.replace('hover:bg-slate-600', 'bg-emerald-600');
+                playSound(true);
+            } else {
+                btn.classList.replace('bg-slate-700', 'bg-slate-900');
+                btn.classList.add('opacity-40');
+                hmLives--;
+                document.getElementById('hm-lives').innerText = hmLives;
+                playSound(false);
+            }
+            
+            renderHmWord();
+            checkHmEnd();
+        }
+
+        function checkHmEnd() {
+            const isWin = hmWord.split("").every(c => c === " " || hmGuessed.includes(c));
+            if(isWin) {
+                endHangman(true);
+            } else if(hmLives <= 0) {
+                endHangman(false);
+            }
+        }
+
+        function endHangman(win) {
+            document.getElementById('hm-keyboard').classList.add('hidden');
+            const overlay = document.getElementById('hm-result-overlay');
+            const title = document.getElementById('hm-result-title');
+            const txt = document.getElementById('hm-result-text');
+            
+            overlay.classList.remove('hidden', 'border-emerald-500', 'border-red-500', 'bg-emerald-950/30', 'bg-red-950/30');
+            
+            if(win) {
+                overlay.classList.add('border-emerald-500', 'bg-emerald-950/30');
+                title.className = "text-2xl font-bold mb-2 text-emerald-400";
+                title.innerHTML = "<i class='fa-solid fa-medal mr-2'></i> Correcte!";
+                txt.innerText = "Molt bé, has encertat la paraula.";
+                if(window.getFirebaseCurrentUser()) window.updateUserScoreInFirestore(1); 
+            } else {
+                overlay.classList.add('border-red-500', 'bg-red-950/30');
+                title.className = "text-2xl font-bold mb-2 text-red-400";
+                title.innerHTML = "<i class='fa-solid fa-skull mr-2'></i> Has perdut!";
+                txt.innerHTML = `La paraula correcta era: <strong class='text-white'>${hmWord}</strong>`;
+                document.getElementById('hm-word-display').innerText = hmWord.split("").join(" ");
+            }
+        }
+
+        // RUTA DE PATRULLA
+        let patrolPos = 0;
+        let suspectPos = 3;
+        let patrolQ = null;
+
+        window.startPatrol = function() {
+            if(questionBank.length === 0) return window.showToast("Banc buit", "error");
+            
+            document.getElementById('minigames-menu').classList.add('hidden');
+            document.getElementById('game-patrol').classList.remove('hidden');
+            document.getElementById('patrol-result-overlay').classList.add('hidden');
+            document.getElementById('patrol-question-container').classList.remove('hidden');
+            
+            patrolPos = 0;
+            suspectPos = 3;
+            updatePatrolTrack();
+            nextPatrolQuestion();
+        }
+
+        function updatePatrolTrack() {
+            document.getElementById('patrol-police').style.left = (patrolPos * 10) + "%";
+            document.getElementById('patrol-suspect').style.left = (suspectPos * 10) + "%";
+        }
+
+        function nextPatrolQuestion() {
+            patrolQ = questionBank[Math.floor(Math.random() * questionBank.length)];
+            
+            // Barallar opcions
+            let optsWithOrig = patrolQ.options.map(opt => ({ text: opt, isCorrect: opt === patrolQ.correctAnswer }));
+            optsWithOrig.sort(() => 0.5 - Math.random());
+            patrolQ.shuffledOpts = optsWithOrig;
+
+            document.getElementById('patrol-topic').innerText = patrolQ.topic || "General";
+            document.getElementById('patrol-q-text').innerText = patrolQ.question;
+            
+            const optsBox = document.getElementById('patrol-options');
+            optsBox.innerHTML = "";
+            patrolQ.shuffledOpts.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = "w-full text-left p-4 rounded-xl border border-slate-700 bg-slate-900 text-slate-200 text-sm font-medium hover:border-brand-500 transition-all";
+                btn.innerHTML = String.fromCharCode(65+idx) + ". " + opt.text;
+                btn.onclick = () => handlePatrolAnswer(opt.isCorrect, btn);
+                optsBox.appendChild(btn);
+            });
+        }
+
+        function handlePatrolAnswer(isCorrect, btnClicked) {
+            const btns = document.getElementById('patrol-options').querySelectorAll('button');
+            btns.forEach(b => b.disabled = true);
+
+            if(isCorrect) {
+                btnClicked.classList.replace('bg-slate-900', 'bg-emerald-950/80');
+                btnClicked.classList.replace('border-slate-700', 'border-emerald-500');
+                patrolPos += 1;
+                playSound(true);
+            } else {
+                btnClicked.classList.replace('bg-slate-900', 'bg-red-950/80');
+                btnClicked.classList.replace('border-slate-700', 'border-red-500');
+                suspectPos += 1;
+                playSound(false);
+            }
+            
+            updatePatrolTrack();
+            
+            setTimeout(() => {
+                if(patrolPos >= suspectPos) {
+                    endPatrol(true);
+                } else if(suspectPos >= 9) {
+                    endPatrol(false);
+                } else {
+                    nextPatrolQuestion();
+                }
+            }, 800);
+        }
+
+        function endPatrol(win) {
+            document.getElementById('patrol-question-container').classList.add('hidden');
+            const overlay = document.getElementById('patrol-result-overlay');
+            const title = document.getElementById('patrol-result-title');
+            const txt = document.getElementById('patrol-result-text');
+            
+            overlay.classList.remove('hidden', 'border-brand-500', 'border-red-500', 'bg-brand-950/30', 'bg-red-950/30');
+            
+            if(win) {
+                overlay.classList.add('border-brand-500', 'bg-brand-950/30');
+                title.className = "text-2xl font-bold mb-2 text-brand-400";
+                title.innerHTML = "<i class='fa-solid fa-handcuffs mr-2'></i> Sospitós atrapat!";
+                txt.innerText = "Excel·lent feina agent. Has respost prou ràpid per interceptar-lo.";
+                if(window.getFirebaseCurrentUser()) window.updateUserScoreInFirestore(1); 
+            } else {
+                overlay.classList.add('border-red-500', 'bg-red-950/30');
+                title.className = "text-2xl font-bold mb-2 text-red-400";
+                title.innerHTML = "<i class='fa-solid fa-person-running mr-2'></i> S'ha escapat!";
+                txt.innerText = "Has comès massa errors i el sospitós ha fugit del país.";
+            }
         }
 
         // SISTEMA DE SO (Web Audio API)
