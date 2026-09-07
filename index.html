@@ -12,7 +12,7 @@
     <meta property="og:site_name" content="OpposTest">
     <meta property="og:title" content="Tests Mossos d'Esquadra - Oposicions 2026 | OpposTest">
     <meta property="og:description" content="Entrena els teus punts febles. 1 test oficial gratis cada dia per preparar l'oposició de Mossos d'Esquadra.">
-    <meta property="og:image" content="https://www.oppostest.cat/logo.png">
+    <meta property="og:image" content="https://www.oppostest.cat/logoi.png">
     <meta property="og:url" content="https://www.oppostest.cat">
     <meta property="og:type" content="website">
 
@@ -20,8 +20,8 @@
     <meta name="theme-color" content="#2563eb">
     
     <!-- Favicon per a Google i Navegadors -->
-    <link rel="icon" type="image/png" href="logo.png">
-    <link rel="apple-touch-icon" href="logo.png">
+    <link rel="icon" type="image/png" href="logoi.png">
+    <link rel="apple-touch-icon" href="logoi.png">
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -232,7 +232,7 @@
                 </div>
             </div>
 
-            <!-- Stats Overview Grid (Actualitzat) -->
+            <!-- Stats Overview Grid (Sense preguntes fetes) -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 <div class="bg-slate-800/80 rounded-xl p-5 border border-slate-700/60 shadow-sm flex flex-col justify-center">
                     <div class="flex justify-between items-start">
@@ -773,11 +773,11 @@
     <!-- TOAST CONTAINER -->
     <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
 
-    <!-- SCRIPT FIREBASE (Versió fixada a 10.8.0) -->
+    <!-- SCRIPT FIREBASE -->
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-        import { getFirestore, doc, setDoc, getDoc, updateDoc, collection, getDocs, query, where, addDoc, increment } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+        import { getFirestore, doc, setDoc, getDoc, updateDoc, collection, getDocs, query, where, addDoc, increment } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyAK8r_-CMw1626LIFnrn9NcVkIcvYv2Elo",
@@ -1299,7 +1299,7 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             loadQuestionsFromJsonFile();
-            loadHangmanDict(); // Càrrega el diccionari del penjat
+            loadHangmanDict();
             loadStatsFromStorage();
             startMidnightCountdown();
             if(window.updateLocksUI) window.updateLocksUI(null);
@@ -1825,7 +1825,7 @@
                 const today = window.getSpanishDateStr();
                 const metricsRef = window.dbRef;
                 
-                import("https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js").then(mod => {
+                import("https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js").then(mod => {
                     mod.setDoc(mod.doc(metricsRef, "metrics", today), { tests: mod.increment(1) }, { merge: true }).catch(()=>{});
                     if (Object.keys(failedQUpdates).length > 0) {
                         mod.setDoc(mod.doc(metricsRef, "metrics", "failed_qs"), failedQUpdates, {merge:true}).catch(()=>{});
