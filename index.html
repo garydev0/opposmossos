@@ -188,12 +188,12 @@
         </div>
 
         <div class="md:hidden grid grid-cols-6 bg-slate-900 border-t border-slate-800 py-2 px-1 text-[10px] text-center">
-            <button onclick="switchTab('dashboard')" id="nav-mob-dashboard" class="flex flex-col items-center py-1 text-brand-400"><i class="fa-solid fa-chart-pie text-sm mb-0.5"></i><span>Inici</span></button>
-            <button onclick="switchTab('exam')" id="nav-mob-exam" class="flex flex-col items-center py-1 text-slate-400"><i class="fa-solid fa-file-pen text-sm mb-0.5"></i><span>Tests</span></button>
-            <button onclick="switchTab('forum')" id="nav-mob-forum" class="flex flex-col items-center py-1 text-slate-400"><i class="fa-solid fa-comments text-sm mb-0.5"></i><span>Fòrum</span></button>
-            <button onclick="switchTab('ranking')" id="nav-mob-ranking" class="flex flex-col items-center py-1 text-slate-400"><i class="fa-solid fa-trophy text-sm mb-0.5"></i><span>Ranking</span></button>
-            <button onclick="switchTab('guide')" id="nav-mob-guide" class="flex flex-col items-center py-1 text-slate-400"><i class="fa-solid fa-book-bookmark text-sm mb-0.5"></i><span>Guia</span></button>
-            <button onclick="switchTab('profile')" id="nav-mob-profile" class="flex flex-col items-center py-1 text-slate-400 border-l border-slate-800"><i class="fa-solid fa-user-circle text-sm text-brand-400 mb-0.5"></i><span class="truncate w-full px-0.5">Perfil</span></button>
+            <button onclick="switchTab('dashboard')" id="nav-mob-dashboard" class="mob-tab-btn flex flex-col items-center py-1 text-brand-400"><i class="fa-solid fa-chart-pie text-sm mb-0.5"></i><span>Inici</span></button>
+            <button onclick="switchTab('exam')" id="nav-mob-exam" class="mob-tab-btn flex flex-col items-center py-1 text-slate-400"><i class="fa-solid fa-file-pen text-sm mb-0.5"></i><span>Tests</span></button>
+            <button onclick="switchTab('forum')" id="nav-mob-forum" class="mob-tab-btn flex flex-col items-center py-1 text-slate-400"><i class="fa-solid fa-comments text-sm mb-0.5"></i><span>Fòrum</span></button>
+            <button onclick="switchTab('ranking')" id="nav-mob-ranking" class="mob-tab-btn flex flex-col items-center py-1 text-slate-400"><i class="fa-solid fa-trophy text-sm mb-0.5"></i><span>Ranking</span></button>
+            <button onclick="switchTab('guide')" id="nav-mob-guide" class="mob-tab-btn flex flex-col items-center py-1 text-slate-400"><i class="fa-solid fa-book-bookmark text-sm mb-0.5"></i><span>Guia</span></button>
+            <button onclick="switchTab('profile')" id="nav-mob-profile" class="mob-tab-btn flex flex-col items-center py-1 text-slate-400 border-l border-slate-800"><i class="fa-solid fa-user-circle text-sm text-brand-400 mb-0.5"></i><span class="truncate w-full px-0.5">Perfil</span></button>
         </div>
     </header>
 
@@ -1386,15 +1386,32 @@
 
         window.switchTab = function(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            
+            // Desktop Nav
             document.querySelectorAll('.tab-btn').forEach(b => {
                 if(b.id !== 'nav-profile') { b.classList.remove('bg-brand-600', 'text-white', 'shadow-md'); b.classList.add('text-slate-300'); }
             });
-            document.getElementById('sec-' + tabId).classList.remove('hidden');
             const activeBtn = document.getElementById('nav-' + tabId);
             if(activeBtn && tabId !== 'profile') {
                 activeBtn.classList.add('bg-brand-600', 'text-white', 'shadow-md');
                 activeBtn.classList.remove('text-slate-300');
             }
+
+            // Mobile Nav
+            document.querySelectorAll('.mob-tab-btn').forEach(b => {
+                if(b.id !== 'nav-mob-profile') {
+                    b.classList.remove('text-brand-400');
+                    b.classList.add('text-slate-400');
+                }
+            });
+            const activeMobBtn = document.getElementById('nav-mob-' + tabId);
+            if(activeMobBtn && tabId !== 'profile') {
+                activeMobBtn.classList.remove('text-slate-400');
+                activeMobBtn.classList.add('text-brand-400');
+            }
+
+            document.getElementById('sec-' + tabId).classList.remove('hidden');
+            
             if (tabId === 'ranking') window.loadGlobalRanking && window.loadGlobalRanking();
             if (tabId === 'forum') window.loadForumPosts && window.loadForumPosts();
             if (tabId === 'dashboard') updateStatsDashboardUI();
@@ -1499,7 +1516,8 @@
         window.startSimulacre = function() {
             if (!window.checkTestAccess('simulacre')) return;
             if (questionBank.length === 0) { window.showToast("Banc buit", "error"); return; }
-            const subset = [...questionBank].slice(0, Math.min(questionBank.length, 30));
+            
+            const subset = [...questionBank].sort(() => 0.5 - Math.random()).slice(0, Math.min(questionBank.length, 30));
             currentExam = prepareShuffledExam(subset);
             launchExamSession("Simulacre Oficial", true, 30 * 60);
         }
@@ -1507,6 +1525,7 @@
         window.startPractice = function() {
             if (!window.checkTestAccess('practice')) return;
             if (questionBank.length === 0) { window.showToast("Banc buit", "error"); return; }
+            
             const subset = [...questionBank].sort(() => 0.5 - Math.random()).slice(0, practiceSelectedCount);
             currentExam = prepareShuffledExam(subset);
             launchExamSession(`Pràctica Lliure (${subset.length} preguntes)`, false, 0);
@@ -1538,6 +1557,7 @@
                 return (s.correct / s.total) < 0.7;
             });
             if (weakQuestions.length === 0) weakQuestions = questionBank;
+            
             const subset = weakQuestions.sort(() => 0.5 - Math.random()).slice(0, 15);
             currentExam = prepareShuffledExam(subset);
             launchExamSession("🔥 Test Personalitzat (Punts Dèbils)", false, 0);
