@@ -1,8 +1,8 @@
-const CACHE_NAME = 'oppostest-v3';
+const CACHE_NAME = 'oppostest-v4';
 const urlsToCache = [
     './',
     './index.html',
-    './logo.png',
+    './logoi.png',
     './preguntas-a1.json',
     './preguntas-a2.json',
     './preguntas-a3.json',
@@ -41,6 +41,11 @@ self.addEventListener('activate', event => {
 });
 
 self.addEventListener('fetch', event => {
+    // REGLA CLAVE: Ignorar las peticiones POST (Firebase) y extensiones
+    if (event.request.method !== 'GET' || !event.request.url.startsWith('http')) {
+        return;
+    }
+
     event.respondWith(
         fetch(event.request)
         .then(response => {
