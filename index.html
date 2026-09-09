@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tests Mossos d'Esquadra - Oposicions 2026 | OpposTest</title>
     
+    <!-- SEO & Meta Tags Optimitzats -->
     <meta name="description" content="Plataforma líder d'Oposicions per a Mossos d'Esquadra. Practica gratis amb milers de preguntes de tests oficials, simulacres, fòrum d'opositors i rànquing diari.">
     <meta name="keywords" content="Mossos d'Esquadra, Oposicions Mossos, Test Mossos 2026, Simulacres Mossos, Temari Mossos, Catalunya, Policia de la Generalitat">
     <meta name="author" content="Gerard App's">
@@ -18,13 +19,18 @@
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#2563eb">
     
+    <!-- Favicon per a Google i Navegadors -->
     <link rel="icon" type="image/png" href="logoi.png">
     <link rel="apple-touch-icon" href="logoi.png">
     
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
+    <!-- Schema.org Structured Data -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -60,11 +66,13 @@
 </head>
 <body class="h-full flex flex-col font-sans antialiased overflow-x-hidden bg-slate-950 text-slate-100">
 
+    <!-- ANUNCI GLOBAL EMERGENT -->
     <div id="global-alert-banner" class="hidden bg-brand-600 text-white text-sm font-bold text-center py-2.5 px-4 shadow-md z-50 relative flex justify-center items-center gap-3">
         <span><i class="fa-solid fa-bell mr-2 animate-bounce"></i><span id="global-alert-text"></span></span>
         <button onclick="document.getElementById('global-alert-banner').classList.add('hidden')" class="absolute right-4 text-white/70 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
     </div>
 
+    <!-- SECCIÓ DE LOGIN / REGISTRE -->
     <div id="auth-overlay" onclick="if(event.target === this) closeAuthModal()" class="fixed inset-0 z-50 bg-slate-950/95 backdrop-blur-md flex items-center justify-center p-4 hidden">
         <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-md w-full p-8 shadow-2xl space-y-6">
             <div class="text-center space-y-2">
@@ -119,6 +127,7 @@
         </div>
     </div>
 
+    <!-- MODAL REPORTAR ERROR PREGUNTA -->
     <div id="report-modal" onclick="if(event.target === this) closeReportModal()" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4 hidden">
         <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-md w-full p-6 shadow-2xl space-y-4">
             <h3 class="text-lg font-bold text-white flex items-center"><i class="fa-solid fa-triangle-exclamation text-amber-400 mr-2"></i> Reportar un error a la pregunta</h3>
@@ -149,6 +158,7 @@
                 </div>
             </div>
 
+            <!-- Navigation Tabs -->
             <nav class="hidden md:flex space-x-1 bg-slate-800/60 p-1 rounded-xl border border-slate-700/50">
                 <button onclick="switchTab('dashboard')" id="nav-dashboard" class="tab-btn px-3 py-2 rounded-lg text-sm font-medium transition-all bg-brand-600 text-white shadow-md">
                     <i class="fa-solid fa-chart-pie mr-1"></i>Inici
@@ -225,18 +235,19 @@
             <!-- Contenidor d'Estadístiques Privades -->
             <div class="relative">
                 
-                <div id="stats-overlay-container" class="absolute inset-0 z-20 flex flex-col items-center justify-center bg-slate-900/70 backdrop-blur-[4px] rounded-2xl hidden transition-all duration-300">
-                    <div class="bg-slate-800 p-6 rounded-2xl shadow-2xl text-center border border-slate-700 max-w-sm w-11/12 transform scale-100">
-                        <i class="fa-solid fa-lock text-4xl text-brand-400 mb-4 drop-shadow-md"></i>
-                        <p class="text-base font-bold text-white mb-2">Estadístiques Privades</p>
-                        <p class="text-xs text-slate-300 mb-5">Inicia sessió per desbloquejar el teu rendiment i les teves dades d'estudi personals.</p>
-                        <button onclick="openAuthModal('login')" class="w-full py-2.5 bg-brand-600 hover:bg-brand-500 text-white font-semibold rounded-xl text-sm transition-all shadow-md">Identificar-me</button>
+                <!-- Overlay de Bloqueig (Es mostra només a usuaris NO loguejats) -->
+                <div id="stats-overlay-container" class="absolute inset-0 z-20 flex flex-col items-center justify-center bg-slate-900/60 backdrop-blur-[3px] rounded-2xl hidden">
+                    <div class="bg-slate-800 p-6 rounded-2xl shadow-2xl text-center border border-slate-700 max-w-sm w-11/12">
+                        <i class="fa-solid fa-lock text-3xl text-slate-400 mb-3"></i>
+                        <p class="text-sm font-bold text-white mb-4">Inicia sessió per veure el teu rendiment i dades d'estudi</p>
+                        <button onclick="openAuthModal('login')" class="px-6 py-2.5 bg-brand-600 hover:bg-brand-500 text-white font-semibold rounded-xl text-sm transition-all shadow-md">Identificar-me</button>
                     </div>
                 </div>
 
                 <!-- Contingut Protegit -->
                 <div id="stats-content-wrapper" class="space-y-6 transition-all duration-300">
                     
+                    <!-- Stats Overview Grid -->
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                         <div class="bg-slate-800/80 rounded-xl p-5 border border-slate-700/60 shadow-sm flex flex-col justify-center">
                             <div class="flex justify-between items-start">
@@ -280,6 +291,7 @@
                         </div>
                     </div>
 
+                    <!-- Comparativa Personal -->
                     <div class="bg-slate-800/80 rounded-xl p-6 border border-slate-700 space-y-4">
                         <h3 class="text-base font-bold text-white flex items-center"><i class="fa-solid fa-chart-line text-brand-400 mr-2"></i> Comparativa Personal</h3>
                         <div class="bg-slate-900/80 p-4 rounded-xl border border-slate-700 space-y-3 text-sm">
@@ -291,6 +303,7 @@
                 </div>
             </div>
 
+            <!-- Properes Dates (Sempre visible per a tothom) -->
             <div class="bg-slate-800/80 rounded-xl p-6 border border-slate-700 shadow-sm space-y-4">
                 <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
                     <div>
@@ -328,6 +341,7 @@
 
         <!-- MINIGAMES SECTION -->
         <section id="sec-minigames" class="tab-content hidden space-y-6">
+            <!-- Menú Principal de Minijocs -->
             <div id="minigames-menu" class="space-y-6">
                 <div class="bg-slate-800 rounded-2xl p-6 border border-slate-700 shadow-xl">
                     <h2 class="text-xl font-bold text-white mb-2"><i class="fa-solid fa-gamepad text-purple-400 mr-2"></i>Minijocs per a Opositors</h2>
@@ -335,6 +349,7 @@
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- El Penjat Legal -->
                     <div class="bg-slate-800/90 rounded-2xl p-6 border border-slate-700 shadow-xl flex flex-col justify-between hover:border-amber-500 transition-all">
                         <div>
                             <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-xl mb-4"><i class="fa-solid fa-scale-balanced"></i></div>
@@ -346,6 +361,7 @@
                         </button>
                     </div>
 
+                    <!-- Ruta de Patrulla -->
                     <div class="bg-slate-800/90 rounded-2xl p-6 border border-slate-700 shadow-xl flex flex-col justify-between hover:border-brand-500 transition-all">
                         <div>
                             <div class="w-12 h-12 rounded-xl bg-brand-500/10 text-brand-400 flex items-center justify-center text-xl mb-4"><i class="fa-solid fa-car-on"></i></div>
@@ -363,11 +379,12 @@
             <div id="game-hangman" class="hidden space-y-6">
                 <div class="bg-slate-800 rounded-xl p-4 border border-slate-700 flex justify-between items-center">
                     <h2 class="text-lg font-bold text-amber-400"><i class="fa-solid fa-scale-balanced mr-2"></i> El Penjat Legal</h2>
-                    <button onclick="exitMinigame('game-hangman')" class="text-xs px-4 py-1.5 bg-red-600 hover:bg-red-700 text-white rounded-lg border border-red-500 transition-all"><i class="fa-solid fa-arrow-left mr-1"></i> Tornar al menú</button>
+                    <button onclick="exitMinigame('game-hangman')" class="text-xs px-4 py-1.5 bg-red-600 hover:bg-red-700 text-white rounded-lg border border-red-500 transition-all">Tornar al menú</button>
                 </div>
 
                 <div class="bg-slate-800/90 rounded-2xl p-6 sm:p-8 border border-slate-700 shadow-xl flex flex-col items-center">
                     
+                    <!-- Marcador de Punts -->
                     <div class="flex justify-between items-center w-full max-w-2xl mx-auto mb-4 bg-slate-900/50 p-3 rounded-xl border border-slate-700">
                         <span class="text-sm font-bold text-slate-300">Puntuació: <span id="hm-current-score" class="text-amber-400 text-lg ml-1">0</span></span>
                         <span class="text-sm font-bold text-slate-300">Rècord: <span id="hm-high-score" class="text-emerald-400 text-lg ml-1">0</span></span>
@@ -387,6 +404,7 @@
                     </div>
 
                     <div id="hm-keyboard" class="grid grid-cols-7 sm:grid-cols-9 gap-2 max-w-2xl w-full">
+                        <!-- Teclat generat per JS -->
                     </div>
 
                     <div id="hm-result-overlay" class="hidden w-full mt-6 p-6 rounded-xl border text-center">
@@ -401,21 +419,25 @@
             <div id="game-patrol" class="hidden space-y-6">
                 <div class="bg-slate-800 rounded-xl p-4 border border-slate-700 flex justify-between items-center">
                     <h2 class="text-lg font-bold text-brand-400"><i class="fa-solid fa-car-on mr-2"></i> Ruta de Patrulla</h2>
-                    <button onclick="exitMinigame('game-patrol')" class="text-xs px-4 py-1.5 bg-red-600 hover:bg-red-700 text-white font-bold rounded-lg border border-red-700 shadow-md transition-all"><i class="fa-solid fa-arrow-left mr-1"></i> Tornar al menú</button>
+                    <button onclick="exitMinigame('game-patrol')" class="text-xs px-4 py-1.5 bg-red-600 hover:bg-red-700 text-white rounded-lg border border-red-500 transition-all">Tornar al menú</button>
                 </div>
 
                 <div class="bg-slate-800/90 rounded-2xl p-6 sm:p-8 border border-slate-700 shadow-xl space-y-6">
+                    <!-- Pista de persecució visual -->
                     <div class="relative w-full h-16 bg-slate-900 rounded-full border-2 border-slate-700 overflow-hidden px-4 flex items-center">
                         <div class="absolute inset-0 opacity-10 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+PGNpcmNsZSBjeD0iMTAiIGN5PSIxMCIgcj0iMiIgZmlsbD0iI2ZmZiIvPjwvc3ZnPg==')]"></div>
                         
+                        <!-- Coche Policia -->
                         <div id="patrol-police" class="absolute z-10 transition-all duration-500 ease-in-out text-brand-400 text-3xl" style="left: 0%;">
                             <i class="fa-solid fa-car-side"></i>
                         </div>
                         
+                        <!-- Sospitós -->
                         <div id="patrol-suspect" class="absolute z-10 transition-all duration-500 ease-in-out text-red-500 text-2xl" style="left: 30%;">
                             <i class="fa-solid fa-person-running"></i>
                         </div>
                         
+                        <!-- Meta -->
                         <div class="absolute right-4 text-emerald-500 text-2xl opacity-50">
                             <i class="fa-solid fa-flag-checkered"></i>
                         </div>
@@ -425,6 +447,7 @@
                         <span id="patrol-topic" class="px-2.5 py-1 bg-slate-900 border border-slate-700 rounded-lg text-[11px] text-slate-300 font-semibold mb-3 inline-block">Tema</span>
                         <h3 id="patrol-q-text" class="text-lg font-semibold text-white mb-6"></h3>
                         <div id="patrol-options" class="space-y-3">
+                            <!-- Opcions JS -->
                         </div>
                     </div>
 
@@ -610,6 +633,63 @@
             </div>
         </section>
 
+        <!-- FÒRUM SECTION -->
+        <section id="sec-forum" class="tab-content hidden space-y-6">
+            <div class="bg-slate-800 rounded-2xl p-6 border border-slate-700 shadow-xl">
+                <h2 class="text-xl font-bold text-white flex items-center"><i class="fa-solid fa-comments text-brand-400 mr-2"></i>Fòrum d'Opositors</h2>
+                <p class="text-slate-300 text-sm mt-1">Comparteix dubtes i ajuda a altres companys.</p>
+            </div>
+
+            <!-- Fòrum No Loguejat -->
+            <div id="forum-unauth" class="bg-slate-800/80 rounded-2xl border border-slate-700 p-8 text-center hidden">
+                <i class="fa-solid fa-lock text-4xl text-slate-500 mb-3"></i>
+                <p class="text-slate-300 text-sm mb-4">Inicia sessió per llegir i participar al fòrum.</p>
+                <button onclick="openAuthModal('login')" class="px-6 py-2.5 bg-brand-600 hover:bg-brand-500 text-white font-semibold rounded-xl text-sm transition-all shadow-md">Iniciar Sessió</button>
+            </div>
+
+            <!-- Fòrum Loguejat -->
+            <div id="forum-auth" class="space-y-6 hidden">
+                <div class="bg-slate-900 rounded-2xl p-4 border border-slate-700 flex gap-3">
+                    <input type="text" id="forum-new-post" placeholder="Escriu la teva pregunta o comentari..." class="flex-1 bg-slate-950 border border-slate-800 rounded-xl p-3 text-sm text-white outline-none focus:border-brand-500">
+                    <button onclick="submitForumPost()" class="px-5 py-3 bg-brand-600 hover:bg-brand-500 text-white font-bold rounded-xl transition-all shadow-md"><i class="fa-solid fa-paper-plane"></i></button>
+                </div>
+                <div id="forum-posts-container" class="space-y-4">
+                    <p class="text-center text-slate-400 text-sm">Carregant missatges...</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- RANKING SECTION -->
+        <section id="sec-ranking" class="tab-content hidden space-y-6">
+            <div class="bg-slate-800 rounded-2xl p-6 border border-slate-700 shadow-xl flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div>
+                    <h2 class="text-xl font-bold text-white flex items-center"><i class="fa-solid fa-trophy text-amber-400 mr-2"></i>Ranking Global Diari</h2>
+                    <p class="text-slate-300 text-sm mt-1">Classificació d'usuaris segons preguntes encertades avui. S'actualitza automàticament.</p>
+                </div>
+                <div class="bg-slate-900 border border-slate-700 px-4 py-2.5 rounded-xl text-center shrink-0">
+                    <span class="text-[10px] uppercase font-bold text-slate-400 block">Temps restant pel reset</span>
+                    <span id="ranking-countdown" class="text-brand-400 font-mono font-bold text-base">--:--:--</span>
+                </div>
+            </div>
+
+            <div class="bg-slate-800/90 rounded-2xl border border-slate-700 overflow-hidden shadow-xl">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-900/80 text-slate-400 text-xs uppercase tracking-wider border-b border-slate-700">
+                                <th class="p-4 font-bold text-center w-16">Pos</th>
+                                <th class="p-4 font-bold">Usuari</th>
+                                <th class="p-4 font-bold text-right">Preguntes Acertades</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ranking-table-body" class="divide-y divide-slate-700/60 text-sm">
+                            <tr><td colspan="3" class="p-6 text-center text-slate-400">Carregant ranking...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
         <!-- PROFILE SECTION -->
         <section id="sec-profile" class="tab-content hidden space-y-6">
             <div class="bg-slate-800 rounded-2xl p-6 sm:p-8 border border-slate-700 shadow-xl max-w-2xl mx-auto space-y-6">
@@ -765,23 +845,6 @@
     <!-- TOAST CONTAINER -->
     <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
 
-    <!-- SCRIPT PRINCIPAL I UTILITATS -->
-    <script>
-        // Utilitat per evitar vulnerabilitats XSS (DOM reinterpreted as HTML)
-        window.escapeHTML = function(str) {
-            if (typeof str !== 'string') return '';
-            return str.replace(/[&<>'"]/g, function(match) {
-                return {
-                    '&': '&amp;',
-                    '<': '&lt;',
-                    '>': '&gt;',
-                    "'": '&#39;',
-                    '"': '&quot;'
-                }[match];
-            });
-        };
-    </script>
-
     <!-- SCRIPT FIREBASE -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
@@ -898,7 +961,7 @@
 
                 await setDoc(userRef, { username: newUsername, lastUsernameChange: now.toISOString() }, { merge: true });
                 const desktopLabel = document.getElementById('desktop-profile-label');
-                if (desktopLabel) desktopLabel.innerHTML = `${window.escapeHTML(newUsername)} ${window.getRoleBadge(userData)}`;
+                if (desktopLabel) desktopLabel.innerHTML = `${newUsername} ${window.getRoleBadge(userData)}`;
                 window.showToast("Nom d'usuari actualitzat correctament!", "success");
                 if (window.loadGlobalRanking) window.loadGlobalRanking();
             } catch (err) {
@@ -959,10 +1022,9 @@
                     else if (i === 1) posColor = 'bg-slate-300 text-slate-800 font-bold shadow-[0_0_8px_rgba(203,213,225,0.5)]';
                     else if (i === 2) posColor = 'bg-amber-700 text-orange-100 font-bold shadow-[0_0_8px_rgba(180,83,9,0.5)]';
 
-                    const safeUser = window.escapeHTML(u.username);
                     html += `<tr class="hover:bg-slate-900/40 transition-colors border-b border-slate-800">
                         <td class="p-4 text-center font-bold"><span class="inline-block w-7 h-7 rounded-full text-xs leading-7 ${posColor}">${i + 1}</span></td>
-                        <td class="p-4 font-semibold text-white flex items-center h-16">${safeUser} ${window.getRoleBadge(u)}</td>
+                        <td class="p-4 font-semibold text-white flex items-center h-16">${u.username} ${window.getRoleBadge(u)}</td>
                         <td class="p-4 text-right font-bold text-brand-400">${u.score} pts</td>
                     </tr>`;
                 });
@@ -970,11 +1032,13 @@
             } catch (e) { tableBody.innerHTML = `<tr><td colspan="3" class="p-6 text-center text-red-400">Error carregant ranking.</td></tr>`; }
         }
 
+        // SISTEMA FÒRUM
+        const badWords = ['puta', 'joder', 'merda', 'gilipolles', 'cabron', 'hòstia', 'hostia', 'follar', 'collons', 'coño', 'mierda'];
+
         window.submitForumPost = async () => {
             const text = document.getElementById('forum-new-post').value.trim();
             if (!text) return;
 
-            const badWords = ['puta', 'joder', 'merda', 'gilipolles', 'cabron', 'hòstia', 'hostia', 'follar', 'collons', 'coño', 'mierda'];
             const textLower = text.toLowerCase();
             if (badWords.some(bw => textLower.includes(bw))) {
                 return window.showToast("Llenguatge no permès. Revisa el teu missatge.", "error");
@@ -1015,20 +1079,17 @@
                     const dObj = new Date(p.timestamp);
                     const timeStr = `${dObj.toLocaleDateString('es-ES')} ${dObj.getHours().toString().padStart(2,'0')}:${dObj.getMinutes().toString().padStart(2,'0')}`;
                     
-                    const safeName = window.escapeHTML(p.authorName);
-                    const safeText = window.escapeHTML(p.text);
-                    
                     html += `
                     <div class="bg-slate-900 rounded-xl p-4 border border-slate-800">
                         <div class="flex justify-between items-start mb-2">
                             <div class="flex items-center">
-                                <span class="font-bold text-white text-sm">${safeName}</span>
+                                <span class="font-bold text-white text-sm">${p.authorName}</span>
                                 ${window.getRoleBadge({ email: p.authorEmail, isPremium: p.isPremium })}
                                 <span class="text-[10px] text-slate-500 ml-3">${timeStr}</span>
                             </div>
-                            <button data-pid="${p.id}" data-ptext="${safeText}" onclick="reportForumPost(this.getAttribute('data-pid'), this.getAttribute('data-ptext'))" class="text-slate-500 hover:text-red-400 transition-colors" title="Reportar"><i class="fa-solid fa-flag text-xs"></i></button>
+                            <button onclick="reportForumPost('${p.id}', '${p.text.replace(/'/g, "\\'")}')" class="text-slate-500 hover:text-red-400 transition-colors" title="Reportar"><i class="fa-solid fa-flag text-xs"></i></button>
                         </div>
-                        <p class="text-slate-300 text-sm leading-relaxed">${safeText}</p>
+                        <p class="text-slate-300 text-sm leading-relaxed">${p.text}</p>
                     </div>`;
                 });
                 container.innerHTML = html;
@@ -1046,6 +1107,7 @@
             } catch(e) { window.showToast("Error en reportar.", "error"); }
         }
 
+        // PANELL D'ADMINISTRACIÓ
         window.saveGlobalAlert = async function() {
             const msg = document.getElementById('admin-alert-msg').value;
             const isActive = document.getElementById('admin-alert-active').checked;
@@ -1063,9 +1125,8 @@
             snap.forEach(d => {
                 const u = d.data(); const uid = d.id;
                 if(u.lastLogin === today) activeToday++;
-                const safeEmail = window.escapeHTML(u.email);
                 html += `<tr>
-                    <td class="p-2 text-xs truncate max-w-[150px] text-white">${safeEmail}</td>
+                    <td class="p-2 text-xs truncate max-w-[150px] text-white">${u.email}</td>
                     <td class="p-2 text-xs text-slate-400">${u.lastLogin || '-'}</td>
                     <td class="p-2 text-center"><button onclick="toggleUserStatus('${uid}', 'isPremium', ${!u.isPremium})" class="text-[10px] px-2 py-1 rounded text-white ${u.isPremium ? 'bg-amber-600' : 'bg-slate-700'}">${u.isPremium ? 'Sí' : 'No'}</button></td>
                     <td class="p-2 text-center"><button onclick="toggleUserStatus('${uid}', 'isBlocked', ${!u.isBlocked})" class="text-[10px] px-2 py-1 rounded text-white ${u.isBlocked ? 'bg-red-600' : 'bg-slate-700'}">${u.isBlocked ? 'Sí' : 'No'}</button></td>
@@ -1112,8 +1173,7 @@
             snap.forEach(d => {
                 const u = d.data();
                 if(u.lastResetDate === today && u.score > 0) {
-                    const safeUser = window.escapeHTML(u.username);
-                    html += `<tr><td class="p-2 text-white truncate max-w-[100px]">${safeUser}</td><td class="p-2 text-brand-400 font-bold">${u.score}</td><td class="p-2 text-right"><button onclick="deleteUserScore('${d.id}')" class="text-red-400 bg-red-900/30 px-2 rounded hover:bg-red-900/60"><i class="fa-solid fa-trash"></i></button></td></tr>`;
+                    html += `<tr><td class="p-2 text-white truncate max-w-[100px]">${u.username}</td><td class="p-2 text-brand-400 font-bold">${u.score}</td><td class="p-2 text-right"><button onclick="deleteUserScore('${d.id}')" class="text-red-400 bg-red-900/30 px-2 rounded hover:bg-red-900/60"><i class="fa-solid fa-trash"></i></button></td></tr>`;
                 }
             });
             tbody.innerHTML = html || '<tr><td colspan="3" class="p-2 text-center text-slate-500">Sense puntuacions avui</td></tr>';
@@ -1161,16 +1221,11 @@
                 let html = '';
                 snap.forEach(doc => {
                     const d = doc.data();
-                    const safeTopic = window.escapeHTML(d.topic);
-                    const safeType = window.escapeHTML(d.type);
-                    const safeQ = window.escapeHTML(d.question);
-                    const safeComment = window.escapeHTML(d.comment || 'Sense comentari addicional');
-
                     html += `<div class="bg-slate-900 p-4 rounded-xl border border-slate-700">
-                        <div class="flex justify-between items-start mb-2"><span class="text-[10px] font-bold uppercase bg-brand-500/20 text-brand-400 px-2 py-1 rounded">${safeTopic}</span><span class="text-xs text-slate-500">${d.date}</span></div>
-                        <p class="text-sm text-red-400 font-bold mb-1"><i class="fa-solid fa-triangle-exclamation mr-1"></i>${safeType}</p>
-                        <p class="text-sm text-white font-medium mb-3 pb-3 border-b border-slate-800">${safeQ}</p>
-                        <p class="text-xs text-slate-400"><strong class="text-slate-300">Comentari:</strong> ${safeComment}</p>
+                        <div class="flex justify-between items-start mb-2"><span class="text-[10px] font-bold uppercase bg-brand-500/20 text-brand-400 px-2 py-1 rounded">${d.topic}</span><span class="text-xs text-slate-500">${d.date}</span></div>
+                        <p class="text-sm text-red-400 font-bold mb-1"><i class="fa-solid fa-triangle-exclamation mr-1"></i>${d.type}</p>
+                        <p class="text-sm text-white font-medium mb-3 pb-3 border-b border-slate-800">${d.question}</p>
+                        <p class="text-xs text-slate-400"><strong class="text-slate-300">Comentari:</strong> ${d.comment || 'Sense comentari addicional'}</p>
                     </div>`;
                 });
                 list.innerHTML = html;
@@ -1187,6 +1242,7 @@
             }
         }
 
+        // Recuperar Alerta Global per a tots
         getDoc(doc(db, "admin", "alert")).then(snap => {
             if(snap.exists() && snap.data().isActive) {
                 document.getElementById('global-alert-banner').classList.remove('hidden');
@@ -1205,6 +1261,7 @@
             const statsContent = document.getElementById('stats-content-wrapper');
             
             if (user) {
+                // Usuari Loguejat: Desbloquejar estadístiques
                 if(statsOverlay) statsOverlay.classList.add('hidden');
                 if(statsContent) statsContent.classList.remove('opacity-40', 'blur-[2px]', 'pointer-events-none');
 
@@ -1224,6 +1281,7 @@
                     if(notLogged) notLogged.classList.add('hidden');
                     if(logged) logged.classList.remove('hidden');
                     
+                    // Mostrem seccions de fòrum
                     const fUnauth = document.getElementById('forum-unauth');
                     const fAuth = document.getElementById('forum-auth');
                     if(fUnauth) fUnauth.classList.add('hidden');
@@ -1234,12 +1292,13 @@
                         else adminBtn.classList.add('hidden');
                     }
 
-                    if(desktopLabel) desktopLabel.innerHTML = `${window.escapeHTML(d.username || 'Perfil')} ${window.getRoleBadge(d)}`;
+                    if(desktopLabel) desktopLabel.innerHTML = `${d.username || 'Perfil'} ${window.getRoleBadge(d)}`;
                     document.getElementById('profile-username-input').value = d.username || '';
                     document.getElementById('profile-email-val').innerText = user.email;
                     document.getElementById('profile-score-val').innerText = `${d.lastResetDate === today ? (d.score || 0) : 0} pts`;
                 }
             } else {
+                // Usuari NO Loguejat: Bloquejar estadístiques
                 if(statsOverlay) statsOverlay.classList.remove('hidden');
                 if(statsContent) statsContent.classList.add('opacity-40', 'blur-[2px]', 'pointer-events-none');
 
@@ -1248,6 +1307,7 @@
                 if(desktopLabel) desktopLabel.innerText = "Iniciar Sessió";
                 if(adminBtn) adminBtn.classList.add('hidden');
                 
+                // Amaguem fòrum interactiu
                 const fUnauth = document.getElementById('forum-unauth');
                 const fAuth = document.getElementById('forum-auth');
                 if(fUnauth) fUnauth.classList.remove('hidden');
@@ -1287,6 +1347,7 @@
 
         let isRegisterMode = false;
 
+        // Connexió a l'arxiu penjat.json de GitHub
         let hmDict = [];
         async function loadHangmanDict() {
             try {
@@ -1492,6 +1553,7 @@
         window.switchTab = function(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
             
+            // Desktop Nav
             document.querySelectorAll('.tab-btn').forEach(b => {
                 if(b.id !== 'nav-profile') { b.classList.remove('bg-brand-600', 'text-white', 'shadow-md'); b.classList.add('text-slate-300'); }
             });
@@ -1501,6 +1563,7 @@
                 activeBtn.classList.remove('text-slate-300');
             }
 
+            // Mobile Nav
             document.querySelectorAll('.mob-tab-btn').forEach(b => {
                 if(b.id !== 'nav-mob-profile') {
                     b.classList.remove('text-brand-400');
@@ -1515,6 +1578,7 @@
 
             document.getElementById('sec-' + tabId).classList.remove('hidden');
             
+            // Aturar jocs si canviem de pestanya
             if(tabId !== 'minigames') {
                 document.getElementById('minigames-menu').classList.remove('hidden');
                 document.getElementById('game-hangman').classList.add('hidden');
@@ -1845,7 +1909,7 @@
                 const today = window.getSpanishDateStr();
                 const metricsRef = window.dbRef;
                 
-                import("https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js").then(mod => {
+                import("https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js").then(mod => {
                     mod.setDoc(mod.doc(metricsRef, "metrics", today), { tests: mod.increment(1) }, { merge: true }).catch(()=>{});
                     if (Object.keys(failedQUpdates).length > 0) {
                         mod.setDoc(mod.doc(metricsRef, "metrics", "failed_qs"), failedQUpdates, {merge:true}).catch(()=>{});
