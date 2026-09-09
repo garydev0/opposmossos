@@ -960,8 +960,12 @@
                 if (duplicated) return window.showToast("Aquest nom d'usuari ja està en ús.", "error");
 
                 await setDoc(userRef, { username: newUsername, lastUsernameChange: now.toISOString() }, { merge: true });
+                
                 const desktopLabel = document.getElementById('desktop-profile-label');
-                if (desktopLabel) desktopLabel.innerHTML = `${newUsername} ${window.getRoleBadge(userData)}`;
+                const safeUsername = String(newUsername || '').replace(/[&<>"'`=\/]/g, s => `&#${s.charCodeAt(0)};`);
+                
+                if (desktopLabel) desktopLabel.innerHTML = `${safeUsername} ${window.getRoleBadge(userData)}`;
+                
                 window.showToast("Nom d'usuari actualitzat correctament!", "success");
                 if (window.loadGlobalRanking) window.loadGlobalRanking();
             } catch (err) {
