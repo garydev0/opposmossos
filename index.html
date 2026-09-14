@@ -774,9 +774,9 @@
                         <input type="text" id="admin-search-user" onkeyup="filterAdminUsers()" placeholder="Cercar usuari (nom o email)..." class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 text-xs text-white outline-none focus:border-brand-500 mb-3">
                         <div class="overflow-y-auto max-h-48 border border-slate-800 rounded-lg">
                             <table class="w-full text-left text-xs">
-                                <thead class="text-slate-400 sticky top-0 bg-slate-950"><tr><th class="p-2 font-semibold">Correu</th><th class="p-2 font-semibold">Últim Accés</th><th class="p-2 text-center font-semibold">Prem.</th><th class="p-2 text-center font-semibold">Bloq.</th></tr></thead>
+                                <thead class="text-slate-400 sticky top-0 bg-slate-950"><tr><th class="p-2 font-semibold">Correu</th><th class="p-2 font-semibold">Últim Accés</th><th class="p-2 text-center font-semibold">Admin</th><th class="p-2 text-center font-semibold">Prem.</th><th class="p-2 text-center font-semibold">Bloq.</th></tr></thead>
                                 <tbody id="admin-users-tbody" class="divide-y divide-slate-800 text-slate-300 bg-slate-900">
-                                    <tr><td colspan="4" class="p-2 text-center">Carregant...</td></tr>
+                                    <tr><td colspan="5" class="p-2 text-center">Carregant...</td></tr>
                                 </tbody>
                             </table>
                         </div>
@@ -869,7 +869,7 @@
                         lastResetDate: window.getSpanishDateStr(),
                         lastLogin: window.getSpanishDateStr(),
                         isPremium: false, isBlocked: false,
-                        unlockedExams: isUnlockedByRef
+                        unlockedExams: isUnlockedByRef, isAdmin: false
                     });
 
                     if (referralCode) {
@@ -904,7 +904,7 @@
                         lastResetDate: window.getSpanishDateStr(),
                         lastLogin: window.getSpanishDateStr(),
                         isPremium: false, isBlocked: false,
-                        unlockedExams: false
+                        unlockedExams: false, isAdmin: false 
                     });
                 }
                 window.showToast("Sessió iniciada amb Google!", "success");
@@ -960,6 +960,8 @@
         window.getRoleBadge = function(u) {
             if (u.email === 'gerardlopezgarcia1@gmail.com') {
                 return '<span class="ml-2 inline-block bg-purple-600/20 border border-purple-500/50 text-purple-400 text-[9px] px-1.5 py-0.5 rounded uppercase font-bold tracking-wider align-middle">CEO</span>';
+            } else if (u.isAdmin) {
+                return '<span class="ml-2 inline-block bg-purple-600/20 border border-purple-500/50 text-purple-400 text-[9px] px-1.5 py-0.5 rounded uppercase font-bold tracking-wider align-middle">ADMIN</span>';
             } else if (u.isPremium) {
                 return '<span class="ml-2 inline-block bg-brand-600/20 border border-brand-500/50 text-brand-400 text-[9px] px-1.5 py-0.5 rounded uppercase font-bold tracking-wider align-middle">PRO</span>';
             }
@@ -998,7 +1000,7 @@
                     if (!data.isBlocked) {
                         let score = data.lastResetDate === today ? (data.score || 0) : 0;
                         if(score >= 1) {
-                            list.push({ username: data.username || 'Anònim', score, email: data.email, isPremium: data.isPremium });
+                            list.push({ username: data.username || 'Anònim', score, email: data.email, isPremium: data.isPremium, isAdmin: data.isAdmin });
                         }
                     }
                 });
@@ -1032,7 +1034,7 @@
 
         window.loadAdminUsers = async function() {
             const tbody = document.getElementById('admin-users-tbody');
-            tbody.innerHTML = '<tr><td colspan="4" class="p-2 text-center">Carregant...</td></tr>';
+            tbody.innerHTML = '<tr><td colspan="5" class="p-2 text-center">Carregant...</td></tr>';
             const snap = await getDocs(collection(db, "users"));
             let html = ''; let activeToday = 0;
             const today = window.getSpanishDateStr();
@@ -1043,6 +1045,7 @@
                 html += `<tr>
                     <td class="p-2 text-xs truncate max-w-[150px] text-white">${u.email}</td>
                     <td class="p-2 text-xs text-slate-400">${u.lastLogin || '-'}</td>
+                    <td class="p-2 text-center"><button onclick="toggleUserStatus('${uid}', 'isAdmin', ${!u.isAdmin})" class="text-[10px] px-2 py-1 rounded text-white ${u.isAdmin ? 'bg-purple-600' : 'bg-slate-700'}">${u.isAdmin ? 'Sí' : 'No'}</button></td>
                     <td class="p-2 text-center"><button onclick="toggleUserStatus('${uid}', 'isPremium', ${!u.isPremium})" class="text-[10px] px-2 py-1 rounded text-white ${u.isPremium ? 'bg-amber-600' : 'bg-slate-700'}">${u.isPremium ? 'Sí' : 'No'}</button></td>
                     <td class="p-2 text-center"><button onclick="toggleUserStatus('${uid}', 'isBlocked', ${!u.isBlocked})" class="text-[10px] px-2 py-1 rounded text-white ${u.isBlocked ? 'bg-red-600' : 'bg-slate-700'}">${u.isBlocked ? 'Sí' : 'No'}</button></td>
                 </tr>`;
@@ -1200,7 +1203,7 @@
                     if(logged) logged.classList.remove('hidden');
                     
                     if(adminBtn) {
-                        if (user.email === "gerardlopezgarcia1@gmail.com") adminBtn.classList.remove('hidden');
+                        if (user.email === "gerardlopezgarcia1@gmail.com" || d.isAdmin) adminBtn.classList.remove('hidden');
                         else adminBtn.classList.add('hidden');
                     }
 
