@@ -91,6 +91,10 @@
                         <label class="text-xs font-semibold text-slate-300 block mb-1">Data de naixement</label>
                         <input type="date" id="auth-dob" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-sm text-white outline-none focus:border-brand-500 transition-all text-slate-300">
                     </div>
+                    <div>
+                        <label class="text-xs font-semibold text-slate-300 block mb-1">Codi d'amic (Opcional)</label>
+                        <input type="text" id="auth-referral" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-sm text-white outline-none focus:border-brand-500 transition-all" placeholder="Nom d'usuari de qui et convida">
+                    </div>
                 </div>
 
                 <div>
@@ -537,7 +541,7 @@
                             <p class="text-slate-300 text-xs mt-2 leading-relaxed">Entrena els teus punts dèbils. Fes un test exprés amb els temes de menor rendiment.</p>
                             <div class="mt-4 bg-slate-900/50 p-2.5 rounded-lg border border-slate-700/50">
                                 <p class="text-[10px] uppercase font-bold text-slate-500 mb-1">Temes a reforçar:</p>
-                                <p id="weak-spots-topics-list" class="text-xs font-semibold text-orange-400 truncate">Calculant...</p>
+                                <p id="weak-spots-topics-list" class="text-xs font-semibold text-orange-400 truncate">Carregant...</p>
                             </div>
                         </div>
                         <button id="btn-start-weak" onclick="startWeakSpotExam()" class="mt-6 w-full py-2.5 bg-orange-600 hover:bg-orange-500 text-white font-semibold rounded-xl text-xs transition-all shadow-md">Començar Test Exprés</button>
@@ -711,7 +715,17 @@
                         </div>
                     </div>
                     
-                    <button id="btn-admin-panel" onclick="initAdminPanel()" class="hidden w-full py-3 bg-purple-600 hover:bg-purple-500 text-white font-semibold rounded-xl text-sm transition-all flex items-center justify-center">
+                    <!-- Widget Referits -->
+                    <div class="bg-gradient-to-r from-brand-900/40 to-slate-900 p-4 rounded-xl border border-brand-500/30 text-sm mt-4">
+                        <h3 class="font-bold text-white mb-1"><i class="fa-solid fa-unlock-keyhole text-brand-400 mr-2"></i>Desbloqueja contingut!</h3>
+                        <p class="text-xs text-slate-300 mb-3">Els Exàmens per Temes i el Test Personalitzat són exclusius. Comparteix el teu nom d'usuari: si un amic es registra amb ell, tots dos els tindreu actius per sempre.</p>
+                        <div class="flex gap-2">
+                            <input type="text" id="profile-ref-link" readonly class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 text-xs text-slate-400 font-bold" value="Carregant...">
+                            <button onclick="copyRefLink()" class="px-4 py-2 bg-brand-600 hover:bg-brand-500 text-white rounded-lg text-xs font-bold transition-all"><i class="fa-regular fa-copy"></i></button>
+                        </div>
+                    </div>
+
+                    <button id="btn-admin-panel" onclick="initAdminPanel()" class="hidden w-full py-3 mt-4 bg-purple-600 hover:bg-purple-500 text-white font-semibold rounded-xl text-sm transition-all flex items-center justify-center">
                         <i class="fa-solid fa-user-shield mr-2"></i> Panell d'Administració
                     </button>
 
@@ -832,6 +846,7 @@
             const password = document.getElementById('auth-password').value;
             const username = document.getElementById('auth-username').value.trim();
             const dob = document.getElementById('auth-dob').value;
+            const referralCode = document.getElementById('auth-referral') ? document.getElementById('auth-referral').value.trim() : "";
 
             if (!email || !password || (window.isRegisterMode && (!username || !dob))) {
                 if (window.showToast) window.showToast("Omple tots els camps obligatoris.", "error");
@@ -847,12 +862,24 @@
                         return;
                     }
                     const cred = await createUserWithEmailAndPassword(auth, email, password);
+                    const isUnlockedByRef = !!referralCode;
+                    
                     await setDoc(doc(db, "users", cred.user.uid), { 
                         username, email, dob, score: 0, 
                         lastResetDate: window.getSpanishDateStr(),
                         lastLogin: window.getSpanishDateStr(),
-                        isPremium: false, isBlocked: false
+                        isPremium: false, isBlocked: false,
+                        unlockedExams: isUnlockedByRef
                     });
+
+                    if (referralCode) {
+                        const refQ = query(collection(db, "users"), where("username", "==", referralCode));
+                        const refSnap = await getDocs(refQ);
+                        if (!refSnap.empty) {
+                            await updateDoc(doc(db, "users", refSnap.docs[0].id), { unlockedExams: true });
+                        }
+                    }
+
                     window.showToast("Compte creat correctament!", "success");
                     window.closeAuthModal();
                 } else {
@@ -876,7 +903,8 @@
                         email: res.user.email, dob: "", score: 0, 
                         lastResetDate: window.getSpanishDateStr(),
                         lastLogin: window.getSpanishDateStr(),
-                        isPremium: false, isBlocked: false 
+                        isPremium: false, isBlocked: false,
+                        unlockedExams: false
                     });
                 }
                 window.showToast("Sessió iniciada amb Google!", "success");
@@ -920,7 +948,8 @@
 
                 await setDoc(userRef, { username: newUsername, lastUsernameChange: now.toISOString() }, { merge: true });
                 const desktopLabel = document.getElementById('desktop-profile-label');
-                if (desktopLabel) desktopLabel.innerHTML = `${newUsername} ${window.getRoleBadge(userData)}`;
+                const safeUsername = String(newUsername || '').replace(/[&<>"'`=\/]/g, s => `&#${s.charCodeAt(0)};`);
+                if (desktopLabel) desktopLabel.innerHTML = `${safeUsername} ${window.getRoleBadge(userData)}`;
                 window.showToast("Nom d'usuari actualitzat correctament!", "success");
                 if (window.loadGlobalRanking) window.loadGlobalRanking();
             } catch (err) {
@@ -1156,6 +1185,7 @@
                 const snap = await getDoc(doc(db, "users", user.uid));
                 if(snap.exists()) {
                     const d = snap.data();
+                    window.currentUserData = d;
                     
                     if(d.isBlocked) {
                         window.showToast("Compte bloquejat per l'administrador.", "error");
@@ -1178,8 +1208,12 @@
                     document.getElementById('profile-username-input').value = d.username || '';
                     document.getElementById('profile-email-val').innerText = user.email;
                     document.getElementById('profile-score-val').innerText = `${d.lastResetDate === today ? (d.score || 0) : 0} pts`;
+                    
+                    const refLinkEl = document.getElementById('profile-ref-link');
+                    if(refLinkEl) refLinkEl.value = d.username || '';
                 }
             } else {
+                window.currentUserData = null;
                 // Usuari NO Loguejat: Bloquejar estadístiques
                 if(statsOverlay) statsOverlay.classList.remove('hidden');
                 if(statsContent) statsContent.classList.add('opacity-40', 'blur-[2px]', 'pointer-events-none');
@@ -1190,10 +1224,18 @@
                 if(adminBtn) adminBtn.classList.add('hidden');
             }
             if(window.loadGlobalRanking) window.loadGlobalRanking();
-            if(window.updateLocksUI) window.updateLocksUI(user);
+            if(window.updateLocksUI) window.updateLocksUI(user, window.currentUserData);
         });
 
         window.getFirebaseCurrentUser = () => auth.currentUser;
+        
+        window.copyRefLink = function() {
+            const code = document.getElementById('profile-ref-link').value;
+            if(!code || code === 'Carregant...') return;
+            navigator.clipboard.writeText(`Crea't un compte gratis a OpposTest.cat i al registre posa el meu nom com a Codi d'amic: ${code}`).then(() => {
+                window.showToast("Codi copiat correctament!", "success");
+            });
+        }
     </script>
 
     <!-- SCRIPT PRINCIPAL DE L'APLICACIÓ -->
@@ -1263,7 +1305,7 @@
             loadHangmanDict();
             loadStatsFromStorage();
             startMidnightCountdown();
-            if(window.updateLocksUI) window.updateLocksUI(null);
+            if(window.updateLocksUI) window.updateLocksUI(null, null);
             
             const txt = document.getElementById('sound-status-text');
             if (txt) txt.innerText = soundEnabled ? 'Activat' : 'Desactivat';
@@ -1286,7 +1328,7 @@
                     if (elFreeTest) elFreeTest.innerText = "00:00:00";
                     
                     if (!logged && localStorage.getItem('oppos_free_test_date') !== todayStr) {
-                        if(window.updateLocksUI) window.updateLocksUI(null);
+                        if(window.updateLocksUI) window.updateLocksUI(null, null);
                     }
                     return; 
                 }
@@ -1498,7 +1540,14 @@
 
         window.checkTestAccess = function(type) {
             const logged = !!window.getFirebaseCurrentUser();
-            if (logged) return true;
+            if (logged) {
+                if ((type === 'topic' || type === 'weak') && window.currentUserData && !window.currentUserData.unlockedExams) {
+                    window.showToast("🔒 Exclusiu: Convida un amic amb el teu nom d'usuari per desbloquejar-ho!", "error");
+                    window.switchTab('profile');
+                    return false;
+                }
+                return true;
+            }
 
             if (type !== 'practice') {
                 window.showToast("🔒 Inicia sessió per accedir a aquesta modalitat.", "error");
@@ -1512,14 +1561,14 @@
                 window.openAuthModal('login');
                 return false;
             }
-
             return true;
         }
 
-        window.updateLocksUI = function(user) {
+        window.updateLocksUI = function(user, userData = null) {
             const logged = !!user;
             const today = window.getSpanishDateStr();
             const freeTestDone = localStorage.getItem('oppos_free_test_date') === today;
+            const examsUnlocked = userData ? userData.unlockedExams : false;
 
             const updateBtn = (id, isLocked, normalText, baseColorClass, hoverColorClass) => {
                 const btn = document.getElementById(id);
@@ -1537,8 +1586,8 @@
             };
 
             updateBtn('btn-start-simulacre', !logged, 'Començar Simulacre', 'bg-brand-600', 'hover:bg-brand-500');
-            updateBtn('btn-start-topic', !logged, 'Iniciar Test per Tema', 'bg-amber-600', 'hover:bg-amber-500');
-            updateBtn('btn-start-weak', !logged, 'Començar Test Exprés', 'bg-orange-600', 'hover:bg-orange-500');
+            updateBtn('btn-start-topic', !logged || !examsUnlocked, 'Iniciar Test per Tema', 'bg-amber-600', 'hover:bg-amber-500');
+            updateBtn('btn-start-weak', !logged || !examsUnlocked, 'Començar Test Exprés', 'bg-orange-600', 'hover:bg-orange-500');
             updateBtn('btn-start-practice', (!logged && freeTestDone), 'Començar Pràctica', 'bg-emerald-600', 'hover:bg-emerald-500');
 
             updateBtn('btn-start-hangman', !logged, '<i class="fa-solid fa-play mr-2"></i> Jugar al Penjat', 'bg-amber-600', 'hover:bg-amber-500');
@@ -1811,7 +1860,7 @@
                 });
             } else {
                 localStorage.setItem('oppos_free_test_date', window.getSpanishDateStr());
-                if (window.updateLocksUI) window.updateLocksUI(null);
+                if (window.updateLocksUI) window.updateLocksUI(null, null);
             }
 
             document.getElementById('exam-active-container').classList.add('hidden');
