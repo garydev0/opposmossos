@@ -167,7 +167,7 @@
             <div class="flex items-center space-x-3">
                 <div>
                     <h1 class="text-lg font-bold text-slate-100 leading-tight">OpposTest - Mossos d'Esquadra</h1>
-                    <p class="text-xs text-slate-400">Tests oposicions Mossos i Guia d'Estudi</p>
+                    <p class="text-xs text-slate-400">Tests oposicions Mossos</p>
                 </div>
             </div>
 
@@ -214,6 +214,18 @@
 
         <!-- DASHBOARD SECTION -->
         <section id="sec-dashboard" class="tab-content space-y-6">
+            
+            <!-- Accessos Directes -->
+            <div class="grid grid-cols-2 gap-4">
+                <button onclick="switchTab('exam')" class="bg-brand-600 hover:bg-brand-500 text-white rounded-2xl p-4 sm:p-6 shadow-lg shadow-brand-600/30 border border-brand-500/50 transition-all flex flex-col items-center justify-center group">
+                    <i class="fa-solid fa-file-pen text-3xl mb-2 group-hover:scale-110 transition-transform"></i>
+                    <span class="font-bold text-sm sm:text-base">Anar a Tests</span>
+                </button>
+                <button onclick="switchTab('minigames')" class="bg-purple-600 hover:bg-purple-500 text-white rounded-2xl p-4 sm:p-6 shadow-lg shadow-purple-600/30 border border-purple-500/50 transition-all flex flex-col items-center justify-center group">
+                    <i class="fa-solid fa-gamepad text-3xl mb-2 group-hover:scale-110 transition-transform"></i>
+                    <span class="font-bold text-sm sm:text-base">Anar a Minijocs</span>
+                </button>
+            </div>
 
             <!-- Contenidor d'Estadístiques Privades -->
             <div class="relative">
@@ -475,7 +487,7 @@
                         <div>
                             <div class="w-12 h-12 rounded-xl bg-brand-500/10 text-brand-400 flex items-center justify-center text-xl mb-4"><i class="fa-solid fa-clock"></i></div>
                             <h3 class="text-lg font-bold text-white">Simulacre Oficial</h3>
-                            <p class="text-slate-300 text-xs mt-2 leading-relaxed">Examen cronometrat amb 30 preguntes barrejades i límit de 30 minuts. No voràs la solució fins al final.</p>
+                            <p class="text-slate-300 text-xs mt-2 leading-relaxed">Examen cronometrat amb 30 preguntes barrejades i límit de 30 minuts. No voràs la solució fins al final i podràs rectificar.</p>
                         </div>
                         <button id="btn-start-simulacre" onclick="startSimulacre()" class="mt-6 w-full py-2.5 bg-brand-600 hover:bg-brand-500 text-white font-semibold rounded-xl text-xs transition-all shadow-md">Començar Simulacre</button>
                     </div>
@@ -1680,8 +1692,8 @@
                 const btn = document.createElement('button');
                 btn.type = "button";
                 btn.className = `w-full text-left p-4 rounded-xl border text-sm font-medium transition-all flex items-center justify-between `;
-                if (!answered) {
-                    btn.className += `bg-slate-900 border-slate-700 hover:border-brand-500 text-slate-200`;
+                
+                if (!answered || isSimulacro) {
                     btn.onclick = () => {
                         const timeSpent = (Date.now() - questionStartTime) / 1000;
                         userAnswers[currentQuestionIdx] = { choice: idx, time: timeSpent };
@@ -1693,16 +1705,24 @@
                         
                         renderQuestion();
                     };
+                }
+
+                if (isSimulacro) {
+                    if (answered && selected.choice === idx) {
+                        btn.className += `bg-brand-900/50 border-brand-500 text-brand-200`;
+                    } else {
+                        btn.className += `bg-slate-900 border-slate-700 hover:border-brand-500 text-slate-200 ${answered ? 'opacity-60' : ''}`;
+                    }
                 } else {
-                    if (isSimulacro) {
-                        if (selected.choice === idx) btn.className += `bg-brand-900/50 border-brand-500 text-brand-200`;
-                        else btn.className += `bg-slate-900/50 border-slate-800 text-slate-500 opacity-60`;
+                    if (!answered) {
+                        btn.className += `bg-slate-900 border-slate-700 hover:border-brand-500 text-slate-200`;
                     } else {
                         if (opt === q.correctAnswer) btn.className += `bg-emerald-950/80 border-emerald-500 text-emerald-200`;
                         else if (selected.choice === idx) btn.className += `bg-red-950/80 border-red-500 text-red-200`;
                         else btn.className += `bg-slate-900/50 border-slate-800 text-slate-500 opacity-60`;
                     }
                 }
+                
                 btn.innerHTML = `<span>${String.fromCharCode(65+idx)}. ${opt}</span>`;
                 optsBox.appendChild(btn);
             });
