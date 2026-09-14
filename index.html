@@ -977,6 +977,9 @@
             if (!user) return;
             
             if (code === window.currentUserData.username) return window.showToast("No pots usar el teu propi codi.", "error");
+            
+            // Bloqueo de seguridad: Evita que ejecuten la función por consola si ya lo han canjeado
+            if (window.currentUserData.unlockedExams) return window.showToast("Ja tens el contingut desbloquejat, no pots canviar més codis.", "error");
 
             try {
                 const refQ = query(collection(db, "users"), where("username", "==", code));
