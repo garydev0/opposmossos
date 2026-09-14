@@ -148,7 +148,7 @@
             </div>
             <div class="flex justify-end space-x-3 pt-2">
                 <button type="button" onclick="closeReportModal()" class="px-4 py-2 bg-slate-800 text-slate-300 rounded-xl text-xs font-semibold">Cancel·lar</button>
-                <button type="button" onclick="submitQuestionReport()" class="px-4 py-2 bg-brand-600 hover:bg-brand-500 text-white rounded-xl text-xs font-semibold">Enviar avís</button>
+                <button type="button" onclick="window.submitQuestionReport()" class="px-4 py-2 bg-brand-600 hover:bg-brand-500 text-white rounded-xl text-xs font-semibold">Enviar avís</button>
             </div>
         </div>
     </div>
@@ -168,13 +168,15 @@
 
     <header class="bg-slate-900/90 backdrop-blur border-b border-slate-800 sticky top-0 z-40">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-            <div class="flex items-center space-x-3">
+            <div class="flex items-center space-x-5">
                 <div>
-                    <div class="flex items-center">
-                        <h1 class="text-lg font-bold text-slate-100 leading-tight">OpposTest</h1>
-                        <span id="police-clock" class="ml-3 font-mono text-[10px] bg-slate-900 border border-slate-700 text-brand-400 px-2 py-0.5 rounded shadow-sm">--:--:--</span>
-                    </div>
+                    <h1 class="text-lg font-bold text-slate-100 leading-tight">OpposTest</h1>
                     <p class="text-xs text-slate-400">Tests oposicions Mossos</p>
+                </div>
+                <!-- Widget Reloj Independiente -->
+                <div class="hidden sm:flex items-center bg-slate-900 border border-slate-700/80 px-3 py-1.5 rounded-lg shadow-inner">
+                    <i class="fa-regular fa-clock text-brand-400 mr-2 text-xs"></i>
+                    <span id="police-clock" class="font-mono text-xs font-bold text-slate-200 tracking-wider">--:--:--</span>
                 </div>
             </div>
 
