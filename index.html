@@ -6,7 +6,7 @@
     <title>Tests Mossos d'Esquadra - Oposicions 2026 | OpposTest</title>
     
     <!-- SEO & Meta Tags Optimitzats -->
-    <meta name="description" content="Plataforma líder d'Oposicions per a Mossos d'Esquadra. Practica gratis amb milers de preguntes de tests oficials, simulacres, fòrum d'opositors i rànquing diari.">
+    <meta name="description" content="Plataforma líder d'Oposicions per a Mossos d'Esquadra. Practica gratis amb milers de preguntes de tests oficials, simulacres i rànquing diari.">
     <meta name="keywords" content="Mossos d'Esquadra, Oposicions Mossos, Test Mossos 2026, Simulacres Mossos, Temari Mossos, Catalunya, Policia de la Generalitat">
     <meta name="author" content="Gerard App's">
     <meta property="og:site_name" content="OpposTest">
@@ -149,6 +149,19 @@
         </div>
     </div>
 
+    <!-- MODAL CONFIRMAR SORTIDA EXAMEN -->
+    <div id="exit-modal" onclick="if(event.target === this) document.getElementById('exit-modal').classList.add('hidden')" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+        <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-sm w-full p-6 shadow-2xl text-center space-y-4">
+            <div class="w-16 h-16 bg-red-900/30 text-red-500 rounded-full flex items-center justify-center text-3xl mx-auto mb-2"><i class="fa-solid fa-person-walking-arrow-right"></i></div>
+            <h3 class="text-lg font-bold text-white">Segur que vols sortir?</h3>
+            <p class="text-sm text-slate-300">Si surts ara, perdràs el progrés d'aquest test i no es guardarà la teva nota.</p>
+            <div class="flex justify-center space-x-3 pt-4">
+                <button type="button" onclick="document.getElementById('exit-modal').classList.add('hidden')" class="px-5 py-2.5 bg-slate-800 hover:bg-slate-700 text-white rounded-xl text-sm font-semibold transition-all">Cancel·lar</button>
+                <button type="button" onclick="exitExamToMenu()" class="px-5 py-2.5 bg-red-600 hover:bg-red-500 text-white rounded-xl text-sm font-semibold transition-all shadow-lg">Sortir del test</button>
+            </div>
+        </div>
+    </div>
+
     <header class="bg-slate-900/90 backdrop-blur border-b border-slate-800 sticky top-0 z-40">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
             <div class="flex items-center space-x-3">
@@ -169,14 +182,8 @@
                 <button onclick="switchTab('minigames')" id="nav-minigames" class="tab-btn px-3 py-2 rounded-lg text-sm font-medium transition-all text-slate-300 hover:text-white hover:bg-slate-700/50">
                     <i class="fa-solid fa-gamepad mr-1"></i>Minijocs
                 </button>
-                <button onclick="switchTab('forum')" id="nav-forum" class="tab-btn px-3 py-2 rounded-lg text-sm font-medium transition-all text-slate-300 hover:text-white hover:bg-slate-700/50">
-                    <i class="fa-solid fa-comments mr-1"></i>Fòrum
-                </button>
                 <button onclick="switchTab('ranking')" id="nav-ranking" class="tab-btn px-3 py-2 rounded-lg text-sm font-medium transition-all text-slate-300 hover:text-white hover:bg-slate-700/50">
                     <i class="fa-solid fa-trophy mr-1"></i>Ranking
-                </button>
-                <button onclick="switchTab('guide')" id="nav-guide" class="tab-btn px-3 py-2 rounded-lg text-sm font-medium transition-all text-slate-300 hover:text-white hover:bg-slate-700/50">
-                    <i class="fa-solid fa-book-bookmark mr-1"></i>Guia
                 </button>
             </nav>
 
@@ -194,13 +201,11 @@
             </div>
         </div>
 
-        <div class="md:hidden grid grid-cols-7 bg-slate-900 border-t border-slate-800 py-2 px-1 text-[10px] text-center">
+        <div class="md:hidden grid grid-cols-5 bg-slate-900 border-t border-slate-800 py-2 px-1 text-[10px] text-center">
             <button onclick="switchTab('dashboard')" id="nav-mob-dashboard" class="mob-tab-btn flex flex-col items-center py-1 text-brand-400"><i class="fa-solid fa-chart-pie text-sm mb-0.5"></i><span>Inici</span></button>
             <button onclick="switchTab('exam')" id="nav-mob-exam" class="mob-tab-btn flex flex-col items-center py-1 text-slate-400"><i class="fa-solid fa-file-pen text-sm mb-0.5"></i><span>Tests</span></button>
             <button onclick="switchTab('minigames')" id="nav-mob-minigames" class="mob-tab-btn flex flex-col items-center py-1 text-slate-400"><i class="fa-solid fa-gamepad text-sm mb-0.5"></i><span>Jocs</span></button>
-            <button onclick="switchTab('forum')" id="nav-mob-forum" class="mob-tab-btn flex flex-col items-center py-1 text-slate-400"><i class="fa-solid fa-comments text-sm mb-0.5"></i><span>Fòrum</span></button>
             <button onclick="switchTab('ranking')" id="nav-mob-ranking" class="mob-tab-btn flex flex-col items-center py-1 text-slate-400"><i class="fa-solid fa-trophy text-sm mb-0.5"></i><span>Rànquing</span></button>
-            <button onclick="switchTab('guide')" id="nav-mob-guide" class="mob-tab-btn flex flex-col items-center py-1 text-slate-400"><i class="fa-solid fa-book-bookmark text-sm mb-0.5"></i><span>Guia</span></button>
             <button onclick="switchTab('profile')" id="nav-mob-profile" class="mob-tab-btn flex flex-col items-center py-1 text-slate-400 border-l border-slate-800"><i class="fa-solid fa-user-circle text-sm text-brand-400 mb-0.5"></i><span class="truncate w-full px-0.5">Perfil</span></button>
         </div>
     </header>
@@ -209,28 +214,6 @@
 
         <!-- DASHBOARD SECTION -->
         <section id="sec-dashboard" class="tab-content space-y-6">
-            <div class="bg-gradient-to-r from-slate-800 to-slate-900 rounded-2xl p-6 border border-slate-800 shadow-xl relative overflow-hidden">
-                <div class="absolute -right-10 -bottom-10 opacity-10 text-slate-100 pointer-events-none">
-                    <i class="fa-solid fa-shield-halved text-[220px]"></i>
-                </div>
-                <div class="relative z-10 max-w-2xl">
-                    <h2 class="text-2xl sm:text-3xl font-extrabold text-white">Hola, Opositor/a! 👋</h2>
-                    <p class="text-slate-300 mt-2 text-sm sm:text-base">
-                        Benvingut/da al teu centre de preparació de tests per als <strong>Mossos d'Esquadra</strong>. Practica amb el banc de preguntes, vigila la teva racha i millora els punts dèbils.
-                    </p>
-                    <div id="streak-banner-box" class="mt-4 inline-flex items-center bg-amber-500/10 border border-amber-500/30 px-3 py-1.5 rounded-xl text-amber-300 text-xs font-bold">
-                        <i class="fa-solid fa-fire text-amber-400 mr-2"></i> <span id="streak-text-counter">🔥 0 dies estudiant seguits</span>
-                    </div>
-                    <div class="mt-6 flex flex-wrap gap-3">
-                        <button onclick="switchTab('exam')" class="px-5 py-2.5 bg-brand-600 hover:bg-brand-500 text-white font-semibold rounded-xl shadow-lg shadow-brand-600/30 transition-all flex items-center">
-                            <i class="fa-solid fa-play mr-2"></i> Anar a Secció de Tests
-                        </button>
-                        <button onclick="switchTab('minigames')" class="px-5 py-2.5 bg-purple-600 hover:bg-purple-500 text-white font-semibold rounded-xl shadow-lg shadow-purple-600/30 transition-all flex items-center">
-                            <i class="fa-solid fa-gamepad mr-2"></i> Minijocs Interactius
-                        </button>
-                    </div>
-                </div>
-            </div>
 
             <!-- Contenidor d'Estadístiques Privades -->
             <div class="relative">
@@ -291,9 +274,14 @@
                         </div>
                     </div>
 
-                    <!-- Comparativa Personal -->
+                    <!-- Comparativa Personal i Racha -->
                     <div class="bg-slate-800/80 rounded-xl p-6 border border-slate-700 space-y-4">
-                        <h3 class="text-base font-bold text-white flex items-center"><i class="fa-solid fa-chart-line text-brand-400 mr-2"></i> Comparativa Personal</h3>
+                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+                            <h3 class="text-base font-bold text-white flex items-center"><i class="fa-solid fa-chart-line text-brand-400 mr-2"></i> Comparativa Personal</h3>
+                            <div id="streak-banner-box" class="inline-flex items-center bg-amber-500/10 border border-amber-500/30 px-3 py-1.5 rounded-xl text-amber-300 text-xs font-bold shadow-sm">
+                                <i class="fa-solid fa-fire text-amber-400 mr-2"></i> <span id="streak-text-counter">🔥 0 dies estudiant seguits</span>
+                            </div>
+                        </div>
                         <div class="bg-slate-900/80 p-4 rounded-xl border border-slate-700 space-y-3 text-sm">
                             <div class="flex justify-between items-center"><span class="text-slate-400 text-xs">Fa 30 dies:</span> <span id="comp-past-score" class="font-bold text-slate-300">61%</span></div>
                             <div class="flex justify-between items-center"><span class="text-slate-400 text-xs">Ara mateix:</span> <span id="comp-now-score" class="font-bold text-white">0%</span></div>
@@ -487,7 +475,7 @@
                         <div>
                             <div class="w-12 h-12 rounded-xl bg-brand-500/10 text-brand-400 flex items-center justify-center text-xl mb-4"><i class="fa-solid fa-clock"></i></div>
                             <h3 class="text-lg font-bold text-white">Simulacre Oficial</h3>
-                            <p class="text-slate-300 text-xs mt-2 leading-relaxed">Examen cronometrat amb 30 preguntes barrejades i límit de 30 minuts.</p>
+                            <p class="text-slate-300 text-xs mt-2 leading-relaxed">Examen cronometrat amb 30 preguntes barrejades i límit de 30 minuts. No voràs la solució fins al final.</p>
                         </div>
                         <button id="btn-start-simulacre" onclick="startSimulacre()" class="mt-6 w-full py-2.5 bg-brand-600 hover:bg-brand-500 text-white font-semibold rounded-xl text-xs transition-all shadow-md">Començar Simulacre</button>
                     </div>
@@ -496,7 +484,7 @@
                         <div>
                             <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xl mb-4"><i class="fa-solid fa-graduation-cap"></i></div>
                             <h3 class="text-lg font-bold text-white">Pràctica Lliure</h3>
-                            <p class="text-slate-300 text-xs mt-2 leading-relaxed">Sense límit de temps. Tria quantes preguntes vols practicar.</p>
+                            <p class="text-slate-300 text-xs mt-2 leading-relaxed">Sense límit de temps. Tria quantes preguntes vols practicar. Es corregeix al moment.</p>
                             <div class="mt-4 flex gap-2">
                                 <button onclick="setPracticeCount(10)" id="p-btn-10" class="practice-count-btn flex-1 py-1.5 bg-emerald-600 text-white border border-emerald-600 rounded-lg text-xs font-semibold">10</button>
                                 <button onclick="setPracticeCount(30)" id="p-btn-30" class="practice-count-btn flex-1 py-1.5 bg-slate-900 text-slate-300 border border-slate-700 rounded-lg text-xs font-semibold">30</button>
@@ -562,7 +550,7 @@
                         <div class="w-32 bg-slate-700 h-2.5 rounded-full overflow-hidden">
                             <div id="exam-progress-bar" class="bg-brand-500 h-full w-0 transition-all duration-300"></div>
                         </div>
-                        <button onclick="exitExamToMenu()" class="text-xs px-4 py-1.5 bg-red-600 hover:bg-red-700 text-white font-bold border border-red-500 rounded-lg shadow-md transition-all">Sortir</button>
+                        <button onclick="document.getElementById('exit-modal').classList.remove('hidden')" class="text-xs px-4 py-1.5 bg-red-600 hover:bg-red-700 text-white font-bold border border-red-500 rounded-lg shadow-md transition-all">Sortir</button>
                     </div>
                 </div>
 
@@ -629,32 +617,6 @@
                     <button onclick="switchTab('dashboard')" class="px-6 py-2.5 bg-slate-700 hover:bg-slate-600 text-slate-200 font-medium rounded-xl text-sm">
                         Veure Estadístiques
                     </button>
-                </div>
-            </div>
-        </section>
-
-        <!-- FÒRUM SECTION -->
-        <section id="sec-forum" class="tab-content hidden space-y-6">
-            <div class="bg-slate-800 rounded-2xl p-6 border border-slate-700 shadow-xl">
-                <h2 class="text-xl font-bold text-white flex items-center"><i class="fa-solid fa-comments text-brand-400 mr-2"></i>Fòrum d'Opositors</h2>
-                <p class="text-slate-300 text-sm mt-1">Comparteix dubtes i ajuda a altres companys.</p>
-            </div>
-
-            <!-- Fòrum No Loguejat -->
-            <div id="forum-unauth" class="bg-slate-800/80 rounded-2xl border border-slate-700 p-8 text-center hidden">
-                <i class="fa-solid fa-lock text-4xl text-slate-500 mb-3"></i>
-                <p class="text-slate-300 text-sm mb-4">Inicia sessió per llegir i participar al fòrum.</p>
-                <button onclick="openAuthModal('login')" class="px-6 py-2.5 bg-brand-600 hover:bg-brand-500 text-white font-semibold rounded-xl text-sm transition-all shadow-md">Iniciar Sessió</button>
-            </div>
-
-            <!-- Fòrum Loguejat -->
-            <div id="forum-auth" class="space-y-6 hidden">
-                <div class="bg-slate-900 rounded-2xl p-4 border border-slate-700 flex gap-3">
-                    <input type="text" id="forum-new-post" placeholder="Escriu la teva pregunta o comentari..." class="flex-1 bg-slate-950 border border-slate-800 rounded-xl p-3 text-sm text-white outline-none focus:border-brand-500">
-                    <button onclick="submitForumPost()" class="px-5 py-3 bg-brand-600 hover:bg-brand-500 text-white font-bold rounded-xl transition-all shadow-md"><i class="fa-solid fa-paper-plane"></i></button>
-                </div>
-                <div id="forum-posts-container" class="space-y-4">
-                    <p class="text-center text-slate-400 text-sm">Carregant missatges...</p>
                 </div>
             </div>
         </section>
@@ -816,19 +778,6 @@
                     <h3 class="font-bold text-slate-300 mb-3"><i class="fa-solid fa-bug text-red-400 mr-2"></i>Reportes de Preguntes i Fòrum</h3>
                     <div id="admin-reports-list" class="space-y-2 max-h-48 overflow-y-auto pr-2"></div>
                 </div>
-            </div>
-        </section>
-
-        <!-- GUIDE SECTION -->
-        <section id="sec-guide" class="tab-content hidden space-y-6">
-            <div class="bg-slate-800 rounded-xl p-6 border border-slate-700">
-                <h2 class="text-2xl font-bold text-white mb-2"><i class="fa-solid fa-book-open text-brand-400 mr-2"></i>Guia d'Estudi Mossos d'Esquadra</h2>
-                <p class="text-slate-300 text-sm">Resum executiu i temari clau per a les oposicions.</p>
-            </div>
-
-            <div class="bg-slate-800/60 rounded-xl border border-slate-700/80 p-8 text-center text-slate-400 space-y-3">
-                <i class="fa-solid fa-person-digging text-3xl text-brand-400"></i>
-                <p class="text-sm font-medium">Contingut de la guia en construcció. Estarà disponible properament.</p>
             </div>
         </section>
 
@@ -1013,11 +962,13 @@
                     const data = d.data();
                     if (!data.isBlocked) {
                         let score = data.lastResetDate === today ? (data.score || 0) : 0;
-                        list.push({ username: data.username || 'Anònim', score, email: data.email, isPremium: data.isPremium });
+                        if(score >= 1) {
+                            list.push({ username: data.username || 'Anònim', score, email: data.email, isPremium: data.isPremium });
+                        }
                     }
                 });
                 list.sort((a, b) => b.score - a.score);
-                if (list.length === 0) return tableBody.innerHTML = `<tr><td colspan="3" class="p-6 text-center text-slate-400">Encara no hi ha usuaris avui.</td></tr>`;
+                if (list.length === 0) return tableBody.innerHTML = `<tr><td colspan="3" class="p-6 text-center text-slate-400">Encara no hi ha usuaris actius avui.</td></tr>`;
                 
                 let html = '';
                 list.forEach((u, i) => {
@@ -1034,86 +985,6 @@
                 });
                 tableBody.innerHTML = html;
             } catch (e) { tableBody.innerHTML = `<tr><td colspan="3" class="p-6 text-center text-red-400">Error carregant ranking.</td></tr>`; }
-        }
-
-        // SISTEMA FÒRUM
-        const badWords = ['puta', 'joder', 'merda', 'gilipolles', 'cabron', 'hòstia', 'hostia', 'follar', 'collons', 'coño', 'mierda'];
-
-        window.submitForumPost = async () => {
-            const text = document.getElementById('forum-new-post').value.trim();
-            if (!text) return;
-
-            const textLower = text.toLowerCase();
-            if (badWords.some(bw => textLower.includes(bw))) {
-                return window.showToast("Llenguatge no permès. Revisa el teu missatge.", "error");
-            }
-
-            const user = window.getFirebaseCurrentUser();
-            if (!user) return;
-
-            try {
-                const uSnap = await getDoc(doc(db, "users", user.uid));
-                const uData = uSnap.exists() ? uSnap.data() : {};
-                
-                await addDoc(collection(db, "forum"), {
-                    text, authorUid: user.uid, authorName: uData.username || 'Anònim',
-                    authorEmail: uData.email, isPremium: uData.isPremium || false,
-                    timestamp: Date.now(), dateStr: window.getSpanishDateStr()
-                });
-                document.getElementById('forum-new-post').value = '';
-                window.loadForumPosts();
-                window.showToast("Missatge publicat al fòrum!", "success");
-            } catch(e) { window.showToast("Error en publicar: " + e.message, "error"); }
-        }
-
-        window.loadForumPosts = async function() {
-            const container = document.getElementById('forum-posts-container');
-            if(!container) return;
-            container.innerHTML = '<p class="text-center text-slate-400 text-sm">Carregant missatges...</p>';
-            try {
-                const snap = await getDocs(collection(db, "forum"));
-                let posts = [];
-                snap.forEach(d => posts.push({ id: d.id, ...d.data() }));
-                posts.sort((a, b) => b.timestamp - a.timestamp);
-
-                if(posts.length === 0) return container.innerHTML = '<p class="text-center text-slate-500 text-sm py-4">Cap missatge encara. Trenca el gel!</p>';
-
-                let html = '';
-                const escapeHTML = (str) => String(str || '').replace(/[&<>"'`=\/]/g, s => `&#${s.charCodeAt(0)};`);
-
-                posts.forEach(p => {
-                    const dObj = new Date(p.timestamp);
-                    const timeStr = `${dObj.toLocaleDateString('es-ES')} ${dObj.getHours().toString().padStart(2,'0')}:${dObj.getMinutes().toString().padStart(2,'0')}`;
-                    const safeAuthor = escapeHTML(p.authorName);
-                    const safeText = escapeHTML(p.text);
-                    const safeJsText = encodeURIComponent(p.text);
-                    
-                    html += `
-                    <div class="bg-slate-900 rounded-xl p-4 border border-slate-800">
-                        <div class="flex justify-between items-start mb-2">
-                            <div class="flex items-center">
-                                <span class="font-bold text-white text-sm">${safeAuthor}</span>
-                                ${window.getRoleBadge({ email: p.authorEmail, isPremium: p.isPremium })}
-                                <span class="text-[10px] text-slate-500 ml-3">${timeStr}</span>
-                            </div>
-                            <button onclick="reportForumPost('${escapeHTML(p.id)}', decodeURIComponent('${safeJsText}'))" class="text-slate-500 hover:text-red-400 transition-colors" title="Reportar"><i class="fa-solid fa-flag text-xs"></i></button>
-                        </div>
-                        <p class="text-slate-300 text-sm leading-relaxed">${safeText}</p>
-                    </div>`;
-                });
-                container.innerHTML = html;
-            } catch(e) { container.innerHTML = `<p class="text-center text-red-400 text-sm">Error carregant el fòrum.</p>`; }
-        }
-
-        window.reportForumPost = async (postId, postText) => {
-            if(!confirm("Vols reportar aquest missatge per llenguatge ofensiu o inadequat?")) return;
-            try {
-                await addDoc(collection(db, "reports"), {
-                    type: "Report Fòrum", comment: "Aquest missatge ha estat reportat pels usuaris.",
-                    question: postText, topic: "Fòrum", date: window.getSpanishDateStr()
-                });
-                window.showToast("Missatge reportat correctament.", "success");
-            } catch(e) { window.showToast("Error en reportar.", "error"); }
         }
 
         // PANELL D'ADMINISTRACIÓ
@@ -1292,12 +1163,6 @@
                     if(notLogged) notLogged.classList.add('hidden');
                     if(logged) logged.classList.remove('hidden');
                     
-                    // Mostrem seccions de fòrum
-                    const fUnauth = document.getElementById('forum-unauth');
-                    const fAuth = document.getElementById('forum-auth');
-                    if(fUnauth) fUnauth.classList.add('hidden');
-                    if(fAuth) { fAuth.classList.remove('hidden'); window.loadForumPosts(); }
-                    
                     if(adminBtn) {
                         if (user.email === "gerardlopezgarcia1@gmail.com") adminBtn.classList.remove('hidden');
                         else adminBtn.classList.add('hidden');
@@ -1317,12 +1182,6 @@
                 if(logged) logged.classList.add('hidden');
                 if(desktopLabel) desktopLabel.innerText = "Iniciar Sessió";
                 if(adminBtn) adminBtn.classList.add('hidden');
-                
-                // Amaguem fòrum interactiu
-                const fUnauth = document.getElementById('forum-unauth');
-                const fAuth = document.getElementById('forum-auth');
-                if(fUnauth) fUnauth.classList.remove('hidden');
-                if(fAuth) fAuth.classList.add('hidden');
             }
             if(window.loadGlobalRanking) window.loadGlobalRanking();
             if(window.updateLocksUI) window.updateLocksUI(user);
@@ -1355,6 +1214,7 @@
         let activeTimerInterval = null;
         let timeLeftSeconds = 0;
         let questionStartTime = 0;
+        let isSimulacro = false;
 
         let isRegisterMode = false;
 
@@ -1597,7 +1457,6 @@
             }
 
             if (tabId === 'ranking') window.loadGlobalRanking && window.loadGlobalRanking();
-            if (tabId === 'forum') window.loadForumPosts && window.loadForumPosts();
             if (tabId === 'dashboard') updateStatsDashboardUI();
         }
 
@@ -1708,6 +1567,7 @@
             if (!window.checkTestAccess('simulacre')) return;
             if (questionBank.length === 0) { window.showToast("Banc buit", "error"); return; }
             
+            isSimulacro = true;
             const subset = [...questionBank].sort(() => 0.5 - Math.random()).slice(0, Math.min(questionBank.length, 30));
             currentExam = prepareShuffledExam(subset);
             launchExamSession("Simulacre Oficial", true, 30 * 60);
@@ -1717,6 +1577,7 @@
             if (!window.checkTestAccess('practice')) return;
             if (questionBank.length === 0) { window.showToast("Banc buit", "error"); return; }
             
+            isSimulacro = false;
             const subset = [...questionBank].sort(() => 0.5 - Math.random()).slice(0, practiceSelectedCount);
             currentExam = prepareShuffledExam(subset);
             launchExamSession(`Pràctica Lliure (${subset.length} preguntes)`, false, 0);
@@ -1726,6 +1587,7 @@
             if (!window.checkTestAccess('topic')) return;
             const file = document.getElementById('topic-select').value;
             try {
+                isSimulacro = false;
                 const res = await fetch(file);
                 if (!res.ok) throw new Error();
                 const data = await res.json();
@@ -1740,6 +1602,7 @@
 
         window.startWeakSpotExam = function() {
             if (!window.checkTestAccess('weak')) return;
+            isSimulacro = false;
             const stats = examHistory.topicsStats || {};
             let weakQuestions = questionBank.filter(q => {
                 const t = q.topic || 'General';
@@ -1789,6 +1652,7 @@
         }
 
         window.exitExamToMenu = () => {
+            document.getElementById('exit-modal').classList.add('hidden');
             if (activeTimerInterval) clearInterval(activeTimerInterval);
             document.getElementById('exam-menu-container').classList.remove('hidden');
             document.getElementById('exam-active-container').classList.add('hidden');
@@ -1822,22 +1686,29 @@
                         const timeSpent = (Date.now() - questionStartTime) / 1000;
                         userAnswers[currentQuestionIdx] = { choice: idx, time: timeSpent };
                         
-                        const isCorrect = (q.options[idx] === q.correctAnswer);
-                        playSound(isCorrect);
+                        if(!isSimulacro) {
+                            const isCorrect = (q.options[idx] === q.correctAnswer);
+                            playSound(isCorrect);
+                        }
                         
                         renderQuestion();
                     };
                 } else {
-                    if (opt === q.correctAnswer) btn.className += `bg-emerald-950/80 border-emerald-500 text-emerald-200`;
-                    else if (selected.choice === idx) btn.className += `bg-red-950/80 border-red-500 text-red-200`;
-                    else btn.className += `bg-slate-900/50 border-slate-800 text-slate-500 opacity-60`;
+                    if (isSimulacro) {
+                        if (selected.choice === idx) btn.className += `bg-brand-900/50 border-brand-500 text-brand-200`;
+                        else btn.className += `bg-slate-900/50 border-slate-800 text-slate-500 opacity-60`;
+                    } else {
+                        if (opt === q.correctAnswer) btn.className += `bg-emerald-950/80 border-emerald-500 text-emerald-200`;
+                        else if (selected.choice === idx) btn.className += `bg-red-950/80 border-red-500 text-red-200`;
+                        else btn.className += `bg-slate-900/50 border-slate-800 text-slate-500 opacity-60`;
+                    }
                 }
                 btn.innerHTML = `<span>${String.fromCharCode(65+idx)}. ${opt}</span>`;
                 optsBox.appendChild(btn);
             });
 
             const expBox = document.getElementById('explanation-box');
-            if (answered) {
+            if (answered && !isSimulacro) {
                 expBox.classList.remove('hidden');
                 const isCorrect = q.options[selected.choice] === q.correctAnswer;
                 expBox.className = `mt-6 p-4 rounded-xl border ${isCorrect ? 'bg-emerald-950/40 border-emerald-500/40 text-emerald-200' : 'bg-red-950/40 border-red-500/40 text-red-200'}`;
