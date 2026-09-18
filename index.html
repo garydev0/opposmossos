@@ -550,6 +550,7 @@
         <!-- PROFILE SECTION -->
         <section id="sec-profile" class="tab-content hidden space-y-6">
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Columna Esquerra: Info Bàsica i Settings -->
                 <div class="lg:col-span-1 space-y-6">
                     <div class="bg-slate-800 rounded-2xl p-6 sm:p-8 border border-slate-700 shadow-xl flex flex-col items-center text-center">
                         <div class="w-24 h-24 rounded-full bg-slate-900 border-4 border-brand-500 flex items-center justify-center text-4xl font-bold text-brand-400 mb-4 shadow-[0_0_20px_rgba(37,99,235,0.3)] relative">
@@ -593,7 +594,10 @@
                     </div>
                 </div>
 
+                <!-- Columna Dreta: Insígnies i Desbloquejos -->
                 <div class="lg:col-span-2 space-y-6">
+                    
+                    <!-- Desbloquejos i Referits -->
                     <div class="bg-gradient-to-br from-brand-900/30 to-slate-800 p-6 sm:p-8 rounded-2xl border border-brand-500/30 shadow-lg">
                         <div class="flex items-start gap-4 mb-4">
                             <div class="w-12 h-12 bg-brand-600 rounded-xl flex items-center justify-center text-2xl text-white shrink-0"><i class="fa-solid fa-unlock-keyhole"></i></div>
@@ -622,9 +626,11 @@
                         </div>
                     </div>
 
+                    <!-- Insígnies Gamificació -->
                     <div class="bg-slate-800 rounded-2xl p-6 sm:p-8 border border-slate-700 shadow">
                         <h3 class="text-base font-bold text-white mb-6"><i class="fa-solid fa-medal text-amber-400 mr-2"></i>Insígnies Aconseguides</h3>
                         <div class="grid grid-cols-2 sm:grid-cols-4 gap-4" id="badges-container">
+                            <!-- Generat dinàmicament en carregar -->
                             <div class="bg-slate-900/50 p-4 rounded-xl border border-slate-700 text-center opacity-50 grayscale"><i class="fa-solid fa-play text-2xl text-slate-500 mb-2"></i><p class="text-[10px] font-bold text-slate-300 uppercase">1r Test Completat</p></div>
                             <div class="bg-slate-900/50 p-4 rounded-xl border border-slate-700 text-center opacity-50 grayscale"><i class="fa-solid fa-fire text-2xl text-slate-500 mb-2"></i><p class="text-[10px] font-bold text-slate-300 uppercase">Racha 7 dies</p></div>
                             <div class="bg-slate-900/50 p-4 rounded-xl border border-slate-700 text-center opacity-50 grayscale"><i class="fa-solid fa-bullseye text-2xl text-slate-500 mb-2"></i><p class="text-[10px] font-bold text-slate-300 uppercase">90% Precisió global</p></div>
@@ -632,6 +638,7 @@
                         </div>
                         <p class="text-xs text-slate-500 mt-4 text-center">Inicia sessió i fes tests per desbloquejar les medalles honorífiques.</p>
                     </div>
+
                 </div>
             </div>
         </section>
@@ -648,7 +655,9 @@
                 </div>
             </div>
 
+            <!-- ADMIN TAB: DASHBOARD -->
             <div id="admin-tab-dashboard" class="admin-content-sec space-y-6">
+                <!-- 1. Tauler / Mètriques -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 shadow-xl">
                         <h3 class="font-bold text-white mb-4"><i class="fa-solid fa-bullhorn text-brand-400 mr-2"></i>Notificació Global / Banner</h3>
@@ -680,6 +689,7 @@
                 </div>
             </div>
 
+            <!-- ADMIN TAB: EVENTS -->
             <div id="admin-tab-events" class="admin-content-sec space-y-6 hidden">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="md:col-span-1 bg-slate-800 p-6 rounded-2xl border border-slate-700 shadow-xl flex flex-col h-fit">
@@ -717,7 +727,12 @@
                 </div>
             </div>
 
+            <!-- ADMIN TAB: QUESTIONS -->
             <div id="admin-tab-questions" class="admin-content-sec space-y-6 hidden">
+                <div class="bg-amber-900/30 border border-amber-500/50 rounded-xl p-4 text-sm text-amber-200">
+                    <i class="fa-solid fa-triangle-exclamation mr-2"></i> <strong>Nota per a Gerard:</strong> Les preguntes base estan als arxius JSON de GitHub. Si afegeixes preguntes aquí, es guardaran a Firebase i s'afegiran als tests dels usuaris automàticament sense haver de pujar codi nou.
+                </div>
+                
                 <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 shadow-xl flex flex-col">
                     <h3 class="font-bold text-white mb-4"><i class="fa-solid fa-plus text-emerald-400 mr-2"></i>Crear Nova Pregunta (Firebase DB)</h3>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
@@ -725,10 +740,12 @@
                             <label class="text-[10px] uppercase font-bold text-slate-400 block mb-1">Enunciat de la pregunta</label>
                             <textarea id="q-text" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-3 text-white font-medium h-20 resize-none"></textarea>
                         </div>
+                        
                         <div><label class="text-[10px] uppercase font-bold text-emerald-400 block mb-1">Opció Correcta</label><input type="text" id="q-opt-correct" class="w-full bg-slate-950 border border-emerald-700/50 rounded-lg p-2.5 text-white"></div>
                         <div><label class="text-[10px] uppercase font-bold text-slate-400 block mb-1">Opció Falsa 1</label><input type="text" id="q-opt-f1" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white"></div>
                         <div><label class="text-[10px] uppercase font-bold text-slate-400 block mb-1">Opció Falsa 2</label><input type="text" id="q-opt-f2" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white"></div>
                         <div><label class="text-[10px] uppercase font-bold text-slate-400 block mb-1">Opció Falsa 3</label><input type="text" id="q-opt-f3" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white"></div>
+                        
                         <div>
                             <label class="text-[10px] uppercase font-bold text-slate-400 block mb-1">Assignar a un Tema Oficial</label>
                             <select id="q-topic" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white outline-none">
@@ -740,11 +757,15 @@
                             </select>
                         </div>
                         <div><label class="text-[10px] uppercase font-bold text-slate-400 block mb-1">Explicació (Mostrada en encertar/fallar)</label><input type="text" id="q-exp" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white"></div>
-                        <div class="md:col-span-2 mt-2"><button onclick="saveAdminQuestion()" class="px-8 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl transition-all shadow-lg"><i class="fa-solid fa-cloud-arrow-up mr-2"></i>Pujar Pregunta a la Base de Dades</button></div>
+                        
+                        <div class="md:col-span-2 mt-2">
+                            <button onclick="saveAdminQuestion()" class="px-8 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl transition-all shadow-lg"><i class="fa-solid fa-cloud-arrow-up mr-2"></i>Pujar Pregunta a la Base de Dades</button>
+                        </div>
                     </div>
                 </div>
             </div>
 
+            <!-- ADMIN TAB: USERS -->
             <div id="admin-tab-users" class="admin-content-sec space-y-6 hidden">
                 <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 shadow-xl flex flex-col">
                     <div class="flex justify-between items-center mb-4">
@@ -804,7 +825,19 @@
         const db = getFirestore(app);
         const googleProvider = new GoogleAuthProvider();
 
+        // 🚨 CONNEXIÓ DEL MÒDUL AMB EL CODI GLOBAL 🚨
         window.dbRef = db;
+        window.db = db;
+        window.getDocs = getDocs;
+        window.collection = collection;
+        window.doc = doc;
+        window.getDoc = getDoc;
+        window.setDoc = setDoc;
+        window.updateDoc = updateDoc;
+        window.addDoc = addDoc;
+        window.deleteDoc = deleteDoc;
+        window.query = query;
+        window.where = where;
         window.fbIncrement = increment;
         
         window.deleteFbDoc = async (coll, id) => {
@@ -1149,7 +1182,6 @@
             const statsContent = document.getElementById('stats-content-wrapper');
             
             if (user) {
-                // UI: Logged In -> Carga directa al Dashboard si vienes de la pantalla en blanco
                 document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
                 document.getElementById('sec-dashboard').classList.remove('hidden');
                 
@@ -1415,7 +1447,7 @@
             
             const answeredCount = Object.keys(userAnswers).filter(k => userAnswers[k].choice !== undefined).length;
             document.getElementById('exam-progress-bar').style.width = `${(answeredCount / currentExam.length) * 100}%`;
-            document.getElementById('exam-progress-text').innerText = `Pregunta ${currentQuestionIdx + 1} de ${currentExam.length}`;
+            document.getElementById('exam-progress-text').innerText = `Contestades: ${answeredCount} de ${currentExam.length}`;
             
             document.getElementById('question-topic-badge').innerText = q.topic || 'Mossos d\'Esquadra';
             document.getElementById('question-text').innerText = q.question;
@@ -1496,13 +1528,11 @@
                 examHistory.lastStudyDate = todayStr;
             }
             
-            // Actualitzem l'historial del dia només amb les que s'han contestat realment
             examHistory.dailyActivity[todayStr] = (examHistory.dailyActivity[todayStr] || 0) + answeredOnly;
             saveStatsToStorage();
 
             const loggedUser = window.getFirebaseCurrentUser();
             if (loggedUser) {
-                // A la DB també enviem només les contestades totals
                 window.updateUserScoreInFirestore(correct, answeredOnly); 
                 const metricsRef = window.dbRef;
                 import("https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js").then(mod => { mod.setDoc(mod.doc(metricsRef, "metrics", todayStr), { tests: mod.increment(1) }, { merge: true }).catch(()=>{}); if (Object.keys(failedQUpdates).length > 0) mod.setDoc(mod.doc(metricsRef, "metrics", "failed_qs"), failedQUpdates, {merge:true}).catch(()=>{}); });
