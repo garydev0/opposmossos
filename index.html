@@ -403,25 +403,16 @@
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <!-- Mapa Conquista -->
-                    <div class="bg-slate-800/90 rounded-2xl p-6 border border-slate-700 shadow-lg flex flex-col justify-between hover:border-blue-500 transition-all group">
-                        <div>
-                            <div class="w-12 h-12 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center text-xl mb-4"><i class="fa-solid fa-map-location-dot"></i></div>
-                            <h3 class="text-lg font-bold text-white">Conquista Policial (Mapa)</h3>
-                            <p class="text-slate-400 text-xs mt-2 leading-relaxed">Catalunya està dividida en 9 regions. Respon bateries exprés de 5 preguntes per conquerir cada regió i assegurar el territori. Molt visual.</p>
-                        </div>
-                        <button onclick="startMapGame()" class="mt-6 w-full py-2.5 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl text-sm transition-all shadow flex items-center justify-center"><i class="fa-solid fa-play mr-2"></i> Obrir Mapa</button>
-                    </div>
-
+                <!-- Graella Minijocs (Sense mapa) -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     <!-- Triage / Swipe -->
-                    <div class="bg-slate-800/90 rounded-2xl p-6 border border-slate-700 shadow-lg flex flex-col justify-between hover:border-pink-500 transition-all group">
-                        <div>
+                    <div class="bg-slate-800/90 rounded-2xl p-6 border border-slate-700 shadow-lg flex flex-col justify-between hover:border-pink-500 transition-all group lg:col-span-3 md:flex-row items-center gap-6">
+                        <div class="flex-1">
                             <div class="w-12 h-12 rounded-xl bg-pink-500/10 text-pink-400 flex items-center justify-center text-xl mb-4"><i class="fa-solid fa-layer-group"></i></div>
-                            <h3 class="text-lg font-bold text-white">Triage Ràpid (Swipe)</h3>
-                            <p class="text-slate-400 text-xs mt-2 leading-relaxed">Memòria muscular. Apareix un concepte (Ex: "Seguretat Pública") i tens 3 segons per llançar la targeta cap a la competència correcta (Estat o Generalitat).</p>
+                            <h3 class="text-lg font-bold text-white">Triage Ràpid</h3>
+                            <p class="text-slate-400 text-sm mt-2 leading-relaxed max-w-2xl">Memòria muscular pura. Apareix un concepte (Ex: "Seguretat Pública") i tens 8 segons per assignar-lo a la competència correcta (Estat o Generalitat).</p>
                         </div>
-                        <button onclick="startTriageGame()" class="mt-6 w-full py-2.5 bg-pink-600 hover:bg-pink-500 text-white font-bold rounded-xl text-sm transition-all shadow flex items-center justify-center"><i class="fa-solid fa-bolt mr-2"></i> Iniciar Triage</button>
+                        <button onclick="startTriageGame()" class="mt-6 md:mt-0 w-full md:w-64 py-4 bg-pink-600 hover:bg-pink-500 text-white font-bold rounded-xl text-sm transition-all shadow-lg flex items-center justify-center"><i class="fa-solid fa-bolt mr-2"></i> Iniciar Triage</button>
                     </div>
 
                     <!-- El Penjat Legal -->
@@ -429,7 +420,7 @@
                         <div>
                             <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-xl mb-4"><i class="fa-solid fa-scale-balanced"></i></div>
                             <h3 class="text-lg font-bold text-white">El Penjat Legal</h3>
-                            <p class="text-slate-400 text-xs mt-2 leading-relaxed">Endevina termes jurídics, institucions o lleis lletra per lletra guiant-te només per la definició.</p>
+                            <p class="text-slate-400 text-xs mt-2 leading-relaxed">Endevina termes jurídics, institucions o lleis lletra per lletra guiant-te només per la definició. Tens 6 intents!</p>
                         </div>
                         <button onclick="startHangman()" class="mt-6 w-full py-2.5 bg-amber-600 hover:bg-amber-500 text-white font-bold rounded-xl text-sm transition-all shadow"><i class="fa-solid fa-play mr-2"></i> Jugar al Penjat</button>
                     </div>
@@ -439,103 +430,59 @@
                         <div>
                             <div class="w-12 h-12 rounded-xl bg-brand-500/10 text-brand-400 flex items-center justify-center text-xl mb-4"><i class="fa-solid fa-car-on"></i></div>
                             <h3 class="text-lg font-bold text-white">Ruta de Patrulla</h3>
-                            <p class="text-slate-400 text-xs mt-2 leading-relaxed">Atrapa el sospitós abans no escapi responent preguntes ràpides sense fallar.</p>
+                            <p class="text-slate-400 text-xs mt-2 leading-relaxed">Atrapa el sospitós abans no escapi responent preguntes oficials ràpides sense fallar.</p>
                         </div>
                         <button onclick="startPatrol()" class="mt-6 w-full py-2.5 bg-brand-600 hover:bg-brand-500 text-white font-bold rounded-xl text-sm transition-all shadow"><i class="fa-solid fa-play mr-2"></i> Iniciar Persecució</button>
                     </div>
                 </div>
             </div>
 
-            <!-- INTERFÍCIE JOC: MAPA DE CONQUISTA -->
-            <div id="game-map" class="hidden h-full flex flex-col">
-                <div class="bg-slate-800 rounded-xl p-4 border border-slate-700 flex justify-between items-center mb-6">
-                    <h2 class="text-lg font-bold text-blue-400"><i class="fa-solid fa-map-location-dot mr-2"></i> Conquista Territorial</h2>
-                    <button onclick="exitMinigame('game-map')" class="text-xs px-4 py-1.5 bg-slate-700 hover:bg-slate-600 text-white rounded-lg border border-slate-600 transition-all">Tornar al menú</button>
-                </div>
-
-                <div class="flex-1 bg-slate-900 rounded-2xl border border-slate-700 p-6 flex flex-col md:flex-row gap-8 items-center justify-center shadow-inner relative overflow-hidden">
-                    <!-- Mapa Abstracte CSS Grid -->
-                    <div class="w-full max-w-md aspect-square relative grid grid-cols-3 grid-rows-3 gap-2 p-4 z-10">
-                        <div id="region-0" class="region-node bg-slate-800 border-2 border-slate-700 rounded-xl flex items-center justify-center text-xs font-bold text-slate-500 cursor-pointer hover:border-blue-400 hover:bg-slate-700 transition-all" onclick="clickRegion(0)">RP Pirineu</div>
-                        <div id="region-1" class="region-node bg-slate-800 border-2 border-slate-700 rounded-xl flex items-center justify-center text-xs font-bold text-slate-500 cursor-pointer hover:border-blue-400 hover:bg-slate-700 transition-all" onclick="clickRegion(1)">RP Girona</div>
-                        <div class="empty-node"></div>
-                        <div id="region-2" class="region-node bg-slate-800 border-2 border-slate-700 rounded-xl flex items-center justify-center text-xs font-bold text-slate-500 cursor-pointer hover:border-blue-400 hover:bg-slate-700 transition-all" onclick="clickRegion(2)">RP Ponent</div>
-                        <div id="region-3" class="region-node bg-slate-800 border-2 border-slate-700 rounded-xl flex items-center justify-center text-xs font-bold text-slate-500 cursor-pointer hover:border-blue-400 hover:bg-slate-700 transition-all shadow-[0_0_15px_rgba(37,99,235,0.2)]" onclick="clickRegion(3)">RP Central</div>
-                        <div id="region-4" class="region-node bg-slate-800 border-2 border-slate-700 rounded-xl flex items-center justify-center text-xs font-bold text-slate-500 cursor-pointer hover:border-blue-400 hover:bg-slate-700 transition-all" onclick="clickRegion(4)">RP Metro Nord</div>
-                        <div id="region-5" class="region-node bg-slate-800 border-2 border-slate-700 rounded-xl flex items-center justify-center text-xs font-bold text-slate-500 cursor-pointer hover:border-blue-400 hover:bg-slate-700 transition-all" onclick="clickRegion(5)">RP C.T. Ebre</div>
-                        <div id="region-6" class="region-node bg-slate-800 border-2 border-slate-700 rounded-xl flex items-center justify-center text-xs font-bold text-slate-500 cursor-pointer hover:border-blue-400 hover:bg-slate-700 transition-all" onclick="clickRegion(6)">RP Camp Tarragona</div>
-                        <div id="region-7" class="region-node bg-slate-800 border-2 border-slate-700 rounded-xl flex items-center justify-center text-xs font-bold text-slate-500 cursor-pointer hover:border-blue-400 hover:bg-slate-700 transition-all" onclick="clickRegion(7)">RP Metro Sud</div>
-                        <div id="region-8" class="region-node absolute bottom-2 right-2 w-24 h-24 bg-slate-800 border-2 border-slate-700 rounded-full flex items-center justify-center text-[10px] text-center font-bold text-slate-500 cursor-pointer hover:border-blue-400 hover:bg-slate-700 transition-all" onclick="clickRegion(8)">RP BCN</div>
-                    </div>
-                    
-                    <div class="w-full md:w-1/3 bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-xl z-10 flex flex-col items-center text-center">
-                        <i class="fa-solid fa-satellite-dish text-4xl text-blue-400 mb-4 opacity-50"></i>
-                        <h3 class="text-xl font-bold text-white mb-2" id="map-status-title">Estat del territori</h3>
-                        <p class="text-sm text-slate-400 mb-6" id="map-status-desc">Selecciona una Regió Policial apagada (gris) per intentar assegurar-la. Hauràs d'encertar 3 preguntes seguides sense fallar.</p>
-                        <div class="text-3xl font-black text-blue-400"><span id="map-conquered-count">0</span>/9</div>
-                        <p class="text-[10px] font-bold uppercase text-slate-500 tracking-widest mt-1">Regions asseguades</p>
-                    </div>
-                </div>
-
-                <!-- Overlay Mini-examen del mapa -->
-                <div id="map-exam-overlay" class="fixed inset-0 z-50 bg-slate-950/95 flex items-center justify-center p-4 hidden">
-                    <div class="bg-slate-900 border border-blue-500/50 rounded-2xl w-full max-w-lg p-8 shadow-[0_0_30px_rgba(59,130,246,0.3)] text-center relative overflow-hidden">
-                        <p class="text-xs text-blue-400 font-bold uppercase mb-2" id="map-exam-region-name">Missió de control</p>
-                        <div class="flex justify-center gap-2 mb-6" id="map-exam-dots">
-                            <div class="w-3 h-3 rounded-full bg-slate-700"></div><div class="w-3 h-3 rounded-full bg-slate-700"></div><div class="w-3 h-3 rounded-full bg-slate-700"></div>
-                        </div>
-                        <h3 class="text-lg font-semibold text-white mb-8" id="map-exam-q-text">Carregant pregunta d'assegurament...</h3>
-                        <div id="map-exam-options" class="space-y-3"></div>
-                        <button onclick="document.getElementById('map-exam-overlay').classList.add('hidden')" class="mt-8 text-xs text-slate-500 hover:text-white underline">Avortar missió</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- INTERFÍCIE JOC: TRIAGE SWIPE -->
-            <div id="game-triage" class="hidden h-[80vh] flex flex-col">
-                <div class="bg-slate-800 rounded-xl p-4 border border-slate-700 flex justify-between items-center mb-6 shrink-0">
+            <!-- INTERFÍCIE JOC: TRIAGE RÀPID -->
+            <div id="game-triage" class="hidden min-h-[70vh] flex flex-col relative">
+                <div class="bg-slate-800 rounded-xl p-4 border border-slate-700 flex justify-between items-center mb-6 shrink-0 relative z-30">
                     <div>
                         <h2 class="text-lg font-bold text-pink-400"><i class="fa-solid fa-layer-group mr-2"></i> Triage Ràpid</h2>
-                        <p class="text-[10px] text-slate-400 mt-0.5">Llança la targeta al costat correcte abans que s'esgoti el temps.</p>
+                        <p class="text-[10px] text-slate-400 mt-0.5">Selecciona el botó correcte abans que s'esgoti el temps.</p>
                     </div>
-                    <button onclick="exitMinigame('game-triage'); clearInterval(triageTimerInt);" class="text-xs px-4 py-1.5 bg-slate-700 hover:bg-slate-600 text-white rounded-lg border border-slate-600 transition-all">Tornar</button>
+                    <button onclick="exitMinigame('game-triage'); clearInterval(triageTimerInt);" class="text-xs px-4 py-1.5 bg-slate-700 hover:bg-slate-600 text-white rounded-lg border border-slate-600 transition-all">Tornar al Menú</button>
                 </div>
 
-                <div class="flex-1 relative flex flex-col items-center justify-center w-full max-w-2xl mx-auto overflow-hidden">
-                    <!-- Marcadors superiors -->
-                    <div class="absolute top-0 w-full flex justify-between px-4 z-0">
-                        <div id="triage-cat-left" class="bg-slate-900/80 border border-slate-700 p-3 rounded-xl text-center w-1/3 opacity-50 transition-opacity"><p class="text-[10px] uppercase font-bold text-slate-500 mb-1"><i class="fa-solid fa-arrow-left"></i> Opció A</p><h3 class="font-bold text-white text-sm" id="t-label-l">Estat</h3></div>
-                        <div id="triage-cat-right" class="bg-slate-900/80 border border-slate-700 p-3 rounded-xl text-center w-1/3 opacity-50 transition-opacity"><p class="text-[10px] uppercase font-bold text-slate-500 mb-1">Opció B <i class="fa-solid fa-arrow-right"></i></p><h3 class="font-bold text-white text-sm" id="t-label-r">Generalitat</h3></div>
-                    </div>
-
+                <div class="flex-1 relative flex flex-col items-center justify-center w-full max-w-2xl mx-auto">
                     <!-- Targeta Central -->
-                    <div id="triage-card" class="bg-gradient-to-b from-slate-800 to-slate-900 border-2 border-slate-600 rounded-2xl p-8 w-64 h-80 flex flex-col items-center justify-center text-center shadow-2xl z-10 transition-transform duration-200">
+                    <div id="triage-card" class="bg-gradient-to-b from-slate-800 to-slate-900 border-2 border-slate-600 rounded-2xl p-8 w-full sm:w-80 h-80 flex flex-col items-center justify-center text-center shadow-2xl z-10 transition-transform duration-200">
                         <i class="fa-solid fa-scale-unbalanced text-3xl text-pink-500/50 mb-4"></i>
-                        <h2 id="triage-concept" class="text-xl font-bold text-white leading-snug">Carregant concepte...</h2>
+                        <h2 id="triage-concept" class="text-xl sm:text-2xl font-bold text-white leading-snug">Carregant concepte...</h2>
                         
+                        <!-- Barra de temps inferior a la targeta -->
                         <div class="mt-auto w-full">
-                            <div class="h-1.5 w-full bg-slate-700 rounded-full overflow-hidden"><div id="triage-time-bar" class="h-full bg-pink-500 w-full"></div></div>
+                            <div class="h-2 w-full bg-slate-700 rounded-full overflow-hidden"><div id="triage-time-bar" class="h-full bg-pink-500 w-full"></div></div>
                         </div>
                     </div>
 
-                    <!-- Resultat temporal overlay -->
-                    <div id="triage-feedback" class="absolute inset-0 z-20 flex items-center justify-center pointer-events-none opacity-0 transition-opacity duration-200">
-                        <i id="triage-icon" class="fa-solid fa-check text-8xl text-emerald-500 drop-shadow-[0_0_30px_rgba(16,185,129,0.8)]"></i>
+                    <!-- Botons d'Acció (Ja no es fa swipe) -->
+                    <div class="mt-8 flex justify-center gap-4 sm:gap-8 w-full z-20 px-4">
+                        <button onclick="handleTriage(0)" class="flex-1 sm:flex-none sm:w-48 px-4 py-4 rounded-xl bg-slate-800 border-2 border-slate-600 text-slate-300 font-bold shadow-lg hover:bg-brand-600 hover:border-brand-500 hover:text-white transition-all flex flex-col items-center gap-2">
+                            <i class="fa-solid fa-arrow-left text-xl opacity-50"></i>
+                            <span id="t-label-l" class="text-sm">Estat</span>
+                        </button>
+                        <button onclick="handleTriage(1)" class="flex-1 sm:flex-none sm:w-48 px-4 py-4 rounded-xl bg-slate-800 border-2 border-slate-600 text-slate-300 font-bold shadow-lg hover:bg-emerald-600 hover:border-emerald-500 hover:text-white transition-all flex flex-col items-center gap-2">
+                            <i class="fa-solid fa-arrow-right text-xl opacity-50"></i>
+                            <span id="t-label-r" class="text-sm">Generalitat</span>
+                        </button>
                     </div>
 
-                    <!-- Botons Mòbil (Per si no volen fer swipe físic) -->
-                    <div class="absolute bottom-4 w-full flex justify-center gap-12 z-20 md:hidden">
-                        <button onclick="handleTriage(0)" class="w-16 h-16 rounded-full bg-slate-800 border-2 border-slate-600 text-slate-300 text-xl shadow-lg active:scale-95 transition-all"><i class="fa-solid fa-arrow-left"></i></button>
-                        <button onclick="handleTriage(1)" class="w-16 h-16 rounded-full bg-slate-800 border-2 border-slate-600 text-slate-300 text-xl shadow-lg active:scale-95 transition-all"><i class="fa-solid fa-arrow-right"></i></button>
+                    <!-- Resultat temporal overlay (Tick verd o X vermella) -->
+                    <div id="triage-feedback" class="absolute inset-0 z-40 flex items-center justify-center pointer-events-none opacity-0 transition-opacity duration-200">
+                        <i id="triage-icon" class="fa-solid fa-check text-9xl text-emerald-500 drop-shadow-[0_0_50px_rgba(16,185,129,0.8)]"></i>
                     </div>
                 </div>
                 
-                <div class="text-center mt-4 shrink-0">
-                    <p class="text-sm font-bold text-slate-400">Punts Triage: <span id="triage-score" class="text-pink-400 text-xl ml-1">0</span></p>
+                <div class="text-center mt-6 shrink-0">
+                    <p class="text-sm font-bold text-slate-400 bg-slate-900 border border-slate-800 inline-block px-6 py-2 rounded-xl">Punts Triage: <span id="triage-score" class="text-pink-400 text-xl ml-2">0</span></p>
                 </div>
             </div>
 
-            <!-- Jocs antics mantinguts ocults per defecte (El Penjat i Ruta Patrulla) -->
+            <!-- INTERFÍCIE JOC: EL PENJAT LEGAL -->
             <div id="game-hangman" class="hidden space-y-6">
                 <div class="bg-slate-800 rounded-xl p-4 border border-slate-700 flex justify-between items-center"><h2 class="text-lg font-bold text-amber-400"><i class="fa-solid fa-scale-balanced mr-2"></i> El Penjat Legal</h2><button onclick="exitMinigame('game-hangman')" class="text-xs px-4 py-1.5 bg-red-600 hover:bg-red-700 text-white rounded-lg border border-red-500 transition-all">Tornar al menú</button></div>
                 <div class="bg-slate-800/90 rounded-2xl p-6 sm:p-8 border border-slate-700 shadow-xl flex flex-col items-center">
@@ -548,6 +495,7 @@
                 </div>
             </div>
 
+            <!-- INTERFÍCIE JOC: RUTA DE PATRULLA -->
             <div id="game-patrol" class="hidden space-y-6">
                 <div class="bg-slate-800 rounded-xl p-4 border border-slate-700 flex justify-between items-center"><h2 class="text-lg font-bold text-brand-400"><i class="fa-solid fa-car-on mr-2"></i> Ruta de Patrulla</h2><button onclick="exitMinigame('game-patrol')" class="text-xs px-4 py-1.5 bg-red-600 hover:bg-red-700 text-white rounded-lg border border-red-500 transition-all">Tornar al menú</button></div>
                 <div class="bg-slate-800/90 rounded-2xl p-6 sm:p-8 border border-slate-700 shadow-xl space-y-6">
@@ -1025,7 +973,7 @@
                 // Actualitzar nivel a UI si cal
                 if(window.updateUserLevelUI) window.updateUserLevelUI(lifetimeScore);
                 
-            } catch (e) { console.warn("Sense permisos escriure punts. Actualitza Regles Firebase.", e); }
+            } catch (e) { console.warn("Sense permisos escriure punts.", e); }
         }
 
         // CARREGA EXTRAS DB (Calendari, Preguntes custom)
@@ -1085,7 +1033,7 @@
                     document.getElementById('cd-days').innerText = diffDays > 0 ? String(diffDays).padStart(2,'0') : '00';
                 }
 
-            } catch(e) { console.warn("Permisos denegats events. Actualitza Firestore Rules.", e); }
+            } catch(e) { console.warn("Permisos denegats events.", e); }
         }
 
         window.loadCustomDBQuestions = async function() {
@@ -1438,9 +1386,20 @@
         window.openReportModal = () => document.getElementById('report-modal').classList.remove('hidden');
         window.closeReportModal = () => document.getElementById('report-modal').classList.add('hidden');
 
+        // ======================= NOU: Carregar Diccionari Penjat =======================
+        let hmDict = [];
+        async function loadHangmanDict() {
+            try {
+                const res = await fetch('penjat.json');
+                if (res.ok) hmDict = await res.json();
+            } catch(e) {}
+            if (hmDict.length === 0) hmDict = [{ word: "CONSTITUCIO", def: "Norma suprema de l'ordenament jurídic espanyol." }];
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
             loadQuestionsFromJsonFile();
             loadStatsFromStorage();
+            loadHangmanDict(); // Inicialitzar Penjat
             startMidnightCountdown();
             startPoliceClock();
             if(window.updateLocksUI) window.updateLocksUI(null, null);
@@ -1655,8 +1614,9 @@
             // Si surt de jocs o exàmens en actiu, amaguem
             if (tabId !== 'minigames') {
                 document.getElementById('minigames-menu').classList.remove('hidden');
-                document.getElementById('game-map').classList.add('hidden');
                 document.getElementById('game-triage').classList.add('hidden');
+                document.getElementById('game-hangman').classList.add('hidden');
+                document.getElementById('game-patrol').classList.add('hidden');
             }
         }
 
@@ -2128,10 +2088,9 @@
             osc.start(); osc.stop(audioCtx.currentTime + 0.3);
         }
 
-        // 5.A. JOC TRIAGE / SWIPE
-        let triageTimerInt = null; let triageScore = 0; let triageCurrentQ = null; let triageTimeLeft = 3;
+        // 5.A. JOC TRIAGE (BOTONS, SENSE SWIPE, 8 SEGONS)
+        let triageTimerInt = null; let triageScore = 0; let triageCurrentQ = null; let triageTimeLeft = 8;
         
-        // Hardcoded dualitats clàssiques per a l'arcade per assegurar respostes binàries clares independentment del JSON base.
         const triageQuestions = [
             { c: "Seguretat Pública", l: "Estat", r: "Generalitat", correct: 1 },
             { c: "Relacions Internacionals", l: "Estat", r: "Generalitat", correct: 0 },
@@ -2139,12 +2098,12 @@
             { c: "Abandonar servei", l: "Falta Greu", r: "Falta Molt Greu", correct: 1 },
             { c: "Dret de Vaga", l: "Dret Fonamental (Secció 1)", r: "Dret Ciutadà (Secció 2)", correct: 0 },
             { c: "Dret a la propietat privada", l: "Dret Fonamental", r: "Dret Ciutadà", correct: 1 },
-            { c: "Trànsit i circulació vehicles", l: "Competència Exclusiva Gen", r: "Competència Compartida", correct: 0 },
+            { c: "Trànsit i circulació vehicles", l: "Exclusiva Gen", r: "Compartida", correct: 0 },
             { c: "Protecció civil", l: "Exclusiva Gen", r: "Executiva Gen", correct: 0 },
             { c: "Nomenament Magistrats TC", l: "Rei", r: "President Govern", correct: 0 },
             { c: "Aprovació Estatut", l: "Llei Orgànica", r: "Llei Ordinària", correct: 0 },
             { c: "Principi legalitat sancionadora", l: "Art. 25 CE", r: "Art. 24 CE", correct: 0 },
-            { c: "Tribunal Superior de Justícia", l: "Estat", r: "Culmina organització Cat", correct: 1 }
+            { c: "Tribunal Superior de Justícia", l: "Estat", r: "Organització Cat", correct: 1 }
         ];
 
         window.startTriageGame = function() {
@@ -2168,9 +2127,12 @@
             document.getElementById('triage-time-bar').style.transition = 'none';
             document.getElementById('triage-time-bar').style.width = '100%';
             
-            setTimeout(() => { document.getElementById('triage-time-bar').style.transition = 'width 3s linear'; document.getElementById('triage-time-bar').style.width = '0%'; }, 50);
+            setTimeout(() => { 
+                document.getElementById('triage-time-bar').style.transition = 'width 8s linear'; 
+                document.getElementById('triage-time-bar').style.width = '0%'; 
+            }, 50);
 
-            triageTimeLeft = 3;
+            triageTimeLeft = 8;
             if(triageTimerInt) clearInterval(triageTimerInt);
             triageTimerInt = setInterval(() => {
                 triageTimeLeft -= 0.1;
@@ -2189,7 +2151,7 @@
                 card.style.transform = sideVal === 0 ? 'translateX(-200px) rotate(-15deg)' : 'translateX(200px) rotate(15deg)';
                 card.style.opacity = '0';
                 
-                feedback.style.opacity = '1'; icon.className = "fa-solid fa-check text-8xl text-emerald-500 drop-shadow-[0_0_30px_rgba(16,185,129,0.8)]";
+                feedback.style.opacity = '1'; icon.className = "fa-solid fa-check text-9xl text-emerald-500 drop-shadow-[0_0_50px_rgba(16,185,129,0.8)]";
                 playSound(true);
                 triageScore += 10; document.getElementById('triage-score').innerText = triageScore;
                 
@@ -2207,7 +2169,7 @@
             const feedback = document.getElementById('triage-feedback');
             const icon = document.getElementById('triage-icon');
             
-            feedback.style.opacity = '1'; icon.className = "fa-solid fa-xmark text-8xl text-red-500 drop-shadow-[0_0_30px_rgba(239,68,68,0.8)]";
+            feedback.style.opacity = '1'; icon.className = "fa-solid fa-xmark text-9xl text-red-500 drop-shadow-[0_0_50px_rgba(239,68,68,0.8)]";
             playSound(false);
             
             setTimeout(() => {
@@ -2217,95 +2179,159 @@
             }, 1000);
         }
 
-        // Add swipe listeners (Desktop & Mobile basic support)
-        let ts_x = null;
-        document.getElementById('triage-card').addEventListener('touchstart', e => ts_x = e.touches[0].clientX);
-        document.getElementById('triage-card').addEventListener('touchend', e => {
-            if(!ts_x) return;
-            let te_x = e.changedTouches[0].clientX;
-            if(ts_x - te_x > 50) handleTriage(0); // Swipe Left
-            else if(te_x - ts_x > 50) handleTriage(1); // Swipe Right
-            ts_x = null;
-        });
+        // 5.B. EL PENJAT LEGAL (LLÒGICA RESTAURADA)
+        let hmWord = ""; let hmGuessed = []; let hmLives = 6; let hmCurrentScore = 0; let hmHighScore = parseInt(localStorage.getItem('oppos_hm_highscore')) || 0;
 
-        // 5.B. JOC MAPA CONQUISTA
-        let mapConquered = new Set();
-        let activeMapRegion = null;
-        let mapExamQs = []; let mapCurrentQ = 0;
-
-        window.startMapGame = function() {
+        window.startHangman = function() {
             document.getElementById('minigames-menu').classList.add('hidden');
-            document.getElementById('game-map').classList.remove('hidden');
-            mapConquered.clear(); updateMapUI();
+            document.getElementById('game-hangman').classList.remove('hidden');
+            document.getElementById('hm-result-overlay').classList.add('hidden');
+            document.getElementById('hm-keyboard').classList.remove('hidden');
+
+            const randomEntry = hmDict[Math.floor(Math.random() * hmDict.length)];
+            hmWord = randomEntry.word; hmGuessed = []; hmLives = 6;
+
+            document.getElementById('hm-definition').innerText = randomEntry.def;
+            document.getElementById('hm-lives').innerText = hmLives;
+            document.getElementById('hm-current-score').innerText = hmCurrentScore;
+            document.getElementById('hm-high-score').innerText = hmHighScore;
+
+            renderHmWord(); renderHmKeyboard();
         }
 
-        function updateMapUI() {
-            document.getElementById('map-conquered-count').innerText = mapConquered.size;
-            for(let i=0; i<=8; i++) {
-                const node = document.getElementById(`region-${i}`);
-                if(mapConquered.has(i)) {
-                    node.className = "region-node bg-blue-900 border-2 border-blue-500 rounded-xl flex items-center justify-center text-xs font-bold text-blue-200 cursor-default shadow-[0_0_15px_rgba(59,130,246,0.4)]";
-                    if(i===8) node.className += " absolute bottom-2 right-2 w-24 h-24 rounded-full text-[10px]"; // Keep special styling for BCN
-                } else {
-                    node.className = "region-node bg-slate-800 border-2 border-slate-700 rounded-xl flex items-center justify-center text-xs font-bold text-slate-500 cursor-pointer hover:border-blue-400 hover:bg-slate-700 transition-all";
-                    if(i===8) node.className += " absolute bottom-2 right-2 w-24 h-24 rounded-full text-[10px]";
-                }
+        function renderHmWord() {
+            let display = "";
+            for(let char of hmWord) {
+                if(char === " ") display += "&nbsp;&nbsp;";
+                else if(hmGuessed.includes(char)) display += char + " ";
+                else display += "_ ";
             }
-            if(mapConquered.size === 9) { window.showToast("CATALUNYA ASSEGURADA! Has completat el mapa estratègic.", "success"); }
+            document.getElementById('hm-word-display').innerHTML = display;
         }
 
-        window.clickRegion = function(id) {
-            if(mapConquered.has(id) || window.questionBank.length === 0) return;
-            activeMapRegion = id;
-            document.getElementById('map-exam-overlay').classList.remove('hidden');
-            document.getElementById('map-exam-region-name').innerText = document.getElementById(`region-${id}`).innerText;
-            
-            // Randomize 3 questions from bank
-            mapExamQs = prepareShuffledExam([...window.questionBank].sort(()=>0.5-Math.random()).slice(0,3));
-            mapCurrentQ = 0;
-            renderMapExamQ();
-        }
-
-        function renderMapExamQ() {
-            const dots = document.getElementById('map-exam-dots').children;
-            for(let i=0; i<3; i++) {
-                dots[i].className = i < mapCurrentQ ? "w-3 h-3 rounded-full bg-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.8)]" : (i === mapCurrentQ ? "w-3 h-3 rounded-full bg-blue-400 animate-pulse" : "w-3 h-3 rounded-full bg-slate-700");
-            }
-            
-            const q = mapExamQs[mapCurrentQ];
-            document.getElementById('map-exam-q-text').innerText = q.question;
-            const ob = document.getElementById('map-exam-options');
-            ob.innerHTML = '';
-            
-            q.options.forEach((opt, idx) => {
+        function renderHmKeyboard() {
+            const kb = document.getElementById('hm-keyboard'); kb.innerHTML = "";
+            const letters = "ABCÇDEFGHIJKLMNÑOPQRSTUVWXYZ".split("");
+            letters.forEach(l => {
                 const btn = document.createElement('button');
-                btn.className = "w-full p-3 bg-slate-800 border border-slate-600 rounded-xl text-sm font-semibold text-white hover:border-blue-400 transition-all text-left";
-                btn.innerText = opt;
-                btn.onclick = () => {
-                    if(opt === q.correctAnswer) {
-                        playSound(true);
-                        btn.className = "w-full p-3 bg-emerald-600 border border-emerald-500 rounded-xl text-sm font-bold text-white shadow text-left";
-                        setTimeout(() => {
-                            mapCurrentQ++;
-                            if(mapCurrentQ >= 3) {
-                                document.getElementById('map-exam-overlay').classList.add('hidden');
-                                mapConquered.add(activeMapRegion);
-                                updateMapUI();
-                                playSound(true); // Extra win sound
-                                if(window.getFirebaseCurrentUser()) window.updateUserScoreInFirestore(3);
-                            } else renderMapExamQ();
-                        }, 500);
-                    } else {
-                        playSound(false);
-                        btn.className = "w-full p-3 bg-red-600 border border-red-500 rounded-xl text-sm font-bold text-white shadow text-left";
-                        setTimeout(() => {
-                            document.getElementById('map-exam-overlay').classList.add('hidden');
-                            window.showToast("Missió fallida. La regió continua sent hostil.", "error");
-                        }, 800);
-                    }
-                };
-                ob.appendChild(btn);
+                btn.innerText = l; btn.className = "p-2 sm:py-3 rounded-lg font-bold text-sm sm:text-base transition-all bg-slate-700 hover:bg-slate-600 text-white shadow";
+                btn.onclick = () => guessHmLetter(l, btn); kb.appendChild(btn);
             });
+        }
+
+        function guessHmLetter(letter, btn) {
+            btn.disabled = true; hmGuessed.push(letter);
+            if(hmWord.includes(letter)) {
+                btn.classList.replace('bg-slate-700', 'bg-emerald-600'); btn.classList.replace('hover:bg-slate-600', 'bg-emerald-600');
+                playSound(true);
+            } else {
+                btn.classList.replace('bg-slate-700', 'bg-slate-900'); btn.classList.add('opacity-40');
+                hmLives--; document.getElementById('hm-lives').innerText = hmLives;
+                playSound(false);
+            }
+            renderHmWord(); checkHmEnd();
+        }
+
+        function checkHmEnd() {
+            const isWin = hmWord.split("").every(c => c === " " || hmGuessed.includes(c));
+            if(isWin) endHangman(true); else if(hmLives <= 0) endHangman(false);
+        }
+
+        function endHangman(win) {
+            document.getElementById('hm-keyboard').classList.add('hidden');
+            const overlay = document.getElementById('hm-result-overlay'); const title = document.getElementById('hm-result-title');
+            const txt = document.getElementById('hm-result-text'); const nextBtn = document.getElementById('hm-next-btn');
+            overlay.classList.remove('hidden', 'border-emerald-500', 'border-red-500', 'bg-emerald-950/30', 'bg-red-950/30');
+            
+            if(win) {
+                hmCurrentScore++;
+                if (hmCurrentScore > hmHighScore) { hmHighScore = hmCurrentScore; localStorage.setItem('oppos_hm_highscore', hmHighScore); }
+                document.getElementById('hm-current-score').innerText = hmCurrentScore; document.getElementById('hm-high-score').innerText = hmHighScore;
+                overlay.classList.add('border-emerald-500', 'bg-emerald-950/30');
+                title.className = "text-2xl font-bold mb-2 text-emerald-400"; title.innerHTML = "<i class='fa-solid fa-medal mr-2'></i> Correcte!";
+                txt.innerText = "Molt bé, has encertat la paraula."; nextBtn.innerText = "Següent paraula";
+                if(window.getFirebaseCurrentUser()) window.updateUserScoreInFirestore(1); 
+            } else {
+                hmCurrentScore = 0; overlay.classList.add('border-red-500', 'bg-red-950/30');
+                title.className = "text-2xl font-bold mb-2 text-red-400"; title.innerHTML = "<i class='fa-solid fa-skull mr-2'></i> Has perdut!";
+                txt.innerHTML = `La paraula correcta era: <strong class='text-white'>${hmWord}</strong>`;
+                document.getElementById('hm-word-display').innerText = hmWord.split("").join(" ");
+                nextBtn.innerText = "Tornar a començar des de 0";
+            }
+        }
+
+        // 5.C. RUTA DE PATRULLA (LLÒGICA RESTAURADA)
+        let patrolPos = 0; let suspectPos = 3; let patrolQ = null;
+
+        window.startPatrol = function() {
+            if(window.questionBank.length === 0) return window.showToast("No hi ha preguntes carregades a la base de dades", "error");
+            document.getElementById('minigames-menu').classList.add('hidden');
+            document.getElementById('game-patrol').classList.remove('hidden');
+            document.getElementById('patrol-result-overlay').classList.add('hidden');
+            document.getElementById('patrol-question-container').classList.remove('hidden');
+            patrolPos = 0; suspectPos = 3; updatePatrolTrack(); nextPatrolQuestion();
+        }
+
+        function updatePatrolTrack() {
+            document.getElementById('patrol-police').style.left = (patrolPos * 10) + "%";
+            document.getElementById('patrol-suspect').style.left = (suspectPos * 10) + "%";
+        }
+
+        function nextPatrolQuestion() {
+            patrolQ = window.questionBank[Math.floor(Math.random() * window.questionBank.length)];
+            let optsWithOrig = patrolQ.options.map(opt => ({ text: opt, isCorrect: opt === patrolQ.correctAnswer }));
+            optsWithOrig.sort(() => 0.5 - Math.random());
+            patrolQ.shuffledOpts = optsWithOrig;
+
+            document.getElementById('patrol-topic').innerText = patrolQ.topic || "General";
+            document.getElementById('patrol-q-text').innerText = patrolQ.question;
+            
+            const optsBox = document.getElementById('patrol-options'); optsBox.innerHTML = "";
+            patrolQ.shuffledOpts.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = "w-full text-left p-4 rounded-xl border border-slate-700 bg-slate-900 text-slate-200 text-sm font-medium hover:border-brand-500 transition-all";
+                btn.innerHTML = String.fromCharCode(65+idx) + ". " + opt.text;
+                btn.onclick = () => handlePatrolAnswer(opt.isCorrect, btn);
+                optsBox.appendChild(btn);
+            });
+        }
+
+        function handlePatrolAnswer(isCorrect, btnClicked) {
+            const btns = document.getElementById('patrol-options').querySelectorAll('button');
+            btns.forEach(b => b.disabled = true);
+
+            if(isCorrect) {
+                btnClicked.classList.replace('bg-slate-900', 'bg-emerald-950/80'); btnClicked.classList.replace('border-slate-700', 'border-emerald-500');
+                patrolPos += 1; playSound(true);
+            } else {
+                btnClicked.classList.replace('bg-slate-900', 'bg-red-950/80'); btnClicked.classList.replace('border-slate-700', 'border-red-500');
+                suspectPos += 1; playSound(false);
+            }
+            
+            updatePatrolTrack();
+            
+            setTimeout(() => {
+                if(patrolPos >= suspectPos) endPatrol(true);
+                else if(suspectPos >= 9) endPatrol(false);
+                else nextPatrolQuestion();
+            }, 800);
+        }
+
+        function endPatrol(win) {
+            document.getElementById('patrol-question-container').classList.add('hidden');
+            const overlay = document.getElementById('patrol-result-overlay'); const title = document.getElementById('patrol-result-title'); const txt = document.getElementById('patrol-result-text');
+            overlay.classList.remove('hidden', 'border-brand-500', 'border-red-500', 'bg-brand-950/30', 'bg-red-950/30');
+            
+            if(win) {
+                overlay.classList.add('border-brand-500', 'bg-brand-950/30');
+                title.className = "text-2xl font-bold mb-2 text-brand-400"; title.innerHTML = "<i class='fa-solid fa-handcuffs mr-2'></i> Sospitós atrapat!";
+                txt.innerText = "Excel·lent feina agent. Has respost prou ràpid per interceptar-lo.";
+                if(window.getFirebaseCurrentUser()) window.updateUserScoreInFirestore(1); 
+            } else {
+                overlay.classList.add('border-red-500', 'bg-red-950/30');
+                title.className = "text-2xl font-bold mb-2 text-red-400"; title.innerHTML = "<i class='fa-solid fa-person-running mr-2'></i> S'ha escapat!";
+                txt.innerText = "Has comès massa errors i el sospitós ha fugit del país.";
+            }
         }
 
         // SW Service Worker per PWA Cache
@@ -2314,4 +2340,3 @@
     </script>
 </body>
 </html>
-```eof
