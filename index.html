@@ -26,7 +26,7 @@
                 extend: {
                     fontFamily: { sans: ['Inter', 'sans-serif'] },
                     colors: {
-                        brand: { 50: '#f0f6ff', 100: '#e0edff', 500: '#2563eb', 600: '#1d4ed8', 700: '#1e40af', 900: '#0f172a', accent: '#dc2626' }
+                        brand: { 50: '#f0f6ff', 100: '#e0edff', 300: '#93c5fd', 400: '#60a5fa', 500: '#2563eb', 600: '#1d4ed8', 700: '#1e40af', 900: '#0f172a', accent: '#dc2626' }
                     },
                     animation: { 'swipe-left': 'swipeLeft 0.3s ease-out forwards', 'swipe-right': 'swipeRight 0.3s ease-out forwards', 'pulse-fast': 'pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite' },
                     keyframes: {
@@ -83,6 +83,19 @@
         </div>
     </div>
 
+    <!-- MODAL SORTIR EXAMEN SENSE GUARDAR -->
+    <div id="exit-modal" onclick="if(event.target === this) document.getElementById('exit-modal').classList.add('hidden')" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+        <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-sm w-full p-6 shadow-2xl text-center space-y-4">
+            <div class="w-16 h-16 bg-red-900/30 text-red-500 rounded-full flex items-center justify-center text-3xl mx-auto mb-2"><i class="fa-solid fa-person-walking-arrow-right"></i></div>
+            <h3 class="text-lg font-bold text-white">Segur que vols avortar?</h3>
+            <p class="text-sm text-slate-300">Si surts ara, perdràs tot el progrés d'aquest test i no s'avaluarà cap resposta.</p>
+            <div class="flex justify-center space-x-3 pt-4">
+                <button type="button" onclick="document.getElementById('exit-modal').classList.add('hidden')" class="px-5 py-2.5 bg-slate-800 hover:bg-slate-700 text-white rounded-xl text-sm font-semibold transition-all">Continuar Test</button>
+                <button type="button" onclick="exitExamToMenu()" class="px-5 py-2.5 bg-red-600 hover:bg-red-500 text-white rounded-xl text-sm font-semibold transition-all shadow-lg">Sortir sense guardar</button>
+            </div>
+        </div>
+    </div>
+
     <!-- HEADER -->
     <header class="glass-panel sticky top-0 z-40 border-b-0 border-slate-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
@@ -125,7 +138,7 @@
         <!-- LANDING PAGE (Per a usuaris NO loguejats) -->
         <section id="sec-landing" class="tab-content block min-h-[70vh] flex flex-col justify-center items-center text-center space-y-8 animate-fade-in py-10">
             <div class="inline-block bg-brand-900/50 border border-brand-500/30 text-brand-300 px-4 py-1.5 rounded-full text-xs font-bold tracking-wide uppercase mb-4"><i class="fa-solid fa-star mr-2 text-yellow-400"></i>Oposicions 2026/2027</div>
-            <h1 class="text-4xl sm:text-6xl font-extrabold text-white tracking-tight leading-tight max-w-4xl mx-auto">La plataforma definitiva per ser <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-400 to-blue-200">Mosso d'Esquadra</span></h1>
+            <h1 class="text-4xl sm:text-6xl font-extrabold text-white tracking-tight leading-tight max-w-4xl mx-auto">La plataforma definitiva per ser <span class="text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.4)] block sm:inline mt-2 sm:mt-0">Mosso d'Esquadra</span></h1>
             <p class="text-lg text-slate-400 max-w-2xl mx-auto leading-relaxed">Deixa de llegir PDFs avorrits. Entrena amb milers de preguntes, minijocs, simulacres reals i un rànquing diari. El teu aptitudinal comença aquí.</p>
             
             <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4 w-full sm:w-auto">
@@ -238,7 +251,7 @@
                             <h3 class="text-lg font-bold text-white">Simulacre Real (30 Qs)</h3>
                             <p class="text-slate-400 text-xs mt-2 leading-relaxed">Condicions oficials. 30 preguntes barrejades, 30 minuts de límit. Possibilitat de marcar dubtes i navegar. Correcció al final.</p>
                         </div>
-                        <button class="mt-6 w-full py-2.5 bg-brand-600 hover:bg-brand-500 text-white font-bold rounded-xl text-sm transition-all">Configurar</button>
+                        <button class="mt-6 w-full py-2.5 bg-brand-600 hover:bg-brand-500 text-white font-bold rounded-xl text-sm transition-all">Iniciar Simulacre</button>
                     </div>
 
                     <div class="bg-slate-800/90 rounded-2xl p-6 border border-slate-700 shadow-lg flex flex-col justify-between hover:border-emerald-500 transition-all cursor-pointer group" onclick="prepareExamMode('practice')">
@@ -247,7 +260,7 @@
                             <h3 class="text-lg font-bold text-white">Pràctica Lliure</h3>
                             <p class="text-slate-400 text-xs mt-2 leading-relaxed">Sense límits de temps. Correcció immediata al marcar cada opció amb explicació detallada.</p>
                         </div>
-                        <button class="mt-6 w-full py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-sm transition-all">Configurar</button>
+                        <button class="mt-6 w-full py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-sm transition-all">Començar Pràctica</button>
                     </div>
 
                     <div class="bg-slate-800/90 rounded-2xl p-6 border border-slate-700 shadow-lg flex flex-col justify-between hover:border-amber-500 transition-all cursor-pointer group" onclick="prepareExamMode('topic')">
@@ -256,7 +269,7 @@
                             <h3 class="text-lg font-bold text-white">Tests per Temes</h3>
                             <p class="text-slate-400 text-xs mt-2 leading-relaxed">Selecciona un àmbit específic (A, B o C) per aprofundir en el seu estudi i dominar-lo completament.</p>
                         </div>
-                        <button class="mt-6 w-full py-2.5 bg-amber-600 hover:bg-amber-500 text-white font-bold rounded-xl text-sm transition-all">Configurar <i class="fa-solid fa-lock text-[10px] ml-1 opacity-50 lock-icon hidden"></i></button>
+                        <button class="mt-6 w-full py-2.5 bg-amber-600 hover:bg-amber-500 text-white font-bold rounded-xl text-sm transition-all">Seleccionar Tema <i class="fa-solid fa-lock text-[10px] ml-1 opacity-50 lock-icon hidden"></i></button>
                     </div>
 
                     <div class="bg-slate-800/90 rounded-2xl p-6 border border-slate-700 shadow-lg flex flex-col justify-between hover:border-orange-500 transition-all cursor-pointer group" onclick="prepareExamMode('weak')">
@@ -265,7 +278,7 @@
                             <h3 class="text-lg font-bold text-white">Reforç Intel·ligent</h3>
                             <p class="text-slate-400 text-xs mt-2 leading-relaxed">L'algoritme genera un test exprés usant exclusivament els temes on tens pitjor precisió històrica.</p>
                         </div>
-                        <button class="mt-6 w-full py-2.5 bg-orange-600 hover:bg-orange-500 text-white font-bold rounded-xl text-sm transition-all">Configurar <i class="fa-solid fa-lock text-[10px] ml-1 opacity-50 lock-icon hidden"></i></button>
+                        <button class="mt-6 w-full py-2.5 bg-orange-600 hover:bg-orange-500 text-white font-bold rounded-xl text-sm transition-all">Crear Test Exprés <i class="fa-solid fa-lock text-[10px] ml-1 opacity-50 lock-icon hidden"></i></button>
                     </div>
                 </div>
             </div>
@@ -325,7 +338,9 @@
                 <div class="w-full md:w-72 shrink-0 space-y-4">
                     <div class="bg-slate-800 rounded-2xl p-5 border border-slate-700 shadow-lg text-center">
                         <p class="text-xs text-slate-400 font-bold uppercase mb-2">Temps Restant</p>
-                        <div id="timer-box" class="text-3xl font-mono font-black text-white bg-slate-900 py-3 rounded-xl border border-slate-700">--:--</div>
+                        <div id="timer-box-container" class="bg-slate-900 py-3 rounded-xl border border-slate-700">
+                            <div id="timer-box" class="text-3xl font-mono font-black text-white">--:--</div>
+                        </div>
                         
                         <div class="w-full bg-slate-900 h-2 rounded-full overflow-hidden mt-4 mb-2"><div id="exam-progress-bar" class="bg-brand-500 h-full w-0 transition-all"></div></div>
                         <p id="exam-progress-text" class="text-xs text-slate-400 font-semibold">Pregunta 0 de 0</p>
@@ -338,7 +353,11 @@
                         </div>
                     </div>
 
-                    <button onclick="document.getElementById('exit-modal').classList.remove('hidden')" class="w-full py-3 bg-red-950/40 hover:bg-red-900/60 text-red-400 font-bold border border-red-900/50 rounded-xl text-sm transition-all">Finalitzar Examen</button>
+                    <!-- Botons Acció Test -->
+                    <div class="grid grid-cols-2 gap-2">
+                        <button onclick="document.getElementById('exit-modal').classList.remove('hidden')" class="w-full py-3 bg-slate-700 hover:bg-slate-600 text-slate-300 font-bold rounded-xl text-xs transition-all"><i class="fa-solid fa-xmark mr-1"></i> Sortir</button>
+                        <button onclick="promptEndExam()" class="w-full py-3 bg-red-950/40 hover:bg-red-900/60 text-red-400 font-bold border border-red-900/50 rounded-xl text-xs transition-all"><i class="fa-solid fa-check-double mr-1"></i> Finalitzar</button>
+                    </div>
                 </div>
             </div>
 
@@ -516,9 +535,8 @@
                 </div>
             </div>
 
-            <!-- Jocs antics mantinguts ocults per defecte (El Penjat i Ruta Patrulla es gestionen des de JS usant la base existent i mostrant-los a la pantalla quan toca) -->
+            <!-- Jocs antics mantinguts ocults per defecte (El Penjat i Ruta Patrulla) -->
             <div id="game-hangman" class="hidden space-y-6">
-                <!-- Reutilitzem el codi de Penjat i Patrulla que ja funcionava perfectament, per no fer l'arxiu excessivament redundant en la vista visual -->
                 <div class="bg-slate-800 rounded-xl p-4 border border-slate-700 flex justify-between items-center"><h2 class="text-lg font-bold text-amber-400"><i class="fa-solid fa-scale-balanced mr-2"></i> El Penjat Legal</h2><button onclick="exitMinigame('game-hangman')" class="text-xs px-4 py-1.5 bg-red-600 hover:bg-red-700 text-white rounded-lg border border-red-500 transition-all">Tornar al menú</button></div>
                 <div class="bg-slate-800/90 rounded-2xl p-6 sm:p-8 border border-slate-700 shadow-xl flex flex-col items-center">
                     <div class="flex justify-between items-center w-full max-w-2xl mx-auto mb-4 bg-slate-900/50 p-3 rounded-xl border border-slate-700"><span class="text-sm font-bold text-slate-300">Puntuació: <span id="hm-current-score" class="text-amber-400 text-lg ml-1">0</span></span><span class="text-sm font-bold text-slate-300">Rècord: <span id="hm-high-score" class="text-emerald-400 text-lg ml-1">0</span></span></div>
@@ -862,9 +880,11 @@
         // Expose deletes to window context for admin buttons
         window.deleteFbDoc = async (coll, id) => {
             if(confirm("Segur que vols eliminar aquest registre?")) {
-                await deleteDoc(doc(db, coll, id));
-                window.showToast("Eliminat correctament", "success");
-                if(coll === 'events') window.loadAdminEvents();
+                try {
+                    await deleteDoc(doc(db, coll, id));
+                    window.showToast("Eliminat correctament", "success");
+                    if(coll === 'events') window.loadAdminEvents();
+                } catch(e) { window.showToast("Error permisos", "error"); }
             }
         };
 
@@ -1005,7 +1025,7 @@
                 // Actualitzar nivel a UI si cal
                 if(window.updateUserLevelUI) window.updateUserLevelUI(lifetimeScore);
                 
-            } catch (e) {}
+            } catch (e) { console.warn("Sense permisos escriure punts. Actualitza Regles Firebase.", e); }
         }
 
         // CARREGA EXTRAS DB (Calendari, Preguntes custom)
@@ -1065,7 +1085,7 @@
                     document.getElementById('cd-days').innerText = diffDays > 0 ? String(diffDays).padStart(2,'0') : '00';
                 }
 
-            } catch(e) { console.error(e); }
+            } catch(e) { console.warn("Permisos denegats events. Actualitza Firestore Rules.", e); }
         }
 
         window.loadCustomDBQuestions = async function() {
@@ -1078,15 +1098,15 @@
                     count++;
                 });
                 if(count > 0) document.getElementById('footer-total-q').innerText = `| Base Dades: ${window.questionBank.length} Qs (+${count} DB)`;
-            } catch(e) {}
+            } catch(e) { console.warn("Permisos denegats lectura preguntes.", e); }
         }
 
         // PANELL D'ADMINISTRACIÓ LOGIC
         window.saveGlobalAlert = async function() {
             const msg = document.getElementById('admin-alert-msg').value;
             const isActive = document.getElementById('admin-alert-active').checked;
-            await setDoc(doc(db, "admin", "alert"), { message: msg, isActive });
-            window.showToast("Alerta actualitzada i propagada.", "success");
+            try { await setDoc(doc(db, "admin", "alert"), { message: msg, isActive }); window.showToast("Alerta actualitzada", "success"); } 
+            catch(e) { window.showToast("Sense permisos admin.", "error"); }
         }
         
         window.saveAdminEvent = async function() {
@@ -1098,10 +1118,12 @@
                 featured: document.getElementById('ev-featured').checked
             };
             if(!ev.title || !ev.date) return window.showToast("Falten dades de l'event.", "error");
-            await addDoc(collection(db, "events"), ev);
-            window.showToast("Event guardat", "success");
-            window.loadAdminEvents(); window.loadDBCalendarEvents();
-            document.getElementById('ev-title').value = ''; document.getElementById('ev-desc').value = '';
+            try {
+                await addDoc(collection(db, "events"), ev);
+                window.showToast("Event guardat", "success");
+                window.loadAdminEvents(); window.loadDBCalendarEvents();
+                document.getElementById('ev-title').value = ''; document.getElementById('ev-desc').value = '';
+            } catch(e) { window.showToast("Permisos denegats. Revisa DB.", "error"); }
         }
 
         window.saveAdminQuestion = async function() {
@@ -1120,84 +1142,91 @@
             
             if(!q.question || q.options.length < 2 || !q.correctAnswer) return window.showToast("Falten camps a la pregunta.", "error");
             
-            await addDoc(collection(db, "custom_questions"), q);
-            window.showToast("Pregunta afegida a la BD correctament.", "success");
-            document.getElementById('q-text').value = ''; document.getElementById('q-opt-correct').value = ''; document.getElementById('q-opt-f1').value = ''; document.getElementById('q-opt-f2').value = ''; document.getElementById('q-opt-f3').value = '';
-            
-            // Push it locally immediately so no reload is needed
-            window.questionBank.push(q);
+            try {
+                await addDoc(collection(db, "custom_questions"), q);
+                window.showToast("Pregunta afegida a la BD correctament.", "success");
+                document.getElementById('q-text').value = ''; document.getElementById('q-opt-correct').value = ''; document.getElementById('q-opt-f1').value = ''; document.getElementById('q-opt-f2').value = ''; document.getElementById('q-opt-f3').value = '';
+                window.questionBank.push(q);
+            } catch(e) { window.showToast("Permís denegat.", "error"); }
         }
 
         window.loadAdminEvents = async function() {
             const tbody = document.getElementById('admin-events-tbody');
             tbody.innerHTML = '<tr><td colspan="4" class="p-4 text-center">Carregant...</td></tr>';
-            const snap = await getDocs(collection(db, "events"));
-            let html = '';
-            snap.forEach(d => {
-                const ev = d.data();
-                html += `<tr class="hover:bg-slate-800/50">
-                    <td class="p-3 text-xs text-brand-300 font-mono">${ev.date}</td>
-                    <td class="p-3 text-xs text-white font-bold">${ev.title} ${ev.featured ? '<i class="fa-solid fa-star text-amber-400 ml-1"></i>' : ''}</td>
-                    <td class="p-3 text-[10px] uppercase text-slate-400">${ev.type}</td>
-                    <td class="p-3 text-center"><button onclick="deleteFbDoc('events', '${d.id}')" class="text-red-400 hover:text-red-300"><i class="fa-solid fa-trash"></i></button></td>
-                </tr>`;
-            });
-            tbody.innerHTML = html || '<tr><td colspan="4" class="p-4 text-center text-slate-500">Cap event creat.</td></tr>';
+            try {
+                const snap = await getDocs(collection(db, "events"));
+                let html = '';
+                snap.forEach(d => {
+                    const ev = d.data();
+                    html += `<tr class="hover:bg-slate-800/50">
+                        <td class="p-3 text-xs text-brand-300 font-mono">${ev.date}</td>
+                        <td class="p-3 text-xs text-white font-bold">${ev.title} ${ev.featured ? '<i class="fa-solid fa-star text-amber-400 ml-1"></i>' : ''}</td>
+                        <td class="p-3 text-[10px] uppercase text-slate-400">${ev.type}</td>
+                        <td class="p-3 text-center"><button onclick="deleteFbDoc('events', '${d.id}')" class="text-red-400 hover:text-red-300"><i class="fa-solid fa-trash"></i></button></td>
+                    </tr>`;
+                });
+                tbody.innerHTML = html || '<tr><td colspan="4" class="p-4 text-center text-slate-500">Cap event creat.</td></tr>';
+            } catch(e) { tbody.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-red-400">Error permisos base de dades.</td></tr>`; }
         }
 
         window.loadAdminUsers = async function() {
             const tbody = document.getElementById('admin-users-tbody');
             tbody.innerHTML = '<tr><td colspan="4" class="p-4 text-center">Carregant usuaris...</td></tr>';
-            const snap = await getDocs(collection(db, "users"));
-            let html = ''; let activeToday = 0;
-            const today = window.getSpanishDateStr();
-            
-            snap.forEach(d => {
-                const u = d.data(); const uid = d.id;
-                if(u.lastLogin === today) activeToday++;
-                html += `<tr class="hover:bg-slate-800/50">
-                    <td class="p-3 text-xs">
-                        <span class="block text-white font-bold">${u.username || 'Sense nom'}</span>
-                        <span class="block text-slate-400 text-[10px]">${u.email}</span>
-                    </td>
-                    <td class="p-3 text-xs text-center text-slate-400">${u.lastLogin === today ? '<span class="text-emerald-400 font-bold">Avui</span>' : (u.lastLogin || '-')}</td>
-                    <td class="p-3 text-center"><button onclick="toggleUserStatus('${uid}', 'unlockedExams', ${!u.unlockedExams})" class="text-[10px] px-2 py-1 rounded text-white ${u.unlockedExams ? 'bg-emerald-600' : 'bg-slate-700'}">${u.unlockedExams ? 'ON' : 'OFF'}</button></td>
-                    <td class="p-3 text-center"><button onclick="toggleUserStatus('${uid}', 'isBlocked', ${!u.isBlocked})" class="text-[10px] px-2 py-1 rounded text-white ${u.isBlocked ? 'bg-red-600' : 'bg-slate-700'}">${u.isBlocked ? 'BLOQUEJAT' : 'ACTIU'}</button></td>
-                </tr>`;
-            });
-            tbody.innerHTML = html;
-            document.getElementById('admin-active-users').innerText = activeToday;
+            try {
+                const snap = await getDocs(collection(db, "users"));
+                let html = ''; let activeToday = 0;
+                const today = window.getSpanishDateStr();
+                
+                snap.forEach(d => {
+                    const u = d.data(); const uid = d.id;
+                    if(u.lastLogin === today) activeToday++;
+                    html += `<tr class="hover:bg-slate-800/50">
+                        <td class="p-3 text-xs">
+                            <span class="block text-white font-bold">${u.username || 'Sense nom'}</span>
+                            <span class="block text-slate-400 text-[10px]">${u.email}</span>
+                        </td>
+                        <td class="p-3 text-xs text-center text-slate-400">${u.lastLogin === today ? '<span class="text-emerald-400 font-bold">Avui</span>' : (u.lastLogin || '-')}</td>
+                        <td class="p-3 text-center"><button onclick="toggleUserStatus('${uid}', 'unlockedExams', ${!u.unlockedExams})" class="text-[10px] px-2 py-1 rounded text-white ${u.unlockedExams ? 'bg-emerald-600' : 'bg-slate-700'}">${u.unlockedExams ? 'ON' : 'OFF'}</button></td>
+                        <td class="p-3 text-center"><button onclick="toggleUserStatus('${uid}', 'isBlocked', ${!u.isBlocked})" class="text-[10px] px-2 py-1 rounded text-white ${u.isBlocked ? 'bg-red-600' : 'bg-slate-700'}">${u.isBlocked ? 'BLOQUEJAT' : 'ACTIU'}</button></td>
+                    </tr>`;
+                });
+                tbody.innerHTML = html;
+                document.getElementById('admin-active-users').innerText = activeToday;
+            } catch(e) { tbody.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-red-400">Sense accés administrador.</td></tr>`; }
         }
 
         window.toggleUserStatus = async function(uid, field, val) {
-            await updateDoc(doc(db, "users", uid), { [field]: val });
-            window.loadAdminUsers();
+            try { await updateDoc(doc(db, "users", uid), { [field]: val }); window.loadAdminUsers(); } catch(e) { window.showToast("Error de permisos", "error"); }
         }
 
         window.loadAdminMetrics = async function() {
             const today = window.getSpanishDateStr();
-            const dSnap = await getDoc(doc(db, "metrics", today));
-            document.getElementById('admin-tests-today').innerText = dSnap.exists() ? (dSnap.data().tests || 0) : 0;
+            try {
+                const dSnap = await getDoc(doc(db, "metrics", today));
+                document.getElementById('admin-tests-today').innerText = dSnap.exists() ? (dSnap.data().tests || 0) : 0;
 
-            const fSnap = await getDoc(doc(db, "metrics", "failed_qs"));
-            if(fSnap.exists()) {
-                const data = fSnap.data();
-                let worstQ = "-"; let maxF = 0;
-                for(let q in data) { if(data[q] > maxF) { maxF = data[q]; worstQ = q; } }
-                document.getElementById('admin-worst-q').innerText = worstQ !== "-" ? `"${worstQ}" (${maxF} errors totals globals)` : 'Cap dada rellevant';
-            }
+                const fSnap = await getDoc(doc(db, "metrics", "failed_qs"));
+                if(fSnap.exists()) {
+                    const data = fSnap.data();
+                    let worstQ = "-"; let maxF = 0;
+                    for(let q in data) { if(data[q] > maxF) { maxF = data[q]; worstQ = q; } }
+                    document.getElementById('admin-worst-q').innerText = worstQ !== "-" ? `"${worstQ}" (${maxF} errors totals globals)` : 'Cap dada rellevant';
+                }
+            } catch(e) {} // Silent cache if no permissions
         }
 
         window.resetGlobalRanking = async function() {
             if(!confirm("⚠️ PERILL: Això esborrarà a 0 els punts i percentatges d'avui de TOTS els usuaris actius. Segur?")) return;
-            const snap = await getDocs(collection(db, "users"));
-            const today = window.getSpanishDateStr();
-            snap.forEach(async d => {
-                if(d.data().lastResetDate === today && (d.data().score > 0 || d.data().answeredToday > 0)) {
-                    await updateDoc(doc(db, "users", d.id), { score: 0, answeredToday: 0 });
-                }
-            });
-            setTimeout(() => { window.loadGlobalRanking(); window.showToast("Rànquing purgat", "success"); }, 1500);
+            try {
+                const snap = await getDocs(collection(db, "users"));
+                const today = window.getSpanishDateStr();
+                snap.forEach(async d => {
+                    if(d.data().lastResetDate === today && (d.data().score > 0 || d.data().answeredToday > 0)) {
+                        await updateDoc(doc(db, "users", d.id), { score: 0, answeredToday: 0 });
+                    }
+                });
+                setTimeout(() => { window.loadGlobalRanking(); window.showToast("Rànquing purgat", "success"); }, 1500);
+            } catch(e) { window.showToast("No tens permisos per netejar tot", "error"); }
         }
 
         window.submitQuestionReport = async () => {
@@ -1234,18 +1263,20 @@
                     </div>`;
                 });
                 list.innerHTML = html;
-            } catch(e) {}
+            } catch(e) { list.innerHTML = '<p class="text-red-400 text-sm text-center py-4">No hi ha accés (Revisa regles Firebase).</p>'; }
         }
 
         window.initAdminPanel = async function() {
             window.switchTab('admin');
             window.switchAdminTab('dashboard'); // Default
             window.loadAdminReports(); window.loadAdminUsers(); window.loadAdminMetrics(); window.loadAdminEvents();
-            const alertSnap = await getDoc(doc(db, "admin", "alert"));
-            if(alertSnap.exists()) {
-                document.getElementById('admin-alert-msg').value = alertSnap.data().message || '';
-                document.getElementById('admin-alert-active').checked = alertSnap.data().isActive || false;
-            }
+            try {
+                const alertSnap = await getDoc(doc(db, "admin", "alert"));
+                if(alertSnap.exists()) {
+                    document.getElementById('admin-alert-msg').value = alertSnap.data().message || '';
+                    document.getElementById('admin-alert-active').checked = alertSnap.data().isActive || false;
+                }
+            } catch(e) {}
         }
         
         window.switchAdminTab = function(tab) {
@@ -1292,35 +1323,37 @@
                 if(statsOverlay) statsOverlay.classList.add('hidden');
                 if(statsContent) statsContent.classList.remove('opacity-40', 'blur-[2px]', 'pointer-events-none');
 
-                const snap = await getDoc(doc(db, "users", user.uid));
-                if(snap.exists()) {
-                    const d = snap.data();
-                    window.currentUserData = d;
-                    
-                    if(d.isBlocked) { window.showToast("Compte bloquejat.", "error"); await signOut(auth); return; }
+                try {
+                    const snap = await getDoc(doc(db, "users", user.uid));
+                    if(snap.exists()) {
+                        const d = snap.data();
+                        window.currentUserData = d;
+                        
+                        if(d.isBlocked) { window.showToast("Compte bloquejat.", "error"); await signOut(auth); return; }
 
-                    const today = window.getSpanishDateStr();
-                    if(d.lastLogin !== today) updateDoc(doc(db, "users", user.uid), { lastLogin: today }).catch(()=>{});
+                        const today = window.getSpanishDateStr();
+                        if(d.lastLogin !== today) updateDoc(doc(db, "users", user.uid), { lastLogin: today }).catch(()=>{});
 
-                    if(notLogged) notLogged.classList.add('hidden');
-                    if(logged) logged.classList.remove('hidden');
-                    
-                    if(adminBtn) {
-                        if (user.email === "gerardlopezgarcia1@gmail.com") adminBtn.classList.remove('hidden');
-                        else adminBtn.classList.add('hidden');
+                        if(notLogged) notLogged.classList.add('hidden');
+                        if(logged) logged.classList.remove('hidden');
+                        
+                        if(adminBtn) {
+                            if (user.email === "gerardlopezgarcia1@gmail.com") adminBtn.classList.remove('hidden');
+                            else adminBtn.classList.add('hidden');
+                        }
+
+                        if(desktopLabel) desktopLabel.innerHTML = `${d.username || 'Perfil'}`;
+                        document.getElementById('profile-username-input').value = d.username || '';
+                        document.getElementById('profile-email-val').innerText = user.email;
+                        
+                        if(window.updateUserLevelUI) window.updateUserLevelUI(d.lifetimeScore || 0);
+                        
+                        const refLinkEl = document.getElementById('profile-ref-link');
+                        if(refLinkEl) refLinkEl.value = d.username || '';
+                        const addRefBox = document.getElementById('profile-add-referral-box');
+                        if(addRefBox) { if(!d.unlockedExams) addRefBox.classList.remove('hidden'); else addRefBox.classList.add('hidden'); }
                     }
-
-                    if(desktopLabel) desktopLabel.innerHTML = `${d.username || 'Perfil'}`;
-                    document.getElementById('profile-username-input').value = d.username || '';
-                    document.getElementById('profile-email-val').innerText = user.email;
-                    
-                    if(window.updateUserLevelUI) window.updateUserLevelUI(d.lifetimeScore || 0);
-                    
-                    const refLinkEl = document.getElementById('profile-ref-link');
-                    if(refLinkEl) refLinkEl.value = d.username || '';
-                    const addRefBox = document.getElementById('profile-add-referral-box');
-                    if(addRefBox) { if(!d.unlockedExams) addRefBox.classList.remove('hidden'); else addRefBox.classList.add('hidden'); }
-                }
+                } catch(e) { console.warn("Error lectura usuari inicial."); }
                 
                 // Carregar dades asincrones
                 window.loadDBCalendarEvents();
@@ -1766,6 +1799,12 @@
             }, 1000);
         }
 
+        window.promptEndExam = function() {
+            if(confirm("Segur que vols finalitzar l'examen ara? Es calcularà la teva nota amb les respostes donades.")) {
+                showExamResults();
+            }
+        }
+
         window.exitExamToMenu = () => {
             document.getElementById('exit-modal').classList.add('hidden');
             if (activeTimerInterval) clearInterval(activeTimerInterval);
@@ -1793,21 +1832,24 @@
             document.getElementById('question-topic-badge').innerText = q.topic || 'Mossos d\'Esquadra';
             document.getElementById('question-text').innerText = q.question;
 
-            // Actualitzar Grid UI
+            // Actualitzar Grid UI de forma segura
             document.querySelectorAll('.grid-q-btn').forEach(b => b.classList.remove('active'));
             const activeBtn = document.getElementById(`q-grid-btn-${currentQuestionIdx}`);
             if(activeBtn) activeBtn.classList.add('active');
             
             const btnFlag = document.getElementById('btn-flag-q');
-            if(userAnswers[currentQuestionIdx] && userAnswers[currentQuestionIdx].flagged) {
-                btnFlag.classList.add('text-amber-400', 'border-amber-400', 'bg-amber-900/20'); btnFlag.classList.remove('text-slate-400', 'border-slate-600');
-                if(activeBtn) activeBtn.classList.add('flagged');
-            } else {
-                btnFlag.classList.remove('text-amber-400', 'border-amber-400', 'bg-amber-900/20'); btnFlag.classList.add('text-slate-400', 'border-slate-600');
-                if(activeBtn) activeBtn.classList.remove('flagged');
+            if(btnFlag) {
+                if(userAnswers[currentQuestionIdx] && userAnswers[currentQuestionIdx].flagged) {
+                    btnFlag.classList.add('text-amber-400', 'border-amber-400', 'bg-amber-900/20'); btnFlag.classList.remove('text-slate-400', 'border-slate-600');
+                    if(activeBtn) activeBtn.classList.add('flagged');
+                } else {
+                    btnFlag.classList.remove('text-amber-400', 'border-amber-400', 'bg-amber-900/20'); btnFlag.classList.add('text-slate-400', 'border-slate-600');
+                    if(activeBtn) activeBtn.classList.remove('flagged');
+                }
             }
 
             const optsBox = document.getElementById('options-container');
+            if(!optsBox) return;
             optsBox.innerHTML = '';
             const ansObj = userAnswers[currentQuestionIdx];
             const hasChosen = ansObj && ansObj.choice !== undefined;
@@ -1834,8 +1876,6 @@
 
                         if(examConfig.mode !== 'simulacre') playSound(isCorrect);
                         renderQuestion();
-                        
-                        // Auto avança en simulacre si volen (desactivat per evitar errors si es toca sense voler)
                     };
                 }
 
@@ -1859,14 +1899,16 @@
 
             // Explicació immediata (només Pràctica)
             const expBox = document.getElementById('explanation-box');
-            if (hasChosen && examConfig.mode !== 'simulacre') {
-                expBox.classList.remove('hidden');
-                const isCorrect = ansObj.isCorrect;
-                expBox.className = `mb-6 p-4 rounded-xl border animate-fade-in ${isCorrect ? 'bg-emerald-950/40 border-emerald-500/40 text-emerald-200' : 'bg-red-950/40 border-red-500/40 text-red-200'}`;
-                document.getElementById('explanation-title').innerHTML = isCorrect ? `<i class="fa-solid fa-circle-check"></i> Resposta Correcta` : `<i class="fa-solid fa-circle-xmark"></i> Resposta Incorrecta`;
-                document.getElementById('explanation-text').innerText = q.explanation || `La resposta correcta dictada a temari és: ${q.correctAnswer}`;
-            } else {
-                expBox.classList.add('hidden');
+            if(expBox) {
+                if (hasChosen && examConfig.mode !== 'simulacre') {
+                    expBox.classList.remove('hidden');
+                    const isCorrect = ansObj.isCorrect;
+                    expBox.className = `mb-6 p-4 rounded-xl border animate-fade-in ${isCorrect ? 'bg-emerald-950/40 border-emerald-500/40 text-emerald-200' : 'bg-red-950/40 border-red-500/40 text-red-200'}`;
+                    document.getElementById('explanation-title').innerHTML = isCorrect ? `<i class="fa-solid fa-circle-check"></i> Resposta Correcta` : `<i class="fa-solid fa-circle-xmark"></i> Resposta Incorrecta`;
+                    document.getElementById('explanation-text').innerText = q.explanation || `La resposta correcta dictada a temari és: ${q.correctAnswer}`;
+                } else {
+                    expBox.classList.add('hidden');
+                }
             }
         }
 
@@ -2058,7 +2100,7 @@
                     </tr>`;
                 });
                 tableBody.innerHTML = html;
-            } catch (e) { tableBody.innerHTML = `<tr><td colspan="3" class="p-8 text-center text-red-400">Error de connexió al carregar dades.</td></tr>`; }
+            } catch (e) { tableBody.innerHTML = `<tr><td colspan="3" class="p-8 text-center text-red-400">Pendent de carregar dades del rànquing.</td></tr>`; }
         }
 
         // 5. SISTEMA MINIJOCS GAMIFICATS
