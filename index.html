@@ -165,12 +165,15 @@
                         <h2 class="text-2xl sm:text-3xl font-extrabold text-white leading-tight">Primera prova de coneixements</h2>
                         <p class="text-brand-300 font-medium mt-1"><i class="fa-regular fa-calendar mr-2"></i>17 d'Octubre de 2026 (Estimada)</p>
                     </div>
-                    <div class="bg-slate-950/50 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-4 flex gap-4 text-center min-w-[280px] shadow-inner">
-                        <div class="flex-1"><span id="cd-days" class="block text-3xl font-black text-white">00</span><span class="text-[10px] text-slate-400 uppercase font-bold">Dies</span></div>
+                    <!-- Reloj corregido para incluir Segundos -->
+                    <div class="bg-slate-950/50 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-4 flex gap-3 text-center min-w-[300px] shadow-inner">
+                        <div class="flex-1"><span id="cd-days" class="block text-2xl sm:text-3xl font-black text-white">00</span><span class="text-[9px] sm:text-[10px] text-slate-400 uppercase font-bold">Dies</span></div>
                         <div class="w-px bg-slate-800"></div>
-                        <div class="flex-1"><span id="cd-hours" class="block text-3xl font-black text-white">00</span><span class="text-[10px] text-slate-400 uppercase font-bold">Hores</span></div>
+                        <div class="flex-1"><span id="cd-hours" class="block text-2xl sm:text-3xl font-black text-white">00</span><span class="text-[9px] sm:text-[10px] text-slate-400 uppercase font-bold">Hores</span></div>
                         <div class="w-px bg-slate-800"></div>
-                        <div class="flex-1"><span id="cd-mins" class="block text-3xl font-black text-white">00</span><span class="text-[10px] text-slate-400 uppercase font-bold">Mins</span></div>
+                        <div class="flex-1"><span id="cd-mins" class="block text-2xl sm:text-3xl font-black text-white">00</span><span class="text-[9px] sm:text-[10px] text-slate-400 uppercase font-bold">Mins</span></div>
+                        <div class="w-px bg-slate-800"></div>
+                        <div class="flex-1"><span id="cd-secs" class="block text-2xl sm:text-3xl font-black text-brand-400">00</span><span class="text-[9px] sm:text-[10px] text-slate-400 uppercase font-bold">Segs</span></div>
                     </div>
                 </div>
             </div>
@@ -403,16 +406,17 @@
                     </div>
                 </div>
 
-                <!-- Graella Minijocs (Sense mapa) -->
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Modificado a grid-cols-3 para mostrarlos en 1 sola fila en PC -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    
                     <!-- Triage / Swipe -->
-                    <div class="bg-slate-800/90 rounded-2xl p-6 border border-slate-700 shadow-lg flex flex-col justify-between hover:border-pink-500 transition-all group lg:col-span-3 md:flex-row items-center gap-6">
-                        <div class="flex-1">
+                    <div class="bg-slate-800/90 rounded-2xl p-6 border border-slate-700 shadow-lg flex flex-col justify-between hover:border-pink-500 transition-all group">
+                        <div>
                             <div class="w-12 h-12 rounded-xl bg-pink-500/10 text-pink-400 flex items-center justify-center text-xl mb-4"><i class="fa-solid fa-layer-group"></i></div>
                             <h3 class="text-lg font-bold text-white">Triage Ràpid</h3>
-                            <p class="text-slate-400 text-sm mt-2 leading-relaxed max-w-2xl">Memòria muscular pura. Apareix un concepte (Ex: "Seguretat Pública") i tens 8 segons per assignar-lo a la competència correcta (Estat o Generalitat).</p>
+                            <p class="text-slate-400 text-xs mt-2 leading-relaxed">Memòria muscular pura. Apareix un concepte (Ex: "Seguretat Pública") i tens 8 segons per assignar-lo a la competència correcta (Estat o Generalitat).</p>
                         </div>
-                        <button onclick="startTriageGame()" class="mt-6 md:mt-0 w-full md:w-64 py-4 bg-pink-600 hover:bg-pink-500 text-white font-bold rounded-xl text-sm transition-all shadow-lg flex items-center justify-center"><i class="fa-solid fa-bolt mr-2"></i> Iniciar Triage</button>
+                        <button onclick="startTriageGame()" class="mt-6 w-full py-2.5 bg-pink-600 hover:bg-pink-500 text-white font-bold rounded-xl text-sm transition-all shadow flex items-center justify-center"><i class="fa-solid fa-bolt mr-2"></i> Iniciar Triage</button>
                     </div>
 
                     <!-- El Penjat Legal -->
@@ -437,52 +441,51 @@
                 </div>
             </div>
 
-            <!-- INTERFÍCIE JOC: TRIAGE RÀPID -->
-            <div id="game-triage" class="hidden min-h-[70vh] flex flex-col relative">
-                <div class="bg-slate-800 rounded-xl p-4 border border-slate-700 flex justify-between items-center mb-6 shrink-0 relative z-30">
+            <!-- INTERFÍCIE JOC: TRIAGE AMB BOTONS (Eliminat Swipe) -->
+            <div id="game-triage" class="hidden h-[80vh] flex flex-col">
+                <div class="bg-slate-800 rounded-xl p-4 border border-slate-700 flex justify-between items-center mb-6 shrink-0">
                     <div>
                         <h2 class="text-lg font-bold text-pink-400"><i class="fa-solid fa-layer-group mr-2"></i> Triage Ràpid</h2>
-                        <p class="text-[10px] text-slate-400 mt-0.5">Selecciona el botó correcte abans que s'esgoti el temps.</p>
+                        <p class="text-[10px] text-slate-400 mt-0.5">Tria l'opció correcta ràpidament abans que s'esgoti el temps.</p>
                     </div>
-                    <button onclick="exitMinigame('game-triage'); clearInterval(triageTimerInt);" class="text-xs px-4 py-1.5 bg-slate-700 hover:bg-slate-600 text-white rounded-lg border border-slate-600 transition-all">Tornar al Menú</button>
+                    <button onclick="exitMinigame('game-triage'); clearInterval(triageTimerInt);" class="text-xs px-4 py-1.5 bg-slate-700 hover:bg-slate-600 text-white rounded-lg border border-slate-600 transition-all">Tornar</button>
                 </div>
 
-                <div class="flex-1 relative flex flex-col items-center justify-center w-full max-w-2xl mx-auto">
+                <div class="flex-1 relative flex flex-col items-center justify-center w-full max-w-2xl mx-auto overflow-hidden px-4">
                     <!-- Targeta Central -->
-                    <div id="triage-card" class="bg-gradient-to-b from-slate-800 to-slate-900 border-2 border-slate-600 rounded-2xl p-8 w-full sm:w-80 h-80 flex flex-col items-center justify-center text-center shadow-2xl z-10 transition-transform duration-200">
+                    <div id="triage-card" class="bg-gradient-to-b from-slate-800 to-slate-900 border-2 border-slate-600 rounded-2xl p-8 w-full max-w-sm h-64 flex flex-col items-center justify-center text-center shadow-2xl z-10 transition-transform duration-200">
                         <i class="fa-solid fa-scale-unbalanced text-3xl text-pink-500/50 mb-4"></i>
-                        <h2 id="triage-concept" class="text-xl sm:text-2xl font-bold text-white leading-snug">Carregant concepte...</h2>
+                        <h2 id="triage-concept" class="text-xl font-bold text-white leading-snug">Carregant concepte...</h2>
                         
-                        <!-- Barra de temps inferior a la targeta -->
                         <div class="mt-auto w-full">
-                            <div class="h-2 w-full bg-slate-700 rounded-full overflow-hidden"><div id="triage-time-bar" class="h-full bg-pink-500 w-full"></div></div>
+                            <div class="h-1.5 w-full bg-slate-700 rounded-full overflow-hidden"><div id="triage-time-bar" class="h-full bg-pink-500 w-full"></div></div>
                         </div>
                     </div>
 
-                    <!-- Botons d'Acció (Ja no es fa swipe) -->
-                    <div class="mt-8 flex justify-center gap-4 sm:gap-8 w-full z-20 px-4">
-                        <button onclick="handleTriage(0)" class="flex-1 sm:flex-none sm:w-48 px-4 py-4 rounded-xl bg-slate-800 border-2 border-slate-600 text-slate-300 font-bold shadow-lg hover:bg-brand-600 hover:border-brand-500 hover:text-white transition-all flex flex-col items-center gap-2">
-                            <i class="fa-solid fa-arrow-left text-xl opacity-50"></i>
+                    <!-- Resultat temporal overlay -->
+                    <div id="triage-feedback" class="absolute inset-0 z-20 flex items-center justify-center pointer-events-none opacity-0 transition-opacity duration-200">
+                        <i id="triage-icon" class="fa-solid fa-check text-8xl text-emerald-500 drop-shadow-[0_0_30px_rgba(16,185,129,0.8)]"></i>
+                    </div>
+
+                    <!-- Botons grans d'acció en lloc de Swipe -->
+                    <div class="w-full max-w-sm flex justify-between gap-4 mt-8 z-20">
+                        <button onclick="handleTriage(0)" class="flex-1 py-4 px-2 rounded-xl bg-slate-800 border-2 border-slate-600 text-slate-300 font-bold shadow-lg hover:bg-slate-700 active:scale-95 transition-all flex flex-col items-center justify-center gap-1">
+                            <i class="fa-solid fa-arrow-left text-lg text-slate-500"></i>
                             <span id="t-label-l" class="text-sm">Estat</span>
                         </button>
-                        <button onclick="handleTriage(1)" class="flex-1 sm:flex-none sm:w-48 px-4 py-4 rounded-xl bg-slate-800 border-2 border-slate-600 text-slate-300 font-bold shadow-lg hover:bg-emerald-600 hover:border-emerald-500 hover:text-white transition-all flex flex-col items-center gap-2">
-                            <i class="fa-solid fa-arrow-right text-xl opacity-50"></i>
+                        <button onclick="handleTriage(1)" class="flex-1 py-4 px-2 rounded-xl bg-slate-800 border-2 border-slate-600 text-slate-300 font-bold shadow-lg hover:bg-slate-700 active:scale-95 transition-all flex flex-col items-center justify-center gap-1">
+                            <i class="fa-solid fa-arrow-right text-lg text-slate-500"></i>
                             <span id="t-label-r" class="text-sm">Generalitat</span>
                         </button>
                     </div>
-
-                    <!-- Resultat temporal overlay (Tick verd o X vermella) -->
-                    <div id="triage-feedback" class="absolute inset-0 z-40 flex items-center justify-center pointer-events-none opacity-0 transition-opacity duration-200">
-                        <i id="triage-icon" class="fa-solid fa-check text-9xl text-emerald-500 drop-shadow-[0_0_50px_rgba(16,185,129,0.8)]"></i>
-                    </div>
                 </div>
                 
-                <div class="text-center mt-6 shrink-0">
-                    <p class="text-sm font-bold text-slate-400 bg-slate-900 border border-slate-800 inline-block px-6 py-2 rounded-xl">Punts Triage: <span id="triage-score" class="text-pink-400 text-xl ml-2">0</span></p>
+                <div class="text-center mt-4 shrink-0">
+                    <p class="text-sm font-bold text-slate-400">Punts Triage: <span id="triage-score" class="text-pink-400 text-xl ml-1">0</span></p>
                 </div>
             </div>
 
-            <!-- INTERFÍCIE JOC: EL PENJAT LEGAL -->
+            <!-- INTERFÍCIE JOC: EL PENJAT -->
             <div id="game-hangman" class="hidden space-y-6">
                 <div class="bg-slate-800 rounded-xl p-4 border border-slate-700 flex justify-between items-center"><h2 class="text-lg font-bold text-amber-400"><i class="fa-solid fa-scale-balanced mr-2"></i> El Penjat Legal</h2><button onclick="exitMinigame('game-hangman')" class="text-xs px-4 py-1.5 bg-red-600 hover:bg-red-700 text-white rounded-lg border border-red-500 transition-all">Tornar al menú</button></div>
                 <div class="bg-slate-800/90 rounded-2xl p-6 sm:p-8 border border-slate-700 shadow-xl flex flex-col items-center">
@@ -533,7 +536,7 @@
                             <tr class="bg-slate-900/80 text-slate-400 text-xs uppercase tracking-wider border-b border-slate-700">
                                 <th class="p-4 font-bold text-center w-16">Pos</th>
                                 <th class="p-4 font-bold">Usuari / Nivell</th>
-                                <th class="p-4 font-bold text-right" id="th-ranking-metric">Punts</th>
+                                <th class="p-4 font-bold text-right" id="th-ranking-metric">Punts Avui</th>
                             </tr>
                         </thead>
                         <tbody id="ranking-table-body" class="divide-y divide-slate-700/60 text-sm">
@@ -547,7 +550,6 @@
         <!-- PROFILE SECTION -->
         <section id="sec-profile" class="tab-content hidden space-y-6">
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <!-- Columna Esquerra: Info Bàsica i Settings -->
                 <div class="lg:col-span-1 space-y-6">
                     <div class="bg-slate-800 rounded-2xl p-6 sm:p-8 border border-slate-700 shadow-xl flex flex-col items-center text-center">
                         <div class="w-24 h-24 rounded-full bg-slate-900 border-4 border-brand-500 flex items-center justify-center text-4xl font-bold text-brand-400 mb-4 shadow-[0_0_20px_rgba(37,99,235,0.3)] relative">
@@ -591,10 +593,7 @@
                     </div>
                 </div>
 
-                <!-- Columna Dreta: Insígnies i Desbloquejos -->
                 <div class="lg:col-span-2 space-y-6">
-                    
-                    <!-- Desbloquejos i Referits -->
                     <div class="bg-gradient-to-br from-brand-900/30 to-slate-800 p-6 sm:p-8 rounded-2xl border border-brand-500/30 shadow-lg">
                         <div class="flex items-start gap-4 mb-4">
                             <div class="w-12 h-12 bg-brand-600 rounded-xl flex items-center justify-center text-2xl text-white shrink-0"><i class="fa-solid fa-unlock-keyhole"></i></div>
@@ -623,11 +622,9 @@
                         </div>
                     </div>
 
-                    <!-- Insígnies Gamificació -->
                     <div class="bg-slate-800 rounded-2xl p-6 sm:p-8 border border-slate-700 shadow">
                         <h3 class="text-base font-bold text-white mb-6"><i class="fa-solid fa-medal text-amber-400 mr-2"></i>Insígnies Aconseguides</h3>
                         <div class="grid grid-cols-2 sm:grid-cols-4 gap-4" id="badges-container">
-                            <!-- Generat dinàmicament en carregar -->
                             <div class="bg-slate-900/50 p-4 rounded-xl border border-slate-700 text-center opacity-50 grayscale"><i class="fa-solid fa-play text-2xl text-slate-500 mb-2"></i><p class="text-[10px] font-bold text-slate-300 uppercase">1r Test Completat</p></div>
                             <div class="bg-slate-900/50 p-4 rounded-xl border border-slate-700 text-center opacity-50 grayscale"><i class="fa-solid fa-fire text-2xl text-slate-500 mb-2"></i><p class="text-[10px] font-bold text-slate-300 uppercase">Racha 7 dies</p></div>
                             <div class="bg-slate-900/50 p-4 rounded-xl border border-slate-700 text-center opacity-50 grayscale"><i class="fa-solid fa-bullseye text-2xl text-slate-500 mb-2"></i><p class="text-[10px] font-bold text-slate-300 uppercase">90% Precisió global</p></div>
@@ -635,7 +632,6 @@
                         </div>
                         <p class="text-xs text-slate-500 mt-4 text-center">Inicia sessió i fes tests per desbloquejar les medalles honorífiques.</p>
                     </div>
-
                 </div>
             </div>
         </section>
@@ -652,9 +648,7 @@
                 </div>
             </div>
 
-            <!-- ADMIN TAB: DASHBOARD -->
             <div id="admin-tab-dashboard" class="admin-content-sec space-y-6">
-                <!-- 1. Tauler / Mètriques -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 shadow-xl">
                         <h3 class="font-bold text-white mb-4"><i class="fa-solid fa-bullhorn text-brand-400 mr-2"></i>Notificació Global / Banner</h3>
@@ -686,7 +680,6 @@
                 </div>
             </div>
 
-            <!-- ADMIN TAB: EVENTS -->
             <div id="admin-tab-events" class="admin-content-sec space-y-6 hidden">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="md:col-span-1 bg-slate-800 p-6 rounded-2xl border border-slate-700 shadow-xl flex flex-col h-fit">
@@ -724,12 +717,7 @@
                 </div>
             </div>
 
-            <!-- ADMIN TAB: QUESTIONS -->
             <div id="admin-tab-questions" class="admin-content-sec space-y-6 hidden">
-                <div class="bg-amber-900/30 border border-amber-500/50 rounded-xl p-4 text-sm text-amber-200">
-                    <i class="fa-solid fa-triangle-exclamation mr-2"></i> <strong>Nota per a Gerard:</strong> Les preguntes base estan als arxius JSON de GitHub. Si afegeixes preguntes aquí, es guardaran a Firebase i s'afegiran als tests dels usuaris automàticament sense haver de pujar codi nou.
-                </div>
-                
                 <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 shadow-xl flex flex-col">
                     <h3 class="font-bold text-white mb-4"><i class="fa-solid fa-plus text-emerald-400 mr-2"></i>Crear Nova Pregunta (Firebase DB)</h3>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
@@ -737,12 +725,10 @@
                             <label class="text-[10px] uppercase font-bold text-slate-400 block mb-1">Enunciat de la pregunta</label>
                             <textarea id="q-text" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-3 text-white font-medium h-20 resize-none"></textarea>
                         </div>
-                        
                         <div><label class="text-[10px] uppercase font-bold text-emerald-400 block mb-1">Opció Correcta</label><input type="text" id="q-opt-correct" class="w-full bg-slate-950 border border-emerald-700/50 rounded-lg p-2.5 text-white"></div>
                         <div><label class="text-[10px] uppercase font-bold text-slate-400 block mb-1">Opció Falsa 1</label><input type="text" id="q-opt-f1" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white"></div>
                         <div><label class="text-[10px] uppercase font-bold text-slate-400 block mb-1">Opció Falsa 2</label><input type="text" id="q-opt-f2" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white"></div>
                         <div><label class="text-[10px] uppercase font-bold text-slate-400 block mb-1">Opció Falsa 3</label><input type="text" id="q-opt-f3" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white"></div>
-                        
                         <div>
                             <label class="text-[10px] uppercase font-bold text-slate-400 block mb-1">Assignar a un Tema Oficial</label>
                             <select id="q-topic" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white outline-none">
@@ -754,15 +740,11 @@
                             </select>
                         </div>
                         <div><label class="text-[10px] uppercase font-bold text-slate-400 block mb-1">Explicació (Mostrada en encertar/fallar)</label><input type="text" id="q-exp" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white"></div>
-                        
-                        <div class="md:col-span-2 mt-2">
-                            <button onclick="saveAdminQuestion()" class="px-8 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl transition-all shadow-lg"><i class="fa-solid fa-cloud-arrow-up mr-2"></i>Pujar Pregunta a la Base de Dades</button>
-                        </div>
+                        <div class="md:col-span-2 mt-2"><button onclick="saveAdminQuestion()" class="px-8 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl transition-all shadow-lg"><i class="fa-solid fa-cloud-arrow-up mr-2"></i>Pujar Pregunta a la Base de Dades</button></div>
                     </div>
                 </div>
             </div>
 
-            <!-- ADMIN TAB: USERS -->
             <div id="admin-tab-users" class="admin-content-sec space-y-6 hidden">
                 <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 shadow-xl flex flex-col">
                     <div class="flex justify-between items-center mb-4">
@@ -825,7 +807,6 @@
         window.dbRef = db;
         window.fbIncrement = increment;
         
-        // Expose deletes to window context for admin buttons
         window.deleteFbDoc = async (coll, id) => {
             if(confirm("Segur que vols eliminar aquest registre?")) {
                 try {
@@ -970,13 +951,12 @@
                 
                 await setDoc(userRef, { score, answeredToday, lifetimeScore, lastResetDate: lastReset }, { merge: true });
                 
-                // Actualitzar nivel a UI si cal
                 if(window.updateUserLevelUI) window.updateUserLevelUI(lifetimeScore);
                 
             } catch (e) { console.warn("Sense permisos escriure punts.", e); }
         }
 
-        // CARREGA EXTRAS DB (Calendari, Preguntes custom)
+        // CARREGA EXTRAS DB
         window.loadDBCalendarEvents = async function() {
             try {
                 const snap = await getDocs(collection(db, "events"));
@@ -988,18 +968,13 @@
                     eventsList.push(ev);
                 });
                 
-                // Sort by date approaching
                 eventsList.sort((a,b) => new Date(a.date) - new Date(b.date));
-                
-                let html = '';
-                let nextFeatured = null;
+                let html = ''; let nextFeatured = null;
 
                 eventsList.forEach(ev => {
-                    // Check featured for dashboard widget
                     if(ev.featured && !nextFeatured && new Date(ev.date) >= new Date()) nextFeatured = ev;
                     
-                    let icon = 'fa-calendar';
-                    let bg = 'bg-slate-800 border-slate-700 text-slate-300';
+                    let icon = 'fa-calendar'; let bg = 'bg-slate-800 border-slate-700 text-slate-300';
                     if(ev.type === 'Examen') { icon = 'fa-pen-to-square'; bg = 'bg-brand-900/40 border-brand-500/50 text-brand-300'; }
                     if(ev.type === 'Resultados') { icon = 'fa-square-poll-vertical'; bg = 'bg-emerald-900/40 border-emerald-500/50 text-emerald-300'; }
                     
@@ -1025,28 +1000,39 @@
                 if(eventsList.length === 0) html = '<p class="text-sm text-slate-400 p-4 text-center">No hi ha esdeveniments oficials programats.</p>';
                 container.innerHTML = html;
                 
-                // Actualitzar widget dashboard
+                // Actualitzar widget dashboard con segundos reales
                 if(nextFeatured) {
-                    const diffDays = Math.ceil((new Date(nextFeatured.date) - new Date()) / (1000 * 60 * 60 * 24));
                     document.querySelector('#sec-dashboard h2').innerText = nextFeatured.title;
                     document.querySelector('#sec-dashboard .text-brand-300').innerHTML = `<i class="fa-regular fa-calendar mr-2"></i> ${nextFeatured.date.split('-').reverse().join('/')}`;
-                    document.getElementById('cd-days').innerText = diffDays > 0 ? String(diffDays).padStart(2,'0') : '00';
+                    
+                    if (window.examCountdownInt) clearInterval(window.examCountdownInt);
+                    window.examCountdownInt = setInterval(() => {
+                        const now = new Date();
+                        const target = new Date(nextFeatured.date);
+                        target.setHours(8, 0, 0, 0); // Asumimos las 8 de la mañana
+                        const diff = target - now;
+                        if(diff > 0) {
+                            document.getElementById('cd-days').innerText = String(Math.floor(diff / 86400000)).padStart(2,'0');
+                            document.getElementById('cd-hours').innerText = String(Math.floor((diff / 3600000) % 24)).padStart(2,'0');
+                            document.getElementById('cd-mins').innerText = String(Math.floor((diff / 60000) % 60)).padStart(2,'0');
+                            if(document.getElementById('cd-secs')) document.getElementById('cd-secs').innerText = String(Math.floor((diff / 1000) % 60)).padStart(2,'0');
+                        } else {
+                            document.getElementById('cd-days').innerText = "00"; document.getElementById('cd-hours').innerText = "00";
+                            document.getElementById('cd-mins').innerText = "00"; if(document.getElementById('cd-secs')) document.getElementById('cd-secs').innerText = "00";
+                        }
+                    }, 1000);
                 }
 
-            } catch(e) { console.warn("Permisos denegats events.", e); }
+            } catch(e) { console.warn("Permisos denegats events."); }
         }
 
         window.loadCustomDBQuestions = async function() {
             try {
                 const snap = await getDocs(collection(db, "custom_questions"));
                 let count = 0;
-                snap.forEach(d => {
-                    const qData = d.data();
-                    window.questionBank.push(qData);
-                    count++;
-                });
+                snap.forEach(d => { window.questionBank.push(d.data()); count++; });
                 if(count > 0) document.getElementById('footer-total-q').innerText = `| Base Dades: ${window.questionBank.length} Qs (+${count} DB)`;
-            } catch(e) { console.warn("Permisos denegats lectura preguntes.", e); }
+            } catch(e) { console.warn("Permisos denegats lectura preguntes."); }
         }
 
         // PANELL D'ADMINISTRACIÓ LOGIC
@@ -1058,60 +1044,25 @@
         }
         
         window.saveAdminEvent = async function() {
-            const ev = {
-                title: document.getElementById('ev-title').value,
-                date: document.getElementById('ev-date').value,
-                type: document.getElementById('ev-type').value,
-                desc: document.getElementById('ev-desc').value,
-                featured: document.getElementById('ev-featured').checked
-            };
+            const ev = { title: document.getElementById('ev-title').value, date: document.getElementById('ev-date').value, type: document.getElementById('ev-type').value, desc: document.getElementById('ev-desc').value, featured: document.getElementById('ev-featured').checked };
             if(!ev.title || !ev.date) return window.showToast("Falten dades de l'event.", "error");
-            try {
-                await addDoc(collection(db, "events"), ev);
-                window.showToast("Event guardat", "success");
-                window.loadAdminEvents(); window.loadDBCalendarEvents();
-                document.getElementById('ev-title').value = ''; document.getElementById('ev-desc').value = '';
-            } catch(e) { window.showToast("Permisos denegats. Revisa DB.", "error"); }
+            try { await addDoc(collection(db, "events"), ev); window.showToast("Event guardat", "success"); window.loadAdminEvents(); window.loadDBCalendarEvents(); document.getElementById('ev-title').value = ''; document.getElementById('ev-desc').value = ''; } catch(e) { window.showToast("Permisos denegats.", "error"); }
         }
 
         window.saveAdminQuestion = async function() {
-            const q = {
-                question: document.getElementById('q-text').value,
-                topic: document.getElementById('q-topic').value,
-                options: [
-                    document.getElementById('q-opt-correct').value,
-                    document.getElementById('q-opt-f1').value,
-                    document.getElementById('q-opt-f2').value,
-                    document.getElementById('q-opt-f3').value
-                ].filter(o => o.trim() !== ""),
-                correctAnswer: document.getElementById('q-opt-correct').value,
-                explanation: document.getElementById('q-exp').value || ''
-            };
-            
-            if(!q.question || q.options.length < 2 || !q.correctAnswer) return window.showToast("Falten camps a la pregunta.", "error");
-            
-            try {
-                await addDoc(collection(db, "custom_questions"), q);
-                window.showToast("Pregunta afegida a la BD correctament.", "success");
-                document.getElementById('q-text').value = ''; document.getElementById('q-opt-correct').value = ''; document.getElementById('q-opt-f1').value = ''; document.getElementById('q-opt-f2').value = ''; document.getElementById('q-opt-f3').value = '';
-                window.questionBank.push(q);
-            } catch(e) { window.showToast("Permís denegat.", "error"); }
+            const q = { question: document.getElementById('q-text').value, topic: document.getElementById('q-topic').value, options: [document.getElementById('q-opt-correct').value, document.getElementById('q-opt-f1').value, document.getElementById('q-opt-f2').value, document.getElementById('q-opt-f3').value].filter(o => o.trim() !== ""), correctAnswer: document.getElementById('q-opt-correct').value, explanation: document.getElementById('q-exp').value || '' };
+            if(!q.question || q.options.length < 2 || !q.correctAnswer) return window.showToast("Falten camps.", "error");
+            try { await addDoc(collection(db, "custom_questions"), q); window.showToast("Pregunta pujada.", "success"); document.getElementById('q-text').value = ''; document.getElementById('q-opt-correct').value = ''; document.getElementById('q-opt-f1').value = ''; document.getElementById('q-opt-f2').value = ''; document.getElementById('q-opt-f3').value = ''; window.questionBank.push(q); } catch(e) { window.showToast("Permís denegat.", "error"); }
         }
 
         window.loadAdminEvents = async function() {
             const tbody = document.getElementById('admin-events-tbody');
             tbody.innerHTML = '<tr><td colspan="4" class="p-4 text-center">Carregant...</td></tr>';
             try {
-                const snap = await getDocs(collection(db, "events"));
-                let html = '';
+                const snap = await getDocs(collection(db, "events")); let html = '';
                 snap.forEach(d => {
                     const ev = d.data();
-                    html += `<tr class="hover:bg-slate-800/50">
-                        <td class="p-3 text-xs text-brand-300 font-mono">${ev.date}</td>
-                        <td class="p-3 text-xs text-white font-bold">${ev.title} ${ev.featured ? '<i class="fa-solid fa-star text-amber-400 ml-1"></i>' : ''}</td>
-                        <td class="p-3 text-[10px] uppercase text-slate-400">${ev.type}</td>
-                        <td class="p-3 text-center"><button onclick="deleteFbDoc('events', '${d.id}')" class="text-red-400 hover:text-red-300"><i class="fa-solid fa-trash"></i></button></td>
-                    </tr>`;
+                    html += `<tr class="hover:bg-slate-800/50"><td class="p-3 text-xs text-brand-300 font-mono">${ev.date}</td><td class="p-3 text-xs text-white font-bold">${ev.title} ${ev.featured ? '<i class="fa-solid fa-star text-amber-400 ml-1"></i>' : ''}</td><td class="p-3 text-[10px] uppercase text-slate-400">${ev.type}</td><td class="p-3 text-center"><button onclick="deleteFbDoc('events', '${d.id}')" class="text-red-400 hover:text-red-300"><i class="fa-solid fa-trash"></i></button></td></tr>`;
                 });
                 tbody.innerHTML = html || '<tr><td colspan="4" class="p-4 text-center text-slate-500">Cap event creat.</td></tr>';
             } catch(e) { tbody.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-red-400">Error permisos base de dades.</td></tr>`; }
@@ -1121,131 +1072,72 @@
             const tbody = document.getElementById('admin-users-tbody');
             tbody.innerHTML = '<tr><td colspan="4" class="p-4 text-center">Carregant usuaris...</td></tr>';
             try {
-                const snap = await getDocs(collection(db, "users"));
-                let html = ''; let activeToday = 0;
-                const today = window.getSpanishDateStr();
-                
+                const snap = await getDocs(collection(db, "users")); let html = ''; let activeToday = 0; const today = window.getSpanishDateStr();
                 snap.forEach(d => {
-                    const u = d.data(); const uid = d.id;
-                    if(u.lastLogin === today) activeToday++;
-                    html += `<tr class="hover:bg-slate-800/50">
-                        <td class="p-3 text-xs">
-                            <span class="block text-white font-bold">${u.username || 'Sense nom'}</span>
-                            <span class="block text-slate-400 text-[10px]">${u.email}</span>
-                        </td>
-                        <td class="p-3 text-xs text-center text-slate-400">${u.lastLogin === today ? '<span class="text-emerald-400 font-bold">Avui</span>' : (u.lastLogin || '-')}</td>
-                        <td class="p-3 text-center"><button onclick="toggleUserStatus('${uid}', 'unlockedExams', ${!u.unlockedExams})" class="text-[10px] px-2 py-1 rounded text-white ${u.unlockedExams ? 'bg-emerald-600' : 'bg-slate-700'}">${u.unlockedExams ? 'ON' : 'OFF'}</button></td>
-                        <td class="p-3 text-center"><button onclick="toggleUserStatus('${uid}', 'isBlocked', ${!u.isBlocked})" class="text-[10px] px-2 py-1 rounded text-white ${u.isBlocked ? 'bg-red-600' : 'bg-slate-700'}">${u.isBlocked ? 'BLOQUEJAT' : 'ACTIU'}</button></td>
-                    </tr>`;
+                    const u = d.data(); const uid = d.id; if(u.lastLogin === today) activeToday++;
+                    html += `<tr class="hover:bg-slate-800/50"><td class="p-3 text-xs"><span class="block text-white font-bold">${u.username || 'Sense nom'}</span><span class="block text-slate-400 text-[10px]">${u.email}</span></td><td class="p-3 text-xs text-center text-slate-400">${u.lastLogin === today ? '<span class="text-emerald-400 font-bold">Avui</span>' : (u.lastLogin || '-')}</td><td class="p-3 text-center"><button onclick="toggleUserStatus('${uid}', 'unlockedExams', ${!u.unlockedExams})" class="text-[10px] px-2 py-1 rounded text-white ${u.unlockedExams ? 'bg-emerald-600' : 'bg-slate-700'}">${u.unlockedExams ? 'ON' : 'OFF'}</button></td><td class="p-3 text-center"><button onclick="toggleUserStatus('${uid}', 'isBlocked', ${!u.isBlocked})" class="text-[10px] px-2 py-1 rounded text-white ${u.isBlocked ? 'bg-red-600' : 'bg-slate-700'}">${u.isBlocked ? 'BLOQUEJAT' : 'ACTIU'}</button></td></tr>`;
                 });
-                tbody.innerHTML = html;
-                document.getElementById('admin-active-users').innerText = activeToday;
+                tbody.innerHTML = html; document.getElementById('admin-active-users').innerText = activeToday;
             } catch(e) { tbody.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-red-400">Sense accés administrador.</td></tr>`; }
         }
 
-        window.toggleUserStatus = async function(uid, field, val) {
-            try { await updateDoc(doc(db, "users", uid), { [field]: val }); window.loadAdminUsers(); } catch(e) { window.showToast("Error de permisos", "error"); }
-        }
+        window.toggleUserStatus = async function(uid, field, val) { try { await updateDoc(doc(db, "users", uid), { [field]: val }); window.loadAdminUsers(); } catch(e) { window.showToast("Error", "error"); } }
 
         window.loadAdminMetrics = async function() {
-            const today = window.getSpanishDateStr();
             try {
-                const dSnap = await getDoc(doc(db, "metrics", today));
+                const dSnap = await getDoc(doc(db, "metrics", window.getSpanishDateStr()));
                 document.getElementById('admin-tests-today').innerText = dSnap.exists() ? (dSnap.data().tests || 0) : 0;
-
                 const fSnap = await getDoc(doc(db, "metrics", "failed_qs"));
                 if(fSnap.exists()) {
-                    const data = fSnap.data();
-                    let worstQ = "-"; let maxF = 0;
+                    const data = fSnap.data(); let worstQ = "-"; let maxF = 0;
                     for(let q in data) { if(data[q] > maxF) { maxF = data[q]; worstQ = q; } }
-                    document.getElementById('admin-worst-q').innerText = worstQ !== "-" ? `"${worstQ}" (${maxF} errors totals globals)` : 'Cap dada rellevant';
+                    document.getElementById('admin-worst-q').innerText = worstQ !== "-" ? `"${worstQ}" (${maxF} errors)` : 'Cap dada';
                 }
-            } catch(e) {} // Silent cache if no permissions
+            } catch(e) {}
         }
 
         window.resetGlobalRanking = async function() {
-            if(!confirm("⚠️ PERILL: Això esborrarà a 0 els punts i percentatges d'avui de TOTS els usuaris actius. Segur?")) return;
+            if(!confirm("⚠️ PERILL: Esborrarà punts d'avui de TOTS els usuaris. Segur?")) return;
             try {
-                const snap = await getDocs(collection(db, "users"));
-                const today = window.getSpanishDateStr();
-                snap.forEach(async d => {
-                    if(d.data().lastResetDate === today && (d.data().score > 0 || d.data().answeredToday > 0)) {
-                        await updateDoc(doc(db, "users", d.id), { score: 0, answeredToday: 0 });
-                    }
-                });
+                const snap = await getDocs(collection(db, "users")); const today = window.getSpanishDateStr();
+                snap.forEach(async d => { if(d.data().lastResetDate === today && (d.data().score > 0 || d.data().answeredToday > 0)) { await updateDoc(doc(db, "users", d.id), { score: 0, answeredToday: 0 }); } });
                 setTimeout(() => { window.loadGlobalRanking(); window.showToast("Rànquing purgat", "success"); }, 1500);
             } catch(e) { window.showToast("No tens permisos per netejar tot", "error"); }
         }
 
         window.submitQuestionReport = async () => {
-            const type = document.querySelector('input[name="report-type"]:checked').value;
-            const comment = document.getElementById('report-comment').value;
-            const questionText = document.getElementById('question-text').innerText;
-            const topicText = document.getElementById('question-topic-badge').innerText;
-
+            const type = document.querySelector('input[name="report-type"]:checked').value; const comment = document.getElementById('report-comment').value; const questionText = document.getElementById('question-text').innerText; const topicText = document.getElementById('question-topic-badge').innerText;
             if (!questionText || questionText === "Carregant enunciat...") return window.showToast("Cap pregunta activa.", "error");
-            try {
-                await addDoc(collection(db, "reports"), { type, comment, question: questionText, topic: topicText, date: window.getSpanishDateStr() });
-                window.showToast("Gràcies! Enviant informe a central.", "success");
-                window.closeReportModal();
-            } catch(e) { window.showToast("Error xarxa", "error"); }
+            try { await addDoc(collection(db, "reports"), { type, comment, question: questionText, topic: topicText, date: window.getSpanishDateStr() }); window.showToast("Enviant informe a central.", "success"); window.closeReportModal(); } catch(e) { window.showToast("Error xarxa", "error"); }
         }
 
         window.loadAdminReports = async function() {
-            const list = document.getElementById('admin-reports-list');
-            list.innerHTML = '<p class="text-slate-400 text-sm">Cercant...</p>';
+            const list = document.getElementById('admin-reports-list'); list.innerHTML = '<p class="text-slate-400 text-sm">Cercant...</p>';
             try {
                 const snap = await getDocs(collection(db, "reports"));
-                if(snap.empty) return list.innerHTML = '<p class="text-slate-500 text-sm text-center py-4">Sistema lliure d\'errors pendents.</p>';
-                let html = '';
-                const escapeHTML = (str) => String(str || '').replace(/[&<>"'`=\/]/g, s => `&#${s.charCodeAt(0)};`);
-                
+                if(snap.empty) return list.innerHTML = '<p class="text-slate-500 text-sm py-4">Sistema lliure d\'errors.</p>';
+                let html = ''; const escapeHTML = (str) => String(str || '').replace(/[&<>"'`=\/]/g, s => `&#${s.charCodeAt(0)};`);
                 snap.forEach(doc => {
                     const d = doc.data();
-                    html += `<div class="bg-slate-950 p-4 rounded-xl border border-slate-700 relative group">
-                        <button onclick="deleteFbDoc('reports', '${doc.id}')" class="absolute top-2 right-2 text-slate-600 hover:text-red-400"><i class="fa-solid fa-trash"></i></button>
-                        <div class="flex items-center mb-2 gap-2"><span class="text-[10px] font-bold uppercase bg-brand-500/20 text-brand-400 px-2 py-1 rounded">${escapeHTML(d.topic)}</span><span class="text-[10px] text-slate-500">${escapeHTML(d.date)}</span></div>
-                        <p class="text-xs text-red-400 font-bold mb-1 uppercase"><i class="fa-solid fa-triangle-exclamation mr-1"></i> ${escapeHTML(d.type)}</p>
-                        <p class="text-sm text-white font-medium mb-2">${escapeHTML(d.question)}</p>
-                        ${d.comment ? `<div class="bg-slate-900 border border-slate-800 p-2 rounded text-xs text-slate-300"><strong>Notes:</strong> ${escapeHTML(d.comment)}</div>` : ''}
-                    </div>`;
+                    html += `<div class="bg-slate-950 p-4 rounded-xl border border-slate-700 relative group"><button onclick="deleteFbDoc('reports', '${doc.id}')" class="absolute top-2 right-2 text-slate-600 hover:text-red-400"><i class="fa-solid fa-trash"></i></button><div class="flex items-center mb-2 gap-2"><span class="text-[10px] font-bold uppercase bg-brand-500/20 text-brand-400 px-2 py-1 rounded">${escapeHTML(d.topic)}</span><span class="text-[10px] text-slate-500">${escapeHTML(d.date)}</span></div><p class="text-xs text-red-400 font-bold mb-1 uppercase"><i class="fa-solid fa-triangle-exclamation mr-1"></i> ${escapeHTML(d.type)}</p><p class="text-sm text-white font-medium mb-2">${escapeHTML(d.question)}</p>${d.comment ? `<div class="bg-slate-900 border border-slate-800 p-2 rounded text-xs text-slate-300"><strong>Notes:</strong> ${escapeHTML(d.comment)}</div>` : ''}</div>`;
                 });
                 list.innerHTML = html;
-            } catch(e) { list.innerHTML = '<p class="text-red-400 text-sm text-center py-4">No hi ha accés (Revisa regles Firebase).</p>'; }
+            } catch(e) { list.innerHTML = '<p class="text-red-400 text-sm py-4">No hi ha accés (Revisa regles).</p>'; }
         }
 
         window.initAdminPanel = async function() {
-            window.switchTab('admin');
-            window.switchAdminTab('dashboard'); // Default
+            window.switchTab('admin'); window.switchAdminTab('dashboard');
             window.loadAdminReports(); window.loadAdminUsers(); window.loadAdminMetrics(); window.loadAdminEvents();
-            try {
-                const alertSnap = await getDoc(doc(db, "admin", "alert"));
-                if(alertSnap.exists()) {
-                    document.getElementById('admin-alert-msg').value = alertSnap.data().message || '';
-                    document.getElementById('admin-alert-active').checked = alertSnap.data().isActive || false;
-                }
-            } catch(e) {}
+            try { const alertSnap = await getDoc(doc(db, "admin", "alert")); if(alertSnap.exists()) { document.getElementById('admin-alert-msg').value = alertSnap.data().message || ''; document.getElementById('admin-alert-active').checked = alertSnap.data().isActive || false; } } catch(e) {}
         }
         
         window.switchAdminTab = function(tab) {
-            document.querySelectorAll('.admin-content-sec').forEach(el => el.classList.add('hidden'));
-            document.getElementById('admin-tab-' + tab).classList.remove('hidden');
-            
-            document.querySelectorAll('.admin-tab').forEach(b => {
-                b.classList.remove('text-white', 'border-purple-500', 'bg-slate-800/50');
-                b.classList.add('text-slate-400', 'border-transparent');
-            });
-            event.currentTarget.classList.add('text-white', 'border-purple-500', 'bg-slate-800/50');
-            event.currentTarget.classList.remove('text-slate-400', 'border-transparent');
+            document.querySelectorAll('.admin-content-sec').forEach(el => el.classList.add('hidden')); document.getElementById('admin-tab-' + tab).classList.remove('hidden');
+            document.querySelectorAll('.admin-tab').forEach(b => { b.classList.remove('text-white', 'border-purple-500', 'bg-slate-800/50'); b.classList.add('text-slate-400', 'border-transparent'); });
+            event.currentTarget.classList.add('text-white', 'border-purple-500', 'bg-slate-800/50'); event.currentTarget.classList.remove('text-slate-400', 'border-transparent');
         }
 
-        // Recuperar Alerta Global
-        getDoc(doc(db, "admin", "alert")).then(snap => {
-            if(snap.exists() && snap.data().isActive) {
-                document.getElementById('global-alert-banner').classList.remove('hidden');
-                document.getElementById('global-alert-text').innerText = snap.data().message;
-            }
-        }).catch(()=>{});
+        getDoc(doc(db, "admin", "alert")).then(snap => { if(snap.exists() && snap.data().isActive) { document.getElementById('global-alert-banner').classList.remove('hidden'); document.getElementById('global-alert-text').innerText = snap.data().message; } }).catch(()=>{});
 
         // Gestor de Sessió Principal
         onAuthStateChanged(auth, async (user) => {
@@ -1253,16 +1145,13 @@
             const logged = document.getElementById('profile-logged-content');
             const desktopLabel = document.getElementById('desktop-profile-label');
             const adminBtn = document.getElementById('btn-admin-panel');
-            
             const statsOverlay = document.getElementById('stats-overlay-container');
             const statsContent = document.getElementById('stats-content-wrapper');
             
             if (user) {
-                // UI: Logged In
-                document.getElementById('sec-landing').classList.add('hidden');
-                if(document.querySelector('.tab-content:not(.hidden)') === document.getElementById('sec-landing')) {
-                    window.switchTab('dashboard'); // Redirigir a dash si venia del landing
-                }
+                // UI: Logged In -> Carga directa al Dashboard si vienes de la pantalla en blanco
+                document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+                document.getElementById('sec-dashboard').classList.remove('hidden');
                 
                 document.getElementById('desktop-nav').classList.remove('opacity-0', 'pointer-events-none');
                 document.getElementById('mobile-nav').classList.remove('hidden');
@@ -1274,9 +1163,7 @@
                 try {
                     const snap = await getDoc(doc(db, "users", user.uid));
                     if(snap.exists()) {
-                        const d = snap.data();
-                        window.currentUserData = d;
-                        
+                        const d = snap.data(); window.currentUserData = d;
                         if(d.isBlocked) { window.showToast("Compte bloquejat.", "error"); await signOut(auth); return; }
 
                         const today = window.getSpanishDateStr();
@@ -1285,10 +1172,7 @@
                         if(notLogged) notLogged.classList.add('hidden');
                         if(logged) logged.classList.remove('hidden');
                         
-                        if(adminBtn) {
-                            if (user.email === "gerardlopezgarcia1@gmail.com") adminBtn.classList.remove('hidden');
-                            else adminBtn.classList.add('hidden');
-                        }
+                        if(adminBtn) { if (user.email === "gerardlopezgarcia1@gmail.com") adminBtn.classList.remove('hidden'); else adminBtn.classList.add('hidden'); }
 
                         if(desktopLabel) desktopLabel.innerHTML = `${d.username || 'Perfil'}`;
                         document.getElementById('profile-username-input').value = d.username || '';
@@ -1296,25 +1180,17 @@
                         
                         if(window.updateUserLevelUI) window.updateUserLevelUI(d.lifetimeScore || 0);
                         
-                        const refLinkEl = document.getElementById('profile-ref-link');
-                        if(refLinkEl) refLinkEl.value = d.username || '';
-                        const addRefBox = document.getElementById('profile-add-referral-box');
-                        if(addRefBox) { if(!d.unlockedExams) addRefBox.classList.remove('hidden'); else addRefBox.classList.add('hidden'); }
+                        const refLinkEl = document.getElementById('profile-ref-link'); if(refLinkEl) refLinkEl.value = d.username || '';
+                        const addRefBox = document.getElementById('profile-add-referral-box'); if(addRefBox) { if(!d.unlockedExams) addRefBox.classList.remove('hidden'); else addRefBox.classList.add('hidden'); }
                     }
-                } catch(e) { console.warn("Error lectura usuari inicial."); }
+                } catch(e) { console.warn("Error ususari."); }
                 
-                // Carregar dades asincrones
-                window.loadDBCalendarEvents();
-                window.loadCustomDBQuestions();
+                window.loadDBCalendarEvents(); window.loadCustomDBQuestions(); window.switchTab('dashboard');
                 
             } else {
-                // UI: Not Logged
                 window.currentUserData = null;
-                
-                // Forçar Landing
                 document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
                 document.getElementById('sec-landing').classList.remove('hidden');
-                
                 document.getElementById('desktop-nav').classList.add('opacity-0', 'pointer-events-none');
                 document.getElementById('mobile-nav').classList.add('hidden');
                 document.getElementById('mobile-login-btn').classList.remove('hidden');
@@ -1336,9 +1212,7 @@
         window.copyRefLink = function() {
             const code = document.getElementById('profile-ref-link').value;
             if(!code || code === "Registra't primer") return;
-            navigator.clipboard.writeText(`Crea't un compte gratis a OpposTest.cat i al registre posa el meu nom com a Codi d'amic: ${code}`).then(() => {
-                window.showToast("Codi d'amic copiat!", "success");
-            });
+            navigator.clipboard.writeText(`Crea't un compte gratis a OpposTest.cat i al registre posa el meu nom com a Codi d'amic: ${code}`).then(() => { window.showToast("Codi d'amic copiat!", "success"); });
         }
     </script>
 
@@ -1347,97 +1221,45 @@
         window.questionBank = [];
         let currentExam = [];
         let currentQuestionIdx = 0;
-        let userAnswers = {}; // { choice: idx, time: s, isCorrect: bool, flagged: bool }
+        let userAnswers = {};
         
-        // Stats avançades emmagatzemades
-        let examHistory = {
-            done: 0, totalCorrect: 0, totalQuestions: 0, totalTimeSeconds: 0,
-            bestGrade: 0.0, gradesSum: 0, streakDays: 0, lastStudyDate: '',
-            topicsStats: {}, dailyActivity: {} 
-        };
-
+        let examHistory = { done: 0, totalCorrect: 0, totalQuestions: 0, totalTimeSeconds: 0, bestGrade: 0.0, gradesSum: 0, streakDays: 0, lastStudyDate: '', topicsStats: {}, dailyActivity: {} };
         let examConfig = { mode: 'simulacre', param: null, hasTimer: false, secondsLimit: 0, count: 30 };
-        let activeTimerInterval = null;
-        let timeLeftSeconds = 0;
-        let questionStartTime = 0;
+        let activeTimerInterval = null; let timeLeftSeconds = 0; let questionStartTime = 0;
+        let isRegisterMode = false; let currentRankingMetric = 'points';
 
-        let isRegisterMode = false;
-        let currentRankingMetric = 'points'; // 'points' o 'accuracy'
-
-        // 1. CARREGA DE DADES INICIAL
         window.getSpanishDateStr = function() {
-            const now = new Date();
-            const options = { timeZone: 'Europe/Madrid', year: 'numeric', month: '2-digit', day: '2-digit' };
+            const now = new Date(); const options = { timeZone: 'Europe/Madrid', year: 'numeric', month: '2-digit', day: '2-digit' };
             const parts = new Intl.DateTimeFormat('es-ES', options).formatToParts(now);
             return `${parts.find(p => p.type === 'year').value}-${parts.find(p => p.type === 'month').value}-${parts.find(p => p.type === 'day').value}`;
         }
 
-        window.openAuthModal = (mode = 'login') => {
-            isRegisterMode = (mode === 'register');
-            document.getElementById('register-extra-fields').classList.toggle('hidden', !isRegisterMode);
-            document.getElementById('auth-overlay').classList.remove('hidden');
-        };
+        window.openAuthModal = (mode = 'login') => { isRegisterMode = (mode === 'register'); document.getElementById('register-extra-fields').classList.toggle('hidden', !isRegisterMode); document.getElementById('auth-overlay').classList.remove('hidden'); };
         window.closeAuthModal = () => document.getElementById('auth-overlay').classList.add('hidden');
-        window.toggleAuthMode = () => {
-            isRegisterMode = !isRegisterMode;
-            document.getElementById('register-extra-fields').classList.toggle('hidden', !isRegisterMode);
-        };
-        
+        window.toggleAuthMode = () => { isRegisterMode = !isRegisterMode; document.getElementById('register-extra-fields').classList.toggle('hidden', !isRegisterMode); };
         window.openReportModal = () => document.getElementById('report-modal').classList.remove('hidden');
         window.closeReportModal = () => document.getElementById('report-modal').classList.add('hidden');
 
-        // ======================= NOU: Carregar Diccionari Penjat =======================
-        let hmDict = [];
-        async function loadHangmanDict() {
-            try {
-                const res = await fetch('penjat.json');
-                if (res.ok) hmDict = await res.json();
-            } catch(e) {}
-            if (hmDict.length === 0) hmDict = [{ word: "CONSTITUCIO", def: "Norma suprema de l'ordenament jurídic espanyol." }];
-        }
-
         document.addEventListener('DOMContentLoaded', () => {
-            loadQuestionsFromJsonFile();
-            loadStatsFromStorage();
-            loadHangmanDict(); // Inicialitzar Penjat
-            startMidnightCountdown();
-            startPoliceClock();
+            loadQuestionsFromJsonFile(); loadStatsFromStorage(); startMidnightCountdown(); startPoliceClock();
             if(window.updateLocksUI) window.updateLocksUI(null, null);
-            
-            // So default
-            const txt = document.getElementById('sound-status-text');
-            if (txt) txt.innerText = soundEnabled ? 'Activat' : 'Desactivat';
+            const txt = document.getElementById('sound-status-text'); if (txt) txt.innerText = soundEnabled ? 'Activat' : 'Desactivat';
+            loadHangmanDict();
         });
 
         function startPoliceClock() {
             const el = document.getElementById('police-clock');
             if(el) setInterval(() => { el.innerText = new Date().toLocaleTimeString('ca-ES', { hour12: false }); }, 1000);
-            
-            // Reloj de cuenta atras para widgets (examen en dashboard)
-            setInterval(() => {
-                const els = document.querySelectorAll('#cd-hours, #cd-mins');
-                if(els.length > 0) {
-                    const now = new Date();
-                    document.getElementById('cd-hours').innerText = String(23 - now.getHours()).padStart(2,'0');
-                    document.getElementById('cd-mins').innerText = String(59 - now.getMinutes()).padStart(2,'0');
-                }
-            }, 60000);
         }
 
         function startMidnightCountdown() {
             const elRankingTab = document.getElementById('ranking-countdown-tab');
             setInterval(() => {
                 const now = new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/Madrid' }));
-                const mid = new Date(now); mid.setHours(24, 0, 0, 0);
-                const diff = mid.getTime() - now.getTime();
-                
+                const mid = new Date(now); mid.setHours(24, 0, 0, 0); const diff = mid.getTime() - now.getTime();
                 if (diff <= 0) return;
-                const h = Math.floor((diff / 3600000) % 24);
-                const m = Math.floor((diff / 60000) % 60);
-                const s = Math.floor((diff / 1000) % 60);
-                const timeStr = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
-                
-                if (elRankingTab) elRankingTab.innerText = timeStr;
+                const h = Math.floor((diff / 3600000) % 24); const m = Math.floor((diff / 60000) % 60); const s = Math.floor((diff / 1000) % 60);
+                if (elRankingTab) elRankingTab.innerText = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
             }, 1000);
         }
 
@@ -1450,7 +1272,6 @@
                     if (res.ok) {
                         const data = await res.json();
                         if (Array.isArray(data)) {
-                            // Assignem un super-bloc genèric per estadístiques simplificades (A, B o C)
                             const superBloc = f.includes('-a') ? 'A' : (f.includes('-b') ? 'B' : 'C');
                             const defaultTopicName = f.replace('preguntas-', '').replace('.json', '').toUpperCase();
                             data.forEach(q => { if (!q.topic) q.topic = defaultTopicName; q.superBloc = superBloc; });
@@ -1459,41 +1280,18 @@
                     }
                 } catch(e) {}
             }
-            if (all.length === 0) {
-                all = [{ topic: "Constitució", superBloc: "B", question: "Termini detenció preventiva CE?", options: ["24 h", "48 h", "72 hores", "5 dies"], correctAnswer: "72 hores", explanation: "Art 17.2" }];
-            }
-            window.questionBank = all;
-            document.getElementById('footer-total-q').innerText = `| Base Dades Oficial: ${window.questionBank.length} Qs`;
+            if (all.length === 0) all = [{ topic: "Constitució", superBloc: "B", question: "Termini detenció preventiva CE?", options: ["24 h", "48 h", "72 hores", "5 dies"], correctAnswer: "72 hores", explanation: "Art 17.2" }];
+            window.questionBank = all; document.getElementById('footer-total-q').innerText = `| Base Dades Oficial: ${window.questionBank.length} Qs`;
         }
 
-        // 2. SISTEMA D'ESTADÍSTIQUES, NIVELLS I PLA D'ESTUDI
-        function loadStatsFromStorage() {
-            try {
-                const data = localStorage.getItem('oppos_advanced_stats_v3');
-                if (data) examHistory = JSON.parse(data);
-            } catch(e) {}
-            updateStatsDashboardUI();
-        }
-
-        function saveStatsToStorage() {
-            try { localStorage.setItem('oppos_advanced_stats_v3', JSON.stringify(examHistory)); } catch(e) {}
-            updateStatsDashboardUI();
-        }
+        function loadStatsFromStorage() { try { const data = localStorage.getItem('oppos_advanced_stats_v3'); if (data) examHistory = JSON.parse(data); } catch(e) {} updateStatsDashboardUI(); }
+        function saveStatsToStorage() { try { localStorage.setItem('oppos_advanced_stats_v3', JSON.stringify(examHistory)); } catch(e) {} updateStatsDashboardUI(); }
 
         window.updateUserLevelUI = function(lifetimeScore) {
             let levelName = "Aspirant"; let icon = "fa-shield-halved"; let color = "text-slate-400";
-            if(lifetimeScore > 5000) { levelName = "Elite"; icon = "fa-crown"; color = "text-yellow-400"; }
-            else if(lifetimeScore > 2000) { levelName = "Expert"; icon = "fa-star"; color = "text-purple-400"; }
-            else if(lifetimeScore > 500) { levelName = "Preparació"; icon = "fa-bolt"; color = "text-blue-400"; }
-            
-            const badgeEl = document.getElementById('header-level-badge');
-            if(badgeEl) badgeEl.innerHTML = `<i class="fa-solid ${icon} mr-1"></i>${levelName}`;
-            
-            const profileEl = document.getElementById('profile-level-text');
-            if(profileEl) {
-                profileEl.className = `text-sm font-bold ${color}`;
-                profileEl.innerHTML = `<i class="fa-solid ${icon} mr-1"></i>${levelName} <span class="text-xs text-slate-500 font-normal ml-2">(${lifetimeScore} pts totals)</span>`;
-            }
+            if(lifetimeScore > 5000) { levelName = "Elite"; icon = "fa-crown"; color = "text-yellow-400"; } else if(lifetimeScore > 2000) { levelName = "Expert"; icon = "fa-star"; color = "text-purple-400"; } else if(lifetimeScore > 500) { levelName = "Preparació"; icon = "fa-bolt"; color = "text-blue-400"; }
+            const badgeEl = document.getElementById('header-level-badge'); if(badgeEl) badgeEl.innerHTML = `<i class="fa-solid ${icon} mr-1"></i>${levelName}`;
+            const profileEl = document.getElementById('profile-level-text'); if(profileEl) { profileEl.className = `text-sm font-bold ${color}`; profileEl.innerHTML = `<i class="fa-solid ${icon} mr-1"></i>${levelName} <span class="text-xs text-slate-500 font-normal ml-2">(${lifetimeScore} pts totals)</span>`; }
         }
 
         function updateStatsDashboardUI() {
@@ -1501,513 +1299,227 @@
             const notaMitjana = examHistory.done > 0 ? (examHistory.gradesSum / examHistory.done).toFixed(1) : '0.0';
             const tempsMig = examHistory.totalQuestions > 0 ? Math.round(examHistory.totalTimeSeconds / examHistory.totalQuestions) : 0;
             
-            // Actualitzar targetes dash
             if(document.getElementById('stat-acc')) document.getElementById('stat-acc').innerText = `${acc}%`;
             if(document.getElementById('stat-grade')) document.getElementById('stat-grade').innerText = `${notaMitjana}`;
             if(document.getElementById('stat-total')) document.getElementById('stat-total').innerText = examHistory.totalQuestions;
             if(document.getElementById('stat-time')) document.getElementById('stat-time').innerText = `${tempsMig}s`;
             if(document.getElementById('streak-counter')) document.getElementById('streak-counter').innerText = `${examHistory.streakDays || 0} dies`;
 
-            // Pla d'Estudi Diari
-            const todayStr = window.getSpanishDateStr();
-            const qToday = examHistory.dailyActivity[todayStr] || 0;
-            const dailyGoal = 30;
-            const pctDaily = Math.min(100, Math.round((qToday / dailyGoal) * 100));
-            
+            const todayStr = window.getSpanishDateStr(); const qToday = examHistory.dailyActivity[todayStr] || 0; const dailyGoal = 30; const pctDaily = Math.min(100, Math.round((qToday / dailyGoal) * 100));
             if(document.getElementById('daily-q-count')) document.getElementById('daily-q-count').innerText = qToday;
             if(document.getElementById('daily-progress-bar')) document.getElementById('daily-progress-bar').style.width = `${pctDaily}%`;
 
-            // Progrés per Blocs Temàtics (A, B, C)
-            const stats = examHistory.topicsStats || {};
-            let blocks = { 'A': {c:0, t:0}, 'B': {c:0, t:0}, 'C': {c:0, t:0} };
-            
-            for(let key in stats) {
-                const superBloc = key.substring(0,1).toUpperCase(); // Assumeix key = "A1", "B2", "C3"
-                if(blocks[superBloc]) {
-                    blocks[superBloc].c += stats[key].correct;
-                    blocks[superBloc].t += stats[key].total;
-                } else {
-                    blocks['B'].c += stats[key].correct; // Fallback a B si no detectat clar
-                    blocks['B'].t += stats[key].total;
-                }
-            }
-
+            const stats = examHistory.topicsStats || {}; let blocks = { 'A': {c:0, t:0}, 'B': {c:0, t:0}, 'C': {c:0, t:0} };
+            for(let key in stats) { const superBloc = key.substring(0,1).toUpperCase(); if(blocks[superBloc]) { blocks[superBloc].c += stats[key].correct; blocks[superBloc].t += stats[key].total; } else { blocks['B'].c += stats[key].correct; blocks['B'].t += stats[key].total; } }
             const getPct = (b) => b.t > 0 ? Math.round((b.c / b.t)*100) : 0;
-            
-            if(document.getElementById('bar-fill-a')) {
-                document.getElementById('bar-pct-a').innerText = `${getPct(blocks['A'])}%`;
-                document.getElementById('bar-fill-a').style.width = `${getPct(blocks['A'])}%`;
-            }
-            if(document.getElementById('bar-fill-b')) {
-                document.getElementById('bar-pct-b').innerText = `${getPct(blocks['B'])}%`;
-                document.getElementById('bar-fill-b').style.width = `${getPct(blocks['B'])}%`;
-            }
-            if(document.getElementById('bar-fill-c')) {
-                document.getElementById('bar-pct-c').innerText = `${getPct(blocks['C'])}%`;
-                document.getElementById('bar-fill-c').style.width = `${getPct(blocks['C'])}%`;
-            }
-
+            if(document.getElementById('bar-fill-a')) { document.getElementById('bar-pct-a').innerText = `${getPct(blocks['A'])}%`; document.getElementById('bar-fill-a').style.width = `${getPct(blocks['A'])}%`; }
+            if(document.getElementById('bar-fill-b')) { document.getElementById('bar-pct-b').innerText = `${getPct(blocks['B'])}%`; document.getElementById('bar-fill-b').style.width = `${getPct(blocks['B'])}%`; }
+            if(document.getElementById('bar-fill-c')) { document.getElementById('bar-pct-c').innerText = `${getPct(blocks['C'])}%`; document.getElementById('bar-fill-c').style.width = `${getPct(blocks['C'])}%`; }
             checkBadgesAndRanks();
         }
 
         function checkBadgesAndRanks() {
-            const bc = document.getElementById('badges-container');
-            if(!bc) return;
-            const bHtml = [];
-            
-            // Lògica Insígnies Visual
-            const addB = (icon, text, isUnloc) => {
-                const color = isUnloc ? 'text-amber-400 bg-amber-950/20 border-amber-900/50' : 'text-slate-500 bg-slate-900/50 border-slate-700 opacity-50 grayscale';
-                const iColor = isUnloc ? 'text-amber-400 drop-shadow-[0_0_10px_rgba(251,191,36,0.8)]' : 'text-slate-500';
-                bHtml.push(`<div class="p-4 rounded-xl border text-center transition-all ${color}"><i class="fa-solid ${icon} text-3xl mb-3 ${iColor}"></i><p class="text-[10px] font-bold uppercase tracking-wider">${text}</p></div>`);
-            };
-
+            const bc = document.getElementById('badges-container'); if(!bc) return; const bHtml = [];
+            const addB = (icon, text, isUnloc) => { const color = isUnloc ? 'text-amber-400 bg-amber-950/20 border-amber-900/50' : 'text-slate-500 bg-slate-900/50 border-slate-700 opacity-50 grayscale'; const iColor = isUnloc ? 'text-amber-400 drop-shadow-[0_0_10px_rgba(251,191,36,0.8)]' : 'text-slate-500'; bHtml.push(`<div class="p-4 rounded-xl border text-center transition-all ${color}"><i class="fa-solid ${icon} text-3xl mb-3 ${iColor}"></i><p class="text-[10px] font-bold uppercase tracking-wider">${text}</p></div>`); };
             const acc = examHistory.totalQuestions > 0 ? (examHistory.totalCorrect / examHistory.totalQuestions) : 0;
-            
-            addB('fa-play', '1r Test Completat', examHistory.done > 0);
-            addB('fa-fire', 'Racha 7 Dies', examHistory.streakDays >= 7);
-            addB('fa-bullseye', '90% Precisió', (acc >= 0.9 && examHistory.totalQuestions > 50));
-            addB('fa-book-open', '1000 Preguntes', examHistory.totalQuestions >= 1000);
-
+            addB('fa-play', '1r Test Completat', examHistory.done > 0); addB('fa-fire', 'Racha 7 Dies', examHistory.streakDays >= 7); addB('fa-bullseye', '90% Precisió', (acc >= 0.9 && examHistory.totalQuestions > 50)); addB('fa-book-open', '1000 Preguntes', examHistory.totalQuestions >= 1000);
             bc.innerHTML = bHtml.join('');
         }
 
         window.showToast = function(msg, type = 'info') {
-            const container = document.getElementById('toast-container');
-            if (!container) return;
-            const t = document.createElement('div');
-            let bg = 'bg-slate-800 border-slate-700 text-slate-100';
-            if (type === 'success') bg = 'bg-emerald-950 border-emerald-500/50 text-emerald-200';
-            else if (type === 'error') bg = 'bg-red-950 border-red-500/50 text-red-200';
+            const container = document.getElementById('toast-container'); if (!container) return; const t = document.createElement('div');
+            let bg = 'bg-slate-800 border-slate-700 text-slate-100'; if (type === 'success') bg = 'bg-emerald-950 border-emerald-500/50 text-emerald-200'; else if (type === 'error') bg = 'bg-red-950 border-red-500/50 text-red-200';
             t.className = `p-3.5 rounded-xl border shadow-2xl text-xs font-bold ${bg} animate-swipe-left flex items-center gap-2 z-50`;
             const icon = type === 'success' ? '<i class="fa-solid fa-circle-check text-emerald-400"></i>' : (type === 'error' ? '<i class="fa-solid fa-circle-exclamation text-red-400"></i>' : '<i class="fa-solid fa-info-circle"></i>');
-            t.innerHTML = `${icon} <span>${msg}</span>`;
-            container.appendChild(t);
+            t.innerHTML = `${icon} <span>${msg}</span>`; container.appendChild(t);
             setTimeout(() => { t.classList.replace('animate-swipe-left', 'animate-swipe-right'); setTimeout(() => t.remove(), 300); }, 3000);
         }
 
         window.switchTab = function(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
-            
-            // Desk Nav Update
-            document.querySelectorAll('.tab-btn').forEach(b => {
-                if(b.id !== 'nav-profile') { b.classList.remove('bg-brand-600', 'text-white', 'shadow'); b.classList.add('text-slate-400'); }
-            });
-            const activeBtn = document.getElementById('nav-' + tabId);
-            if(activeBtn && tabId !== 'profile') {
-                activeBtn.classList.add('bg-brand-600', 'text-white', 'shadow');
-                activeBtn.classList.remove('text-slate-400');
-            }
-
-            // Mob Nav Update
-            document.querySelectorAll('.mob-tab-btn').forEach(b => {
-                b.classList.remove('text-brand-400'); b.classList.add('text-slate-400');
-            });
-            const activeMobBtn = document.getElementById('nav-mob-' + tabId);
-            if(activeMobBtn) { activeMobBtn.classList.remove('text-slate-400'); activeMobBtn.classList.add('text-brand-400'); }
-
+            document.querySelectorAll('.tab-btn').forEach(b => { if(b.id !== 'nav-profile') { b.classList.remove('bg-brand-600', 'text-white', 'shadow'); b.classList.add('text-slate-400'); } });
+            const activeBtn = document.getElementById('nav-' + tabId); if(activeBtn && tabId !== 'profile') { activeBtn.classList.add('bg-brand-600', 'text-white', 'shadow'); activeBtn.classList.remove('text-slate-400'); }
+            document.querySelectorAll('.mob-tab-btn').forEach(b => { b.classList.remove('text-brand-400'); b.classList.add('text-slate-400'); });
+            const activeMobBtn = document.getElementById('nav-mob-' + tabId); if(activeMobBtn) { activeMobBtn.classList.remove('text-slate-400'); activeMobBtn.classList.add('text-brand-400'); }
             document.getElementById('sec-' + tabId).classList.remove('hidden');
-
             if (tabId === 'ranking') window.loadGlobalRanking && window.loadGlobalRanking();
             if (tabId === 'dashboard') updateStatsDashboardUI();
-            
-            // Si surt de jocs o exàmens en actiu, amaguem
-            if (tabId !== 'minigames') {
-                document.getElementById('minigames-menu').classList.remove('hidden');
-                document.getElementById('game-triage').classList.add('hidden');
-                document.getElementById('game-hangman').classList.add('hidden');
-                document.getElementById('game-patrol').classList.add('hidden');
-            }
+            if (tabId !== 'minigames') { document.getElementById('minigames-menu').classList.remove('hidden'); document.getElementById('game-triage').classList.add('hidden'); document.getElementById('game-hangman').classList.add('hidden'); document.getElementById('game-patrol').classList.add('hidden'); }
         }
 
         window.updateLocksUI = function(user, userData = null) {
-            const logged = !!user;
-            const examsUnlocked = userData ? userData.unlockedExams : false;
-            
-            // Amagar candaus de la interfície de selecció d'examen
-            document.querySelectorAll('.lock-icon').forEach(i => {
-                if(!logged || !examsUnlocked) i.classList.remove('hidden');
-                else i.classList.add('hidden');
-            });
+            const logged = !!user; const examsUnlocked = userData ? userData.unlockedExams : false;
+            document.querySelectorAll('.lock-icon').forEach(i => { if(!logged || !examsUnlocked) i.classList.remove('hidden'); else i.classList.add('hidden'); });
         }
 
-        // 3. NOU SISTEMA D'EXAMEN CONFIGURABLE
         window.prepareExamMode = function(mode) {
             const logged = !!window.getFirebaseCurrentUser();
             if(!logged && mode !== 'practice') { window.showToast("Inicia sessió per accedir-hi", "error"); return window.openAuthModal(); }
-            
-            if((mode === 'topic' || mode === 'weak') && window.currentUserData && !window.currentUserData.unlockedExams) {
-                window.showToast("Exclusiu! Bescanvia un codi d'amic al Perfil", "error");
-                return window.switchTab('profile');
-            }
-
+            if((mode === 'topic' || mode === 'weak') && window.currentUserData && !window.currentUserData.unlockedExams) { window.showToast("Exclusiu! Bescanvia un codi d'amic al Perfil", "error"); return window.switchTab('profile'); }
             if(window.questionBank.length === 0) return window.showToast("Banc de preguntes buit", "error");
 
-            examConfig.mode = mode;
-            const modal = document.getElementById('pre-exam-modal');
-            const title = document.getElementById('pre-exam-title');
-            const content = document.getElementById('pre-exam-content');
+            examConfig.mode = mode; const modal = document.getElementById('pre-exam-modal'); const title = document.getElementById('pre-exam-title'); const content = document.getElementById('pre-exam-content');
+            modal.classList.remove('hidden'); document.getElementById('exam-menu-container').classList.add('hidden');
             
-            modal.classList.remove('hidden');
-            document.getElementById('exam-menu-container').classList.add('hidden');
-            
-            if(mode === 'simulacre') {
-                title.innerHTML = '<i class="fa-solid fa-clock text-brand-400 mr-2"></i> Simulacre Oficial';
-                content.innerHTML = `<div class="bg-brand-900/20 border border-brand-500/30 p-4 rounded-xl text-center"><p class="text-3xl font-black text-brand-400">30 <span class="text-sm font-bold text-slate-400">Qs</span></p><p class="text-xs text-slate-400 mt-1">Límit de temps: 30 minuts</p></div>`;
-                examConfig.hasTimer = true; examConfig.secondsLimit = 30 * 60; examConfig.count = 30;
-            } 
-            else if(mode === 'practice') {
-                title.innerHTML = '<i class="fa-solid fa-graduation-cap text-emerald-400 mr-2"></i> Pràctica Lliure';
-                content.innerHTML = `
-                    <label class="text-xs font-bold text-slate-400 uppercase block mb-2">Nombre de preguntes a practicar:</label>
-                    <div class="flex gap-3">
-                        <button onclick="examConfig.count=10; this.parentElement.querySelectorAll('button').forEach(b=>b.className='flex-1 py-3 bg-slate-800 text-slate-300 rounded-xl text-sm font-bold border border-slate-700'); this.className='flex-1 py-3 bg-emerald-600 text-white rounded-xl text-sm font-bold border border-emerald-500';" class="flex-1 py-3 bg-emerald-600 text-white rounded-xl text-sm font-bold border border-emerald-500">10</button>
-                        <button onclick="examConfig.count=30; this.parentElement.querySelectorAll('button').forEach(b=>b.className='flex-1 py-3 bg-slate-800 text-slate-300 rounded-xl text-sm font-bold border border-slate-700'); this.className='flex-1 py-3 bg-emerald-600 text-white rounded-xl text-sm font-bold border border-emerald-500';" class="flex-1 py-3 bg-slate-800 text-slate-300 rounded-xl text-sm font-bold border border-slate-700">30</button>
-                        <button onclick="examConfig.count=50; this.parentElement.querySelectorAll('button').forEach(b=>b.className='flex-1 py-3 bg-slate-800 text-slate-300 rounded-xl text-sm font-bold border border-slate-700'); this.className='flex-1 py-3 bg-emerald-600 text-white rounded-xl text-sm font-bold border border-emerald-500';" class="flex-1 py-3 bg-slate-800 text-slate-300 rounded-xl text-sm font-bold border border-slate-700">50</button>
-                    </div>`;
-                examConfig.hasTimer = false; examConfig.count = 10;
-            }
-            else if(mode === 'topic') {
-                title.innerHTML = '<i class="fa-solid fa-folder-open text-amber-400 mr-2"></i> Test per Temes';
-                content.innerHTML = `
-                    <label class="text-xs font-bold text-slate-400 uppercase block mb-2">Tria el tema a entrenar:</label>
-                    <select id="config-topic-select" class="w-full bg-slate-900 border border-slate-700 text-slate-200 text-sm font-bold rounded-xl p-4 outline-none focus:border-amber-500">
-                        <option value="A">Tot l'Àmbit A (Social/Història)</option>
-                        <option value="B">Tot l'Àmbit B (Institucional)</option>
-                        <option value="C">Tot l'Àmbit C (Seguretat)</option>
-                    </select>`;
-                examConfig.hasTimer = false; examConfig.count = 30;
-            }
-            else if(mode === 'weak') {
-                title.innerHTML = '<i class="fa-solid fa-heart-crack text-orange-400 mr-2"></i> Reforç Intel·ligent';
-                content.innerHTML = `<div class="bg-orange-900/20 border border-orange-500/30 p-4 rounded-xl text-center"><p class="text-sm font-bold text-orange-400">Analitzant les teves dades...</p><p class="text-xs text-slate-400 mt-2">Crearem un test exprés de 15 preguntes focalitzat allà on sols fallar més.</p></div>`;
-                examConfig.hasTimer = false; examConfig.count = 15;
-            }
+            if(mode === 'simulacre') { title.innerHTML = '<i class="fa-solid fa-clock text-brand-400 mr-2"></i> Simulacre Oficial'; content.innerHTML = `<div class="bg-brand-900/20 border border-brand-500/30 p-4 rounded-xl text-center"><p class="text-3xl font-black text-brand-400">30 <span class="text-sm font-bold text-slate-400">Qs</span></p><p class="text-xs text-slate-400 mt-1">Límit de temps: 30 minuts</p></div>`; examConfig.hasTimer = true; examConfig.secondsLimit = 30 * 60; examConfig.count = 30; } 
+            else if(mode === 'practice') { title.innerHTML = '<i class="fa-solid fa-graduation-cap text-emerald-400 mr-2"></i> Pràctica Lliure'; content.innerHTML = `<label class="text-xs font-bold text-slate-400 uppercase block mb-2">Nombre de preguntes a practicar:</label><div class="flex gap-3"><button onclick="examConfig.count=10; this.parentElement.querySelectorAll('button').forEach(b=>b.className='flex-1 py-3 bg-slate-800 text-slate-300 rounded-xl text-sm font-bold border border-slate-700'); this.className='flex-1 py-3 bg-emerald-600 text-white rounded-xl text-sm font-bold border border-emerald-500';" class="flex-1 py-3 bg-emerald-600 text-white rounded-xl text-sm font-bold border border-emerald-500">10</button><button onclick="examConfig.count=30; this.parentElement.querySelectorAll('button').forEach(b=>b.className='flex-1 py-3 bg-slate-800 text-slate-300 rounded-xl text-sm font-bold border border-slate-700'); this.className='flex-1 py-3 bg-emerald-600 text-white rounded-xl text-sm font-bold border border-emerald-500';" class="flex-1 py-3 bg-slate-800 text-slate-300 rounded-xl text-sm font-bold border border-slate-700">30</button><button onclick="examConfig.count=50; this.parentElement.querySelectorAll('button').forEach(b=>b.className='flex-1 py-3 bg-slate-800 text-slate-300 rounded-xl text-sm font-bold border border-slate-700'); this.className='flex-1 py-3 bg-emerald-600 text-white rounded-xl text-sm font-bold border border-emerald-500';" class="flex-1 py-3 bg-slate-800 text-slate-300 rounded-xl text-sm font-bold border border-slate-700">50</button></div>`; examConfig.hasTimer = false; examConfig.count = 10; }
+            else if(mode === 'topic') { title.innerHTML = '<i class="fa-solid fa-folder-open text-amber-400 mr-2"></i> Test per Temes'; content.innerHTML = `<label class="text-xs font-bold text-slate-400 uppercase block mb-2">Tria el tema a entrenar:</label><select id="config-topic-select" class="w-full bg-slate-900 border border-slate-700 text-slate-200 text-sm font-bold rounded-xl p-4 outline-none focus:border-amber-500"><option value="A">Tot l'Àmbit A (Social/Història)</option><option value="B">Tot l'Àmbit B (Institucional)</option><option value="C">Tot l'Àmbit C (Seguretat)</option></select>`; examConfig.hasTimer = false; examConfig.count = 30; }
+            else if(mode === 'weak') { title.innerHTML = '<i class="fa-solid fa-heart-crack text-orange-400 mr-2"></i> Reforç Intel·ligent'; content.innerHTML = `<div class="bg-orange-900/20 border border-orange-500/30 p-4 rounded-xl text-center"><p class="text-sm font-bold text-orange-400">Analitzant les teves dades...</p><p class="text-xs text-slate-400 mt-2">Crearem un test exprés de 15 preguntes focalitzat allà on sols fallar més.</p></div>`; examConfig.hasTimer = false; examConfig.count = 15; }
         }
 
         function prepareShuffledExam(questionsArray) {
             return questionsArray.map(q => {
-                let rawOptions = q.options || [];
-                let optsWithOrig = rawOptions.map(opt => ({ text: opt, isCorrect: opt === q.correctAnswer }));
-                optsWithOrig.sort(() => 0.5 - Math.random());
-                return { ...q, options: optsWithOrig.map(o => o.text), correctAnswer: optsWithOrig.find(o => o.isCorrect)?.text || rawOptions[0] };
+                let rawOptions = q.options || []; let optsWithOrig = rawOptions.map(opt => ({ text: opt, isCorrect: opt === q.correctAnswer }));
+                optsWithOrig.sort(() => 0.5 - Math.random()); return { ...q, options: optsWithOrig.map(o => o.text), correctAnswer: optsWithOrig.find(o => o.isCorrect)?.text || rawOptions[0] };
             }).sort(() => 0.5 - Math.random());
         }
 
         window.launchPreparedExam = function() {
             document.getElementById('pre-exam-modal').classList.add('hidden');
-            
             let subset = [];
-            if(examConfig.mode === 'topic') {
-                const bloc = document.getElementById('config-topic-select').value;
-                subset = window.questionBank.filter(q => q.superBloc === bloc).sort(() => 0.5 - Math.random()).slice(0, examConfig.count);
-            } else if (examConfig.mode === 'weak') {
-                const stats = examHistory.topicsStats || {};
-                let weakQs = window.questionBank.filter(q => {
-                    const s = stats[q.topic];
-                    if(!s || s.total === 0) return true;
-                    return (s.correct / s.total) < 0.7; // Fallades freqüents
-                });
-                if(weakQs.length === 0) weakQs = window.questionBank; // Si va perfecte, random
-                subset = weakQs.sort(() => 0.5 - Math.random()).slice(0, examConfig.count);
-            } else {
-                subset = [...window.questionBank].sort(() => 0.5 - Math.random()).slice(0, examConfig.count);
-            }
+            if(examConfig.mode === 'topic') { const bloc = document.getElementById('config-topic-select').value; subset = window.questionBank.filter(q => q.superBloc === bloc).sort(() => 0.5 - Math.random()).slice(0, examConfig.count); } 
+            else if (examConfig.mode === 'weak') { const stats = examHistory.topicsStats || {}; let weakQs = window.questionBank.filter(q => { const s = stats[q.topic]; if(!s || s.total === 0) return true; return (s.correct / s.total) < 0.7; }); if(weakQs.length === 0) weakQs = window.questionBank; subset = weakQs.sort(() => 0.5 - Math.random()).slice(0, examConfig.count); } 
+            else { subset = [...window.questionBank].sort(() => 0.5 - Math.random()).slice(0, examConfig.count); }
 
-            currentExam = prepareShuffledExam(subset);
-            currentQuestionIdx = 0;
-            userAnswers = {};
-
+            currentExam = prepareShuffledExam(subset); currentQuestionIdx = 0; userAnswers = {};
             document.getElementById('exam-active-container').classList.remove('hidden');
             
-            // Init Timer UI
-            const timerBox = document.getElementById('timer-box');
-            if(examConfig.hasTimer) {
-                timeLeftSeconds = examConfig.secondsLimit;
-                timerBox.innerText = `${Math.floor(timeLeftSeconds/60)}:00`;
-                timerBox.parentElement.classList.remove('hidden');
-                startTimer();
-            } else {
-                timerBox.parentElement.classList.add('hidden');
-            }
+            const timerBox = document.getElementById('timer-box-container');
+            if(examConfig.hasTimer) { timeLeftSeconds = examConfig.secondsLimit; document.getElementById('timer-box').innerText = `${Math.floor(timeLeftSeconds/60)}:00`; timerBox.classList.remove('hidden'); startTimer(); } else { timerBox.classList.add('hidden'); }
             
-            buildQuestionGrid();
-            renderQuestion();
+            buildQuestionGrid(); renderQuestion();
         }
 
         function buildQuestionGrid() {
-            const grid = document.getElementById('question-grid');
-            grid.innerHTML = '';
-            for(let i=0; i<currentExam.length; i++) {
-                const btn = document.createElement('button');
-                btn.className = `grid-q-btn w-full aspect-square rounded bg-slate-900 border border-slate-700 text-[10px] font-bold text-slate-400 hover:border-slate-500`;
-                btn.innerText = i+1;
-                btn.id = `q-grid-btn-${i}`;
-                btn.onclick = () => { currentQuestionIdx = i; renderQuestion(); };
-                grid.appendChild(btn);
-            }
+            const grid = document.getElementById('question-grid'); grid.innerHTML = '';
+            for(let i=0; i<currentExam.length; i++) { const btn = document.createElement('button'); btn.className = `grid-q-btn w-full aspect-square rounded bg-slate-900 border border-slate-700 text-[10px] font-bold text-slate-400 hover:border-slate-500`; btn.innerText = i+1; btn.id = `q-grid-btn-${i}`; btn.onclick = () => { currentQuestionIdx = i; renderQuestion(); }; grid.appendChild(btn); }
         }
 
         function startTimer() {
             if (activeTimerInterval) clearInterval(activeTimerInterval);
             activeTimerInterval = setInterval(() => {
-                timeLeftSeconds--;
-                const m = Math.floor(timeLeftSeconds / 60);
-                const s = timeLeftSeconds % 60;
+                timeLeftSeconds--; const m = Math.floor(timeLeftSeconds / 60); const s = timeLeftSeconds % 60;
                 document.getElementById('timer-box').innerText = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
                 if (timeLeftSeconds <= 0) { clearInterval(activeTimerInterval); showExamResults(); }
             }, 1000);
         }
 
-        window.promptEndExam = function() {
-            if(confirm("Segur que vols finalitzar l'examen ara? Es calcularà la teva nota amb les respostes donades.")) {
-                showExamResults();
-            }
-        }
-
-        window.exitExamToMenu = () => {
-            document.getElementById('exit-modal').classList.add('hidden');
-            if (activeTimerInterval) clearInterval(activeTimerInterval);
-            document.getElementById('exam-active-container').classList.add('hidden');
-            document.getElementById('exam-menu-container').classList.remove('hidden');
-        }
+        window.promptEndExam = function() { if(confirm("Segur que vols finalitzar l'examen ara? Es calcularà la teva nota amb les respostes donades.")) { showExamResults(); } }
+        window.exitExamToMenu = () => { document.getElementById('exit-modal').classList.add('hidden'); if (activeTimerInterval) clearInterval(activeTimerInterval); document.getElementById('exam-active-container').classList.add('hidden'); document.getElementById('exam-menu-container').classList.remove('hidden'); }
+        window.backToExamMenu = () => { document.getElementById('exam-results-container').classList.add('hidden'); document.getElementById('exam-menu-container').classList.remove('hidden'); }
         
-        window.backToExamMenu = () => {
-            document.getElementById('exam-results-container').classList.add('hidden');
-            document.getElementById('exam-menu-container').classList.remove('hidden');
-        }
-
-        window.toggleFlagCurrentQuestion = function() {
-            if(!userAnswers[currentQuestionIdx]) userAnswers[currentQuestionIdx] = {};
-            userAnswers[currentQuestionIdx].flagged = !userAnswers[currentQuestionIdx].flagged;
-            renderQuestion();
-        }
+        window.toggleFlagCurrentQuestion = function() { if(!userAnswers[currentQuestionIdx]) userAnswers[currentQuestionIdx] = {}; userAnswers[currentQuestionIdx].flagged = !userAnswers[currentQuestionIdx].flagged; renderQuestion(); }
 
         function renderQuestion() {
-            questionStartTime = Date.now();
-            const q = currentExam[currentQuestionIdx];
+            questionStartTime = Date.now(); const q = currentExam[currentQuestionIdx];
             
+            const answeredCount = Object.keys(userAnswers).filter(k => userAnswers[k].choice !== undefined).length;
+            document.getElementById('exam-progress-bar').style.width = `${(answeredCount / currentExam.length) * 100}%`;
             document.getElementById('exam-progress-text').innerText = `Pregunta ${currentQuestionIdx + 1} de ${currentExam.length}`;
-            document.getElementById('exam-progress-bar').style.width = `${((currentQuestionIdx + 1) / currentExam.length) * 100}%`;
+            
             document.getElementById('question-topic-badge').innerText = q.topic || 'Mossos d\'Esquadra';
             document.getElementById('question-text').innerText = q.question;
 
-            // Actualitzar Grid UI de forma segura
             document.querySelectorAll('.grid-q-btn').forEach(b => b.classList.remove('active'));
-            const activeBtn = document.getElementById(`q-grid-btn-${currentQuestionIdx}`);
-            if(activeBtn) activeBtn.classList.add('active');
+            const activeBtn = document.getElementById(`q-grid-btn-${currentQuestionIdx}`); if(activeBtn) activeBtn.classList.add('active');
             
             const btnFlag = document.getElementById('btn-flag-q');
-            if(btnFlag) {
-                if(userAnswers[currentQuestionIdx] && userAnswers[currentQuestionIdx].flagged) {
-                    btnFlag.classList.add('text-amber-400', 'border-amber-400', 'bg-amber-900/20'); btnFlag.classList.remove('text-slate-400', 'border-slate-600');
-                    if(activeBtn) activeBtn.classList.add('flagged');
-                } else {
-                    btnFlag.classList.remove('text-amber-400', 'border-amber-400', 'bg-amber-900/20'); btnFlag.classList.add('text-slate-400', 'border-slate-600');
-                    if(activeBtn) activeBtn.classList.remove('flagged');
-                }
-            }
+            if(btnFlag) { if(userAnswers[currentQuestionIdx] && userAnswers[currentQuestionIdx].flagged) { btnFlag.classList.add('text-amber-400', 'border-amber-400', 'bg-amber-900/20'); btnFlag.classList.remove('text-slate-400', 'border-slate-600'); if(activeBtn) activeBtn.classList.add('flagged'); } else { btnFlag.classList.remove('text-amber-400', 'border-amber-400', 'bg-amber-900/20'); btnFlag.classList.add('text-slate-400', 'border-slate-600'); if(activeBtn) activeBtn.classList.remove('flagged'); } }
 
-            const optsBox = document.getElementById('options-container');
-            if(!optsBox) return;
-            optsBox.innerHTML = '';
-            const ansObj = userAnswers[currentQuestionIdx];
-            const hasChosen = ansObj && ansObj.choice !== undefined;
+            const optsBox = document.getElementById('options-container'); if(!optsBox) return; optsBox.innerHTML = '';
+            const ansObj = userAnswers[currentQuestionIdx]; const hasChosen = ansObj && ansObj.choice !== undefined;
 
             q.options.forEach((opt, idx) => {
-                const btn = document.createElement('button');
-                btn.type = "button";
-                btn.className = `w-full text-left p-4 sm:p-5 rounded-xl border text-sm sm:text-base font-medium transition-all flex items-center justify-between `;
+                const btn = document.createElement('button'); btn.type = "button"; btn.className = `w-full text-left p-4 sm:p-5 rounded-xl border text-sm sm:text-base font-medium transition-all flex items-center justify-between `;
                 
-                // Lògica Clic (Simulacre vs Pràctica)
                 if (!hasChosen || examConfig.mode === 'simulacre') {
                     btn.onclick = () => {
-                        const timeSpent = (Date.now() - questionStartTime) / 1000;
-                        const isCorrect = (q.options[idx] === q.correctAnswer);
-                        
+                        const timeSpent = (Date.now() - questionStartTime) / 1000; const isCorrect = (q.options[idx] === q.correctAnswer);
                         if(!userAnswers[currentQuestionIdx]) userAnswers[currentQuestionIdx] = {};
-                        userAnswers[currentQuestionIdx].choice = idx;
-                        userAnswers[currentQuestionIdx].time = (userAnswers[currentQuestionIdx].time || 0) + timeSpent;
-                        userAnswers[currentQuestionIdx].isCorrect = isCorrect;
-                        
-                        // Marcar al Grid
-                        const gBtn = document.getElementById(`q-grid-btn-${currentQuestionIdx}`);
-                        if(gBtn) gBtn.classList.add('answered');
-
+                        userAnswers[currentQuestionIdx].choice = idx; userAnswers[currentQuestionIdx].time = (userAnswers[currentQuestionIdx].time || 0) + timeSpent; userAnswers[currentQuestionIdx].isCorrect = isCorrect;
+                        const gBtn = document.getElementById(`q-grid-btn-${currentQuestionIdx}`); if(gBtn) gBtn.classList.add('answered');
                         if(examConfig.mode !== 'simulacre') playSound(isCorrect);
                         renderQuestion();
                     };
                 }
 
-                // Estils
                 if (examConfig.mode === 'simulacre') {
-                    if (hasChosen && ansObj.choice === idx) btn.className += `bg-brand-900/60 border-brand-500 text-brand-200 shadow-[0_0_15px_rgba(37,99,235,0.2)]`;
-                    else btn.className += `bg-slate-900 border-slate-700 hover:border-brand-500 text-slate-200 ${hasChosen ? 'opacity-70' : ''}`;
+                    if (hasChosen && ansObj.choice === idx) btn.className += `bg-brand-900/60 border-brand-500 text-brand-200 shadow-[0_0_15px_rgba(37,99,235,0.2)]`; else btn.className += `bg-slate-900 border-slate-700 hover:border-brand-500 text-slate-200 ${hasChosen ? 'opacity-70' : ''}`;
                 } else {
-                    if (!hasChosen) {
-                        btn.className += `bg-slate-900 border-slate-700 hover:border-brand-500 hover:bg-slate-800 text-slate-200`;
-                    } else {
-                        if (opt === q.correctAnswer) btn.className += `bg-emerald-950/80 border-emerald-500 text-emerald-300 font-bold shadow-[0_0_15px_rgba(16,185,129,0.2)]`;
-                        else if (ansObj.choice === idx) btn.className += `bg-red-950/80 border-red-500 text-red-300 line-through opacity-80`;
-                        else btn.className += `bg-slate-900/30 border-slate-800 text-slate-600 opacity-40`;
-                    }
+                    if (!hasChosen) { btn.className += `bg-slate-900 border-slate-700 hover:border-brand-500 hover:bg-slate-800 text-slate-200`; } else { if (opt === q.correctAnswer) btn.className += `bg-emerald-950/80 border-emerald-500 text-emerald-300 font-bold shadow-[0_0_15px_rgba(16,185,129,0.2)]`; else if (ansObj.choice === idx) btn.className += `bg-red-950/80 border-red-500 text-red-300 line-through opacity-80`; else btn.className += `bg-slate-900/30 border-slate-800 text-slate-600 opacity-40`; }
                 }
                 
                 btn.innerHTML = `<span class="flex items-center gap-3"><span class="w-6 h-6 rounded-md bg-slate-950 border border-slate-700 flex items-center justify-center text-xs font-black text-slate-400 shadow-inner">${String.fromCharCode(65+idx)}</span> ${opt}</span>`;
                 optsBox.appendChild(btn);
             });
 
-            // Explicació immediata (només Pràctica)
             const expBox = document.getElementById('explanation-box');
-            if(expBox) {
-                if (hasChosen && examConfig.mode !== 'simulacre') {
-                    expBox.classList.remove('hidden');
-                    const isCorrect = ansObj.isCorrect;
-                    expBox.className = `mb-6 p-4 rounded-xl border animate-fade-in ${isCorrect ? 'bg-emerald-950/40 border-emerald-500/40 text-emerald-200' : 'bg-red-950/40 border-red-500/40 text-red-200'}`;
-                    document.getElementById('explanation-title').innerHTML = isCorrect ? `<i class="fa-solid fa-circle-check"></i> Resposta Correcta` : `<i class="fa-solid fa-circle-xmark"></i> Resposta Incorrecta`;
-                    document.getElementById('explanation-text').innerText = q.explanation || `La resposta correcta dictada a temari és: ${q.correctAnswer}`;
-                } else {
-                    expBox.classList.add('hidden');
-                }
-            }
+            if(expBox) { if (hasChosen && examConfig.mode !== 'simulacre') { expBox.classList.remove('hidden'); const isCorrect = ansObj.isCorrect; expBox.className = `mb-6 p-4 rounded-xl border animate-fade-in ${isCorrect ? 'bg-emerald-950/40 border-emerald-500/40 text-emerald-200' : 'bg-red-950/40 border-red-500/40 text-red-200'}`; document.getElementById('explanation-title').innerHTML = isCorrect ? `<i class="fa-solid fa-circle-check"></i> Resposta Correcta` : `<i class="fa-solid fa-circle-xmark"></i> Resposta Incorrecta`; document.getElementById('explanation-text').innerText = q.explanation || `La resposta correcta dictada a temari és: ${q.correctAnswer}`; } else { expBox.classList.add('hidden'); } }
         }
 
         window.navigateQuestion = function(dir) {
             if (dir === 1 && currentQuestionIdx === currentExam.length - 1) {
-                // Confirmació si falten per respondre en simulacre
                 const unans = currentExam.filter((_, i) => !userAnswers[i] || userAnswers[i].choice === undefined).length;
-                if(examConfig.mode === 'simulacre' && unans > 0) {
-                    if(!confirm(`Tens ${unans} preguntes en blanc. Segur que vols entregar ja?`)) return;
-                }
-                showExamResults();
-                return;
+                if(examConfig.mode === 'simulacre' && unans > 0) { if(!confirm(`Tens ${unans} preguntes en blanc. Segur que vols entregar ja?`)) return; }
+                showExamResults(); return;
             }
-            currentQuestionIdx += dir;
-            if (currentQuestionIdx < 0) currentQuestionIdx = 0;
-            if (currentQuestionIdx >= currentExam.length) currentQuestionIdx = currentExam.length - 1;
+            currentQuestionIdx += dir; if (currentQuestionIdx < 0) currentQuestionIdx = 0; if (currentQuestionIdx >= currentExam.length) currentQuestionIdx = currentExam.length - 1;
             renderQuestion();
         }
 
         function showExamResults() {
             if (activeTimerInterval) clearInterval(activeTimerInterval);
-            let correct = 0; let blank = 0; let totalTime = 0;
-            let reviewHTML = ''; let failedQUpdates = {};
-            const todayStr = window.getSpanishDateStr();
+            let correct = 0; let blank = 0; let totalTime = 0; let answeredOnly = 0;
+            let reviewHTML = ''; let failedQUpdates = {}; const todayStr = window.getSpanishDateStr();
 
             currentExam.forEach((q, idx) => {
-                const ans = userAnswers[idx];
-                const hasAns = ans !== undefined && ans.choice !== undefined;
-                const isCorrect = hasAns && ans.isCorrect;
-                
-                if(!hasAns) blank++;
-                else if (isCorrect) correct++;
-                else {
-                    let safeKey = q.question.replace(/[\.\/\[\]\*~]/g, '').substring(0, 50);
-                    failedQUpdates[safeKey] = window.fbIncrement(1);
-                }
-                
+                const ans = userAnswers[idx]; const hasAns = ans !== undefined && ans.choice !== undefined; const isCorrect = hasAns && ans.isCorrect;
+                if(!hasAns) blank++; else { answeredOnly++; if (isCorrect) correct++; else { let safeKey = q.question.replace(/[\.\/\[\]\*~]/g, '').substring(0, 50); failedQUpdates[safeKey] = window.fbIncrement(1); } }
                 if (ans && ans.time) totalTime += ans.time;
 
-                // Stats Internes Topics
-                const topic = q.topic || 'General';
-                if (!examHistory.topicsStats[topic]) examHistory.topicsStats[topic] = { correct: 0, total: 0 };
-                examHistory.topicsStats[topic].total += 1;
-                if (isCorrect) examHistory.topicsStats[topic].correct += 1;
+                const topic = q.topic || 'General'; if (!examHistory.topicsStats[topic]) examHistory.topicsStats[topic] = { correct: 0, total: 0 };
+                examHistory.topicsStats[topic].total += 1; if (isCorrect) examHistory.topicsStats[topic].correct += 1;
 
-                // Generar HTML Resum
                 let cardColor = !hasAns ? 'bg-slate-900/50 border-slate-700 text-slate-300' : (isCorrect ? 'bg-emerald-950/20 border-emerald-800/50 text-emerald-200' : 'bg-red-950/20 border-red-800/50 text-red-200');
-                
-                reviewHTML += `
-                    <div class="p-4 rounded-xl border ${cardColor} mb-3 shadow-sm">
-                        <p class="font-bold text-white mb-2"><span class="text-xs text-slate-400 mr-2">Q${idx + 1}.</span>${q.question}</p>
-                        ${!hasAns ? '<p class="text-xs text-slate-400 italic">No resposta</p>' : `<p class="text-sm">La teva resposta: <strong class="font-bold">${q.options[ans.choice]}</strong></p>`}
-                        ${!isCorrect ? `<p class="text-sm mt-1">Correcta: <strong class="font-bold text-white">${q.correctAnswer}</strong></p>` : ''}
-                        ${q.explanation ? `<div class="mt-2 p-2 bg-slate-950/50 rounded text-xs text-slate-300 opacity-80"><i class="fa-solid fa-book mr-1"></i> ${q.explanation}</div>` : ''}
-                    </div>`;
+                reviewHTML += `<div class="p-4 rounded-xl border ${cardColor} mb-3 shadow-sm"><p class="font-bold text-white mb-2"><span class="text-xs text-slate-400 mr-2">Q${idx + 1}.</span>${q.question}</p>${!hasAns ? '<p class="text-xs text-slate-400 italic">No resposta</p>' : `<p class="text-sm">La teva resposta: <strong class="font-bold">${q.options[ans.choice]}</strong></p>`}${!isCorrect ? `<p class="text-sm mt-1">Correcta: <strong class="font-bold text-white">${q.correctAnswer}</strong></p>` : ''}${q.explanation ? `<div class="mt-2 p-2 bg-slate-950/50 rounded text-xs text-slate-300 opacity-80"><i class="fa-solid fa-book mr-1"></i> ${q.explanation}</div>` : ''}</div>`;
             });
 
             const incorrect = currentExam.length - correct - blank;
+            let grade = ((correct - (incorrect * 0.33)) / currentExam.length) * 10; if (grade < 0) grade = 0; grade = Number(grade.toFixed(2));
             
-            // Fórmula Mossos (Exemple: Encat - (Error/3)) -> Simplificat a base 10 per facilitat si no s'especifica
-            let grade = ((correct - (incorrect * 0.33)) / currentExam.length) * 10;
-            if (grade < 0) grade = 0;
-            grade = Number(grade.toFixed(2));
-            
-            // Update històric local
-            examHistory.done += 1;
-            examHistory.totalCorrect += correct;
-            examHistory.totalQuestions += currentExam.length;
-            examHistory.totalTimeSeconds += totalTime;
-            examHistory.gradesSum += grade;
-            
-            const prevBest = examHistory.bestGrade || 0;
-            if (grade > prevBest) examHistory.bestGrade = grade;
+            examHistory.done += 1; examHistory.totalCorrect += correct; examHistory.totalQuestions += currentExam.length; examHistory.totalTimeSeconds += totalTime; examHistory.gradesSum += grade;
+            const prevBest = examHistory.bestGrade || 0; if (grade > prevBest) examHistory.bestGrade = grade;
 
             if (examHistory.lastStudyDate !== todayStr) {
-                const last = new Date(examHistory.lastStudyDate || todayStr);
-                const now = new Date(todayStr);
-                const diffDays = Math.round((now - last) / (1000 * 60 * 60 * 24));
-                if (diffDays === 1 || !examHistory.lastStudyDate) examHistory.streakDays = (examHistory.streakDays || 0) + 1;
-                else if (diffDays > 1) examHistory.streakDays = 1;
+                const last = new Date(examHistory.lastStudyDate || todayStr); const now = new Date(todayStr); const diffDays = Math.round((now - last) / (1000 * 60 * 60 * 24));
+                if (diffDays === 1 || !examHistory.lastStudyDate) examHistory.streakDays = (examHistory.streakDays || 0) + 1; else if (diffDays > 1) examHistory.streakDays = 1;
                 examHistory.lastStudyDate = todayStr;
             }
             
-            examHistory.dailyActivity[todayStr] = (examHistory.dailyActivity[todayStr] || 0) + currentExam.length;
-            
+            // Actualitzem l'historial del dia només amb les que s'han contestat realment
+            examHistory.dailyActivity[todayStr] = (examHistory.dailyActivity[todayStr] || 0) + answeredOnly;
             saveStatsToStorage();
 
-            // Guardar al Cloud
             const loggedUser = window.getFirebaseCurrentUser();
             if (loggedUser) {
-                window.updateUserScoreInFirestore(correct, currentExam.length); // Dona punts totals y aciertos
+                // A la DB també enviem només les contestades totals
+                window.updateUserScoreInFirestore(correct, answeredOnly); 
                 const metricsRef = window.dbRef;
-                import("https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js").then(mod => {
-                    mod.setDoc(mod.doc(metricsRef, "metrics", todayStr), { tests: mod.increment(1) }, { merge: true }).catch(()=>{});
-                    if (Object.keys(failedQUpdates).length > 0) mod.setDoc(mod.doc(metricsRef, "metrics", "failed_qs"), failedQUpdates, {merge:true}).catch(()=>{});
-                });
-            } else {
-                localStorage.setItem('oppos_free_test_date', todayStr);
-                if (window.updateLocksUI) window.updateLocksUI(null, null);
-            }
+                import("https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js").then(mod => { mod.setDoc(mod.doc(metricsRef, "metrics", todayStr), { tests: mod.increment(1) }, { merge: true }).catch(()=>{}); if (Object.keys(failedQUpdates).length > 0) mod.setDoc(mod.doc(metricsRef, "metrics", "failed_qs"), failedQUpdates, {merge:true}).catch(()=>{}); });
+            } else { localStorage.setItem('oppos_free_test_date', todayStr); if (window.updateLocksUI) window.updateLocksUI(null, null); }
 
-            // Pintar Pantalla Resultats
-            document.getElementById('exam-active-container').classList.add('hidden');
-            document.getElementById('exam-results-container').classList.remove('hidden');
+            document.getElementById('exam-active-container').classList.add('hidden'); document.getElementById('exam-results-container').classList.remove('hidden');
+            document.getElementById('res-correct').innerText = correct; document.getElementById('res-incorrect').innerText = incorrect; document.getElementById('res-blank').innerText = blank; document.getElementById('res-grade').innerText = grade;
             
-            document.getElementById('res-correct').innerText = correct;
-            document.getElementById('res-incorrect').innerText = incorrect;
-            document.getElementById('res-blank').innerText = blank;
-            document.getElementById('res-grade').innerText = grade;
-            
-            const iconBadge = document.getElementById('result-icon-badge');
-            const scoreText = document.getElementById('result-score-text');
-            if(grade >= 5) {
-                iconBadge.innerHTML = '<i class="fa-solid fa-check text-emerald-400"></i>'; iconBadge.className = "w-20 h-20 rounded-full mx-auto flex items-center justify-center text-4xl mb-4 bg-emerald-900/40 border border-emerald-500/50 shadow-[0_0_30px_rgba(16,185,129,0.3)]";
-                scoreText.innerText = "Apte! Bon treball, segueix així."; scoreText.className = "text-emerald-400 text-lg font-bold";
-            } else {
-                iconBadge.innerHTML = '<i class="fa-solid fa-xmark text-red-400"></i>'; iconBadge.className = "w-20 h-20 rounded-full mx-auto flex items-center justify-center text-4xl mb-4 bg-red-900/40 border border-red-500/50 shadow-[0_0_30px_rgba(239,68,68,0.3)]";
-                scoreText.innerText = "No Apte. Cal repassar més aquests conceptes."; scoreText.className = "text-red-400 text-lg font-bold";
-            }
+            const iconBadge = document.getElementById('result-icon-badge'); const scoreText = document.getElementById('result-score-text');
+            if(grade >= 5) { iconBadge.innerHTML = '<i class="fa-solid fa-check text-emerald-400"></i>'; iconBadge.className = "w-20 h-20 rounded-full mx-auto flex items-center justify-center text-4xl mb-4 bg-emerald-900/40 border border-emerald-500/50 shadow-[0_0_30px_rgba(16,185,129,0.3)]"; scoreText.innerText = "Apte! Bon treball, segueix així."; scoreText.className = "text-emerald-400 text-lg font-bold"; } else { iconBadge.innerHTML = '<i class="fa-solid fa-xmark text-red-400"></i>'; iconBadge.className = "w-20 h-20 rounded-full mx-auto flex items-center justify-center text-4xl mb-4 bg-red-900/40 border border-red-500/50 shadow-[0_0_30px_rgba(239,68,68,0.3)]"; scoreText.innerText = "No Apte. Cal repassar més aquests conceptes."; scoreText.className = "text-red-400 text-lg font-bold"; }
 
             const compBox = document.getElementById('res-comparison-box');
-            if(examHistory.done > 1 && examConfig.mode === 'simulacre') {
-                compBox.classList.remove('hidden');
-                const compVal = document.getElementById('res-comp-val');
-                const diff = (grade - prevBest).toFixed(2);
-                if(diff > 0) { compVal.innerText = `+${diff} Punts Rècord!`; compVal.className = "font-bold px-3 py-1.5 rounded bg-emerald-900/50 text-emerald-400 border border-emerald-500/30"; }
-                else if(diff == 0) { compVal.innerText = `Iguales`; compVal.className = "font-bold px-3 py-1.5 rounded bg-slate-800 text-slate-300"; }
-                else { compVal.innerText = `${diff} respecte al màxim (${prevBest})`; compVal.className = "font-bold px-3 py-1.5 rounded bg-orange-900/30 text-orange-400 border border-orange-500/30"; }
-            } else {
-                compBox.classList.add('hidden');
-            }
-
+            if(examHistory.done > 1 && examConfig.mode === 'simulacre') { compBox.classList.remove('hidden'); const compVal = document.getElementById('res-comp-val'); const diff = (grade - prevBest).toFixed(2); if(diff > 0) { compVal.innerText = `+${diff} Punts Rècord!`; compVal.className = "font-bold px-3 py-1.5 rounded bg-emerald-900/50 text-emerald-400 border border-emerald-500/30"; } else if(diff == 0) { compVal.innerText = `Iguales`; compVal.className = "font-bold px-3 py-1.5 rounded bg-slate-800 text-slate-300"; } else { compVal.innerText = `${diff} respecte al màxim (${prevBest})`; compVal.className = "font-bold px-3 py-1.5 rounded bg-orange-900/30 text-orange-400 border border-orange-500/30"; } } else { compBox.classList.add('hidden'); }
             document.getElementById('results-review-list').innerHTML = reviewHTML;
-            
-            // Refrescar rànquing
             if(window.loadGlobalRanking) window.loadGlobalRanking();
         }
 
-        // 4. RANKING SYSTEM (Punts / Precisió)
         window.toggleRankingView = function(metric) {
             currentRankingMetric = metric;
             document.getElementById('btn-rank-points').className = metric === 'points' ? "px-4 py-1.5 rounded-lg text-xs font-bold transition-all bg-brand-600 text-white shadow" : "px-4 py-1.5 rounded-lg text-xs font-bold transition-all text-slate-400 hover:text-white";
@@ -2022,48 +1534,33 @@
             try {
                 const snap = await getDocs(collection(db, "users"));
                 let list = []; const today = window.getSpanishDateStr();
-                
                 snap.forEach(d => {
                     const data = d.data();
                     if (!data.isBlocked && data.lastResetDate === today) {
-                        const score = data.score || 0;
-                        const answered = data.answeredToday || 0;
-                        const acc = answered > 0 ? (score / answered) * 100 : 0;
-                        if(answered >= 5) { // Minim 5 preguntes per sortir al ranking i no adulterar precisions de 1/1
-                            list.push({ username: data.username || 'Anònim', score, acc, lifetime: data.lifetimeScore || 0, isPremium: data.isPremium });
-                        }
+                        const score = data.score || 0; const answered = data.answeredToday || 0; const acc = answered > 0 ? (score / answered) * 100 : 0;
+                        if(answered >= 5) { list.push({ username: data.username || 'Anònim', score, acc, lifetime: data.lifetimeScore || 0, isPremium: data.isPremium }); }
                     }
                 });
                 
-                if (currentRankingMetric === 'points') list.sort((a, b) => b.score - a.score);
-                else list.sort((a, b) => b.acc - a.acc);
-                
+                if (currentRankingMetric === 'points') list.sort((a, b) => b.score - a.score); else list.sort((a, b) => b.acc - a.acc);
                 if (list.length === 0) return tableBody.innerHTML = `<tr><td colspan="3" class="p-8 text-center text-slate-400">Pocs usuaris actius avui encara. Fes tests per obrir el rànquing!</td></tr>`;
                 
                 let html = '';
                 list.forEach((u, i) => {
                     let posColor = 'bg-slate-900 text-slate-300';
-                    if (i === 0) posColor = 'bg-yellow-400 text-yellow-900 font-extrabold shadow-[0_0_15px_rgba(250,204,21,0.5)]';
-                    else if (i === 1) posColor = 'bg-slate-300 text-slate-800 font-bold shadow-[0_0_10px_rgba(203,213,225,0.5)]';
-                    else if (i === 2) posColor = 'bg-orange-700 text-orange-100 font-bold shadow-[0_0_10px_rgba(194,65,12,0.5)]';
-
-                    let levelIcon = '';
-                    if(u.lifetime > 5000) levelIcon = '<i class="fa-solid fa-crown text-yellow-400 text-[10px] ml-2" title="Elite"></i>';
-                    else if(u.lifetime > 2000) levelIcon = '<i class="fa-solid fa-star text-purple-400 text-[10px] ml-2" title="Expert"></i>';
-
+                    if (i === 0) posColor = 'bg-yellow-400 text-yellow-900 font-extrabold shadow-[0_0_15px_rgba(250,204,21,0.5)]'; else if (i === 1) posColor = 'bg-slate-300 text-slate-800 font-bold shadow-[0_0_10px_rgba(203,213,225,0.5)]'; else if (i === 2) posColor = 'bg-orange-700 text-orange-100 font-bold shadow-[0_0_10px_rgba(194,65,12,0.5)]';
+                    let levelIcon = ''; if(u.lifetime > 5000) levelIcon = '<i class="fa-solid fa-crown text-yellow-400 text-[10px] ml-2" title="Elite"></i>'; else if(u.lifetime > 2000) levelIcon = '<i class="fa-solid fa-star text-purple-400 text-[10px] ml-2" title="Expert"></i>';
                     const metricVal = currentRankingMetric === 'points' ? `<span class="text-brand-400">${u.score} pts</span>` : `<span class="text-emerald-400">${u.acc.toFixed(1)}%</span>`;
-
-                    html += `<tr class="hover:bg-slate-900/60 transition-colors border-b border-slate-800/50">
-                        <td class="p-4 text-center font-bold"><span class="inline-block w-8 h-8 rounded-xl text-xs leading-8 ${posColor}">${i + 1}</span></td>
-                        <td class="p-4 font-bold text-white flex items-center h-16">${u.username} ${levelIcon} ${u.isPremium ? '<i class="fa-solid fa-star text-amber-500 ml-1 text-[10px]"></i>' : ''}</td>
-                        <td class="p-4 text-right font-black text-lg">${metricVal}</td>
-                    </tr>`;
+                    html += `<tr class="hover:bg-slate-900/60 transition-colors border-b border-slate-800/50"><td class="p-4 text-center font-bold"><span class="inline-block w-8 h-8 rounded-xl text-xs leading-8 ${posColor}">${i + 1}</span></td><td class="p-4 font-bold text-white flex items-center h-16">${u.username} ${levelIcon} ${u.isPremium ? '<i class="fa-solid fa-star text-amber-500 ml-1 text-[10px]"></i>' : ''}</td><td class="p-4 text-right font-black text-lg">${metricVal}</td></tr>`;
                 });
                 tableBody.innerHTML = html;
-            } catch (e) { tableBody.innerHTML = `<tr><td colspan="3" class="p-8 text-center text-red-400">Pendent de carregar dades del rànquing.</td></tr>`; }
+            } catch (e) {
+                console.error("Error al ranking:", e);
+                tableBody.innerHTML = `<tr><td colspan="3" class="p-8 text-center text-red-400"><i class="fa-solid fa-triangle-exclamation mr-2"></i> Error: Les regles de Firebase no s'han guardat bé. Mira el PASO 1 de la resposta.</td></tr>`;
+            }
         }
 
-        // 5. SISTEMA MINIJOCS GAMIFICATS
+        // --- SISTEMA MINIJOCS GAMIFICATS ---
         window.exitMinigame = function(containerId) {
             document.getElementById(containerId).classList.add('hidden');
             document.getElementById('minigames-menu').classList.remove('hidden');
@@ -2074,269 +1571,122 @@
         window.toggleSound = function() { soundEnabled = !soundEnabled; localStorage.setItem('oppos_sound', soundEnabled); document.getElementById('sound-status-text').innerText = soundEnabled ? 'Activat' : 'Desactivat'; if(soundEnabled) playSound(true); }
 
         function playSound(isCorrect) {
-            if (!soundEnabled) return;
-            if (audioCtx.state === 'suspended') audioCtx.resume();
-            const osc = audioCtx.createOscillator(); const gainNode = audioCtx.createGain();
-            osc.connect(gainNode); gainNode.connect(audioCtx.destination);
-            if (isCorrect) {
-                osc.type = 'sine'; osc.frequency.setValueAtTime(800, audioCtx.currentTime); osc.frequency.exponentialRampToValueAtTime(1200, audioCtx.currentTime + 0.1);
-                gainNode.gain.setValueAtTime(0.2, audioCtx.currentTime); gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
-            } else {
-                osc.type = 'sawtooth'; osc.frequency.setValueAtTime(150, audioCtx.currentTime); osc.frequency.exponentialRampToValueAtTime(100, audioCtx.currentTime + 0.2);
-                gainNode.gain.setValueAtTime(0.2, audioCtx.currentTime); gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
-            }
+            if (!soundEnabled) return; if (audioCtx.state === 'suspended') audioCtx.resume();
+            const osc = audioCtx.createOscillator(); const gainNode = audioCtx.createGain(); osc.connect(gainNode); gainNode.connect(audioCtx.destination);
+            if (isCorrect) { osc.type = 'sine'; osc.frequency.setValueAtTime(800, audioCtx.currentTime); osc.frequency.exponentialRampToValueAtTime(1200, audioCtx.currentTime + 0.1); gainNode.gain.setValueAtTime(0.2, audioCtx.currentTime); gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3); } else { osc.type = 'sawtooth'; osc.frequency.setValueAtTime(150, audioCtx.currentTime); osc.frequency.exponentialRampToValueAtTime(100, audioCtx.currentTime + 0.2); gainNode.gain.setValueAtTime(0.2, audioCtx.currentTime); gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3); }
             osc.start(); osc.stop(audioCtx.currentTime + 0.3);
         }
 
-        // 5.A. JOC TRIAGE (BOTONS, SENSE SWIPE, 8 SEGONS)
+        // JOC 1: TRIAGE (BOTONS I + TEMPS)
         let triageTimerInt = null; let triageScore = 0; let triageCurrentQ = null; let triageTimeLeft = 8;
-        
-        const triageQuestions = [
-            { c: "Seguretat Pública", l: "Estat", r: "Generalitat", correct: 1 },
-            { c: "Relacions Internacionals", l: "Estat", r: "Generalitat", correct: 0 },
-            { c: "Falta de respecte a superior", l: "Falta Greu", r: "Falta Molt Greu", correct: 0 },
-            { c: "Abandonar servei", l: "Falta Greu", r: "Falta Molt Greu", correct: 1 },
-            { c: "Dret de Vaga", l: "Dret Fonamental (Secció 1)", r: "Dret Ciutadà (Secció 2)", correct: 0 },
-            { c: "Dret a la propietat privada", l: "Dret Fonamental", r: "Dret Ciutadà", correct: 1 },
-            { c: "Trànsit i circulació vehicles", l: "Exclusiva Gen", r: "Compartida", correct: 0 },
-            { c: "Protecció civil", l: "Exclusiva Gen", r: "Executiva Gen", correct: 0 },
-            { c: "Nomenament Magistrats TC", l: "Rei", r: "President Govern", correct: 0 },
-            { c: "Aprovació Estatut", l: "Llei Orgànica", r: "Llei Ordinària", correct: 0 },
-            { c: "Principi legalitat sancionadora", l: "Art. 25 CE", r: "Art. 24 CE", correct: 0 },
-            { c: "Tribunal Superior de Justícia", l: "Estat", r: "Organització Cat", correct: 1 }
-        ];
+        const triageQuestions = [ { c: "Seguretat Pública", l: "Estat", r: "Generalitat", correct: 1 }, { c: "Relacions Internacionals", l: "Estat", r: "Generalitat", correct: 0 }, { c: "Falta de respecte a superior", l: "Falta Greu", r: "Falta Molt Greu", correct: 0 }, { c: "Abandonar servei", l: "Falta Greu", r: "Falta Molt Greu", correct: 1 }, { c: "Dret de Vaga", l: "Dret Fonamental", r: "Dret Ciutadà", correct: 0 }, { c: "Dret a la propietat privada", l: "Dret Fonamental", r: "Dret Ciutadà", correct: 1 }, { c: "Trànsit i circulació vehicles", l: "Exclusiva Gen", r: "Compartida", correct: 0 }, { c: "Protecció civil", l: "Exclusiva Gen", r: "Executiva Gen", correct: 0 }, { c: "Nomenament Magistrats TC", l: "Rei", r: "President Govern", correct: 0 }, { c: "Aprovació Estatut", l: "Llei Orgànica", r: "Llei Ordinària", correct: 0 }, { c: "Principi legalitat", l: "Art. 25 CE", r: "Art. 24 CE", correct: 0 }, { c: "Tribunal Superior de Justícia", l: "Estat", r: "Catalunya", correct: 1 } ];
 
-        window.startTriageGame = function() {
-            document.getElementById('minigames-menu').classList.add('hidden');
-            document.getElementById('game-triage').classList.remove('hidden');
-            triageScore = 0; document.getElementById('triage-score').innerText = 0;
-            nextTriageCard();
-        }
+        window.startTriageGame = function() { document.getElementById('minigames-menu').classList.add('hidden'); document.getElementById('game-triage').classList.remove('hidden'); triageScore = 0; document.getElementById('triage-score').innerText = 0; nextTriageCard(); }
 
         function nextTriageCard() {
-            triageCurrentQ = triageQuestions[Math.floor(Math.random() * triageQuestions.length)];
-            const card = document.getElementById('triage-card');
-            
-            document.getElementById('triage-concept').innerText = triageCurrentQ.c;
-            document.getElementById('t-label-l').innerText = triageCurrentQ.l;
-            document.getElementById('t-label-r').innerText = triageCurrentQ.r;
-            
-            card.style.transform = 'translateX(0) rotate(0deg)';
-            card.style.opacity = '1';
-            
-            document.getElementById('triage-time-bar').style.transition = 'none';
-            document.getElementById('triage-time-bar').style.width = '100%';
-            
-            setTimeout(() => { 
-                document.getElementById('triage-time-bar').style.transition = 'width 8s linear'; 
-                document.getElementById('triage-time-bar').style.width = '0%'; 
-            }, 50);
-
+            triageCurrentQ = triageQuestions[Math.floor(Math.random() * triageQuestions.length)]; const card = document.getElementById('triage-card');
+            document.getElementById('triage-concept').innerText = triageCurrentQ.c; document.getElementById('t-label-l').innerText = triageCurrentQ.l; document.getElementById('t-label-r').innerText = triageCurrentQ.r;
+            card.style.transform = 'translateX(0) rotate(0deg)'; card.style.opacity = '1';
+            document.getElementById('triage-time-bar').style.transition = 'none'; document.getElementById('triage-time-bar').style.width = '100%';
+            setTimeout(() => { document.getElementById('triage-time-bar').style.transition = 'width 8s linear'; document.getElementById('triage-time-bar').style.width = '0%'; }, 50);
             triageTimeLeft = 8;
             if(triageTimerInt) clearInterval(triageTimerInt);
-            triageTimerInt = setInterval(() => {
-                triageTimeLeft -= 0.1;
-                if(triageTimeLeft <= 0) { clearInterval(triageTimerInt); triageFail(); }
-            }, 100);
+            triageTimerInt = setInterval(() => { triageTimeLeft -= 0.1; if(triageTimeLeft <= 0) { clearInterval(triageTimerInt); triageFail(); } }, 100);
         }
 
-        window.handleTriage = function(sideVal) { // 0: Left, 1: Right
-            clearInterval(triageTimerInt);
-            const card = document.getElementById('triage-card');
-            const feedback = document.getElementById('triage-feedback');
-            const icon = document.getElementById('triage-icon');
-
+        window.handleTriage = function(sideVal) {
+            clearInterval(triageTimerInt); const card = document.getElementById('triage-card'); const feedback = document.getElementById('triage-feedback'); const icon = document.getElementById('triage-icon');
             if(sideVal === triageCurrentQ.correct) {
-                // Animar sortida targeta
-                card.style.transform = sideVal === 0 ? 'translateX(-200px) rotate(-15deg)' : 'translateX(200px) rotate(15deg)';
-                card.style.opacity = '0';
-                
-                feedback.style.opacity = '1'; icon.className = "fa-solid fa-check text-9xl text-emerald-500 drop-shadow-[0_0_50px_rgba(16,185,129,0.8)]";
-                playSound(true);
+                card.style.transform = sideVal === 0 ? 'translateX(-200px) rotate(-15deg)' : 'translateX(200px) rotate(15deg)'; card.style.opacity = '0';
+                feedback.style.opacity = '1'; icon.className = "fa-solid fa-check text-8xl text-emerald-500 drop-shadow-[0_0_30px_rgba(16,185,129,0.8)]"; playSound(true);
                 triageScore += 10; document.getElementById('triage-score').innerText = triageScore;
-                
-                if(window.getFirebaseCurrentUser()) window.updateUserScoreInFirestore(1);
-                
+                if(window.getFirebaseCurrentUser()) window.updateUserScoreInFirestore(1, 1);
                 setTimeout(() => { feedback.style.opacity = '0'; nextTriageCard(); }, 400);
-            } else {
-                triageFail();
-            }
+            } else { triageFail(); }
         }
 
         function triageFail() {
-            const card = document.getElementById('triage-card');
-            card.style.transform = 'scale(0.9) translateY(20px)';
-            const feedback = document.getElementById('triage-feedback');
-            const icon = document.getElementById('triage-icon');
-            
-            feedback.style.opacity = '1'; icon.className = "fa-solid fa-xmark text-9xl text-red-500 drop-shadow-[0_0_50px_rgba(239,68,68,0.8)]";
-            playSound(false);
-            
-            setTimeout(() => {
-                feedback.style.opacity = '0';
-                window.showToast("Has fallat! Puntuació final: " + triageScore, "error");
-                exitMinigame('game-triage');
-            }, 1000);
+            const card = document.getElementById('triage-card'); card.style.transform = 'scale(0.9) translateY(20px)'; const feedback = document.getElementById('triage-feedback'); const icon = document.getElementById('triage-icon');
+            feedback.style.opacity = '1'; icon.className = "fa-solid fa-xmark text-8xl text-red-500 drop-shadow-[0_0_30px_rgba(239,68,68,0.8)]"; playSound(false);
+            setTimeout(() => { feedback.style.opacity = '0'; window.showToast("Has fallat! Puntuació final: " + triageScore, "error"); exitMinigame('game-triage'); }, 1000);
         }
 
-        // 5.B. EL PENJAT LEGAL (LLÒGICA RESTAURADA)
-        let hmWord = ""; let hmGuessed = []; let hmLives = 6; let hmCurrentScore = 0; let hmHighScore = parseInt(localStorage.getItem('oppos_hm_highscore')) || 0;
+        // JOC 2: EL PENJAT LEGAL (Recuperat)
+        let hmDict = []; let hmWord = ""; let hmGuessed = []; let hmLives = 6; let hmCurrentScore = 0; let hmHighScore = parseInt(localStorage.getItem('oppos_hm_highscore')) || 0;
+        
+        async function loadHangmanDict() {
+            try { const res = await fetch('penjat.json'); if (res.ok) hmDict = await res.json(); } catch(e) {}
+            if (hmDict.length === 0) hmDict = [{ word: "CONSTITUCIO", def: "Llei fonamental de l'Estat" }, { word: "HABEAS CORPUS", def: "Dret a ser posat a disposició judicial ràpidament" }];
+        }
 
         window.startHangman = function() {
-            document.getElementById('minigames-menu').classList.add('hidden');
-            document.getElementById('game-hangman').classList.remove('hidden');
-            document.getElementById('hm-result-overlay').classList.add('hidden');
-            document.getElementById('hm-keyboard').classList.remove('hidden');
-
-            const randomEntry = hmDict[Math.floor(Math.random() * hmDict.length)];
-            hmWord = randomEntry.word; hmGuessed = []; hmLives = 6;
-
-            document.getElementById('hm-definition').innerText = randomEntry.def;
-            document.getElementById('hm-lives').innerText = hmLives;
-            document.getElementById('hm-current-score').innerText = hmCurrentScore;
-            document.getElementById('hm-high-score').innerText = hmHighScore;
-
+            document.getElementById('minigames-menu').classList.add('hidden'); document.getElementById('game-hangman').classList.remove('hidden'); document.getElementById('hm-result-overlay').classList.add('hidden'); document.getElementById('hm-keyboard').classList.remove('hidden');
+            const randomEntry = hmDict[Math.floor(Math.random() * hmDict.length)]; hmWord = randomEntry.word.toUpperCase(); hmGuessed = []; hmLives = 6;
+            document.getElementById('hm-definition').innerText = randomEntry.def; document.getElementById('hm-lives').innerText = hmLives; document.getElementById('hm-current-score').innerText = hmCurrentScore; document.getElementById('hm-high-score').innerText = hmHighScore;
             renderHmWord(); renderHmKeyboard();
         }
 
-        function renderHmWord() {
-            let display = "";
-            for(let char of hmWord) {
-                if(char === " ") display += "&nbsp;&nbsp;";
-                else if(hmGuessed.includes(char)) display += char + " ";
-                else display += "_ ";
-            }
-            document.getElementById('hm-word-display').innerHTML = display;
-        }
+        function renderHmWord() { let display = ""; for(let char of hmWord) { if(char === " ") display += "&nbsp;&nbsp;"; else if(hmGuessed.includes(char)) display += char + " "; else display += "_ "; } document.getElementById('hm-word-display').innerHTML = display; }
 
         function renderHmKeyboard() {
             const kb = document.getElementById('hm-keyboard'); kb.innerHTML = "";
-            const letters = "ABCÇDEFGHIJKLMNÑOPQRSTUVWXYZ".split("");
-            letters.forEach(l => {
-                const btn = document.createElement('button');
-                btn.innerText = l; btn.className = "p-2 sm:py-3 rounded-lg font-bold text-sm sm:text-base transition-all bg-slate-700 hover:bg-slate-600 text-white shadow";
-                btn.onclick = () => guessHmLetter(l, btn); kb.appendChild(btn);
-            });
+            "ABCÇDEFGHIJKLMNÑOPQRSTUVWXYZ".split("").forEach(l => { const btn = document.createElement('button'); btn.innerText = l; btn.className = "p-2 sm:py-3 rounded-lg font-bold text-sm sm:text-base transition-all bg-slate-700 hover:bg-slate-600 text-white shadow"; btn.onclick = () => guessHmLetter(l, btn); kb.appendChild(btn); });
         }
 
         function guessHmLetter(letter, btn) {
             btn.disabled = true; hmGuessed.push(letter);
-            if(hmWord.includes(letter)) {
-                btn.classList.replace('bg-slate-700', 'bg-emerald-600'); btn.classList.replace('hover:bg-slate-600', 'bg-emerald-600');
-                playSound(true);
-            } else {
-                btn.classList.replace('bg-slate-700', 'bg-slate-900'); btn.classList.add('opacity-40');
-                hmLives--; document.getElementById('hm-lives').innerText = hmLives;
-                playSound(false);
-            }
+            if(hmWord.includes(letter)) { btn.classList.replace('bg-slate-700', 'bg-emerald-600'); btn.classList.replace('hover:bg-slate-600', 'bg-emerald-600'); playSound(true); } else { btn.classList.replace('bg-slate-700', 'bg-slate-900'); btn.classList.add('opacity-40'); hmLives--; document.getElementById('hm-lives').innerText = hmLives; playSound(false); }
             renderHmWord(); checkHmEnd();
         }
 
         function checkHmEnd() {
             const isWin = hmWord.split("").every(c => c === " " || hmGuessed.includes(c));
-            if(isWin) endHangman(true); else if(hmLives <= 0) endHangman(false);
-        }
-
-        function endHangman(win) {
-            document.getElementById('hm-keyboard').classList.add('hidden');
-            const overlay = document.getElementById('hm-result-overlay'); const title = document.getElementById('hm-result-title');
-            const txt = document.getElementById('hm-result-text'); const nextBtn = document.getElementById('hm-next-btn');
-            overlay.classList.remove('hidden', 'border-emerald-500', 'border-red-500', 'bg-emerald-950/30', 'bg-red-950/30');
-            
-            if(win) {
-                hmCurrentScore++;
-                if (hmCurrentScore > hmHighScore) { hmHighScore = hmCurrentScore; localStorage.setItem('oppos_hm_highscore', hmHighScore); }
-                document.getElementById('hm-current-score').innerText = hmCurrentScore; document.getElementById('hm-high-score').innerText = hmHighScore;
-                overlay.classList.add('border-emerald-500', 'bg-emerald-950/30');
-                title.className = "text-2xl font-bold mb-2 text-emerald-400"; title.innerHTML = "<i class='fa-solid fa-medal mr-2'></i> Correcte!";
-                txt.innerText = "Molt bé, has encertat la paraula."; nextBtn.innerText = "Següent paraula";
-                if(window.getFirebaseCurrentUser()) window.updateUserScoreInFirestore(1); 
-            } else {
-                hmCurrentScore = 0; overlay.classList.add('border-red-500', 'bg-red-950/30');
-                title.className = "text-2xl font-bold mb-2 text-red-400"; title.innerHTML = "<i class='fa-solid fa-skull mr-2'></i> Has perdut!";
-                txt.innerHTML = `La paraula correcta era: <strong class='text-white'>${hmWord}</strong>`;
-                document.getElementById('hm-word-display').innerText = hmWord.split("").join(" ");
-                nextBtn.innerText = "Tornar a començar des de 0";
+            if(isWin) {
+                document.getElementById('hm-keyboard').classList.add('hidden'); const overlay = document.getElementById('hm-result-overlay'); const title = document.getElementById('hm-result-title'); const txt = document.getElementById('hm-result-text'); const nextBtn = document.getElementById('hm-next-btn');
+                overlay.classList.remove('hidden', 'border-red-500', 'bg-red-950/30'); overlay.classList.add('border-emerald-500', 'bg-emerald-950/30'); title.className = "text-2xl font-bold mb-2 text-emerald-400"; title.innerHTML = "<i class='fa-solid fa-medal mr-2'></i> Correcte!"; txt.innerText = "Molt bé, has encertat la paraula."; nextBtn.innerText = "Següent paraula";
+                hmCurrentScore++; if (hmCurrentScore > hmHighScore) { hmHighScore = hmCurrentScore; localStorage.setItem('oppos_hm_highscore', hmHighScore); } document.getElementById('hm-current-score').innerText = hmCurrentScore; document.getElementById('hm-high-score').innerText = hmHighScore;
+                if(window.getFirebaseCurrentUser()) window.updateUserScoreInFirestore(1, 1);
+            } else if(hmLives <= 0) {
+                document.getElementById('hm-keyboard').classList.add('hidden'); const overlay = document.getElementById('hm-result-overlay'); const title = document.getElementById('hm-result-title'); const txt = document.getElementById('hm-result-text'); const nextBtn = document.getElementById('hm-next-btn');
+                overlay.classList.remove('hidden', 'border-emerald-500', 'bg-emerald-950/30'); overlay.classList.add('border-red-500', 'bg-red-950/30'); title.className = "text-2xl font-bold mb-2 text-red-400"; title.innerHTML = "<i class='fa-solid fa-skull mr-2'></i> Has perdut!"; txt.innerHTML = `La paraula correcta era: <strong class='text-white'>${hmWord}</strong>`; document.getElementById('hm-word-display').innerText = hmWord.split("").join(" "); nextBtn.innerText = "Tornar a començar des de 0"; hmCurrentScore = 0; 
             }
         }
 
-        // 5.C. RUTA DE PATRULLA (LLÒGICA RESTAURADA)
+        // JOC 3: RUTA DE PATRULLA (Recuperat)
         let patrolPos = 0; let suspectPos = 3; let patrolQ = null;
 
         window.startPatrol = function() {
-            if(window.questionBank.length === 0) return window.showToast("No hi ha preguntes carregades a la base de dades", "error");
-            document.getElementById('minigames-menu').classList.add('hidden');
-            document.getElementById('game-patrol').classList.remove('hidden');
-            document.getElementById('patrol-result-overlay').classList.add('hidden');
-            document.getElementById('patrol-question-container').classList.remove('hidden');
+            if(window.questionBank.length === 0) return window.showToast("Banc buit. Torna-ho a provar.", "error");
+            document.getElementById('minigames-menu').classList.add('hidden'); document.getElementById('game-patrol').classList.remove('hidden'); document.getElementById('patrol-result-overlay').classList.add('hidden'); document.getElementById('patrol-question-container').classList.remove('hidden');
             patrolPos = 0; suspectPos = 3; updatePatrolTrack(); nextPatrolQuestion();
         }
 
-        function updatePatrolTrack() {
-            document.getElementById('patrol-police').style.left = (patrolPos * 10) + "%";
-            document.getElementById('patrol-suspect').style.left = (suspectPos * 10) + "%";
-        }
+        function updatePatrolTrack() { document.getElementById('patrol-police').style.left = (patrolPos * 10) + "%"; document.getElementById('patrol-suspect').style.left = (suspectPos * 10) + "%"; }
 
         function nextPatrolQuestion() {
             patrolQ = window.questionBank[Math.floor(Math.random() * window.questionBank.length)];
-            let optsWithOrig = patrolQ.options.map(opt => ({ text: opt, isCorrect: opt === patrolQ.correctAnswer }));
-            optsWithOrig.sort(() => 0.5 - Math.random());
-            patrolQ.shuffledOpts = optsWithOrig;
-
-            document.getElementById('patrol-topic').innerText = patrolQ.topic || "General";
-            document.getElementById('patrol-q-text').innerText = patrolQ.question;
-            
+            let optsWithOrig = patrolQ.options.map(opt => ({ text: opt, isCorrect: opt === patrolQ.correctAnswer })); optsWithOrig.sort(() => 0.5 - Math.random());
+            document.getElementById('patrol-topic').innerText = patrolQ.topic || "General"; document.getElementById('patrol-q-text').innerText = patrolQ.question;
             const optsBox = document.getElementById('patrol-options'); optsBox.innerHTML = "";
-            patrolQ.shuffledOpts.forEach((opt, idx) => {
-                const btn = document.createElement('button');
-                btn.className = "w-full text-left p-4 rounded-xl border border-slate-700 bg-slate-900 text-slate-200 text-sm font-medium hover:border-brand-500 transition-all";
-                btn.innerHTML = String.fromCharCode(65+idx) + ". " + opt.text;
-                btn.onclick = () => handlePatrolAnswer(opt.isCorrect, btn);
+            optsWithOrig.forEach((opt, idx) => {
+                const btn = document.createElement('button'); btn.className = "w-full text-left p-4 rounded-xl border border-slate-700 bg-slate-900 text-slate-200 text-sm font-medium hover:border-brand-500 transition-all"; btn.innerHTML = String.fromCharCode(65+idx) + ". " + opt.text;
+                btn.onclick = () => {
+                    optsBox.querySelectorAll('button').forEach(b => b.disabled = true);
+                    if(opt.isCorrect) { btn.classList.replace('bg-slate-900', 'bg-emerald-950/80'); btn.classList.replace('border-slate-700', 'border-emerald-500'); patrolPos += 1; playSound(true); } else { btn.classList.replace('bg-slate-900', 'bg-red-950/80'); btn.classList.replace('border-slate-700', 'border-red-500'); suspectPos += 1; playSound(false); }
+                    updatePatrolTrack();
+                    setTimeout(() => { if(patrolPos >= suspectPos) { endPatrol(true); } else if(suspectPos >= 9) { endPatrol(false); } else { nextPatrolQuestion(); } }, 800);
+                };
                 optsBox.appendChild(btn);
             });
         }
 
-        function handlePatrolAnswer(isCorrect, btnClicked) {
-            const btns = document.getElementById('patrol-options').querySelectorAll('button');
-            btns.forEach(b => b.disabled = true);
-
-            if(isCorrect) {
-                btnClicked.classList.replace('bg-slate-900', 'bg-emerald-950/80'); btnClicked.classList.replace('border-slate-700', 'border-emerald-500');
-                patrolPos += 1; playSound(true);
-            } else {
-                btnClicked.classList.replace('bg-slate-900', 'bg-red-950/80'); btnClicked.classList.replace('border-slate-700', 'border-red-500');
-                suspectPos += 1; playSound(false);
-            }
-            
-            updatePatrolTrack();
-            
-            setTimeout(() => {
-                if(patrolPos >= suspectPos) endPatrol(true);
-                else if(suspectPos >= 9) endPatrol(false);
-                else nextPatrolQuestion();
-            }, 800);
-        }
-
         function endPatrol(win) {
-            document.getElementById('patrol-question-container').classList.add('hidden');
-            const overlay = document.getElementById('patrol-result-overlay'); const title = document.getElementById('patrol-result-title'); const txt = document.getElementById('patrol-result-text');
+            document.getElementById('patrol-question-container').classList.add('hidden'); const overlay = document.getElementById('patrol-result-overlay'); const title = document.getElementById('patrol-result-title'); const txt = document.getElementById('patrol-result-text');
             overlay.classList.remove('hidden', 'border-brand-500', 'border-red-500', 'bg-brand-950/30', 'bg-red-950/30');
-            
-            if(win) {
-                overlay.classList.add('border-brand-500', 'bg-brand-950/30');
-                title.className = "text-2xl font-bold mb-2 text-brand-400"; title.innerHTML = "<i class='fa-solid fa-handcuffs mr-2'></i> Sospitós atrapat!";
-                txt.innerText = "Excel·lent feina agent. Has respost prou ràpid per interceptar-lo.";
-                if(window.getFirebaseCurrentUser()) window.updateUserScoreInFirestore(1); 
-            } else {
-                overlay.classList.add('border-red-500', 'bg-red-950/30');
-                title.className = "text-2xl font-bold mb-2 text-red-400"; title.innerHTML = "<i class='fa-solid fa-person-running mr-2'></i> S'ha escapat!";
-                txt.innerText = "Has comès massa errors i el sospitós ha fugit del país.";
-            }
+            if(win) { overlay.classList.add('border-brand-500', 'bg-brand-950/30'); title.className = "text-2xl font-bold mb-2 text-brand-400"; title.innerHTML = "<i class='fa-solid fa-handcuffs mr-2'></i> Sospitós atrapat!"; txt.innerText = "Excel·lent feina agent."; if(window.getFirebaseCurrentUser()) window.updateUserScoreInFirestore(1, 1); } else { overlay.classList.add('border-red-500', 'bg-red-950/30'); title.className = "text-2xl font-bold mb-2 text-red-400"; title.innerHTML = "<i class='fa-solid fa-person-running mr-2'></i> S'ha escapat!"; txt.innerText = "El sospitós ha fugit."; }
         }
 
-        // SW Service Worker per PWA Cache
         if ('serviceWorker' in navigator) { window.addEventListener('load', () => { navigator.serviceWorker.register('sw.js').catch(()=>{}); }); }
-
     </script>
 </body>
 </html>
