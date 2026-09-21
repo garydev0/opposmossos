@@ -7,14 +7,14 @@
     
     <meta name="description" content="Plataforma líder d'Oposicions per a Mossos d'Esquadra. Practica gratis amb milers de preguntes de tests oficials, simulacres i rànquing diari.">
     
-    <!-- Rutes corregides (Pugen un nivell amb ../) -->
-    <link rel="manifest" href="../manifest.json">
+    <!-- Rutas apuntant als arxius exclusius d'aquesta carpeta -->
+    <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#2563eb">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     
-    <link rel="icon" type="image/png" href="../logoi.png">
-    <link rel="apple-touch-icon" href="../logoi.png">
+    <link rel="icon" type="image/png" href="logoi.png">
+    <link rel="apple-touch-icon" href="logoi.png">
     
     <!-- Tailwind CSS i FontAwesome -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -65,7 +65,7 @@
 </head>
 <body class="h-full flex flex-col font-sans antialiased overflow-x-hidden bg-slate-950 text-slate-100 selection:bg-brand-500 selection:text-white">
 
-    <!-- ANUNCI GLOBAL -->
+    <!-- ANUNCI GLOBAL EMERGENT -->
     <div id="global-alert-banner" class="hidden bg-gradient-to-r from-brand-700 to-brand-500 text-white text-sm font-bold text-center py-3 px-4 shadow-md z-50 relative flex justify-center items-center gap-3">
         <span><i class="fa-solid fa-bell mr-2 animate-bounce"></i><span id="global-alert-text"></span></span>
         <button onclick="document.getElementById('global-alert-banner').classList.add('hidden')" class="absolute right-4 text-white/70 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
@@ -87,6 +87,10 @@
                         <input type="text" id="auth-username" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-sm text-white outline-none focus:border-brand-500 transition-all" placeholder="Ex: OpositorCAT">
                     </div>
                     <div>
+                        <label class="text-xs font-bold text-slate-300 uppercase tracking-wider block mb-1">Data de naixement</label>
+                        <input type="date" id="auth-dob" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-sm text-slate-300 outline-none focus:border-brand-500 transition-all">
+                    </div>
+                    <div>
                         <label class="text-xs font-bold text-slate-300 uppercase tracking-wider block mb-1">Codi d'amic (Opcional)</label>
                         <input type="text" id="auth-referral" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-sm text-white outline-none focus:border-brand-500 transition-all" placeholder="Nom d'usuari de qui et convida">
                     </div>
@@ -101,7 +105,7 @@
                     <input type="password" id="auth-password" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-sm text-white outline-none focus:border-brand-500 transition-all" placeholder="••••••••">
                 </div>
                 
-                <button type="button" onclick="window.handleAuthSubmit()" id="auth-submit-btn" class="w-full py-3.5 mt-2 bg-brand-600 hover:bg-brand-500 text-white font-bold rounded-xl text-sm transition-all shadow-lg shadow-brand-600/30">
+                <button type="button" onclick="window.handleAuthSubmit()" id="auth-submit-btn" class="w-full py-3.5 mt-2 bg-brand-600 hover:bg-brand-500 text-white font-bold rounded-xl text-sm transition-all shadow-lg shadow-brand-600/30 transform hover:-translate-y-0.5">
                     Accedir
                 </button>
 
@@ -112,7 +116,7 @@
                 </div>
 
                 <button type="button" id="google-login-btn" class="w-full py-3.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-white font-bold rounded-xl text-sm transition-all flex items-center justify-center space-x-2">
-                    <i class="fa-brands fa-google text-red-400"></i>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google" class="w-4 h-4 mr-2">
                     <span>Google</span>
                 </button>
             </div>
@@ -127,17 +131,19 @@
         </div>
     </div>
 
-    <!-- MODAL REPORTAR ERROR -->
+    <!-- MODAL REPORTAR ERROR PREGUNTA -->
     <div id="report-modal" onclick="if(event.target === this) window.closeReportModal()" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4 hidden">
         <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-md w-full p-6 shadow-2xl space-y-4">
             <h3 class="text-lg font-bold text-white flex items-center"><i class="fa-solid fa-triangle-exclamation text-amber-400 mr-2"></i> Reportar un error</h3>
+            <p class="text-sm text-slate-300">Selecciona quin tipus d'inconvenient has detectat:</p>
             <div class="space-y-3 text-sm bg-slate-950 p-4 rounded-xl border border-slate-800">
                 <label class="flex items-center space-x-3 text-slate-200 cursor-pointer"><input type="radio" name="report-type" value="Resposta incorrecta" checked class="text-brand-600 w-4 h-4"> <span>Resposta incorrecta a plantilla</span></label>
                 <label class="flex items-center space-x-3 text-slate-200 cursor-pointer"><input type="radio" name="report-type" value="Llei desactualitzada" class="text-brand-600 w-4 h-4"> <span>Llei derogada o modificada</span></label>
                 <label class="flex items-center space-x-3 text-slate-200 cursor-pointer"><input type="radio" name="report-type" value="Error ortogràfic" class="text-brand-600 w-4 h-4"> <span>Error ortogràfic o gramatical</span></label>
             </div>
             <div>
-                <textarea id="report-comment" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-sm text-white outline-none focus:border-brand-500 resize-none h-24" placeholder="Comentari (Opcional)..."></textarea>
+                <label class="text-xs font-bold text-slate-400 uppercase block mb-2">Comentari (Opcional):</label>
+                <textarea id="report-comment" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-sm text-white outline-none focus:border-brand-500 resize-none h-24" placeholder="Afegeix detalls o l'article correcte..."></textarea>
             </div>
             <div class="flex justify-end space-x-3 pt-4">
                 <button type="button" onclick="window.closeReportModal()" class="px-5 py-2.5 bg-slate-800 text-white rounded-xl text-sm font-bold hover:bg-slate-700 transition-colors">Cancel·lar</button>
@@ -159,9 +165,11 @@
         </div>
     </div>
 
-    <!-- HEADER / NAVEGACIÓ -->
+    <!-- HEADER / MENU DE NAVEGACIÓ -->
     <header class="glass-panel sticky top-0 z-40">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-[72px] flex items-center justify-between">
+            
+            <!-- Botó tornar a l'inici / Portada general -->
             <div class="flex items-center space-x-4 cursor-pointer group" onclick="window.location.href='../'">
                 <div class="w-10 h-10 bg-slate-800 border border-slate-700 rounded-xl flex items-center justify-center text-slate-400 font-bold group-hover:bg-slate-700 group-hover:text-white transition-all shadow-sm">
                     <i class="fa-solid fa-arrow-left"></i>
@@ -172,14 +180,23 @@
                 </div>
             </div>
 
-            <!-- Menú Escriptori -->
+            <!-- Navegació principal Desktop -->
             <nav id="desktop-nav" class="hidden md:flex space-x-1 bg-slate-900/80 p-1.5 rounded-2xl border border-slate-800 transition-all opacity-0 pointer-events-none shadow-inner">
-                <button onclick="window.switchTab('dashboard')" id="nav-dashboard" class="tab-btn px-5 py-2.5 rounded-xl text-sm font-bold transition-all bg-brand-600 text-white shadow-md flex items-center gap-2"><i class="fa-solid fa-chart-pie"></i> Inici</button>
-                <button onclick="window.switchTab('exam')" id="nav-exam" class="tab-btn px-5 py-2.5 rounded-xl text-sm font-bold transition-all text-slate-400 hover:text-white hover:bg-slate-800 flex items-center gap-2"><i class="fa-solid fa-file-pen"></i> Tests</button>
-                <button onclick="window.switchTab('minigames')" id="nav-minigames" class="tab-btn px-5 py-2.5 rounded-xl text-sm font-bold transition-all text-slate-400 hover:text-white hover:bg-slate-800 flex items-center gap-2"><i class="fa-solid fa-gamepad"></i> Jocs</button>
-                <button onclick="window.switchTab('ranking')" id="nav-ranking" class="tab-btn px-5 py-2.5 rounded-xl text-sm font-bold transition-all text-slate-400 hover:text-white hover:bg-slate-800 flex items-center gap-2"><i class="fa-solid fa-trophy"></i> Rànquing</button>
+                <button onclick="window.switchTab('dashboard')" id="nav-dashboard" class="tab-btn px-5 py-2.5 rounded-xl text-sm font-bold transition-all bg-brand-600 text-white shadow-md flex items-center gap-2">
+                    <i class="fa-solid fa-chart-pie"></i> Inici
+                </button>
+                <button onclick="window.switchTab('exam')" id="nav-exam" class="tab-btn px-5 py-2.5 rounded-xl text-sm font-bold transition-all text-slate-400 hover:text-white hover:bg-slate-800 flex items-center gap-2">
+                    <i class="fa-solid fa-file-pen"></i> Tests
+                </button>
+                <button onclick="window.switchTab('minigames')" id="nav-minigames" class="tab-btn px-5 py-2.5 rounded-xl text-sm font-bold transition-all text-slate-400 hover:text-white hover:bg-slate-800 flex items-center gap-2">
+                    <i class="fa-solid fa-gamepad"></i> Jocs
+                </button>
+                <button onclick="window.switchTab('ranking')" id="nav-ranking" class="tab-btn px-5 py-2.5 rounded-xl text-sm font-bold transition-all text-slate-400 hover:text-white hover:bg-slate-800 flex items-center gap-2">
+                    <i class="fa-solid fa-trophy"></i> Rànquing
+                </button>
             </nav>
 
+            <!-- Àrea d'Usuari / Perfil -->
             <div class="hidden md:flex items-center space-x-5">
                 <div class="text-right hidden lg:block">
                     <p class="text-[9px] text-slate-500 font-black uppercase tracking-widest">Nivell Actual</p>
@@ -192,6 +209,7 @@
                 </button>
             </div>
             
+            <!-- Botó Login Mòbil -->
             <div class="md:hidden flex items-center">
                 <button onclick="window.openAuthModal()" id="mobile-login-btn" class="px-4 py-2 bg-brand-600 text-white rounded-lg text-sm font-bold shadow-lg flex items-center">
                     <i class="fa-solid fa-right-to-bracket mr-2"></i> Entrar
@@ -199,29 +217,38 @@
             </div>
         </div>
 
-        <!-- Menú Mòbil -->
+        <!-- Navegació Inferior Mòbil -->
         <div id="mobile-nav" class="md:hidden fixed bottom-0 left-0 right-0 bg-slate-950/95 backdrop-blur border-t border-slate-800 z-40 hidden transition-all pb-safe">
             <div class="grid grid-cols-5 px-2 py-2 text-[10px] text-center">
-                <button onclick="window.switchTab('dashboard')" id="nav-mob-dashboard" class="mob-tab-btn flex flex-col items-center py-2 text-brand-400 transition-colors"><i class="fa-solid fa-chart-pie text-xl mb-1.5"></i><span class="font-bold">Inici</span></button>
-                <button onclick="window.switchTab('exam')" id="nav-mob-exam" class="mob-tab-btn flex flex-col items-center py-2 text-slate-500 hover:text-slate-300 transition-colors"><i class="fa-solid fa-file-pen text-xl mb-1.5"></i><span class="font-bold">Tests</span></button>
-                <button onclick="window.switchTab('minigames')" id="nav-mob-minigames" class="mob-tab-btn flex flex-col items-center py-2 text-slate-500 hover:text-slate-300 transition-colors"><i class="fa-solid fa-gamepad text-xl mb-1.5"></i><span class="font-bold">Jocs</span></button>
-                <button onclick="window.switchTab('ranking')" id="nav-mob-ranking" class="mob-tab-btn flex flex-col items-center py-2 text-slate-500 hover:text-slate-300 transition-colors"><i class="fa-solid fa-trophy text-xl mb-1.5"></i><span class="font-bold">Rànquing</span></button>
-                <button onclick="window.switchTab('profile')" id="nav-mob-profile" class="mob-tab-btn flex flex-col items-center py-2 text-slate-500 hover:text-slate-300 transition-colors"><i class="fa-solid fa-user text-xl mb-1.5"></i><span class="font-bold">Perfil</span></button>
+                <button onclick="window.switchTab('dashboard')" id="nav-mob-dashboard" class="mob-tab-btn flex flex-col items-center py-2 text-brand-400 transition-colors">
+                    <i class="fa-solid fa-chart-pie text-xl mb-1.5"></i><span class="font-bold">Inici</span>
+                </button>
+                <button onclick="window.switchTab('exam')" id="nav-mob-exam" class="mob-tab-btn flex flex-col items-center py-2 text-slate-500 hover:text-slate-300 transition-colors">
+                    <i class="fa-solid fa-file-pen text-xl mb-1.5"></i><span class="font-bold">Tests</span>
+                </button>
+                <button onclick="window.switchTab('minigames')" id="nav-mob-minigames" class="mob-tab-btn flex flex-col items-center py-2 text-slate-500 hover:text-slate-300 transition-colors">
+                    <i class="fa-solid fa-gamepad text-xl mb-1.5"></i><span class="font-bold">Jocs</span>
+                </button>
+                <button onclick="window.switchTab('ranking')" id="nav-mob-ranking" class="mob-tab-btn flex flex-col items-center py-2 text-slate-500 hover:text-slate-300 transition-colors">
+                    <i class="fa-solid fa-trophy text-xl mb-1.5"></i><span class="font-bold">Rànquing</span>
+                </button>
+                <button onclick="window.switchTab('profile')" id="nav-mob-profile" class="mob-tab-btn flex flex-col items-center py-2 text-slate-500 hover:text-slate-300 transition-colors">
+                    <i class="fa-solid fa-user text-xl mb-1.5"></i><span class="font-bold">Perfil</span>
+                </button>
             </div>
         </div>
     </header>
 
     <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8 space-y-8 pb-24 md:pb-8">
 
-        <!-- LANDING PAGE -->
+        <!-- LANDING PAGE (Usuaris no loguejats) -->
         <section id="sec-landing" class="tab-content block min-h-[70vh] flex flex-col justify-center items-center text-center space-y-8 animate-fade-in py-12">
             <div class="inline-block bg-brand-900/30 border border-brand-500/30 text-brand-400 px-5 py-2 rounded-full text-xs font-black tracking-widest uppercase mb-4 shadow-sm">
                 <i class="fa-solid fa-star mr-2 text-yellow-400"></i> Oposicions Mossos 2026
             </div>
             
-            <!-- CORRECCIÓ: Text de Mosso d'Esquadra en blanc -->
             <h1 class="text-5xl sm:text-7xl font-black text-white tracking-tighter leading-tight max-w-4xl mx-auto">
-                La plataforma definitiva per ser <span class="text-white drop-shadow-md block sm:inline mt-2 sm:mt-0">Mosso d'Esquadra</span>
+                La plataforma definitiva per ser <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-400 to-white drop-shadow-[0_0_20px_rgba(59,130,246,0.3)] block sm:inline mt-2 sm:mt-0">Mosso d'Esquadra</span>
             </h1>
             
             <p class="text-lg sm:text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed font-medium">
@@ -229,26 +256,32 @@
             </p>
             
             <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-8 w-full sm:w-auto">
-                <button onclick="window.openAuthModal('register')" class="w-full sm:w-auto px-8 py-4 bg-brand-600 hover:bg-brand-500 text-white font-bold rounded-2xl text-lg transition-all shadow-[0_0_20px_rgba(37,99,235,0.4)] hover:-translate-y-1">
+                <button onclick="window.openAuthModal('register')" class="w-full sm:w-auto px-8 py-4 bg-brand-600 hover:bg-brand-500 text-white font-bold rounded-2xl text-lg transition-all shadow-[0_0_20px_rgba(37,99,235,0.4)] hover:shadow-[0_0_30px_rgba(37,99,235,0.6)] hover:-translate-y-1">
                     Crea un compte gratis
                 </button>
                 <button onclick="window.prepareExamMode('practice'); document.getElementById('pre-exam-modal').classList.add('hidden'); window.launchPreparedExam();" class="w-full sm:w-auto px-8 py-4 bg-slate-800 hover:bg-slate-700 text-white font-bold border border-slate-700 rounded-2xl text-lg transition-all">
-                    Fer test de prova (10 Qs)
+                    Fer un test de prova ràpid
                 </button>
             </div>
 
+            <!-- Features Grid -->
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 pt-20 max-w-5xl mx-auto w-full text-left">
-                <div class="bg-slate-900/60 p-8 rounded-3xl border border-slate-800 group hover:border-emerald-500/50 transition-colors">
+                <div class="bg-slate-900/60 p-8 rounded-3xl border border-slate-800 relative overflow-hidden group hover:border-emerald-500/50 transition-colors">
+                    <div class="absolute -right-6 -top-6 text-9xl text-emerald-500/5 group-hover:text-emerald-500/10 transition-colors"><i class="fa-solid fa-stopwatch"></i></div>
                     <div class="w-14 h-14 bg-emerald-500/10 text-emerald-400 rounded-2xl flex items-center justify-center text-2xl mb-6 shadow-inner"><i class="fa-solid fa-stopwatch"></i></div>
                     <h3 class="text-xl font-bold text-white mb-3">Simulacres Reals</h3>
                     <p class="text-slate-400 leading-relaxed font-medium">Exàmens cronometrats de 30 minuts per acostumar-te a la pressió del dia D. Condicions idèntiques a les oficials.</p>
                 </div>
-                <div class="bg-slate-900/60 p-8 rounded-3xl border border-slate-800 group hover:border-purple-500/50 transition-colors">
+                
+                <div class="bg-slate-900/60 p-8 rounded-3xl border border-slate-800 relative overflow-hidden group hover:border-purple-500/50 transition-colors">
+                    <div class="absolute -right-6 -top-6 text-9xl text-purple-500/5 group-hover:text-purple-500/10 transition-colors"><i class="fa-solid fa-gamepad"></i></div>
                     <div class="w-14 h-14 bg-purple-500/10 text-purple-400 rounded-2xl flex items-center justify-center text-2xl mb-6 shadow-inner"><i class="fa-solid fa-gamepad"></i></div>
                     <h3 class="text-xl font-bold text-white mb-3">Gamificació Tàctica</h3>
-                    <p class="text-slate-400 leading-relaxed font-medium">Interioritza l'Estatut i la CE jugant a minijocs exclusius. Rànquing diari per competir amb altres opositors.</p>
+                    <p class="text-slate-400 leading-relaxed font-medium">Interioritza l'Estatut, la CE i els delictes jugant a minijocs exclusius. Rànquing diari per competir amb altres opositors.</p>
                 </div>
-                <div class="bg-slate-900/60 p-8 rounded-3xl border border-slate-800 group hover:border-brand-500/50 transition-colors">
+                
+                <div class="bg-slate-900/60 p-8 rounded-3xl border border-slate-800 relative overflow-hidden group hover:border-brand-500/50 transition-colors">
+                    <div class="absolute -right-6 -top-6 text-9xl text-brand-500/5 group-hover:text-brand-500/10 transition-colors"><i class="fa-solid fa-chart-line"></i></div>
                     <div class="w-14 h-14 bg-brand-500/10 text-brand-400 rounded-2xl flex items-center justify-center text-2xl mb-6 shadow-inner"><i class="fa-solid fa-chart-line"></i></div>
                     <h3 class="text-xl font-bold text-white mb-3">Reforç Intel·ligent</h3>
                     <p class="text-slate-400 leading-relaxed font-medium">L'algoritme analitza què falles més i et genera tests personalitzats exclusivament dels teus punts dèbils.</p>
@@ -259,8 +292,11 @@
         <!-- DASHBOARD (Usuaris Loguejats) -->
         <section id="sec-dashboard" class="tab-content hidden space-y-6">
             
+            <!-- PRÒXIM EXAMEN WIDGET (Hero) -->
             <div class="relative bg-gradient-to-br from-brand-900 via-slate-900 to-slate-950 rounded-[2rem] p-8 sm:p-10 border border-brand-500/30 shadow-2xl overflow-hidden group">
+                <!-- Efectes fons -->
                 <div class="absolute top-0 right-0 w-96 h-96 bg-brand-500/10 rounded-full blur-3xl -mr-20 -mt-20 pointer-events-none transition-transform group-hover:scale-110 duration-700"></div>
+                <div class="absolute bottom-0 left-0 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl -ml-20 -mb-20 pointer-events-none"></div>
                 
                 <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-8 relative z-10">
                     <div class="max-w-xl">
@@ -269,7 +305,7 @@
                         <p id="hero-event-date" class="text-brand-300 font-bold text-lg flex items-center"><i class="fa-regular fa-calendar-check mr-3 opacity-80"></i> 17 d'Octubre de 2026 (Estimada)</p>
                     </div>
                     
-                    <!-- CORRECCIÓ: Rellotge amb SEGONS afegits visualment -->
+                    <!-- Rellotge de compte enrere (Amb segons) -->
                     <div class="bg-slate-950/60 backdrop-blur-md border border-slate-700/60 rounded-3xl p-5 flex gap-4 text-center min-w-[320px] shadow-inner w-full lg:w-auto justify-center">
                         <div class="flex-1 flex flex-col justify-center">
                             <span id="cd-days" class="block text-4xl sm:text-5xl font-black text-white tracking-tighter">00</span>
@@ -295,15 +331,15 @@
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <!-- COLUMNA 1: PLA I ESTADÍSTIQUES -->
+                <!-- COLUMNA 1: PLA D'ESTUDI I ESTADÍSTIQUES -->
                 <div class="lg:col-span-2 space-y-6">
                     
-                    <!-- Objectiu Diari -->
+                    <!-- El meu Pla Diari -->
                     <div class="bg-slate-800/90 rounded-3xl p-6 sm:p-8 border border-slate-700 shadow-lg relative overflow-hidden">
                         <div class="flex justify-between items-end mb-6">
                             <div>
                                 <h3 class="text-xl font-bold text-white flex items-center"><i class="fa-solid fa-bullseye text-emerald-400 mr-3 text-2xl"></i> Objectiu Diari</h3>
-                                <p class="text-sm text-slate-400 mt-1">Completa l'anell responent 30 preguntes reals cada dia.</p>
+                                <p class="text-sm text-slate-400 mt-1">Completa l'anell resolent 30 preguntes cada dia per mantenir la teva racha viva.</p>
                             </div>
                             <div class="text-right shrink-0 ml-4">
                                 <span id="daily-q-count" class="text-4xl font-black text-emerald-400 tracking-tighter">0</span><span class="text-slate-500 text-lg font-bold ml-1">/ 30</span>
@@ -311,7 +347,9 @@
                         </div>
                         
                         <div class="w-full bg-slate-950 h-4 rounded-full overflow-hidden shadow-inner mb-6">
-                            <div id="daily-progress-bar" class="bg-gradient-to-r from-emerald-600 to-emerald-400 h-full w-0 transition-all duration-1000 ease-out rounded-full relative"></div>
+                            <div id="daily-progress-bar" class="bg-gradient-to-r from-emerald-600 to-emerald-400 h-full w-0 transition-all duration-1000 ease-out rounded-full relative">
+                                <div class="absolute inset-0 bg-white/20 animate-pulse"></div>
+                            </div>
                         </div>
                         
                         <div class="flex flex-col sm:flex-row gap-4">
@@ -328,7 +366,7 @@
                         </div>
                     </div>
 
-                    <!-- Kpis -->
+                    <!-- Kpis d'Estadístiques Globals -->
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                         <div class="bg-slate-800/60 rounded-2xl p-5 border border-slate-700 text-center hover:bg-slate-800 transition-colors">
                             <p class="text-[10px] font-black uppercase text-slate-500 tracking-widest mb-2">Precisió Global</p>
@@ -352,20 +390,38 @@
                     <div class="bg-slate-800/90 rounded-3xl p-6 sm:p-8 border border-slate-700 shadow-lg">
                         <div class="flex items-center justify-between mb-6">
                             <h3 class="text-lg font-bold text-white"><i class="fa-solid fa-chart-column text-brand-400 mr-2"></i> Rendiment per Àmbits</h3>
+                            <button onclick="window.switchTab('exam')" class="text-xs text-brand-400 font-bold hover:text-brand-300">Millorar punts dèbils</button>
                         </div>
                         
                         <div class="space-y-5">
                             <div>
-                                <div class="flex justify-between text-sm font-bold mb-2"><span class="text-slate-300 flex items-center gap-2"><div class="w-3 h-3 rounded-full bg-blue-500"></div> Àmbit A (Entorn i Història)</span><span id="bar-pct-a" class="text-white">0%</span></div>
-                                <div class="w-full bg-slate-900 h-2.5 rounded-full overflow-hidden shadow-inner"><div id="bar-fill-a" class="bg-gradient-to-r from-blue-600 to-blue-400 h-full w-0 transition-all duration-1000 ease-out"></div></div>
+                                <div class="flex justify-between text-sm font-bold mb-2">
+                                    <span class="text-slate-300 flex items-center gap-2"><div class="w-3 h-3 rounded-full bg-blue-500"></div> Àmbit A (Entorn i Història)</span>
+                                    <span id="bar-pct-a" class="text-white">0%</span>
+                                </div>
+                                <div class="w-full bg-slate-900 h-2.5 rounded-full overflow-hidden shadow-inner">
+                                    <div id="bar-fill-a" class="bg-gradient-to-r from-blue-600 to-blue-400 h-full w-0 transition-all duration-1000 ease-out"></div>
+                                </div>
                             </div>
+                            
                             <div>
-                                <div class="flex justify-between text-sm font-bold mb-2"><span class="text-slate-300 flex items-center gap-2"><div class="w-3 h-3 rounded-full bg-amber-500"></div> Àmbit B (Institucional)</span><span id="bar-pct-b" class="text-white">0%</span></div>
-                                <div class="w-full bg-slate-900 h-2.5 rounded-full overflow-hidden shadow-inner"><div id="bar-fill-b" class="bg-gradient-to-r from-amber-600 to-amber-400 h-full w-0 transition-all duration-1000 ease-out"></div></div>
+                                <div class="flex justify-between text-sm font-bold mb-2">
+                                    <span class="text-slate-300 flex items-center gap-2"><div class="w-3 h-3 rounded-full bg-amber-500"></div> Àmbit B (Institucional)</span>
+                                    <span id="bar-pct-b" class="text-white">0%</span>
+                                </div>
+                                <div class="w-full bg-slate-900 h-2.5 rounded-full overflow-hidden shadow-inner">
+                                    <div id="bar-fill-b" class="bg-gradient-to-r from-amber-600 to-amber-400 h-full w-0 transition-all duration-1000 ease-out"></div>
+                                </div>
                             </div>
+                            
                             <div>
-                                <div class="flex justify-between text-sm font-bold mb-2"><span class="text-slate-300 flex items-center gap-2"><div class="w-3 h-3 rounded-full bg-purple-500"></div> Àmbit C (Seguretat i Policia)</span><span id="bar-pct-c" class="text-white">0%</span></div>
-                                <div class="w-full bg-slate-900 h-2.5 rounded-full overflow-hidden shadow-inner"><div id="bar-fill-c" class="bg-gradient-to-r from-purple-600 to-purple-400 h-full w-0 transition-all duration-1000 ease-out"></div></div>
+                                <div class="flex justify-between text-sm font-bold mb-2">
+                                    <span class="text-slate-300 flex items-center gap-2"><div class="w-3 h-3 rounded-full bg-purple-500"></div> Àmbit C (Seguretat i Policia)</span>
+                                    <span id="bar-pct-c" class="text-white">0%</span>
+                                </div>
+                                <div class="w-full bg-slate-900 h-2.5 rounded-full overflow-hidden shadow-inner">
+                                    <div id="bar-fill-c" class="bg-gradient-to-r from-purple-600 to-purple-400 h-full w-0 transition-all duration-1000 ease-out"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -392,14 +448,15 @@
         <section id="sec-exam" class="tab-content hidden space-y-6">
             
             <div id="exam-menu-container" class="space-y-6">
-                <!-- Capçalera Exàmens -->
+                <!-- Capçalera Secció Exàmens -->
                 <div class="bg-slate-800 rounded-3xl p-8 border border-slate-700 shadow-sm flex flex-col md:flex-row items-center justify-between gap-6">
                     <div>
                         <h2 class="text-2xl font-black text-white flex items-center tracking-tight"><i class="fa-solid fa-list-check text-brand-400 mr-3"></i> Centre d'Avaluació Tècnica</h2>
-                        <p class="text-slate-400 mt-2 font-medium">Escull el tipus d'entrenament que vols realitzar avui.</p>
+                        <p class="text-slate-400 mt-2 font-medium">Escull el tipus d'entrenament que vols realitzar avui. El teu progrés es guardarà automàticament.</p>
                     </div>
                 </div>
 
+                <!-- Graella de modes d'examen -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     
                     <!-- Simulacre -->
@@ -407,10 +464,10 @@
                         <div>
                             <div class="w-16 h-16 rounded-2xl bg-brand-500/10 text-brand-400 flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform shadow-inner"><i class="fa-solid fa-stopwatch"></i></div>
                             <h3 class="text-xl font-bold text-white mb-2">Simulacre Oficial (30 Qs)</h3>
-                            <p class="text-slate-400 text-sm leading-relaxed">Avalua't sota la pressió de l'examen real. 30 preguntes aleatòries, límit de 30 minuts. Correcció al finalitzar.</p>
+                            <p class="text-slate-400 text-sm leading-relaxed">Avalua't sota la pressió de l'examen real. 30 preguntes completament aleatòries de tot el temari, límit de 30 minuts. Possibilitat de marcar dubtes. Correcció i explicacions al finalitzar.</p>
                         </div>
                         <button class="mt-8 w-full py-3.5 bg-brand-600 hover:bg-brand-500 text-white font-bold rounded-xl text-sm transition-all shadow-md group-hover:-translate-y-1">
-                            Iniciar Simulacre
+                            Iniciar Simulacre Oficial
                         </button>
                     </div>
 
@@ -419,10 +476,10 @@
                         <div>
                             <div class="w-16 h-16 rounded-2xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform shadow-inner"><i class="fa-solid fa-graduation-cap"></i></div>
                             <h3 class="text-xl font-bold text-white mb-2">Pràctica Lliure</h3>
-                            <p class="text-slate-400 text-sm leading-relaxed">Entrenament relaxat sense temps. Correcció immediata just després de marcar cada opció amb la seva explicació.</p>
+                            <p class="text-slate-400 text-sm leading-relaxed">Entrenament relaxat sense límits de temps. Ideal per assimilar conceptes. Correcció immediata just després de marcar cada opció amb la seva corresponent explicació tècnica detallada.</p>
                         </div>
                         <button class="mt-8 w-full py-3.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-sm transition-all shadow-md group-hover:-translate-y-1">
-                            Començar Pràctica
+                            Començar Entrenament Lliure
                         </button>
                     </div>
 
@@ -434,25 +491,25 @@
                                 <h3 class="text-xl font-bold text-white">Tests per Àmbits</h3>
                                 <i class="fa-solid fa-lock text-xs text-slate-500 lock-icon hidden" title="Pendent de desbloquejar"></i>
                             </div>
-                            <p class="text-slate-400 text-sm leading-relaxed">Aïlla l'estudi. Selecciona un àmbit específic i realitza bateries de preguntes centrades únicament en dominar aquests blocs.</p>
+                            <p class="text-slate-400 text-sm leading-relaxed">Aïlla l'estudi. Selecciona un àmbit específic (A. Entorn, B. Institucional o C. Seguretat) i realitza bateries de preguntes centrades únicament en dominar aquests blocs.</p>
                         </div>
                         <button class="mt-8 w-full py-3.5 bg-amber-600 hover:bg-amber-500 text-white font-bold rounded-xl text-sm transition-all shadow-md group-hover:-translate-y-1 flex items-center justify-center gap-2">
-                            Seleccionar Àmbit
+                            Seleccionar Àmbit i Iniciar
                         </button>
                     </div>
 
-                    <!-- Reforç -->
+                    <!-- Reforç (Punts Febles) -->
                     <div class="bg-slate-800/90 rounded-3xl p-8 border border-slate-700 shadow-lg flex flex-col justify-between hover:border-orange-500 hover:shadow-[0_0_30px_rgba(249,115,22,0.15)] transition-all cursor-pointer group" onclick="window.prepareExamMode('weak')">
                         <div>
                             <div class="w-16 h-16 rounded-2xl bg-orange-500/10 text-orange-400 flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform shadow-inner"><i class="fa-solid fa-brain"></i></div>
                             <div class="flex items-center gap-2 mb-2">
                                 <h3 class="text-xl font-bold text-white">Reforç Intel·ligent</h3>
-                                <i class="fa-solid fa-lock text-xs text-slate-500 lock-icon hidden"></i>
+                                <i class="fa-solid fa-lock text-xs text-slate-500 lock-icon hidden" title="Pendent de desbloquejar"></i>
                             </div>
-                            <p class="text-slate-400 text-sm leading-relaxed">L'algoritme analitza què falles més i et genera un test exprés (15 Qs) exclusivament amb els teus punts dèbils.</p>
+                            <p class="text-slate-400 text-sm leading-relaxed">Aprofita les teves dades. L'algoritme de la plataforma llegeix el teu historial, detecta els temes on tens pitjor precisió i et genera un test exprés (15 Qs) exclusivament amb els teus punts dèbils.</p>
                         </div>
                         <button class="mt-8 w-full py-3.5 bg-orange-600 hover:bg-orange-500 text-white font-bold rounded-xl text-sm transition-all shadow-md group-hover:-translate-y-1 flex items-center justify-center gap-2">
-                            Crear Test de Reforç
+                            Crear Test de Reforç Exprés
                         </button>
                     </div>
                 </div>
@@ -460,58 +517,86 @@
 
             <!-- MODAL CONFIGURACIÓ PRE-EXAMEN -->
             <div id="pre-exam-modal" class="hidden bg-slate-800 rounded-3xl p-8 sm:p-10 border border-slate-700 shadow-[0_0_50px_rgba(0,0,0,0.5)] max-w-xl mx-auto space-y-8 animate-fade-in relative overflow-hidden">
+                <!-- Decoració de fons -->
+                <div class="absolute -right-10 -top-10 text-[150px] text-slate-700/10 pointer-events-none"><i class="fa-solid fa-gears"></i></div>
+                
                 <div class="border-b border-slate-700/80 pb-5 flex justify-between items-center relative z-10">
                     <h2 id="pre-exam-title" class="text-2xl font-black text-white tracking-tight">Configurar Test</h2>
-                    <button onclick="document.getElementById('pre-exam-modal').classList.add('hidden'); document.getElementById('exam-menu-container').classList.remove('hidden');" class="w-8 h-8 flex items-center justify-center rounded-full bg-slate-900 text-slate-400 hover:text-white hover:bg-slate-700 transition-colors"><i class="fa-solid fa-xmark"></i></button>
+                    <button onclick="document.getElementById('pre-exam-modal').classList.add('hidden'); document.getElementById('exam-menu-container').classList.remove('hidden');" class="w-8 h-8 flex items-center justify-center rounded-full bg-slate-900 text-slate-400 hover:text-white hover:bg-slate-700 transition-colors">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
                 </div>
                 
-                <div id="pre-exam-content" class="space-y-6 relative z-10"></div>
+                <div id="pre-exam-content" class="space-y-6 relative z-10">
+                    <!-- Dinàmic injectat des de JS segons mode -->
+                </div>
 
                 <div class="bg-brand-900/10 p-5 rounded-2xl border border-brand-500/20 text-sm text-brand-100 relative z-10">
                     <strong class="text-brand-400 flex items-center mb-3 text-base"><i class="fa-solid fa-circle-info mr-2"></i> Regles d'Avaluació:</strong>
                     <ul class="space-y-2.5 ml-2">
                         <li class="flex items-start"><i class="fa-solid fa-check text-emerald-500 mt-1 mr-2 text-[10px]"></i> <span>Sempre hi ha <strong>4 opcions</strong> i només 1 de correcta.</span></li>
-                        <li class="flex items-start"><i class="fa-solid fa-check text-emerald-500 mt-1 mr-2 text-[10px]"></i> <span>Els errors penalitzen a la nota final. Les blanques no.</span></li>
+                        <li class="flex items-start"><i class="fa-solid fa-check text-emerald-500 mt-1 mr-2 text-[10px]"></i> <span>Les respostes incorrectes penalitzen (0.33 per error a l'avaluació final). Les blanques no.</span></li>
+                        <li class="flex items-start"><i class="fa-solid fa-check text-emerald-500 mt-1 mr-2 text-[10px]"></i> <span>Utilitza la bandera groga per marcar dubtes abans d'entregar si fas el simulacre.</span></li>
                     </ul>
                 </div>
 
                 <div class="pt-2 relative z-10">
-                    <button id="btn-launch-exam" onclick="window.launchPreparedExam()" class="w-full py-4 bg-gradient-to-r from-brand-600 to-brand-500 hover:from-brand-500 hover:to-brand-400 text-white font-black uppercase tracking-widest rounded-xl text-lg shadow-[0_0_20px_rgba(37,99,235,0.4)] transition-all transform hover:scale-[1.02] active:scale-95"><i class="fa-solid fa-rocket mr-2"></i> Iniciar Prova</button>
+                    <button id="btn-launch-exam" onclick="window.launchPreparedExam()" class="w-full py-4 bg-gradient-to-r from-brand-600 to-brand-500 hover:from-brand-500 hover:to-brand-400 text-white font-black uppercase tracking-widest rounded-xl text-lg shadow-[0_0_20px_rgba(37,99,235,0.4)] transition-all transform hover:scale-[1.02] active:scale-95">
+                        <i class="fa-solid fa-rocket mr-2"></i> Iniciar Prova
+                    </button>
                 </div>
             </div>
 
             <!-- INTERFÍCIE EXAMEN ACTIU -->
             <div id="exam-active-container" class="hidden h-full flex flex-col lg:flex-row gap-6 items-start">
                 
+                <!-- PANELL CENTRAL (La Pregunta) -->
                 <div class="flex-1 w-full bg-slate-800/90 rounded-[2rem] p-6 sm:p-10 border border-slate-700 shadow-2xl relative flex flex-col min-h-[600px]">
+                    <!-- Header Targeta Pregunta -->
                     <div class="flex flex-wrap justify-between items-center mb-8 gap-4 border-b border-slate-700/50 pb-4">
-                        <span id="question-topic-badge" class="px-3 py-1.5 bg-slate-900 border border-slate-700 rounded-lg text-xs text-brand-300 font-bold uppercase tracking-widest shadow-inner">Tema</span>
+                        <span id="question-topic-badge" class="px-3 py-1.5 bg-slate-900 border border-slate-700 rounded-lg text-xs text-brand-300 font-bold uppercase tracking-widest shadow-inner">
+                            Tema
+                        </span>
                         <div class="flex items-center gap-3">
                             <button onclick="window.toggleFlagCurrentQuestion()" id="btn-flag-q" class="h-10 px-4 rounded-xl flex items-center justify-center border border-slate-600 text-slate-400 font-bold hover:text-amber-400 hover:border-amber-400 hover:bg-amber-900/20 transition-all shadow-sm group">
                                 <i class="fa-solid fa-flag mr-2 group-hover:animate-bounce"></i> Revisar
                             </button>
                             <div class="w-px h-6 bg-slate-700 mx-1"></div>
-                            <button onclick="window.openReportModal()" class="h-10 px-3 text-slate-500 hover:text-red-400 transition-colors flex items-center justify-center rounded-xl hover:bg-slate-900" title="Informar d'un error a la pregunta"><i class="fa-solid fa-triangle-exclamation"></i></button>
+                            <button onclick="window.openReportModal()" class="h-10 px-3 text-slate-500 hover:text-red-400 transition-colors flex items-center justify-center rounded-xl hover:bg-slate-900" title="Informar d'un error a la pregunta">
+                                <i class="fa-solid fa-triangle-exclamation"></i>
+                            </button>
                         </div>
                     </div>
 
+                    <!-- Enunciat -->
                     <h2 id="question-text" class="text-xl sm:text-2xl font-bold text-white mb-10 leading-relaxed tracking-tight">Carregant enunciat...</h2>
 
-                    <div id="options-container" class="space-y-4 mb-8 flex-1"></div>
+                    <!-- Opcions -->
+                    <div id="options-container" class="space-y-4 mb-8 flex-1">
+                        <!-- Botons generats dinàmicament per JS -->
+                    </div>
 
+                    <!-- Quadre d'explicació (Només per mode pràctica) -->
                     <div id="explanation-box" class="hidden mb-8 p-5 rounded-2xl border transition-all text-sm animate-fade-in shadow-inner">
                         <div class="font-black flex items-center gap-2 mb-2 text-base" id="explanation-title"></div>
                         <p id="explanation-text" class="text-slate-300 leading-relaxed font-medium"></p>
                     </div>
 
+                    <!-- Navegació Inferior Examen -->
                     <div class="mt-auto flex justify-between items-center pt-6 border-t border-slate-700">
-                        <button onclick="window.navigateQuestion(-1)" class="px-6 py-3.5 bg-slate-700 hover:bg-slate-600 text-white rounded-xl text-sm font-bold transition-all shadow-md flex items-center hover:-translate-x-1"><i class="fa-solid fa-chevron-left mr-2"></i> Anterior</button>
-                        <button onclick="window.navigateQuestion(1)" class="px-8 py-3.5 bg-brand-600 hover:bg-brand-500 text-white rounded-xl text-sm font-bold transition-all shadow-lg flex items-center hover:translate-x-1">Següent <i class="fa-solid fa-chevron-right ml-2"></i></button>
+                        <button onclick="window.navigateQuestion(-1)" class="px-6 py-3.5 bg-slate-700 hover:bg-slate-600 text-white rounded-xl text-sm font-bold transition-all shadow-md flex items-center hover:-translate-x-1">
+                            <i class="fa-solid fa-chevron-left mr-2"></i> Anterior
+                        </button>
+                        <button onclick="window.navigateQuestion(1)" class="px-8 py-3.5 bg-brand-600 hover:bg-brand-500 text-white rounded-xl text-sm font-bold transition-all shadow-lg flex items-center hover:translate-x-1">
+                            Següent <i class="fa-solid fa-chevron-right ml-2"></i>
+                        </button>
                     </div>
                 </div>
 
-                <!-- PANELL LATERAL (Giny de control i graella) -->
+                <!-- PANELL LATERAL (Giny de control de temps i graella) -->
                 <div class="w-full lg:w-80 shrink-0 space-y-6">
+                    
+                    <!-- Bloc Temps i Progrés -->
                     <div class="bg-slate-800 rounded-3xl p-6 sm:p-8 border border-slate-700 shadow-xl text-center relative overflow-hidden">
                         <div class="absolute -right-4 -top-4 text-7xl text-slate-700/20"><i class="fa-solid fa-stopwatch"></i></div>
                         <p class="text-[10px] text-slate-400 font-black uppercase tracking-widest mb-3 relative z-10">Temps Restant</p>
@@ -520,10 +605,9 @@
                             <div id="timer-box" class="text-4xl font-mono font-black text-white tracking-tighter">--:--</div>
                         </div>
                         
-                        <!-- CORRECCIÓ: Barra de progrés intel·ligent (Només avançada si has contestat) -->
                         <div class="relative z-10">
                             <div class="flex justify-between text-[10px] font-bold uppercase text-slate-500 mb-2">
-                                <span>Progrés Real</span>
+                                <span>Progrés</span>
                                 <span id="exam-progress-text" class="text-brand-400">0/30</span>
                             </div>
                             <div class="w-full bg-slate-950 h-2.5 rounded-full overflow-hidden shadow-inner">
@@ -532,65 +616,112 @@
                         </div>
                     </div>
 
+                    <!-- Bloc Navegador Preguntes -->
                     <div class="bg-slate-800 rounded-3xl p-6 border border-slate-700 shadow-xl flex flex-col max-h-[400px]">
                         <h3 class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4 text-center">Navegador Ràpid</h3>
-                        <div id="question-grid" class="grid grid-cols-5 gap-2 overflow-y-auto pr-2 pb-2 flex-1"></div>
+                        <div id="question-grid" class="grid grid-cols-5 gap-2 overflow-y-auto pr-2 pb-2 flex-1">
+                            <!-- Botons numèrics generats per JS -->
+                        </div>
                     </div>
 
+                    <!-- Botons d'Acció d'Emergència -->
                     <div class="grid grid-cols-2 gap-3">
-                        <button onclick="document.getElementById('exit-modal').classList.remove('hidden')" class="w-full py-4 bg-slate-900 border border-slate-700 hover:bg-slate-700 text-slate-400 hover:text-white font-bold rounded-2xl text-xs transition-all flex flex-col items-center justify-center gap-1 shadow-sm"><i class="fa-solid fa-person-running text-lg mb-1"></i> Avortar</button>
-                        <button onclick="window.promptEndExam()" class="w-full py-4 bg-red-900/30 hover:bg-red-900/60 border border-red-900/50 text-red-400 hover:text-red-300 font-bold rounded-2xl text-xs transition-all flex flex-col items-center justify-center gap-1 shadow-sm group"><i class="fa-solid fa-flag-checkered text-lg mb-1 group-hover:scale-110 transition-transform"></i> Entregar</button>
+                        <button onclick="document.getElementById('exit-modal').classList.remove('hidden')" class="w-full py-4 bg-slate-900 border border-slate-700 hover:bg-slate-700 text-slate-400 hover:text-white font-bold rounded-2xl text-xs transition-all flex flex-col items-center justify-center gap-1 shadow-sm">
+                            <i class="fa-solid fa-person-running text-lg mb-1"></i> Avortar
+                        </button>
+                        <button onclick="window.promptEndExam()" class="w-full py-4 bg-red-900/30 hover:bg-red-900/60 border border-red-900/50 text-red-400 hover:text-red-300 font-bold rounded-2xl text-xs transition-all flex flex-col items-center justify-center gap-1 shadow-sm group">
+                            <i class="fa-solid fa-flag-checkered text-lg mb-1 group-hover:scale-110 transition-transform"></i> Entregar
+                        </button>
                     </div>
                 </div>
             </div>
 
             <!-- RESULTATS DE L'EXAMEN -->
             <div id="exam-results-container" class="hidden bg-slate-800 rounded-[2rem] p-8 sm:p-12 border border-slate-700 shadow-2xl max-w-4xl mx-auto space-y-10 animate-fade-in relative overflow-hidden">
+                
+                <div class="absolute -left-20 -top-20 w-64 h-64 bg-brand-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+                <!-- Capçalera resultats -->
                 <div class="text-center space-y-4 border-b border-slate-700/50 pb-10 relative z-10">
                     <div id="result-icon-badge" class="w-24 h-24 rounded-full mx-auto flex items-center justify-center text-5xl mb-6 shadow-xl"></div>
                     <h2 class="text-4xl font-black text-white tracking-tighter">Avaluació Finalitzada</h2>
                     <p id="result-score-text" class="text-xl font-medium"></p>
                 </div>
 
+                <!-- Kpis Resultats -->
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 relative z-10">
-                    <div class="bg-slate-900/80 p-5 rounded-2xl border border-slate-700 text-center shadow-inner relative overflow-hidden"><span class="text-[10px] text-slate-400 uppercase font-black tracking-widest block mb-2">Nota Final</span><span id="res-grade" class="text-4xl font-black text-white tracking-tighter">0.0</span></div>
-                    <div class="bg-emerald-900/20 p-5 rounded-2xl border border-emerald-900/50 text-center shadow-inner relative overflow-hidden"><span class="text-[10px] text-emerald-500 uppercase font-black tracking-widest block mb-2">Correctes</span><span id="res-correct" class="text-4xl font-black text-emerald-400 tracking-tighter">0</span></div>
-                    <div class="bg-red-900/20 p-5 rounded-2xl border border-red-900/50 text-center shadow-inner relative overflow-hidden"><span class="text-[10px] text-red-500 uppercase font-black tracking-widest block mb-2">Errors</span><span id="res-incorrect" class="text-4xl font-black text-red-400 tracking-tighter">0</span></div>
-                    <div class="bg-slate-900/80 p-5 rounded-2xl border border-slate-700 text-center shadow-inner relative overflow-hidden"><span class="text-[10px] text-slate-400 uppercase font-black tracking-widest block mb-2">En Blanc</span><span id="res-blank" class="text-4xl font-black text-slate-300 tracking-tighter">0</span></div>
+                    <div class="bg-slate-900/80 p-5 rounded-2xl border border-slate-700 text-center shadow-inner relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-full h-1 bg-white/10"></div>
+                        <span class="text-[10px] text-slate-400 uppercase font-black tracking-widest block mb-2">Nota Final</span>
+                        <span id="res-grade" class="text-4xl font-black text-white tracking-tighter">0.0</span>
+                    </div>
+                    <div class="bg-emerald-900/20 p-5 rounded-2xl border border-emerald-900/50 text-center shadow-inner relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-full h-1 bg-emerald-500/50"></div>
+                        <span class="text-[10px] text-emerald-500 uppercase font-black tracking-widest block mb-2">Correctes</span>
+                        <span id="res-correct" class="text-4xl font-black text-emerald-400 tracking-tighter">0</span>
+                    </div>
+                    <div class="bg-red-900/20 p-5 rounded-2xl border border-red-900/50 text-center shadow-inner relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-full h-1 bg-red-500/50"></div>
+                        <span class="text-[10px] text-red-500 uppercase font-black tracking-widest block mb-2">Errors</span>
+                        <span id="res-incorrect" class="text-4xl font-black text-red-400 tracking-tighter">0</span>
+                    </div>
+                    <div class="bg-slate-900/80 p-5 rounded-2xl border border-slate-700 text-center shadow-inner relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-full h-1 bg-slate-500/50"></div>
+                        <span class="text-[10px] text-slate-400 uppercase font-black tracking-widest block mb-2">En Blanc</span>
+                        <span id="res-blank" class="text-4xl font-black text-slate-300 tracking-tighter">0</span>
+                    </div>
                 </div>
 
+                <!-- Comparativa i Millora -->
                 <div id="res-comparison-box" class="bg-slate-900/50 rounded-2xl p-5 border border-slate-700 text-sm flex flex-col sm:flex-row justify-center items-center gap-4 hidden relative z-10">
-                    <span class="text-slate-400 font-bold uppercase tracking-wider text-xs">Comparativa amb la teva millor nota històrica:</span><span id="res-comp-val" class="font-black px-3 py-1.5 rounded-lg text-lg shadow-inner"></span>
+                    <span class="text-slate-400 font-bold uppercase tracking-wider text-xs">Comparativa amb la teva millor nota històrica:</span>
+                    <span id="res-comp-val" class="font-black px-3 py-1.5 rounded-lg text-lg shadow-inner"></span>
                 </div>
 
+                <!-- Llista de Correccions -->
                 <div class="space-y-4 pt-4 relative z-10">
-                    <h3 class="font-bold text-white text-xl flex items-center border-b border-slate-700 pb-3"><i class="fa-solid fa-magnifying-glass text-brand-400 mr-3"></i> Revisió de Respostes</h3>
-                    <div id="results-review-list" class="space-y-4 max-h-[500px] overflow-y-auto pr-3 rounded-2xl"></div>
+                    <h3 class="font-bold text-white text-xl flex items-center border-b border-slate-700 pb-3"><i class="fa-solid fa-magnifying-glass text-brand-400 mr-3"></i> Revisió Exhuastiva de Respostes</h3>
+                    <div id="results-review-list" class="space-y-4 max-h-[500px] overflow-y-auto pr-3 rounded-2xl">
+                        <!-- Generat dinàmicament. Cada requadre tindrà l'enunciat, què s'ha respost, i la solució oficial -->
+                    </div>
                 </div>
 
+                <!-- Botonera Final -->
                 <div class="flex flex-col sm:flex-row justify-center gap-4 pt-8 border-t border-slate-700 relative z-10">
-                    <button onclick="window.backToExamMenu()" class="px-8 py-4 bg-brand-600 hover:bg-brand-500 text-white font-bold rounded-xl text-sm transition-all shadow-[0_0_15px_rgba(37,99,235,0.3)] hover:-translate-y-0.5 flex items-center justify-center"><i class="fa-solid fa-rotate-right mr-3 text-lg"></i> Configurar un altre test</button>
-                    <button onclick="window.switchTab('dashboard')" class="px-8 py-4 bg-slate-700 hover:bg-slate-600 text-white font-bold rounded-xl text-sm transition-all flex items-center justify-center">Tornar a l'inici per veure l'historial</button>
+                    <button onclick="window.backToExamMenu()" class="px-8 py-4 bg-brand-600 hover:bg-brand-500 text-white font-bold rounded-xl text-sm transition-all shadow-[0_0_15px_rgba(37,99,235,0.3)] hover:-translate-y-0.5 flex items-center justify-center">
+                        <i class="fa-solid fa-rotate-right mr-3 text-lg"></i> Configurar un altre test
+                    </button>
+                    <button onclick="window.switchTab('dashboard')" class="px-8 py-4 bg-slate-700 hover:bg-slate-600 text-white font-bold rounded-xl text-sm transition-all flex items-center justify-center">
+                        Tornar a l'inici i veure estadístiques
+                    </button>
                 </div>
             </div>
         </section>
 
         <!-- RÀNQUING SECTION -->
         <section id="sec-ranking" class="tab-content hidden space-y-6">
+            <!-- Capçalera del Rànquing -->
             <div class="bg-slate-800 rounded-3xl p-8 sm:p-10 border border-slate-700 shadow-lg flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 relative overflow-hidden">
                 <div class="absolute -right-10 -bottom-10 text-[200px] text-amber-500/5 pointer-events-none"><i class="fa-solid fa-trophy"></i></div>
                 
                 <div class="relative z-10 max-w-xl">
                     <span class="bg-amber-500/20 text-amber-400 border border-amber-500/30 text-[10px] font-black uppercase tracking-widest px-3 py-1.5 rounded-lg mb-4 inline-block shadow-sm">Competició Autonòmica</span>
                     <h2 class="text-3xl sm:text-4xl font-black text-white tracking-tight leading-tight mb-2">Rànquing Diari</h2>
-                    <p class="text-slate-400 text-sm font-medium leading-relaxed">Mesura el teu esforç en temps real contra opositors de tot Catalunya. El rànquing s'actualitza instantàniament i es reinicia cada mitjanit.</p>
+                    <p class="text-slate-400 text-sm font-medium leading-relaxed">Mesura el teu esforç en temps real contra opositors de tot Catalunya. El rànquing avalua les teves mètriques diàries i es reinicia automàticament cada mitjanit per mantenir la competència justa.</p>
                 </div>
                 
                 <div class="flex flex-col sm:flex-row items-center gap-4 relative z-10 w-full lg:w-auto">
+                    <!-- Selector de Mètrica -->
                     <div class="bg-slate-950/80 backdrop-blur border border-slate-700 p-1.5 rounded-2xl flex shadow-inner w-full sm:w-auto">
-                        <button onclick="window.toggleRankingView('points')" id="btn-rank-points" class="flex-1 sm:flex-none px-6 py-3 rounded-xl text-xs font-black uppercase tracking-wider transition-all bg-brand-600 text-white shadow-lg"><i class="fa-solid fa-star mr-1"></i> Per Punts</button>
-                        <button onclick="window.toggleRankingView('accuracy')" id="btn-rank-acc" class="flex-1 sm:flex-none px-6 py-3 rounded-xl text-xs font-black uppercase tracking-wider transition-all text-slate-400 hover:text-white hover:bg-slate-800"><i class="fa-solid fa-bullseye mr-1"></i> Per Precisió</button>
+                        <button onclick="window.toggleRankingView('points')" id="btn-rank-points" class="flex-1 sm:flex-none px-6 py-3 rounded-xl text-xs font-black uppercase tracking-wider transition-all bg-brand-600 text-white shadow-lg">
+                            <i class="fa-solid fa-star mr-1"></i> Per Punts
+                        </button>
+                        <button onclick="window.toggleRankingView('accuracy')" id="btn-rank-acc" class="flex-1 sm:flex-none px-6 py-3 rounded-xl text-xs font-black uppercase tracking-wider transition-all text-slate-400 hover:text-white hover:bg-slate-800">
+                            <i class="fa-solid fa-bullseye mr-1"></i> Per Precisió
+                        </button>
                     </div>
+                    
+                    <!-- Rellotge de Reset -->
                     <div class="bg-slate-900 border border-slate-700 px-6 py-3 rounded-2xl text-center shrink-0 w-full sm:w-auto shadow-sm">
                         <span class="text-[9px] font-black uppercase text-slate-500 tracking-widest block mb-1">Reset Rànquing en</span>
                         <span id="ranking-countdown-tab" class="text-amber-400 font-mono font-black text-lg tracking-tight">--:--:--</span>
@@ -598,188 +729,40 @@
                 </div>
             </div>
 
+            <!-- Taula del Rànquing -->
             <div class="bg-slate-800/90 rounded-[2rem] border border-slate-700 overflow-hidden shadow-2xl">
                 <div class="overflow-x-auto">
                     <table class="w-full text-left border-collapse">
                         <thead>
                             <tr class="bg-slate-950/80 text-slate-400 text-[10px] font-black uppercase tracking-widest border-b border-slate-700/80">
-                                <th class="p-5 sm:p-6 text-center w-24">Posició</th><th class="p-5 sm:p-6">Opositor / Nickname</th><th class="p-5 sm:p-6 text-right w-48" id="th-ranking-metric">Punts Avui</th>
+                                <th class="p-5 sm:p-6 text-center w-24">Posició</th>
+                                <th class="p-5 sm:p-6">Opositor / Nickname</th>
+                                <th class="p-5 sm:p-6 text-right w-48" id="th-ranking-metric">Punts Assolits Avui</th>
                             </tr>
                         </thead>
                         <tbody id="ranking-table-body" class="divide-y divide-slate-700/50 text-sm bg-slate-800/50">
-                            <tr><td colspan="3" class="p-16 text-center text-slate-400 font-medium"><i class="fa-solid fa-spinner fa-spin text-2xl mb-3 block"></i> Connectant amb el servidor...</td></tr>
+                            <tr><td colspan="3" class="p-16 text-center text-slate-400 font-medium"><i class="fa-solid fa-spinner fa-spin text-2xl mb-3 block"></i> Connectant amb el servidor central...</td></tr>
                         </tbody>
                     </table>
                 </div>
-                <div class="bg-slate-900 px-6 py-4 border-t border-slate-700 text-center sm:text-left"><p class="text-[10px] text-slate-500 font-bold uppercase tracking-wider"><i class="fa-solid fa-circle-info mr-1"></i> Requereix un mínim de 5 preguntes contestades avui per aparèixer a la llista.</p></div>
-            </div>
-        </section>
-
-        <!-- JOCS SECTION (Triage re-dissenyat, Sense mapa) -->
-        <section id="sec-minigames" class="tab-content hidden space-y-6">
-            <div id="minigames-menu" class="space-y-6">
-                <div class="bg-slate-800 rounded-3xl p-8 border border-slate-700 shadow-sm">
-                    <h2 class="text-2xl font-black text-white tracking-tight"><i class="fa-solid fa-gamepad text-purple-400 mr-3"></i> Zona d'Entrenament Tàctic</h2>
-                    <p class="text-slate-400 mt-2 font-medium">Mecàniques altament gamificades per fixar conceptes legals a la memòria a llarg termini.</p>
-                </div>
-
-                <!-- CORRECCIÓ: Graella d'una sola fila en PC (grid-cols-3) -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    
-                    <!-- Joc 1: Triage Ràpid -->
-                    <div class="bg-slate-800/90 rounded-3xl p-8 border border-slate-700 shadow-lg flex flex-col justify-between hover:border-pink-500 hover:shadow-[0_0_30px_rgba(236,72,153,0.15)] transition-all group">
-                        <div>
-                            <div class="w-14 h-14 rounded-2xl bg-pink-500/10 text-pink-400 flex items-center justify-center text-2xl mb-6 shadow-inner group-hover:scale-110 transition-transform"><i class="fa-solid fa-layer-group"></i></div>
-                            <h3 class="text-xl font-bold text-white mb-2">Triage Ràpid</h3>
-                            <!-- CORRECCIÓ: Text indicant els 8 segons d'avantatge -->
-                            <p class="text-slate-400 text-xs leading-relaxed">Apareix un concepte (ex. "Seguretat Pública") i tens <strong class="text-slate-300">8 segons</strong> per assignar-lo ràpidament al bloc correcte clicant el botó (Estat o Generalitat).</p>
-                        </div>
-                        <button onclick="window.startTriageGame()" class="mt-8 w-full py-3.5 bg-pink-600 hover:bg-pink-500 text-white font-bold rounded-xl text-sm transition-all shadow-md group-hover:-translate-y-1 flex items-center justify-center"><i class="fa-solid fa-bolt mr-2"></i> Iniciar Triage</button>
-                    </div>
-
-                    <!-- Joc 2: El Penjat Legal -->
-                    <div class="bg-slate-800/90 rounded-3xl p-8 border border-slate-700 shadow-lg flex flex-col justify-between hover:border-amber-500 hover:shadow-[0_0_30px_rgba(245,158,11,0.15)] transition-all group">
-                        <div>
-                            <div class="w-14 h-14 rounded-2xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-2xl mb-6 shadow-inner group-hover:scale-110 transition-transform"><i class="fa-solid fa-scale-balanced"></i></div>
-                            <h3 class="text-xl font-bold text-white mb-2">El Penjat Legal</h3>
-                            <p class="text-slate-400 text-xs leading-relaxed">Endevina termes jurídics, òrgans o lleis lletra per lletra guiant-te únicament per la definició formal. Tens 6 intents!</p>
-                        </div>
-                        <button onclick="window.startHangman()" class="mt-8 w-full py-3.5 bg-amber-600 hover:bg-amber-500 text-white font-bold rounded-xl text-sm transition-all shadow-md group-hover:-translate-y-1 flex items-center justify-center"><i class="fa-solid fa-play mr-2"></i> Jugar al Penjat</button>
-                    </div>
-
-                    <!-- Joc 3: Ruta de Patrulla -->
-                    <div class="bg-slate-800/90 rounded-3xl p-8 border border-slate-700 shadow-lg flex flex-col justify-between hover:border-brand-500 hover:shadow-[0_0_30px_rgba(37,99,235,0.15)] transition-all group">
-                        <div>
-                            <div class="w-14 h-14 rounded-2xl bg-brand-500/10 text-brand-400 flex items-center justify-center text-2xl mb-6 shadow-inner group-hover:scale-110 transition-transform"><i class="fa-solid fa-car-on"></i></div>
-                            <h3 class="text-xl font-bold text-white mb-2">Ruta de Patrulla</h3>
-                            <p class="text-slate-400 text-xs leading-relaxed">El sospitós fuig! Has d'atrapar-lo abans que s'acabi la carretera avançant el cotxe policial encertant preguntes oficials.</p>
-                        </div>
-                        <button onclick="window.startPatrol()" class="mt-8 w-full py-3.5 bg-brand-600 hover:bg-brand-500 text-white font-bold rounded-xl text-sm transition-all shadow-md group-hover:-translate-y-1 flex items-center justify-center"><i class="fa-solid fa-car-burst mr-2"></i> Iniciar Persecució</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- INTERFÍCIE JOC 1: TRIAGE (Botons en comptes de Swipe) -->
-            <div id="game-triage" class="hidden h-[80vh] flex flex-col relative">
-                <div class="bg-slate-800 rounded-2xl p-5 border border-slate-700 flex justify-between items-center mb-6 shrink-0 shadow-md z-10 relative">
-                    <div><h2 class="text-xl font-black text-pink-400 tracking-tight"><i class="fa-solid fa-layer-group mr-2"></i> Triage Ràpid</h2><p class="text-xs text-slate-400 mt-1 font-medium">Llegeix ràpid, decideix més ràpid.</p></div>
-                    <button onclick="window.exitMinigame('game-triage'); clearInterval(triageTimerInt);" class="px-5 py-2 bg-slate-700 hover:bg-slate-600 text-white font-bold rounded-xl transition-all shadow-sm"><i class="fa-solid fa-xmark mr-1"></i> Tancar</button>
-                </div>
-
-                <div class="flex-1 relative flex flex-col items-center justify-center w-full max-w-3xl mx-auto px-4 z-10">
-                    <div class="absolute top-4 text-center w-full z-0 pointer-events-none">
-                        <p class="text-xs font-black uppercase tracking-widest text-slate-500">Punts Actuals</p>
-                        <p class="text-4xl font-black text-pink-500/50" id="triage-score">0</p>
-                    </div>
-
-                    <div id="triage-card" class="bg-gradient-to-b from-slate-800 to-slate-900 border-4 border-slate-600 rounded-[2rem] p-10 w-full max-w-md h-80 flex flex-col items-center justify-center text-center shadow-2xl z-20 transition-transform duration-200 relative overflow-hidden">
-                        <div class="absolute -top-10 -right-10 text-[100px] text-white/5 pointer-events-none"><i class="fa-solid fa-scale-unbalanced"></i></div>
-                        <i class="fa-solid fa-bolt text-4xl text-pink-500/30 mb-6 animate-pulse-fast"></i>
-                        <h2 id="triage-concept" class="text-2xl sm:text-3xl font-black text-white leading-tight mb-8">Carregant concepte...</h2>
-                        
-                        <div class="mt-auto w-full"><div class="h-2 w-full bg-slate-950 rounded-full overflow-hidden shadow-inner"><div id="triage-time-bar" class="h-full bg-gradient-to-r from-pink-600 to-pink-400 w-full rounded-full"></div></div></div>
-                    </div>
-
-                    <div id="triage-feedback" class="absolute inset-0 z-30 flex items-center justify-center pointer-events-none opacity-0 transition-opacity duration-200">
-                        <i id="triage-icon" class="fa-solid fa-check text-9xl text-emerald-500 drop-shadow-[0_0_50px_rgba(16,185,129,0.8)]"></i>
-                    </div>
-
-                    <!-- CORRECCIÓ: Botons grans que funcionen amb un clic (substitueixen el Swipe erroni) -->
-                    <div class="w-full max-w-md flex justify-between gap-6 mt-12 z-20">
-                        <button onclick="window.handleTriage(0)" class="flex-1 py-6 px-4 rounded-3xl bg-slate-800/90 backdrop-blur border-2 border-slate-600 text-white shadow-xl hover:bg-slate-700 hover:border-pink-500 active:scale-95 transition-all flex flex-col items-center justify-center gap-3 group">
-                            <div class="w-12 h-12 rounded-full bg-slate-950 flex items-center justify-center text-xl text-slate-400 group-hover:text-pink-400 transition-colors shadow-inner"><i class="fa-solid fa-arrow-left"></i></div>
-                            <span id="t-label-l" class="text-base font-black uppercase tracking-wider text-center line-clamp-2 leading-tight">Estat</span>
-                        </button>
-                        <button onclick="window.handleTriage(1)" class="flex-1 py-6 px-4 rounded-3xl bg-slate-800/90 backdrop-blur border-2 border-slate-600 text-white shadow-xl hover:bg-slate-700 hover:border-pink-500 active:scale-95 transition-all flex flex-col items-center justify-center gap-3 group">
-                            <div class="w-12 h-12 rounded-full bg-slate-950 flex items-center justify-center text-xl text-slate-400 group-hover:text-pink-400 transition-colors shadow-inner"><i class="fa-solid fa-arrow-right"></i></div>
-                            <span id="t-label-r" class="text-base font-black uppercase tracking-wider text-center line-clamp-2 leading-tight">Generalitat</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- INTERFÍCIE JOC 2: EL PENJAT -->
-            <div id="game-hangman" class="hidden space-y-6">
-                <div class="bg-slate-800 rounded-2xl p-5 border border-slate-700 flex justify-between items-center mb-6 shadow-md"><h2 class="text-xl font-black text-amber-400 tracking-tight"><i class="fa-solid fa-scale-balanced mr-2"></i> El Penjat Legal</h2><button onclick="window.exitMinigame('game-hangman')" class="px-5 py-2 bg-slate-700 hover:bg-slate-600 text-white font-bold rounded-xl transition-all shadow-sm"><i class="fa-solid fa-xmark mr-1"></i> Tancar</button></div>
-                <div class="bg-slate-800/90 rounded-[2rem] p-8 sm:p-12 border border-slate-700 shadow-2xl flex flex-col items-center relative overflow-hidden">
-                    <div class="absolute -left-10 -top-10 text-[150px] text-amber-500/5 pointer-events-none"><i class="fa-solid fa-gavel"></i></div>
-                    <div class="flex justify-between items-center w-full max-w-2xl mx-auto mb-8 bg-slate-950/60 p-4 rounded-2xl border border-slate-800 shadow-inner relative z-10"><div class="flex flex-col"><span class="text-[10px] font-black uppercase text-slate-500 tracking-widest">Puntuació Actual</span><span id="hm-current-score" class="text-amber-400 text-2xl font-black">0</span></div><div class="w-px h-8 bg-slate-800 mx-4"></div><div class="flex flex-col text-right"><span class="text-[10px] font-black uppercase text-slate-500 tracking-widest">El teu Rècord</span><span id="hm-high-score" class="text-emerald-500 text-2xl font-black">0</span></div></div>
-                    <div class="w-full text-center mb-10 relative z-10"><span class="inline-block bg-slate-900 border border-slate-700 px-3 py-1 rounded-lg text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-4">Definició del terme</span><p id="hm-definition" class="text-xl sm:text-2xl font-bold text-white max-w-3xl mx-auto leading-relaxed"></p></div>
-                    <div class="mb-12 font-mono text-4xl sm:text-6xl tracking-[0.25em] sm:tracking-[0.5em] font-black text-amber-400 flex flex-wrap justify-center gap-y-6 drop-shadow-[0_0_15px_rgba(245,158,11,0.3)] relative z-10" id="hm-word-display">_ _ _ _ _</div>
-                    <div class="mb-8 flex items-center justify-center gap-3 relative z-10"><span class="text-sm font-bold text-slate-400 uppercase tracking-widest">Intents Restants:</span><div class="bg-slate-950 px-4 py-2 rounded-xl border border-slate-800 flex items-center gap-2 shadow-inner"><span id="hm-lives" class="text-red-500 font-black text-2xl">6</span><i class="fa-solid fa-heart text-red-500 animate-pulse text-lg"></i></div></div>
-                    <div id="hm-keyboard" class="grid grid-cols-7 sm:grid-cols-9 gap-2 sm:gap-3 max-w-3xl w-full relative z-10"></div>
-                    <div id="hm-result-overlay" class="hidden absolute inset-0 z-30 bg-slate-950/95 backdrop-blur-sm flex flex-col items-center justify-center p-8 text-center transition-all"><div id="hm-result-icon" class="w-24 h-24 rounded-full flex items-center justify-center text-5xl mb-6 shadow-2xl"></div><h3 id="hm-result-title" class="text-4xl font-black mb-3 tracking-tight"></h3><p id="hm-result-text" class="text-slate-300 text-lg mb-8 max-w-md"></p><button id="hm-next-btn" onclick="window.startHangman()" class="px-8 py-4 bg-amber-600 hover:bg-amber-500 text-white font-black uppercase tracking-widest rounded-xl transition-all shadow-[0_0_20px_rgba(245,158,11,0.4)] hover:scale-105">Següent paraula</button></div>
-                </div>
-            </div>
-
-            <!-- INTERFÍCIE JOC 3: RUTA DE PATRULLA -->
-            <div id="game-patrol" class="hidden space-y-6">
-                <div class="bg-slate-800 rounded-2xl p-5 border border-slate-700 flex justify-between items-center mb-6 shadow-md"><h2 class="text-xl font-black text-brand-400 tracking-tight"><i class="fa-solid fa-car-on mr-2"></i> Ruta de Patrulla</h2><button onclick="window.exitMinigame('game-patrol')" class="px-5 py-2 bg-slate-700 hover:bg-slate-600 text-white font-bold rounded-xl transition-all shadow-sm"><i class="fa-solid fa-xmark mr-1"></i> Tancar</button></div>
-                <div class="bg-slate-800/90 rounded-[2rem] p-8 sm:p-12 border border-slate-700 shadow-2xl space-y-10 relative overflow-hidden">
-                    <div class="absolute -right-10 -bottom-10 text-[200px] text-brand-500/5 pointer-events-none"><i class="fa-solid fa-road"></i></div>
-                    <div class="relative w-full h-24 bg-slate-950 rounded-[2rem] border-4 border-slate-800 overflow-hidden px-6 flex items-center shadow-inner relative z-10"><div class="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCI+PHBhdGggZD0iTTAgMjBoMjAiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtZGFzaGFycmF5PSIyMCAyMCIvPjwvc3ZnPg==')] bg-repeat-x bg-center" style="background-position-y: 50%;"></div><div id="patrol-police" class="absolute z-20 transition-all duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)] text-brand-400 flex flex-col items-center" style="left: 0%;"><span class="text-[8px] font-black uppercase text-brand-500 bg-slate-950 px-1.5 rounded mb-1">MMEE</span><i class="fa-solid fa-car-side text-5xl drop-shadow-[0_0_15px_rgba(37,99,235,0.8)]"></i></div><div id="patrol-suspect" class="absolute z-20 transition-all duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)] text-red-500 flex flex-col items-center" style="left: 30%;"><span class="text-[8px] font-black uppercase text-red-500 bg-slate-950 px-1.5 rounded mb-1">Fugitiu</span><i class="fa-solid fa-motorcycle text-4xl drop-shadow-[0_0_10px_rgba(239,68,68,0.5)]"></i></div><div class="absolute right-6 text-emerald-500 text-4xl opacity-80 z-10 flex flex-col items-center"><span class="text-[8px] font-black uppercase text-emerald-500 bg-slate-950 px-1.5 rounded mb-1">Presó</span><i class="fa-solid fa-building-shield"></i></div></div>
-                    <div id="patrol-question-container" class="mt-12 bg-slate-900/50 p-6 sm:p-8 rounded-3xl border border-slate-700 shadow-inner relative z-10"><span id="patrol-topic" class="px-3 py-1 bg-brand-900/30 border border-brand-500/30 rounded-lg text-[10px] text-brand-300 font-bold uppercase tracking-widest mb-4 inline-block shadow-sm">Tema</span><h3 id="patrol-q-text" class="text-xl sm:text-2xl font-bold text-white mb-8 leading-relaxed tracking-tight"></h3><div id="patrol-options" class="grid grid-cols-1 gap-3"></div></div>
-                    <div id="patrol-result-overlay" class="hidden absolute inset-0 z-30 bg-slate-950/95 backdrop-blur-sm flex flex-col items-center justify-center p-8 text-center transition-all rounded-[2rem]"><div id="patrol-result-icon" class="w-28 h-28 rounded-full flex items-center justify-center text-6xl mb-6 shadow-2xl"></div><h3 id="patrol-result-title" class="text-4xl font-black mb-3 tracking-tight text-white"></h3><p id="patrol-result-text" class="text-slate-400 text-lg mb-8 max-w-md font-medium"></p><button onclick="window.startPatrol()" class="px-8 py-4 bg-brand-600 hover:bg-brand-500 text-white font-black uppercase tracking-widest rounded-xl transition-all shadow-[0_0_20px_rgba(37,99,235,0.4)] hover:scale-105"><i class="fa-solid fa-rotate-right mr-2"></i> Iniciar nova ruta</button></div>
+                <!-- Peus de taula info -->
+                <div class="bg-slate-900 px-6 py-4 border-t border-slate-700 text-center sm:text-left">
+                    <p class="text-[10px] text-slate-500 font-bold uppercase tracking-wider"><i class="fa-solid fa-circle-info mr-1"></i> Requereix un mínim de 5 preguntes contestades avui per aparèixer a la llista.</p>
                 </div>
             </div>
         </section>
 
-        <!-- PROFILE I CONFIGURACIÓ -->
-        <section id="sec-profile" class="tab-content hidden space-y-6">
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <!-- Columna Esquerra: Info Bàsica i Settings -->
-                <div class="lg:col-span-1 space-y-6">
-                    <div class="bg-slate-800 rounded-3xl p-8 border border-slate-700 shadow-xl flex flex-col items-center text-center relative overflow-hidden">
-                        <div class="absolute -right-8 -top-8 text-[150px] text-slate-700/20 pointer-events-none"><i class="fa-solid fa-id-card"></i></div>
-                        <div class="w-28 h-28 rounded-[2rem] bg-slate-900 border-4 border-brand-500 flex items-center justify-center text-5xl font-black text-brand-400 mb-6 shadow-[0_0_30px_rgba(37,99,235,0.3)] relative z-10 rotate-3 transition-transform hover:rotate-0"><i class="fa-solid fa-user-astronaut"></i><div class="absolute -bottom-3 -right-3 w-10 h-10 bg-amber-500 rounded-full border-4 border-slate-800 flex items-center justify-center text-white text-sm shadow-lg" title="Usuari Actiu"><i class="fa-solid fa-check"></i></div></div>
-                        <h2 class="text-3xl font-black text-white mb-1 tracking-tight relative z-10" id="profile-card-title">Perfil d'Opositor</h2>
-                        <p id="profile-email-val" class="text-sm font-medium text-slate-400 mb-6 relative z-10">Sense identificar</p>
-                        <div class="w-full bg-slate-900 rounded-2xl p-4 border border-slate-700 mb-6 shadow-inner relative z-10"><p class="text-[10px] uppercase font-black text-slate-500 tracking-widest mb-1.5">Reng Escala Bàsica</p><p class="text-lg text-amber-400" id="profile-level-text"><i class="fa-solid fa-shield-halved mr-2"></i>Aspirant</p></div>
-                        
-                        <div id="profile-not-logged" class="w-full space-y-4 relative z-10"><p class="text-sm text-slate-400 font-medium">Inicia sessió per guardar notes i sortir al rànquing oficial.</p><button onclick="window.openAuthModal('login')" class="w-full py-3.5 bg-brand-600 hover:bg-brand-500 text-white font-black uppercase tracking-widest rounded-xl text-sm transition-all shadow-[0_0_15px_rgba(37,99,235,0.4)]">Iniciar Sessió</button></div>
-                        <div id="profile-logged-content" class="w-full space-y-4 hidden relative z-10">
-                            <div class="bg-slate-900/50 p-4 rounded-2xl border border-slate-700/50"><label class="text-[10px] font-black text-slate-500 uppercase tracking-widest block mb-2 text-left">Nom Públic al Rànquing</label><div class="flex gap-2"><input type="text" id="profile-username-input" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-sm text-white outline-none focus:border-brand-500 text-center font-bold shadow-inner transition-colors"><button type="button" onclick="window.handleUpdateUsername()" class="px-4 bg-brand-600 text-white rounded-xl text-sm font-bold hover:bg-brand-500 transition-all shadow-md" title="Guardar nom"><i class="fa-solid fa-save"></i></button></div></div>
-                            <button onclick="window.logoutUser()" class="w-full py-3.5 bg-red-950/30 border border-red-900/50 hover:bg-red-900/50 text-red-400 hover:text-white font-bold uppercase tracking-wider rounded-xl text-xs transition-all flex items-center justify-center gap-2"><i class="fa-solid fa-power-off"></i> Tancar Sessió Segura</button>
-                            <button id="btn-admin-panel" onclick="window.initAdminPanel()" class="hidden w-full py-3.5 bg-gradient-to-r from-purple-600 to-purple-500 hover:from-purple-500 hover:to-purple-400 text-white font-black uppercase tracking-widest rounded-xl text-xs transition-all shadow-[0_0_15px_rgba(168,85,247,0.4)] flex items-center justify-center gap-2"><i class="fa-solid fa-user-shield"></i> Panell Administració</button>
-                        </div>
-                    </div>
-
-                    <div class="bg-slate-800 p-6 sm:p-8 rounded-3xl border border-slate-700 shadow flex justify-between items-center group">
-                        <div><h3 class="text-base font-bold text-white flex items-center gap-2"><i class="fa-solid fa-volume-high text-brand-400"></i> Efectes de So</h3><p class="text-[10px] text-slate-400 mt-1 font-bold uppercase tracking-widest">Aleshores respon i juga</p></div>
-                        <button onclick="window.toggleSound()" class="px-5 py-2.5 bg-slate-900 border border-slate-700 text-white rounded-xl text-xs font-black uppercase tracking-wider hover:border-brand-500 hover:bg-slate-800 transition-all w-28 text-center shadow-inner group-hover:shadow-md"><span id="sound-status-text">Activat</span></button>
-                    </div>
-                </div>
-
-                <div class="lg:col-span-2 space-y-6">
-                    <div class="bg-gradient-to-br from-brand-900/40 via-slate-800 to-slate-900 p-8 sm:p-10 rounded-3xl border border-brand-500/30 shadow-2xl relative overflow-hidden group">
-                        <div class="absolute -right-20 -bottom-20 text-[250px] text-brand-500/5 pointer-events-none group-hover:scale-110 transition-transform duration-1000"><i class="fa-solid fa-share-nodes"></i></div>
-                        <div class="flex flex-col sm:flex-row items-start gap-6 mb-8 relative z-10">
-                            <div class="w-16 h-16 bg-gradient-to-br from-brand-500 to-brand-700 rounded-2xl flex items-center justify-center text-3xl text-white shrink-0 shadow-[0_0_20px_rgba(37,99,235,0.5)]"><i class="fa-solid fa-unlock-keyhole"></i></div>
-                            <div><h3 class="text-2xl font-black text-white tracking-tight mb-2">Desbloqueja OpposTest PRO Gratis</h3><p class="text-sm text-slate-300 leading-relaxed font-medium">Comparteix el teu nom d'usuari amb un company d'oposició perquè l'escrigui al "Codi d'amic" en registrar-se. Tots dos rebreu accés il·limitat als <strong>Tests per Temes</strong> i al <strong>Reforç Intel·ligent</strong> per sempre.</p></div>
-                        </div>
-                        <div class="flex flex-col md:flex-row gap-6 bg-slate-950/40 p-6 rounded-2xl border border-slate-700/50 backdrop-blur-sm relative z-10">
-                            <div class="flex-1"><label class="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-2">El teu codi per compartir:</label><div class="flex gap-2"><input type="text" id="profile-ref-link" readonly class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-sm text-brand-300 font-black text-center shadow-inner cursor-not-allowed outline-none" value="Registra't primer"><button onclick="window.copyRefLink()" class="px-5 bg-brand-600 text-white rounded-xl text-sm font-bold hover:bg-brand-500 transition-colors shadow-md group" title="Copiar missatge al portapapers"><i class="fa-regular fa-copy group-active:scale-90 transition-transform"></i></button></div></div>
-                            <div id="profile-add-referral-box" class="flex-1 hidden md:border-l border-t md:border-t-0 border-slate-700/50 pt-6 md:pt-0 md:pl-6"><label class="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-2">Has rebut un codi d'amic?</label><div class="flex gap-2"><input type="text" id="profile-input-referral" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-sm text-white focus:border-brand-500 outline-none shadow-inner transition-colors font-medium placeholder-slate-600" placeholder="Escriu-lo aquí..."><button onclick="window.submitProfileReferral()" class="px-5 bg-slate-700 hover:bg-slate-600 text-white rounded-xl text-sm font-bold transition-all shadow">Bescanviar</button></div></div>
-                        </div>
-                    </div>
-
-                    <div class="bg-slate-800 rounded-3xl p-8 sm:p-10 border border-slate-700 shadow-lg">
-                        <div class="flex items-center justify-between mb-8 border-b border-slate-700/80 pb-4"><h3 class="text-xl font-black text-white tracking-tight"><i class="fa-solid fa-medal text-amber-400 mr-3 text-2xl"></i> Medaller Oficial</h3><span class="bg-slate-900 px-3 py-1 rounded-lg text-[10px] font-bold text-slate-400 uppercase tracking-widest border border-slate-700">Mèrits</span></div>
-                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4" id="badges-container">
-                            <div class="bg-slate-900/50 p-5 rounded-2xl border border-slate-700 text-center opacity-40 grayscale flex flex-col items-center justify-center"><i class="fa-solid fa-play text-3xl text-slate-500 mb-3"></i><p class="text-[9px] font-black text-slate-300 uppercase tracking-widest leading-tight">1r Test Completat</p></div>
-                            <div class="bg-slate-900/50 p-5 rounded-2xl border border-slate-700 text-center opacity-40 grayscale flex flex-col items-center justify-center"><i class="fa-solid fa-fire text-3xl text-slate-500 mb-3"></i><p class="text-[9px] font-black text-slate-300 uppercase tracking-widest leading-tight">Racha 7 dies</p></div>
-                            <div class="bg-slate-900/50 p-5 rounded-2xl border border-slate-700 text-center opacity-40 grayscale flex flex-col items-center justify-center"><i class="fa-solid fa-bullseye text-3xl text-slate-500 mb-3"></i><p class="text-[9px] font-black text-slate-300 uppercase tracking-widest leading-tight">90% Precisió global</p></div>
-                            <div class="bg-slate-900/50 p-5 rounded-2xl border border-slate-700 text-center opacity-40 grayscale flex flex-col items-center justify-center"><i class="fa-solid fa-book-open text-3xl text-slate-500 mb-3"></i><p class="text-[9px] font-black text-slate-300 uppercase tracking-widest leading-tight">1000 Preguntes</p></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ADMIN SECTION -->
+        <!-- ADMIN SECTION (CENTRE DE COMANDAMENT PRIVAT) -->
         <section id="sec-admin" class="tab-content hidden space-y-6 max-w-6xl mx-auto">
+            
+            <!-- Capçalera Admin amb Tabs (Molt estilitzada) -->
             <div class="bg-slate-900 border-b border-slate-800 pb-0 sticky top-16 z-30 flex flex-col md:flex-row items-start md:items-end justify-between mb-8 shadow-sm rounded-b-3xl px-6 pt-6">
-                <h2 class="text-2xl sm:text-3xl font-black text-white py-4 tracking-tight flex items-center"><i class="fa-solid fa-user-shield text-purple-500 mr-4 text-4xl drop-shadow-[0_0_15px_rgba(168,85,247,0.5)]"></i> Lloc de Comandament</h2>
+                <h2 class="text-2xl sm:text-3xl font-black text-white py-4 tracking-tight flex items-center">
+                    <i class="fa-solid fa-user-shield text-purple-500 mr-4 text-4xl drop-shadow-[0_0_15px_rgba(168,85,247,0.5)]"></i> 
+                    Lloc de Comandament
+                </h2>
+                
+                <!-- Pestanyes d'Admin -->
                 <div class="flex gap-2 overflow-x-auto w-full md:w-auto pb-4 md:pb-0 hide-scrollbar">
                     <button onclick="window.switchAdminTab('dashboard')" class="admin-tab px-6 py-3 text-xs font-black uppercase tracking-widest text-white border-b-4 border-purple-500 bg-slate-800/80 rounded-t-xl transition-colors shrink-0">Tauler</button>
                     <button onclick="window.switchAdminTab('events')" class="admin-tab px-6 py-3 text-xs font-black uppercase tracking-widest text-slate-500 border-b-4 border-transparent hover:text-white hover:bg-slate-800/50 rounded-t-xl transition-colors shrink-0">Calendari</button>
@@ -788,84 +771,157 @@
                 </div>
             </div>
 
+            <!-- ADMIN TAB 1: DASHBOARD I ALERTES GLOBALS -->
             <div id="admin-tab-dashboard" class="admin-content-sec space-y-6 animate-fade-in">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    
+                    <!-- Sistema d'Avisos Globals -->
                     <div class="bg-slate-800 rounded-[2rem] p-8 border border-slate-700 shadow-xl relative overflow-hidden">
                         <div class="absolute -right-10 -bottom-10 text-[150px] text-brand-500/5 pointer-events-none"><i class="fa-solid fa-bullhorn"></i></div>
                         <h3 class="font-black text-white mb-6 text-xl tracking-tight relative z-10"><i class="fa-solid fa-tower-broadcast text-brand-400 mr-2"></i> Emissió d'Avisos Globals</h3>
+                        <p class="text-xs text-slate-400 mb-4 font-medium relative z-10">Aquest missatge apareixerà a la part superior de la pantalla de **TOTS** els usuaris connectats a qualsevol oposició.</p>
+                        
                         <div class="relative z-10 space-y-4">
-                            <input type="text" id="admin-alert-msg" placeholder="Ex: Manteniment programat..." class="w-full bg-slate-950 border border-slate-700 rounded-2xl p-4 text-sm text-white outline-none focus:border-brand-500 font-medium shadow-inner transition-colors">
+                            <input type="text" id="admin-alert-msg" placeholder="Ex: Manteniment programat a les 00:00h..." class="w-full bg-slate-950 border border-slate-700 rounded-2xl p-4 text-sm text-white outline-none focus:border-brand-500 font-medium shadow-inner transition-colors">
                             <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-slate-900/50 p-4 rounded-2xl border border-slate-700/50">
-                                <label class="text-sm font-bold text-slate-300 flex items-center gap-3 cursor-pointer group"><input type="checkbox" id="admin-alert-active" class="w-5 h-5 accent-brand-500 rounded border-slate-700 cursor-pointer"> <span class="group-hover:text-white transition-colors">Forçar emissió activa</span></label>
-                                <button onclick="window.saveGlobalAlert()" class="w-full sm:w-auto px-8 py-3 bg-brand-600 hover:bg-brand-500 text-white rounded-xl text-xs font-black uppercase tracking-widest transition-all shadow-md">Publicar Avís</button>
+                                <label class="text-sm font-bold text-slate-300 flex items-center gap-3 cursor-pointer group">
+                                    <input type="checkbox" id="admin-alert-active" class="w-5 h-5 accent-brand-500 rounded border-slate-700 cursor-pointer"> 
+                                    <span class="group-hover:text-white transition-colors">Forçar emissió activa</span>
+                                </label>
+                                <button onclick="window.saveGlobalAlert()" class="w-full sm:w-auto px-8 py-3 bg-brand-600 hover:bg-brand-500 text-white rounded-xl text-xs font-black uppercase tracking-widest transition-all shadow-md">
+                                    Publicar Avís
+                                </button>
                             </div>
                         </div>
                     </div>
                     
+                    <!-- Kpis de Plataforma Diaris -->
                     <div class="bg-slate-800 rounded-[2rem] p-8 border border-slate-700 shadow-xl relative overflow-hidden">
                         <div class="absolute -right-10 -bottom-10 text-[150px] text-emerald-500/5 pointer-events-none"><i class="fa-solid fa-chart-pie"></i></div>
                         <h3 class="font-black text-white mb-6 text-xl tracking-tight relative z-10"><i class="fa-solid fa-satellite-dish text-emerald-400 mr-2"></i> Telemetria d'Avui</h3>
+                        
                         <div class="grid grid-cols-2 gap-4 mb-6 relative z-10">
-                            <div class="bg-slate-950/80 p-5 rounded-2xl border border-slate-700 text-center shadow-inner"><span class="text-[10px] text-slate-500 block font-black uppercase tracking-widest mb-2">Opositors Actius</span><span id="admin-active-users" class="text-4xl font-black text-white tracking-tighter">0</span></div>
-                            <div class="bg-emerald-950/20 p-5 rounded-2xl border border-emerald-900/50 text-center shadow-inner"><span class="text-[10px] text-emerald-500/70 block font-black uppercase tracking-widest mb-2">Tests Finalitzats</span><span id="admin-tests-today" class="text-4xl font-black text-emerald-400 tracking-tighter">0</span></div>
+                            <div class="bg-slate-950/80 p-5 rounded-2xl border border-slate-700 text-center shadow-inner">
+                                <span class="text-[10px] text-slate-500 block font-black uppercase tracking-widest mb-2">Opositors Actius</span>
+                                <span id="admin-active-users" class="text-4xl font-black text-white tracking-tighter">0</span>
+                            </div>
+                            <div class="bg-emerald-950/20 p-5 rounded-2xl border border-emerald-900/50 text-center shadow-inner">
+                                <span class="text-[10px] text-emerald-500/70 block font-black uppercase tracking-widest mb-2">Tests Finalitzats</span>
+                                <span id="admin-tests-today" class="text-4xl font-black text-emerald-400 tracking-tighter">0</span>
+                            </div>
                         </div>
-                        <div class="bg-red-950/20 p-5 rounded-2xl border border-red-900/30 relative z-10 shadow-inner"><span class="text-[10px] text-red-500/80 block font-black uppercase tracking-widest mb-2"><i class="fa-solid fa-skull mr-1"></i> Pregunta més destructiva</span><p id="admin-worst-q" class="text-red-300 font-bold leading-snug line-clamp-2 text-sm italic">Sincronitzant dades...</p></div>
+                        
+                        <div class="bg-red-950/20 p-5 rounded-2xl border border-red-900/30 relative z-10 shadow-inner">
+                            <span class="text-[10px] text-red-500/80 block font-black uppercase tracking-widest mb-2"><i class="fa-solid fa-skull mr-1"></i> Pregunta més destructiva (Històric)</span>
+                            <p id="admin-worst-q" class="text-red-300 font-bold leading-snug line-clamp-2 text-sm italic">Sincronitzant dades analítiques...</p>
+                        </div>
                     </div>
                 </div>
 
+                <!-- Llista de Reports d'Usuaris -->
                 <div class="bg-slate-800 rounded-[2rem] p-8 border border-slate-700 shadow-xl">
-                    <div class="flex items-center justify-between mb-6 border-b border-slate-700/80 pb-4"><h3 class="font-black text-white text-xl tracking-tight"><i class="fa-solid fa-bug text-red-400 mr-2"></i> Safata de Reports d'Errors</h3><span class="bg-red-900/50 text-red-400 text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-lg border border-red-500/30">Admin</span></div>
-                    <div id="admin-reports-list" class="space-y-4 max-h-96 overflow-y-auto pr-3 rounded-2xl"><div class="text-center py-10"><i class="fa-solid fa-spinner fa-spin text-slate-500 text-3xl"></i></div></div>
+                    <div class="flex items-center justify-between mb-6 border-b border-slate-700/80 pb-4">
+                        <h3 class="font-black text-white text-xl tracking-tight"><i class="fa-solid fa-bug text-red-400 mr-2"></i> Safata de Reports d'Errors (Usuaris)</h3>
+                        <span class="bg-red-900/50 text-red-400 text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-lg border border-red-500/30">Requereix Atenció</span>
+                    </div>
+                    
+                    <div id="admin-reports-list" class="space-y-4 max-h-96 overflow-y-auto pr-3 rounded-2xl">
+                        <!-- S'injectaran les targetes de report aquí via JS -->
+                        <div class="text-center py-10"><i class="fa-solid fa-spinner fa-spin text-slate-500 text-3xl"></i></div>
+                    </div>
                 </div>
             </div>
 
+            <!-- ADMIN TAB 2: GESTOR DE CALENDARI -->
             <div id="admin-tab-events" class="admin-content-sec space-y-6 hidden animate-fade-in">
+                <div class="bg-amber-900/20 border border-amber-500/30 rounded-2xl p-5 text-sm text-amber-200/90 font-medium flex items-start gap-4">
+                    <i class="fa-solid fa-triangle-exclamation text-amber-400 text-xl mt-0.5"></i> 
+                    <p><strong>Avís d'Arquitectura:</strong> Aquesta pestanya modifica directament la col·lecció <code>events</code> de Firebase. Si marques la casella "Proper Examen", aquest esdeveniment sobreescriurà el giny gegant del compte enrere (Dashboard) de tots els usuaris instantàniament.</p>
+                </div>
+
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <!-- Formulari de Nou Event -->
                     <div class="lg:col-span-1 bg-slate-800 rounded-[2rem] p-8 border border-slate-700 shadow-xl flex flex-col h-fit relative overflow-hidden">
                         <div class="absolute -right-10 -top-10 text-[150px] text-brand-500/5 pointer-events-none"><i class="fa-solid fa-calendar-plus"></i></div>
-                        <h3 class="font-black text-white mb-6 text-xl tracking-tight relative z-10"><i class="fa-solid fa-plus text-brand-400 mr-2"></i> Crear Fitxa Calendari</h3>
+                        
+                        <h3 class="font-black text-white mb-6 text-xl tracking-tight relative z-10"><i class="fa-solid fa-plus text-brand-400 mr-2"></i> Crear Fitxa de Calendari</h3>
+                        
                         <div class="space-y-5 relative z-10">
-                            <div><label class="text-[10px] uppercase font-black text-slate-400 tracking-widest block mb-2">Títol de l'Event</label><input type="text" id="ev-title" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-sm text-white font-bold outline-none focus:border-brand-500 shadow-inner"></div>
-                            <div><label class="text-[10px] uppercase font-bold text-slate-400 block mb-2">Data Programada</label><input type="date" id="ev-date" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-sm text-brand-300 font-bold outline-none shadow-inner cursor-pointer"></div>
+                            <div>
+                                <label class="text-[10px] uppercase font-black text-slate-400 tracking-widest block mb-2">Títol Oficial de l'Event</label>
+                                <input type="text" id="ev-title" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-sm text-white font-bold outline-none focus:border-brand-500 transition-colors shadow-inner" placeholder="Ex: Publicació Notes Físiques">
+                            </div>
+                            <div>
+                                <label class="text-[10px] uppercase font-black text-slate-400 tracking-widest block mb-2">Data Programada</label>
+                                <input type="date" id="ev-date" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-sm text-brand-300 font-bold outline-none focus:border-brand-500 transition-colors shadow-inner cursor-pointer">
+                            </div>
                             <div>
                                 <label class="text-[10px] uppercase font-black text-slate-400 tracking-widest block mb-2">Categoria Visual</label>
-                                <select id="ev-type" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-sm text-white font-medium outline-none shadow-inner cursor-pointer appearance-none">
+                                <select id="ev-type" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-sm text-white font-medium outline-none focus:border-brand-500 transition-colors shadow-inner cursor-pointer appearance-none">
                                     <option value="Examen">📝 Prova d'Avaluació / Examen</option>
-                                    <option value="Resultados">📊 Publicació de Resultats</option>
-                                    <option value="Inscripción">📋 Obertura d'Inscripcions</option>
-                                    <option value="Noticia">📢 Avís Administratiu</option>
+                                    <option value="Resultados">📊 Publicació de Resultats / Llistes</option>
+                                    <option value="Inscripción">📋 Obertura d'Inscripcions / Tràmits</option>
+                                    <option value="Noticia">📢 Avís Administratiu General</option>
                                 </select>
                             </div>
-                            <div><label class="text-[10px] uppercase font-black text-slate-400 tracking-widest block mb-2">Detalls (Opcional)</label><textarea id="ev-desc" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-sm text-white font-medium outline-none shadow-inner h-20 resize-none"></textarea></div>
+                            <div>
+                                <label class="text-[10px] uppercase font-black text-slate-400 tracking-widest block mb-2">Detalls (Opcional)</label>
+                                <textarea id="ev-desc" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-sm text-white font-medium outline-none focus:border-brand-500 transition-colors shadow-inner h-20 resize-none" placeholder="Ex: Termini d'al·legacions obert durant 10 dies hàbils..."></textarea>
+                            </div>
+                            
                             <label class="flex items-center gap-3 p-4 bg-amber-950/30 border border-amber-500/30 rounded-xl cursor-pointer hover:bg-amber-950/50 transition-colors group">
                                 <input type="checkbox" id="ev-featured" class="w-5 h-5 rounded border-amber-500/50 bg-slate-950 accent-amber-500 cursor-pointer shrink-0"> 
-                                <span class="text-xs font-bold text-amber-400/90 group-hover:text-amber-400 transition-colors leading-tight">Marcar com a "Meta Principal" (Destacar al Giny)</span>
+                                <span class="text-xs font-bold text-amber-400/90 group-hover:text-amber-400 transition-colors leading-tight">Marcar com a "Meta Principal" (Destacar al Giny Gegant del compte enrere)</span>
                             </label>
-                            <button onclick="window.saveAdminEvent()" class="w-full py-4 bg-brand-600 hover:bg-brand-500 text-white font-black uppercase tracking-widest rounded-xl mt-2 transition-all shadow-[0_0_15px_rgba(37,99,235,0.4)] hover:-translate-y-0.5">Inserir al Calendari</button>
+                            
+                            <button onclick="window.saveAdminEvent()" class="w-full py-4 bg-brand-600 hover:bg-brand-500 text-white font-black uppercase tracking-widest rounded-xl mt-2 transition-all shadow-[0_0_15px_rgba(37,99,235,0.4)] hover:-translate-y-0.5">
+                                Inserir al Calendari
+                            </button>
                         </div>
                     </div>
                     
+                    <!-- Llista d'Events -->
                     <div class="lg:col-span-2 bg-slate-800 rounded-[2rem] p-8 border border-slate-700 shadow-xl flex flex-col">
                         <h3 class="font-black text-white mb-6 text-xl tracking-tight"><i class="fa-solid fa-list-ul text-slate-400 mr-2"></i> Base de Dades del Calendari</h3>
+                        
                         <div class="overflow-x-auto bg-slate-950/50 rounded-2xl border border-slate-700/80 flex-1 shadow-inner">
                             <table class="w-full text-left text-sm whitespace-nowrap">
-                                <thead class="text-slate-400 border-b border-slate-700 bg-slate-900/80"><tr><th class="p-4 text-[10px] font-black uppercase tracking-widest">Data Execució</th><th class="p-4 text-[10px] font-black uppercase tracking-widest w-full">Títol i Contingut</th><th class="p-4 text-[10px] font-black uppercase tracking-widest text-center">Etiqueta</th><th class="p-4 text-[10px] font-black uppercase tracking-widest text-center">Purga</th></tr></thead>
-                                <tbody id="admin-events-tbody" class="divide-y divide-slate-800/80 text-slate-300 font-medium"><tr><td colspan="4" class="p-10 text-center"><i class="fa-solid fa-spinner fa-spin text-2xl text-slate-500"></i></td></tr></tbody>
+                                <thead class="text-slate-400 border-b border-slate-700 bg-slate-900/80">
+                                    <tr>
+                                        <th class="p-4 text-[10px] font-black uppercase tracking-widest">Data Execució</th>
+                                        <th class="p-4 text-[10px] font-black uppercase tracking-widest w-full">Títol i Contingut</th>
+                                        <th class="p-4 text-[10px] font-black uppercase tracking-widest text-center">Etiqueta</th>
+                                        <th class="p-4 text-[10px] font-black uppercase tracking-widest text-center">Purga</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="admin-events-tbody" class="divide-y divide-slate-800/80 text-slate-300 font-medium">
+                                    <tr><td colspan="4" class="p-10 text-center"><i class="fa-solid fa-spinner fa-spin text-2xl text-slate-500"></i></td></tr>
+                                </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
             </div>
 
+            <!-- ADMIN TAB 3: GESTOR DE PREGUNTES CUSTOM -->
             <div id="admin-tab-questions" class="admin-content-sec space-y-6 hidden animate-fade-in">
-                <div class="bg-emerald-900/20 border border-emerald-500/30 rounded-2xl p-5 text-sm text-emerald-200/90 font-medium flex items-start gap-4"><i class="fa-solid fa-database text-emerald-400 text-xl mt-0.5"></i><p><strong>Integració Híbrida:</strong> Si crees una pregunta nova des d'aquest panell, es guardarà al núvol (col·lecció <code>custom_questions</code>) i <strong>s'injectarà en calent</strong> a la bateria de tests dels usuaris automàticament.</p></div>
+                <div class="bg-emerald-900/20 border border-emerald-500/30 rounded-2xl p-5 text-sm text-emerald-200/90 font-medium flex items-start gap-4">
+                    <i class="fa-solid fa-database text-emerald-400 text-xl mt-0.5"></i> 
+                    <p><strong>Integració Híbrida:</strong> El motor principal carrega les milers de preguntes base des dels arxius JSON locals superràpids per no saturar Firebase. Si crees una pregunta nova des d'aquest panell, es guardarà al núvol (col·lecció <code>custom_questions</code>) i <strong>s'injectarà en calent</strong> a la bateria de tests de tots els usuaris en entrar, sense necessitat d'actualitzar el codi de la web.</p>
+                </div>
+                
                 <div class="bg-slate-800 rounded-[2rem] p-8 border border-slate-700 shadow-xl flex flex-col relative overflow-hidden">
                     <div class="absolute -right-10 -bottom-10 text-[200px] text-emerald-500/5 pointer-events-none"><i class="fa-solid fa-flask"></i></div>
                     <h3 class="font-black text-white mb-8 text-2xl tracking-tight relative z-10"><i class="fa-solid fa-plus-circle text-emerald-400 mr-2"></i> Inserció Manual de Preguntes</h3>
                     
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 relative z-10">
+                        <!-- Columna Enunciat i Dades -->
                         <div class="space-y-5">
-                            <div><label class="text-[10px] uppercase font-black text-slate-400 tracking-widest block mb-2">Redacció de l'Enunciat</label><textarea id="q-text" class="w-full bg-slate-950 border border-slate-700 rounded-2xl p-4 text-sm text-white font-bold h-32 resize-none outline-none focus:border-emerald-500 transition-colors shadow-inner" placeholder="Escriu aquí la pregunta literal..."></textarea></div>
+                            <div>
+                                <label class="text-[10px] uppercase font-black text-slate-400 tracking-widest block mb-2">Redacció de l'Enunciat</label>
+                                <textarea id="q-text" class="w-full bg-slate-950 border border-slate-700 rounded-2xl p-4 text-sm text-white font-bold h-32 resize-none outline-none focus:border-emerald-500 transition-colors shadow-inner" placeholder="Escriu aquí la pregunta literal del temari oficial..."></textarea>
+                            </div>
+                            
                             <div class="grid grid-cols-2 gap-4">
                                 <div>
                                     <label class="text-[10px] uppercase font-black text-slate-400 tracking-widest block mb-2">Àmbit Temàtic</label>
@@ -877,37 +933,80 @@
                                         <option value="General" class="font-bold text-emerald-400">Àmbit General / Altres</option>
                                     </select>
                                 </div>
-                                <div><label class="text-[10px] uppercase font-black text-slate-400 tracking-widest block mb-2">Explicació / Correcció</label><input type="text" id="q-exp" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3.5 text-sm text-white outline-none focus:border-emerald-500 transition-colors shadow-inner" placeholder="Opcional..."></div>
+                                <div>
+                                    <label class="text-[10px] uppercase font-black text-slate-400 tracking-widest block mb-2">Explicació / Correcció</label>
+                                    <input type="text" id="q-exp" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3.5 text-sm text-white outline-none focus:border-emerald-500 transition-colors shadow-inner" placeholder="Ex: Segons l'article 17.2 de la CE...">
+                                </div>
                             </div>
                         </div>
                         
+                        <!-- Columna Opcions -->
                         <div class="space-y-4 bg-slate-900/50 p-6 rounded-3xl border border-slate-700/50">
-                            <label class="text-[10px] uppercase font-black text-slate-400 tracking-widest block mb-2 border-b border-slate-700/80 pb-2">Gestió de Respostes</label>
-                            <div class="relative"><div class="absolute left-3 top-3.5 w-6 h-6 bg-emerald-500/20 text-emerald-400 rounded flex items-center justify-center text-xs font-black shadow-inner"><i class="fa-solid fa-check"></i></div><input type="text" id="q-opt-correct" class="w-full bg-emerald-950/20 border-2 border-emerald-600/50 rounded-xl pl-12 pr-4 py-3.5 text-sm text-white font-bold outline-none focus:border-emerald-400 transition-colors shadow-inner placeholder-emerald-700" placeholder="Escriu aquí la resposta EXACTA i CORRECTA"></div>
-                            <div class="relative"><div class="absolute left-3 top-3.5 w-6 h-6 bg-slate-800 text-slate-500 rounded flex items-center justify-center text-xs font-black shadow-inner">F1</div><input type="text" id="q-opt-f1" class="w-full bg-slate-950 border border-slate-700 rounded-xl pl-12 pr-4 py-3 text-sm text-white font-medium outline-none focus:border-slate-500 transition-colors shadow-inner" placeholder="Opció Falsa 1"></div>
-                            <div class="relative"><div class="absolute left-3 top-3.5 w-6 h-6 bg-slate-800 text-slate-500 rounded flex items-center justify-center text-xs font-black shadow-inner">F2</div><input type="text" id="q-opt-f2" class="w-full bg-slate-950 border border-slate-700 rounded-xl pl-12 pr-4 py-3 text-sm text-white font-medium outline-none focus:border-slate-500 transition-colors shadow-inner" placeholder="Opció Falsa 2"></div>
-                            <div class="relative"><div class="absolute left-3 top-3.5 w-6 h-6 bg-slate-800 text-slate-500 rounded flex items-center justify-center text-xs font-black shadow-inner">F3</div><input type="text" id="q-opt-f3" class="w-full bg-slate-950 border border-slate-700 rounded-xl pl-12 pr-4 py-3 text-sm text-white font-medium outline-none focus:border-slate-500 transition-colors shadow-inner" placeholder="Opció Falsa 3"></div>
+                            <label class="text-[10px] uppercase font-black text-slate-400 tracking-widest block mb-2 border-b border-slate-700/80 pb-2">Gestió de Respostes (El sistema les barrejarà sol)</label>
+                            
+                            <div class="relative">
+                                <div class="absolute left-3 top-3.5 w-6 h-6 bg-emerald-500/20 text-emerald-400 rounded flex items-center justify-center text-xs font-black shadow-inner"><i class="fa-solid fa-check"></i></div>
+                                <input type="text" id="q-opt-correct" class="w-full bg-emerald-950/20 border-2 border-emerald-600/50 rounded-xl pl-12 pr-4 py-3.5 text-sm text-white font-bold outline-none focus:border-emerald-400 transition-colors shadow-inner placeholder-emerald-700" placeholder="Escriu aquí la resposta EXACTA i CORRECTA">
+                            </div>
+                            
+                            <div class="relative">
+                                <div class="absolute left-3 top-3.5 w-6 h-6 bg-slate-800 text-slate-500 rounded flex items-center justify-center text-xs font-black shadow-inner">F1</div>
+                                <input type="text" id="q-opt-f1" class="w-full bg-slate-950 border border-slate-700 rounded-xl pl-12 pr-4 py-3 text-sm text-white font-medium outline-none focus:border-slate-500 transition-colors shadow-inner" placeholder="Opció Falsa 1">
+                            </div>
+                            
+                            <div class="relative">
+                                <div class="absolute left-3 top-3.5 w-6 h-6 bg-slate-800 text-slate-500 rounded flex items-center justify-center text-xs font-black shadow-inner">F2</div>
+                                <input type="text" id="q-opt-f2" class="w-full bg-slate-950 border border-slate-700 rounded-xl pl-12 pr-4 py-3 text-sm text-white font-medium outline-none focus:border-slate-500 transition-colors shadow-inner" placeholder="Opció Falsa 2">
+                            </div>
+                            
+                            <div class="relative">
+                                <div class="absolute left-3 top-3.5 w-6 h-6 bg-slate-800 text-slate-500 rounded flex items-center justify-center text-xs font-black shadow-inner">F3</div>
+                                <input type="text" id="q-opt-f3" class="w-full bg-slate-950 border border-slate-700 rounded-xl pl-12 pr-4 py-3 text-sm text-white font-medium outline-none focus:border-slate-500 transition-colors shadow-inner" placeholder="Opció Falsa 3">
+                            </div>
                         </div>
                         
-                        <div class="lg:col-span-2 pt-4 border-t border-slate-700/80"><button onclick="window.saveAdminQuestion()" class="w-full py-4 bg-emerald-600 hover:bg-emerald-500 text-white font-black uppercase tracking-widest rounded-xl transition-all shadow-[0_0_20px_rgba(16,185,129,0.3)] hover:-translate-y-0.5 flex items-center justify-center text-lg"><i class="fa-solid fa-cloud-arrow-up mr-3"></i> Pujar Pregunta a Producció</button></div>
+                        <!-- Botó Execució -->
+                        <div class="lg:col-span-2 pt-4 border-t border-slate-700/80">
+                            <button onclick="window.saveAdminQuestion()" class="w-full py-4 bg-emerald-600 hover:bg-emerald-500 text-white font-black uppercase tracking-widest rounded-xl transition-all shadow-[0_0_20px_rgba(16,185,129,0.3)] hover:-translate-y-0.5 flex items-center justify-center text-lg">
+                                <i class="fa-solid fa-cloud-arrow-up mr-3"></i> Pujar Pregunta a Producció
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
 
+            <!-- ADMIN TAB 4: GESTIÓ D'USUARIS -->
             <div id="admin-tab-users" class="admin-content-sec space-y-6 hidden animate-fade-in">
                 <div class="bg-slate-800 rounded-[2rem] p-8 border border-slate-700 shadow-xl flex flex-col">
                     <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
-                        <div><h3 class="font-black text-white text-2xl tracking-tight"><i class="fa-solid fa-users text-amber-400 mr-2"></i> Bases de Dades d'Opositors</h3></div>
+                        <div>
+                            <h3 class="font-black text-white text-2xl tracking-tight"><i class="fa-solid fa-users text-amber-400 mr-2"></i> Bases de Dades d'Opositors</h3>
+                            <p class="text-xs text-slate-400 font-medium mt-1">Llista i control d'accessos de tots els comptes creats a OpposTest.</p>
+                        </div>
                         <div class="flex flex-wrap gap-3 w-full md:w-auto">
-                            <div class="relative w-full md:w-64"><i class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-slate-500"></i><input type="text" id="admin-search-user" onkeyup="window.filterAdminUsers()" placeholder="Cercar per email o nom..." class="w-full bg-slate-950 border border-slate-700 rounded-xl pl-10 pr-3 py-2.5 text-sm text-white outline-none focus:border-brand-500 shadow-inner transition-colors"></div>
-                            <button onclick="window.resetGlobalRanking()" class="w-full md:w-auto flex-1 md:flex-none text-xs font-black uppercase tracking-widest bg-red-950/40 text-red-400 border border-red-900/50 hover:bg-red-900/60 px-5 py-2.5 rounded-xl transition-all flex items-center justify-center shadow-sm"><i class="fa-solid fa-broom mr-2"></i> Purgar Rànquing</button>
+                            <div class="relative w-full md:w-64">
+                                <i class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-slate-500"></i>
+                                <input type="text" id="admin-search-user" onkeyup="window.filterAdminUsers()" placeholder="Cercar per email o nom..." class="w-full bg-slate-950 border border-slate-700 rounded-xl pl-10 pr-3 py-2.5 text-sm text-white outline-none focus:border-brand-500 shadow-inner transition-colors">
+                            </div>
+                            <button onclick="window.resetGlobalRanking()" class="w-full md:w-auto flex-1 md:flex-none text-xs font-black uppercase tracking-widest bg-red-950/40 text-red-400 border border-red-900/50 hover:bg-red-900/60 px-5 py-2.5 rounded-xl transition-all flex items-center justify-center shadow-sm">
+                                <i class="fa-solid fa-broom mr-2"></i> Purgar Rànquing
+                            </button>
                         </div>
                     </div>
                     
                     <div class="overflow-y-auto max-h-[500px] bg-slate-950/50 rounded-2xl border border-slate-700 shadow-inner">
                         <table class="w-full text-left text-sm whitespace-nowrap">
-                            <thead class="text-slate-400 sticky top-0 bg-slate-900 border-b border-slate-700 shadow-sm z-10"><tr><th class="p-4 text-[10px] font-black uppercase tracking-widest">Identitat Digital</th><th class="p-4 text-[10px] font-black uppercase tracking-widest text-center">Últim Log-in</th><th class="p-4 text-[10px] font-black uppercase tracking-widest text-center">Estat Premium</th><th class="p-4 text-[10px] font-black uppercase tracking-widest text-center">Accés Permès</th></tr></thead>
-                            <tbody id="admin-users-tbody" class="divide-y divide-slate-800/80 text-slate-300 font-medium"><tr><td colspan="4" class="p-10 text-center"><i class="fa-solid fa-spinner fa-spin text-2xl text-slate-500"></i></td></tr></tbody>
+                            <thead class="text-slate-400 sticky top-0 bg-slate-900 border-b border-slate-700 shadow-sm z-10">
+                                <tr>
+                                    <th class="p-4 text-[10px] font-black uppercase tracking-widest">Identitat Digital</th>
+                                    <th class="p-4 text-[10px] font-black uppercase tracking-widest text-center">Últim Log-in</th>
+                                    <th class="p-4 text-[10px] font-black uppercase tracking-widest text-center">Estat Premium</th>
+                                    <th class="p-4 text-[10px] font-black uppercase tracking-widest text-center">Accés Permès</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-users-tbody" class="divide-y divide-slate-800/80 text-slate-300 font-medium">
+                                <tr><td colspan="4" class="p-10 text-center"><i class="fa-solid fa-spinner fa-spin text-2xl text-slate-500"></i></td></tr>
+                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -925,12 +1024,13 @@
             </div>
             <div class="flex items-center gap-6">
                 <a href="#" class="hover:text-brand-400 transition-colors uppercase tracking-widest">Bases de Convocatòria</a>
+                <a href="#" class="hover:text-brand-400 transition-colors uppercase tracking-widest">Suport Tècnic</a>
                 <span class="bg-slate-900 px-3 py-1.5 rounded-lg border border-slate-800 text-slate-400 shadow-inner">Code by GERARD APP'S</span>
             </div>
         </div>
     </footer>
 
-    <!-- TOAST CONTAINER -->
+    <!-- TOAST CONTAINER (Avisos flotants) -->
     <div id="toast-container" class="fixed bottom-6 right-6 z-[60] flex flex-col gap-3 pointer-events-none"></div>
     <!-- ========================================== -->
     <!--  1. MOTOR CENTRAL DE FIREBASE I AUTENTICACIÓ -->
@@ -1047,9 +1147,12 @@
         window.logoutUser = () => signOut(auth).then(() => window.showToast("Sessió tancada correctament.", "info"));
         
         window.handleUpdateUsername = async function() {
-            const user = auth.currentUser; if (!user) return; 
+            const user = auth.currentUser; 
+            if (!user) return; 
+            
             const newUsername = document.getElementById('profile-username-input').value.trim();
             if (!newUsername) return window.showToast("El nom no pot estar buit.", "error");
+            
             try {
                 const snap = await getDocs(query(collection(db, "users"), where("username", "==", newUsername)));
                 let duplicated = false; 
@@ -1143,6 +1246,7 @@
                 const snap = await getDocs(collection(db, "mossos_events"));
                 const container = document.getElementById('calendar-events-container');
                 let eventsList = [];
+                
                 snap.forEach(d => { 
                     const ev = d.data(); 
                     ev.id = d.id; 
@@ -1312,7 +1416,9 @@
                     window.showToast("Registre purgat de la base de dades", "success");
                     if(coll === 'mossos_events') window.loadAdminEvents();
                     if(coll === 'reports') window.loadAdminReports();
-                } catch(e) { window.showToast("Violació de Seguretat: No tens permisos d'Administrador.", "error"); }
+                } catch(e) { 
+                    window.showToast("Violació de Seguretat: No tens permisos d'Administrador.", "error"); 
+                }
             }
         };
 
@@ -1361,7 +1467,11 @@
                 correctAnswer: document.getElementById('q-opt-correct').value, 
                 explanation: document.getElementById('q-exp').value || '' 
             };
-            if(!q.question || q.options.length < 2 || !q.correctAnswer) return window.showToast("Falten dades vitals per la pregunta.", "error");
+            
+            if(!q.question || q.options.length < 2 || !q.correctAnswer) {
+                return window.showToast("Falten dades vitals per la pregunta.", "error");
+            }
+            
             try { 
                 await addDoc(collection(db, "mossos_custom_questions"), q); 
                 window.showToast("Pregunta injectada a producció.", "success"); 
@@ -1484,6 +1594,7 @@
                 const snap = await getDocs(collection(db, "users")); 
                 const today = window.getSpanishDateStr();
                 let count = 0;
+                
                 snap.forEach(async d => { 
                     const uData = d.data();
                     if(uData[`lastReset_${OPPO_ID}`] === today && (uData[`score_${OPPO_ID}`] > 0 || uData[`answeredToday_${OPPO_ID}`] > 0)) { 
@@ -1494,6 +1605,7 @@
                         count++;
                     } 
                 });
+                
                 setTimeout(() => { 
                     window.loadGlobalRanking(); 
                     window.showToast(`Rànquing purgat amb èxit (${count} afectats).`, "success"); 
@@ -1531,10 +1643,13 @@
             list.innerHTML = '<div class="text-center py-10"><i class="fa-solid fa-spinner fa-spin text-3xl text-slate-500"></i></div>';
             try {
                 const snap = await getDocs(collection(db, "reports"));
-                if(snap.empty) return list.innerHTML = '<div class="text-center py-10"><i class="fa-solid fa-clipboard-check text-4xl text-emerald-500/50 mb-3 block"></i><p class="text-sm font-bold text-slate-400">Tot net. Cap informe pendent.</p></div>';
+                if(snap.empty) {
+                    return list.innerHTML = '<div class="text-center py-10"><i class="fa-solid fa-clipboard-check text-4xl text-emerald-500/50 mb-3 block"></i><p class="text-sm font-bold text-slate-400">Tot net. Cap informe pendent.</p></div>';
+                }
                 
                 let html = ''; 
                 const escapeHTML = (str) => String(str || '').replace(/[&<>"'`=\/]/g, s => `&#${s.charCodeAt(0)};`);
+                
                 snap.forEach(doc => {
                     const d = doc.data();
                     html += `
@@ -1577,6 +1692,7 @@
             window.loadAdminUsers(); 
             window.loadAdminMetrics(); 
             window.loadAdminEvents();
+            
             try { 
                 const alertSnap = await getDoc(doc(db, "admin", "alert")); 
                 if(alertSnap.exists()) { 
@@ -1594,6 +1710,7 @@
                 b.classList.remove('text-white', 'border-purple-500', 'bg-slate-800/80'); 
                 b.classList.add('text-slate-500', 'border-transparent'); 
             });
+            
             event.currentTarget.classList.add('text-white', 'border-purple-500', 'bg-slate-800/80'); 
             event.currentTarget.classList.remove('text-slate-500', 'border-transparent');
         }
@@ -1601,6 +1718,7 @@
         window.filterAdminUsers = function() {
             const val = document.getElementById('admin-search-user').value.toLowerCase();
             const rows = document.querySelectorAll('#admin-users-tbody tr');
+            
             rows.forEach(r => {
                 if(r.cells.length > 1) {
                     const text = r.innerText.toLowerCase();
@@ -1609,7 +1727,7 @@
             });
         }
 
-        // Listener Inicial Alerta
+        // Listener Inicial Alerta Global
         getDoc(doc(db, "admin", "alert")).then(snap => { 
             if(snap.exists() && snap.data().isActive) { 
                 document.getElementById('global-alert-banner').classList.remove('hidden'); 
@@ -1624,8 +1742,8 @@
             const desktopLabel = document.getElementById('desktop-profile-label');
             
             if (user) {
-                // UI SETUP
-                if(!document.getElementById('sec-landing').classList.contains('hidden')) {
+                // Si el logueig es detecta mentre estàvem a Landing, anem a Dashboard
+                if (!document.getElementById('sec-landing').classList.contains('hidden')) {
                     document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden')); 
                     document.getElementById('sec-dashboard').classList.remove('hidden');
                     window.switchTab('dashboard');
@@ -1637,39 +1755,42 @@
 
                 try {
                     const snap = await getDoc(doc(db, "users", user.uid));
-                    if(snap.exists()) {
-                        const d = snap.data(); window.currentUserData = d;
+                    if (snap.exists()) {
+                        const d = snap.data(); 
+                        window.currentUserData = d;
                         
-                        if(d.isBlocked) { 
+                        if (d.isBlocked) { 
                             window.showToast("Aquest compte ha estat inhabilitat centralment.", "error"); 
                             await signOut(auth); 
                             return; 
                         }
 
                         const today = window.getSpanishDateStr();
-                        if(d[`lastLogin_${OPPO_ID}`] !== today) updateDoc(doc(db, "users", user.uid), { [`lastLogin_${OPPO_ID}`]: today }).catch(()=>{});
+                        if (d[`lastLogin_${OPPO_ID}`] !== today) {
+                            updateDoc(doc(db, "users", user.uid), { [`lastLogin_${OPPO_ID}`]: today }).catch(()=>{});
+                        }
 
-                        if(notLogged) notLogged.classList.add('hidden'); 
-                        if(logged) logged.classList.remove('hidden');
+                        if (notLogged) notLogged.classList.add('hidden'); 
+                        if (logged) logged.classList.remove('hidden');
                         
-                        // Botó Admin
                         const adminBtn = document.getElementById('btn-admin-panel');
-                        if(adminBtn) { if (user.email === "gerardlopezgarcia1@gmail.com") adminBtn.classList.remove('hidden'); else adminBtn.classList.add('hidden'); }
+                        if (adminBtn) { 
+                            if (user.email === "gerardlopezgarcia1@gmail.com") adminBtn.classList.remove('hidden'); 
+                            else adminBtn.classList.add('hidden'); 
+                        }
 
-                        if(desktopLabel) desktopLabel.innerHTML = `${d.username || 'Perfil'}`;
+                        if (desktopLabel) desktopLabel.innerHTML = `${d.username || 'Perfil'}`;
                         document.getElementById('profile-username-input').value = d.username || '';
                         document.getElementById('profile-email-val').innerText = user.email;
                         
-                        // Nivell calculat
-                        if(window.updateUserLevelUI) window.updateUserLevelUI(d[`lifetime_${OPPO_ID}`] || 0);
+                        if (window.updateUserLevelUI) window.updateUserLevelUI(d[`lifetime_${OPPO_ID}`] || 0);
                         
-                        // Referits
                         const refLinkEl = document.getElementById('profile-ref-link'); 
-                        if(refLinkEl) refLinkEl.value = d.username || '';
+                        if (refLinkEl) refLinkEl.value = d.username || '';
                         
                         const addRefBox = document.getElementById('profile-add-referral-box'); 
-                        if(addRefBox) { 
-                            if(!d.unlockedExams) addRefBox.classList.remove('hidden'); 
+                        if (addRefBox) { 
+                            if (!d.unlockedExams) addRefBox.classList.remove('hidden'); 
                             else addRefBox.classList.add('hidden'); 
                         }
                     }
@@ -1677,12 +1798,10 @@
                     console.warn("Error asíncron de perfil."); 
                 }
                 
-                // Disparem càrregues
                 window.loadDBCalendarEvents(); 
                 window.loadCustomDBQuestions();
                 
             } else {
-                // UI SETUP Not Logged
                 window.currentUserData = null;
                 document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden')); 
                 document.getElementById('sec-landing').classList.remove('hidden');
@@ -1691,16 +1810,16 @@
                 document.getElementById('mobile-nav').classList.add('hidden');
                 document.getElementById('mobile-login-btn').classList.remove('hidden');
 
-                if(notLogged) notLogged.classList.remove('hidden'); 
-                if(logged) logged.classList.add('hidden');
-                if(desktopLabel) desktopLabel.innerText = "Entrar";
+                if (notLogged) notLogged.classList.remove('hidden'); 
+                if (logged) logged.classList.add('hidden');
+                if (desktopLabel) desktopLabel.innerText = "Entrar";
                 
                 const adminBtn = document.getElementById('btn-admin-panel');
-                if(adminBtn) adminBtn.classList.add('hidden');
+                if (adminBtn) adminBtn.classList.add('hidden');
             }
             
-            if(window.loadGlobalRanking) window.loadGlobalRanking();
-            if(window.updateLocksUI) window.updateLocksUI(user, window.currentUserData);
+            if (window.loadGlobalRanking) window.loadGlobalRanking();
+            if (window.updateLocksUI) window.updateLocksUI(user, window.currentUserData);
         });
         
         window.getFirebaseCurrentUser = () => auth.currentUser;
@@ -1710,7 +1829,7 @@
     <!--  2. MOTOR LÒGIC D'EXÀMENS, JOCS I INTERFÍCIE -->
     <!-- ========================================== -->
     <script>
-        // Funció afegida de data per resoldre l'error 404/Function not found de manera global
+        // --- 1. VARIABLES GLOBALS BÀSIQUES ---
         window.getSpanishDateStr = function() {
             const now = new Date(); 
             const options = { timeZone: 'Europe/Madrid', year: 'numeric', month: '2-digit', day: '2-digit' };
@@ -1718,19 +1837,33 @@
             return `${parts.find(p => p.type === 'year').value}-${parts.find(p => p.type === 'month').value}-${parts.find(p => p.type === 'day').value}`;
         }
 
-        // --- SISTEMA D'EXÀMENS OFICIAL ---
+        // --- 5. GESTIÓ D'EXÀMENS (Continuació) ---
         window.switchTab = function(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
             
             document.querySelectorAll('.tab-btn').forEach(b => { 
-                if(b.id !== 'nav-profile') { b.classList.remove('bg-brand-600', 'text-white', 'shadow-md'); b.classList.add('text-slate-400'); } 
+                if (b.id !== 'nav-profile') { 
+                    b.classList.remove('bg-brand-600', 'text-white', 'shadow-md'); 
+                    b.classList.add('text-slate-400'); 
+                } 
             });
-            const activeBtn = document.getElementById('nav-' + tabId); 
-            if(activeBtn && tabId !== 'profile') { activeBtn.classList.add('bg-brand-600', 'text-white', 'shadow-md'); activeBtn.classList.remove('text-slate-400'); }
             
-            document.querySelectorAll('.mob-tab-btn').forEach(b => { b.classList.remove('text-brand-400'); b.classList.add('text-slate-500'); });
+            const activeBtn = document.getElementById('nav-' + tabId); 
+            if (activeBtn && tabId !== 'profile') { 
+                activeBtn.classList.add('bg-brand-600', 'text-white', 'shadow-md'); 
+                activeBtn.classList.remove('text-slate-400'); 
+            }
+            
+            document.querySelectorAll('.mob-tab-btn').forEach(b => { 
+                b.classList.remove('text-brand-400'); 
+                b.classList.add('text-slate-500'); 
+            });
+            
             const activeMobBtn = document.getElementById('nav-mob-' + tabId); 
-            if(activeMobBtn) { activeMobBtn.classList.remove('text-slate-500'); activeMobBtn.classList.add('text-brand-400'); }
+            if (activeMobBtn) { 
+                activeMobBtn.classList.remove('text-slate-500'); 
+                activeMobBtn.classList.add('text-brand-400'); 
+            }
             
             document.getElementById('sec-' + tabId).classList.remove('hidden');
             
@@ -1746,17 +1879,28 @@
         }
 
         window.updateLocksUI = function(user, userData = null) {
-            const logged = !!user; const examsUnlocked = userData ? userData.unlockedExams : false;
-            document.querySelectorAll('.lock-icon').forEach(i => { if(!logged || !examsUnlocked) i.classList.remove('hidden'); else i.classList.add('hidden'); });
+            const logged = !!user; 
+            const examsUnlocked = userData ? userData.unlockedExams : false;
+            document.querySelectorAll('.lock-icon').forEach(i => { 
+                if (!logged || !examsUnlocked) i.classList.remove('hidden'); 
+                else i.classList.add('hidden'); 
+            });
         }
 
         window.prepareExamMode = function(mode) {
-            if(!window.getFirebaseCurrentUser() && mode !== 'practice') { window.showToast("Alerta: Inicia sessió gratuïta per obrir aquesta zona.", "error"); return window.openAuthModal(); }
-            if((mode === 'topic' || mode === 'weak') && window.currentUserData && !window.currentUserData.unlockedExams) { 
+            if (!window.getFirebaseCurrentUser() && mode !== 'practice') { 
+                window.showToast("Alerta: Inicia sessió gratuïta per obrir aquesta zona.", "error"); 
+                return window.openAuthModal(); 
+            }
+            
+            if ((mode === 'topic' || mode === 'weak') && window.currentUserData && !window.currentUserData.unlockedExams) { 
                 window.showToast("Zona Restringida! Desbloqueja-la enviant el teu codi des del teu perfil.", "error"); 
                 return window.switchTab('profile'); 
             }
-            if(window.questionBank.length === 0) return window.showToast("Banc de dades no sincronitzat. Torna a carregar.", "error");
+            
+            if (window.questionBank.length === 0) {
+                return window.showToast("Banc de dades no sincronitzat. Torna a carregar.", "error");
+            }
 
             examConfig.mode = mode; 
             const modal = document.getElementById('pre-exam-modal'); 
@@ -1766,38 +1910,50 @@
             modal.classList.remove('hidden'); 
             document.getElementById('exam-menu-container').classList.add('hidden');
             
-            if(mode === 'simulacre') { 
+            if (mode === 'simulacre') { 
                 title.innerText = "Simulacre Oficial";
-                content.innerHTML = `<div class="bg-brand-900/10 border border-brand-500/20 p-6 rounded-2xl text-center shadow-inner"><p class="text-4xl font-black text-white tracking-tighter drop-shadow-md">30 <span class="text-base font-bold text-slate-500 uppercase tracking-widest">Preguntes</span></p><p class="text-sm font-bold text-brand-400 mt-2"><i class="fa-solid fa-stopwatch mr-1"></i> Temps límit: 30 Minuts</p></div>`; 
-                examConfig.hasTimer = true; examConfig.secondsLimit = 30 * 60; examConfig.count = 30; 
+                content.innerHTML = `
+                <div class="bg-brand-900/10 border border-brand-500/20 p-6 rounded-2xl text-center shadow-inner">
+                    <p class="text-4xl font-black text-white tracking-tighter drop-shadow-md">30 <span class="text-base font-bold text-slate-500 uppercase tracking-widest">Preguntes</span></p>
+                    <p class="text-sm font-bold text-brand-400 mt-2"><i class="fa-solid fa-stopwatch mr-1"></i> Temps límit: 30 Minuts</p>
+                </div>`; 
+                examConfig.hasTimer = true; 
+                examConfig.secondsLimit = 30 * 60; 
+                examConfig.count = 30; 
             } 
-            else if(mode === 'practice') { 
+            else if (mode === 'practice') { 
                 title.innerText = "Pràctica Lliure";
-                content.innerHTML = `<label class="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-3">Volum d'Entrenament:</label>
+                content.innerHTML = `
+                <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-3">Volum d'Entrenament:</label>
                 <div class="flex gap-4">
                     <button onclick="examConfig.count=10; this.parentElement.querySelectorAll('button').forEach(b=>b.className='flex-1 py-4 bg-slate-900 text-slate-400 rounded-xl text-lg font-black border border-slate-700 transition-all'); this.className='flex-1 py-4 bg-emerald-600 text-white rounded-xl text-lg font-black border border-emerald-500 shadow-[0_0_15px_rgba(16,185,129,0.3)] transition-all';" class="flex-1 py-4 bg-emerald-600 text-white rounded-xl text-lg font-black border border-emerald-500 shadow-[0_0_15px_rgba(16,185,129,0.3)] transition-all">10</button>
                     <button onclick="examConfig.count=30; this.parentElement.querySelectorAll('button').forEach(b=>b.className='flex-1 py-4 bg-slate-900 text-slate-400 rounded-xl text-lg font-black border border-slate-700 transition-all'); this.className='flex-1 py-4 bg-emerald-600 text-white rounded-xl text-lg font-black border border-emerald-500 shadow-[0_0_15px_rgba(16,185,129,0.3)] transition-all';" class="flex-1 py-4 bg-slate-900 text-slate-400 rounded-xl text-lg font-black border border-slate-700 transition-all">30</button>
                     <button onclick="examConfig.count=50; this.parentElement.querySelectorAll('button').forEach(b=>b.className='flex-1 py-4 bg-slate-900 text-slate-400 rounded-xl text-lg font-black border border-slate-700 transition-all'); this.className='flex-1 py-4 bg-emerald-600 text-white rounded-xl text-lg font-black border border-emerald-500 shadow-[0_0_15px_rgba(16,185,129,0.3)] transition-all';" class="flex-1 py-4 bg-slate-900 text-slate-400 rounded-xl text-lg font-black border border-slate-700 transition-all">50</button>
                 </div>`; 
-                examConfig.hasTimer = false; examConfig.count = 10; 
+                examConfig.hasTimer = false; 
+                examConfig.count = 10; 
             }
-            else if(mode === 'topic') { 
+            else if (mode === 'topic') { 
                 title.innerText = "Tests per Àmbit Específic";
-                content.innerHTML = `<label class="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-3">Quin sector vols assegurar?</label>
+                content.innerHTML = `
+                <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-3">Quin sector vols assegurar?</label>
                 <select id="config-topic-select" class="w-full bg-slate-950 border border-slate-700 p-4 text-white font-bold rounded-xl outline-none focus:border-amber-500 transition-colors shadow-inner">
                     <option value="A">Àmbit A (Entorn i Història)</option>
                     <option value="B">Àmbit B (Lleis i Institucions)</option>
                     <option value="C">Àmbit C (Policia i Seguretat)</option>
                 </select>`; 
-                examConfig.hasTimer = false; examConfig.count = 30; 
+                examConfig.hasTimer = false; 
+                examConfig.count = 30; 
             }
-            else if(mode === 'weak') { 
+            else if (mode === 'weak') { 
                 title.innerText = "Algoritme de Reforç";
-                content.innerHTML = `<div class="bg-orange-900/10 border border-orange-500/20 p-6 rounded-2xl text-center shadow-inner">
+                content.innerHTML = `
+                <div class="bg-orange-900/10 border border-orange-500/20 p-6 rounded-2xl text-center shadow-inner">
                     <i class="fa-solid fa-brain text-5xl text-orange-500/50 mb-4 animate-pulse"></i>
                     <p class="text-sm font-bold text-orange-400 leading-relaxed">Generant arquitectura de test (15Qs) basada exclusivament en l'historial de fallades del teu compte...</p>
                 </div>`; 
-                examConfig.hasTimer = false; examConfig.count = 15; 
+                examConfig.hasTimer = false; 
+                examConfig.count = 15; 
             }
         }
 
@@ -1814,7 +1970,7 @@
             document.getElementById('pre-exam-modal').classList.add('hidden');
             
             let subset = [];
-            if(examConfig.mode === 'topic') { 
+            if (examConfig.mode === 'topic') { 
                 const bloc = document.getElementById('config-topic-select').value; 
                 subset = window.questionBank.filter(q => q.superBloc === bloc).sort(() => 0.5 - Math.random()); 
             } 
@@ -1822,10 +1978,10 @@
                 const stats = examHistory.topicsStats || {}; 
                 let weakQs = window.questionBank.filter(q => { 
                     const s = stats[q.topic]; 
-                    if(!s || s.total === 0) return true; 
+                    if (!s || s.total === 0) return true; 
                     return (s.correct / s.total) < 0.7; 
                 }); 
-                if(weakQs.length === 0) weakQs = window.questionBank; 
+                if (weakQs.length === 0) weakQs = window.questionBank; 
                 subset = weakQs.sort(() => 0.5 - Math.random()); 
             } 
             else { 
@@ -1842,7 +1998,7 @@
             document.getElementById('exam-active-container').classList.remove('hidden');
             
             const timerBoxCont = document.getElementById('timer-box-container');
-            if(examConfig.hasTimer) { 
+            if (examConfig.hasTimer) { 
                 timeLeftSeconds = examConfig.secondsLimit; 
                 document.getElementById('timer-box').innerText = `${Math.floor(timeLeftSeconds/60)}:00`; 
                 timerBoxCont.classList.remove('hidden'); 
@@ -1915,7 +2071,6 @@
             questionStartTime = Date.now(); 
             const q = currentExam[currentQuestionIdx];
             
-            // LA BARRA DEPÈN DE LES CONTESTADES, NO DE L'ÍNDEX
             const answeredCount = Object.keys(userAnswers).filter(k => userAnswers[k].choice !== undefined).length;
             document.getElementById('exam-progress-bar').style.width = `${(answeredCount / currentExam.length) * 100}%`;
             document.getElementById('exam-progress-text').innerText = `${answeredCount}/${currentExam.length}`;
@@ -1994,7 +2149,7 @@
             });
             
             const expBox = document.getElementById('explanation-box');
-            if(expBox) { 
+            if (expBox) { 
                 if (hasChosen && examConfig.mode !== 'simulacre') { 
                     expBox.classList.remove('hidden'); 
                     const isCorrect = ansObj.isCorrect; 
@@ -2034,9 +2189,10 @@
                 const hasAns = ans !== undefined && ans.choice !== undefined; 
                 const isCorrect = hasAns && ans.isCorrect;
                 
-                if(!hasAns) blank++; 
-                else { 
-                    answeredOnly++; // EL TEU REQUISIT CLAU: Només sumem a l'objectiu diari si realment has marcat l'opció.
+                if(!hasAns) {
+                    blank++; 
+                } else { 
+                    answeredOnly++; 
                     if (isCorrect) correct++; 
                     else { 
                         let safeKey = q.question.replace(/[\.\/\[\]\*~]/g, '').substring(0, 50); 
@@ -2063,14 +2219,13 @@
                     </div>`;
             });
 
-            // Fórmula Oficial Mossos d'Esquadra (Es resta 0.33 per cada errònia. Es deixa en blanc no resta).
             const incorrect = currentExam.length - correct - blank;
             let rawScore = correct - (incorrect * 0.33333333333);
             let grade = (rawScore / currentExam.length) * 10; 
             if (grade < 0) grade = 0; 
             grade = Number(grade.toFixed(2));
             
-            if(examConfig.mode === 'simulacre') {
+            if (examConfig.mode === 'simulacre') {
                 examHistory.done += 1; 
                 examHistory.totalCorrect += correct; 
                 examHistory.totalQuestions += currentExam.length; 
@@ -2118,7 +2273,7 @@
             
             const iconBadge = document.getElementById('result-icon-badge'); 
             const scoreText = document.getElementById('result-score-text');
-            if(grade >= 5) { 
+            if (grade >= 5) { 
                 iconBadge.innerHTML = '<i class="fa-solid fa-check text-emerald-400"></i>'; 
                 iconBadge.className = "w-28 h-28 rounded-full mx-auto flex items-center justify-center text-6xl mb-6 bg-emerald-900/40 border-4 border-emerald-500/50 shadow-[0_0_50px_rgba(16,185,129,0.3)] animate-pulse-fast"; 
                 scoreText.innerText = "Apte! Bon nivell, continua blindant aquests temes."; 
@@ -2133,11 +2288,11 @@
             }
 
             const compBox = document.getElementById('res-comparison-box');
-            if(examHistory.done > 1 && examConfig.mode === 'simulacre') { 
+            if (examHistory.done > 1 && examConfig.mode === 'simulacre') { 
                 compBox.classList.remove('hidden'); 
                 const compVal = document.getElementById('res-comp-val'); 
                 const diff = (grade - prevBest).toFixed(2); 
-                if(diff > 0) { 
+                if (diff > 0) { 
                     compVal.innerHTML = `<i class="fa-solid fa-arrow-trend-up mr-2"></i>+${diff} Nou Rècord!`; 
                     compVal.className = "font-black px-4 py-2 rounded-xl bg-emerald-900/50 text-emerald-400 border border-emerald-500/50 shadow-inner text-lg"; 
                 } else if(diff == 0) { 
@@ -2160,11 +2315,10 @@
             document.getElementById('btn-rank-points').className = metric === 'points' ? "flex-1 sm:flex-none px-6 py-3 rounded-xl text-xs font-black uppercase tracking-wider transition-all bg-brand-600 text-white shadow-lg" : "flex-1 sm:flex-none px-6 py-3 rounded-xl text-xs font-black uppercase tracking-wider transition-all text-slate-400 hover:text-white hover:bg-slate-800";
             document.getElementById('btn-rank-acc').className = metric === 'accuracy' ? "flex-1 sm:flex-none px-6 py-3 rounded-xl text-xs font-black uppercase tracking-wider transition-all bg-emerald-600 text-white shadow-lg" : "flex-1 sm:flex-none px-6 py-3 rounded-xl text-xs font-black uppercase tracking-wider transition-all text-slate-400 hover:text-white hover:bg-slate-800";
             document.getElementById('th-ranking-metric').innerText = metric === 'points' ? 'Punts Avui' : 'Precisió Avui';
-            if(window.loadGlobalRanking) window.loadGlobalRanking();
+            if (window.loadGlobalRanking) window.loadGlobalRanking();
         }
 
-        // --- SISTEMA MINIJOCS GAMIFICATS ---
-        
+        // --- 6. MINIJOCS GAMIFICATS ---
         window.exitMinigame = function(containerId) {
             document.getElementById(containerId).classList.add('hidden');
             document.getElementById('minigames-menu').classList.remove('hidden');
@@ -2177,7 +2331,7 @@
             soundEnabled = !soundEnabled; 
             localStorage.setItem('oppos_sound', soundEnabled); 
             document.getElementById('sound-status-text').innerText = soundEnabled ? 'Activat' : 'Desactivat'; 
-            if(soundEnabled) playSound(true); 
+            if (soundEnabled) playSound(true); 
         }
 
         function playSound(isCorrect) {
@@ -2188,16 +2342,22 @@
             osc.connect(gainNode); 
             gainNode.connect(audioCtx.destination);
             if (isCorrect) { 
-                osc.type = 'sine'; osc.frequency.setValueAtTime(800, audioCtx.currentTime); osc.frequency.exponentialRampToValueAtTime(1200, audioCtx.currentTime + 0.1); 
-                gainNode.gain.setValueAtTime(0.2, audioCtx.currentTime); gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3); 
+                osc.type = 'sine'; 
+                osc.frequency.setValueAtTime(800, audioCtx.currentTime); 
+                osc.frequency.exponentialRampToValueAtTime(1200, audioCtx.currentTime + 0.1); 
+                gainNode.gain.setValueAtTime(0.2, audioCtx.currentTime); 
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3); 
             } else { 
-                osc.type = 'sawtooth'; osc.frequency.setValueAtTime(150, audioCtx.currentTime); osc.frequency.exponentialRampToValueAtTime(100, audioCtx.currentTime + 0.2); 
-                gainNode.gain.setValueAtTime(0.2, audioCtx.currentTime); gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3); 
+                osc.type = 'sawtooth'; 
+                osc.frequency.setValueAtTime(150, audioCtx.currentTime); 
+                osc.frequency.exponentialRampToValueAtTime(100, audioCtx.currentTime + 0.2); 
+                gainNode.gain.setValueAtTime(0.2, audioCtx.currentTime); 
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3); 
             }
-            osc.start(); osc.stop(audioCtx.currentTime + 0.3);
+            osc.start(); 
+            osc.stop(audioCtx.currentTime + 0.3);
         }
 
-        // JOC 1: TRIAGE TÀCTIC
         let triageTimerInt = null; let triageScore = 0; let triageCurrentQ = null; let triageTimeLeft = 8;
         
         const triageQuestions = [ 
@@ -2236,6 +2396,7 @@
             
             document.getElementById('triage-time-bar').style.transition = 'none'; 
             document.getElementById('triage-time-bar').style.width = '100%';
+            
             setTimeout(() => { 
                 document.getElementById('triage-time-bar').style.transition = 'width 8s linear'; 
                 document.getElementById('triage-time-bar').style.width = '0%'; 
@@ -2252,13 +2413,13 @@
             }, 100);
         }
 
-        window.handleTriage = function(sideVal) {
+        window.handleTriage = function(sideVal) { 
             clearInterval(triageTimerInt); 
             const card = document.getElementById('triage-card'); 
             const feedback = document.getElementById('triage-feedback'); 
             const icon = document.getElementById('triage-icon');
 
-            if(sideVal === triageCurrentQ.correct) {
+            if (sideVal === triageCurrentQ.correct) {
                 card.style.transform = sideVal === 0 ? 'translateX(-200px) rotate(-15deg)' : 'translateX(200px) rotate(15deg)'; 
                 card.style.opacity = '0';
                 
@@ -2269,7 +2430,7 @@
                 triageScore += 10; 
                 document.getElementById('triage-score').innerText = triageScore;
                 
-                if(window.getFirebaseCurrentUser && window.getFirebaseCurrentUser()) window.updateUserScoreInFirestore(1, 1);
+                if (window.getFirebaseCurrentUser && window.getFirebaseCurrentUser()) window.updateUserScoreInFirestore(1, 1);
                 
                 setTimeout(() => { 
                     feedback.style.opacity = '0'; 
@@ -2299,20 +2460,22 @@
             }, 1500);
         }
 
-        // JOC 2: EL PENJAT LEGAL 
         let hmDict = []; let hmWord = ""; let hmGuessed = []; let hmLives = 6; let hmCurrentScore = 0; 
         let hmHighScore = parseInt(localStorage.getItem('oppos_hm_highscore_' + window.OPPOSITION.id)) || 0;
         
         async function loadHangmanDict() {
             try { 
-                const res = await fetch('../penjat.json'); 
+                const res = await fetch('penjat.json'); 
                 if (res.ok) hmDict = await res.json(); 
             } catch(e) {}
-            if (hmDict.length === 0) hmDict = [
-                { word: "CONSTITUCIO", def: "Llei fonamental de l'Estat" }, 
-                { word: "HABEAS CORPUS", def: "Dret a ser posat a disposició judicial ràpidament si t'han detingut il·legalment" },
-                { word: "SINDIC DE GREUGES", def: "Alt comissionat del Parlament que defensa els drets de les persones." }
-            ];
+            
+            if (hmDict.length === 0) {
+                hmDict = [
+                    { word: "CONSTITUCIO", def: "Llei fonamental de l'Estat" }, 
+                    { word: "HABEAS CORPUS", def: "Dret a ser posat a disposició judicial ràpidament si t'han detingut il·legalment" },
+                    { word: "SINDIC DE GREUGES", def: "Alt comissionat del Parlament que defensa els drets de les persones." }
+                ];
+            }
         }
 
         window.startHangman = function() {
@@ -2337,8 +2500,8 @@
 
         function renderHmWord() { 
             let display = ""; 
-            for(let char of hmWord) { 
-                if(char === " ") display += "&nbsp;&nbsp;"; 
+            for (let char of hmWord) { 
+                if (char === " ") display += "&nbsp;&nbsp;"; 
                 else if(hmGuessed.includes(char)) display += char + " "; 
                 else display += "_ "; 
             } 
@@ -2360,6 +2523,7 @@
         function guessHmLetter(letter, btn) {
             btn.disabled = true; 
             hmGuessed.push(letter);
+            
             if(hmWord.includes(letter)) { 
                 btn.classList.replace('bg-slate-800', 'bg-emerald-600'); 
                 btn.classList.replace('border-slate-700', 'border-emerald-500');
@@ -2422,11 +2586,10 @@
             }
         }
 
-        // JOC 3: RUTA DE PATRULLA
         let patrolPos = 0; let suspectPos = 3; let patrolQ = null;
 
         window.startPatrol = function() {
-            if(window.questionBank.length === 0) return window.showToast("Banc de dades buit. Torna-ho a provar.", "error");
+            if (window.questionBank.length === 0) return window.showToast("Banc de dades buit. Torna-ho a provar.", "error");
             document.getElementById('minigames-menu').classList.add('hidden'); 
             document.getElementById('game-patrol').classList.remove('hidden'); 
             document.getElementById('patrol-result-overlay').classList.add('hidden'); 
@@ -2491,7 +2654,7 @@
             
             overlay.classList.remove('hidden');
             
-            if(win) { 
+            if (win) { 
                 icon.innerHTML = '<i class="fa-solid fa-handcuffs text-brand-400"></i>';
                 icon.className = "w-28 h-28 rounded-full flex items-center justify-center text-6xl mb-6 shadow-2xl bg-brand-900/40 border-4 border-brand-500/50";
                 title.innerText = "Sospitós assegurat!"; 
