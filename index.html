@@ -3,37 +3,255 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OpposTest | Preparació d'Oposicions a Catalunya</title>
+    <title>OpposTest | El portal líder d'oposicions a Catalunya</title>
+    
+    <meta name="description" content="Prepara les teves oposicions a Mossos d'Esquadra i cossos de seguretat de Catalunya amb tests intel·ligents, simulacres reals i rànquing diari.">
+    <link rel="icon" type="image/png" href="mossos/logoi.png">
+    
+    <!-- Tailwind CSS & Fonts -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'] },
+                    colors: {
+                        brand: {
+                            500: '#2563eb',
+                            600: '#1d4ed8',
+                            700: '#1e40af'
+                        }
+                    },
+                    animation: {
+                        'blob': 'blob 7s infinite',
+                        'fade-in': 'fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards'
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -40px) scale(1.08)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.95)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' }
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0', transform: 'translateY(16px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-card {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.85) 100%);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+    </style>
 </head>
-<body class="min-h-screen flex flex-col items-center justify-center bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-900 via-slate-950 to-black p-6">
-    
-    <div class="text-center mb-12 animate-[pulse_3s_ease-in-out_infinite]">
-        <div class="w-20 h-20 bg-brand-600 rounded-2xl mx-auto flex items-center justify-center text-white font-black text-4xl shadow-[0_0_40px_rgba(37,99,235,0.4)] mb-6 bg-gradient-to-br from-blue-500 to-blue-700 border border-blue-400/50">OT</div>
-        <h1 class="text-4xl sm:text-5xl font-black tracking-tight text-white">OpposTest</h1>
-        <p class="text-slate-400 mt-2 font-medium">Selecciona l'oposició que estàs preparant</p>
+<body class="min-h-full flex flex-col justify-between bg-slate-950 font-sans antialiased text-slate-100 selection:bg-brand-500 selection:text-white relative overflow-x-hidden">
+
+    <!-- EFECTES DE LLUM DE FONS -->
+    <div class="fixed inset-0 pointer-events-none overflow-hidden">
+        <div class="absolute -top-40 left-1/2 -translate-x-1/2 w-[700px] h-[500px] bg-blue-600/15 rounded-full blur-[140px] animate-blob"></div>
+        <div class="absolute top-1/2 -left-40 w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[140px] animate-blob" style="animation-delay: 2s;"></div>
+        <div class="absolute -bottom-40 right-0 w-[500px] h-[500px] bg-red-600/10 rounded-full blur-[140px] animate-blob" style="animation-delay: 4s;"></div>
+        <div class="absolute inset-0 bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:24px_24px] opacity-25"></div>
     </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full max-w-4xl">
-        <a href="mossos/" class="group relative overflow-hidden rounded-3xl bg-slate-900/80 border border-slate-800 p-8 hover:border-blue-500 transition-all hover:-translate-y-2 shadow-xl hover:shadow-[0_0_40px_rgba(37,99,235,0.2)]">
-            <div class="absolute -right-10 -top-10 text-[150px] text-blue-500/5 group-hover:text-blue-500/10 transition-colors"><i class="fa-solid fa-shield-halved"></i></div>
-            <div class="w-16 h-16 bg-blue-500/10 border border-blue-500/20 text-blue-400 rounded-2xl flex items-center justify-center text-3xl mb-6 shadow-inner"><i class="fa-solid fa-car-side"></i></div>
-            <h2 class="text-2xl font-bold text-white mb-2">Mossos d'Esquadra</h2>
-            <p class="text-slate-400 text-sm leading-relaxed">Àmbit Institucional, Seguretat i Entorn Social. Entrena amb milers de preguntes i simulacres cronometrats.</p>
-            <div class="mt-6 flex items-center text-blue-400 font-bold text-sm">Entrar a l'Acadèmia <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-2 transition-transform"></i></div>
-        </a>
+    <!-- CONTINGUT PRINCIPAL -->
+    <main class="relative z-10 max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 flex-1 flex flex-col justify-center items-center">
+        
+        <!-- HEADER / BRAND HERO -->
+        <div class="text-center space-y-5 max-w-3xl mx-auto mb-14 animate-fade-in">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/80 border border-slate-700/80 text-xs font-bold text-slate-300 shadow-inner">
+                <span class="flex h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span>Plataforma d'Entrenament Tècnic 2026</span>
+            </div>
 
-        <a href="bombers/" class="group relative overflow-hidden rounded-3xl bg-slate-900/80 border border-slate-800 p-8 hover:border-red-500 transition-all hover:-translate-y-2 shadow-xl hover:shadow-[0_0_40px_rgba(239,68,68,0.2)]">
-            <div class="absolute -right-10 -top-10 text-[150px] text-red-500/5 group-hover:text-red-500/10 transition-colors"><i class="fa-solid fa-fire-extinguisher"></i></div>
-            <div class="w-16 h-16 bg-red-500/10 border border-red-500/20 text-red-400 rounded-2xl flex items-center justify-center text-3xl mb-6 shadow-inner"><i class="fa-solid fa-truck-fast"></i></div>
-            <h2 class="text-2xl font-bold text-white mb-2">Bombers de la Generalitat</h2>
-            <p class="text-slate-400 text-sm leading-relaxed">Legislació, Física, Química, Construcció i Mecànica. Prepara la prova de coneixements amb els nostres tests.</p>
-            <div class="mt-6 flex items-center text-red-400 font-bold text-sm">Entrar a l'Acadèmia <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-2 transition-transform"></i></div>
-        </a>
-    </div>
-    
-    <div class="mt-16 text-xs font-bold text-slate-600 uppercase tracking-widest">Més oposicions pròximament</div>
+            <div class="flex items-center justify-center gap-3">
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-brand-600 to-blue-400 p-[1px] shadow-lg shadow-brand-500/20">
+                    <div class="w-full h-full bg-slate-950 rounded-2xl flex items-center justify-center text-white font-black text-xl tracking-wider">
+                        OT
+                    </div>
+                </div>
+                <h1 class="text-4xl sm:text-6xl font-black text-white tracking-tight">
+                    Oppos<span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">Test</span>
+                </h1>
+            </div>
+
+            <p class="text-base sm:text-xl text-slate-400 font-medium leading-relaxed max-w-2xl mx-auto">
+                Selecciona la teva convocatòria per accedir a bancs de preguntes oficials, simulacres cronometrats i eines d'estudi gamificades.
+            </p>
+        </div>
+
+        <!-- TARGETES D'OPOSICIONS -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-4xl mx-auto mb-16 animate-fade-in" style="animation-delay: 0.15s;">
+            
+            <!-- TARGETA 1: MOSSOS D'ESQUADRA (ACTIVA I OPERATIVA) -->
+            <a href="mossos/" class="group relative rounded-3xl glass-card border border-blue-500/30 p-8 sm:p-10 flex flex-col justify-between hover:border-blue-400 hover:shadow-[0_0_50px_rgba(37,99,235,0.25)] transition-all duration-300 transform hover:-translate-y-1.5 overflow-hidden">
+                <!-- Brillantor decorativa de fons -->
+                <div class="absolute -right-12 -top-12 w-48 h-48 bg-blue-500/10 rounded-full blur-3xl pointer-events-none group-hover:scale-150 transition-transform duration-500"></div>
+                <div class="absolute -right-4 -bottom-6 text-9xl text-blue-500/5 group-hover:text-blue-500/10 transition-colors pointer-events-none">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+
+                <div>
+                    <!-- Capçalera targeta -->
+                    <div class="flex items-center justify-between gap-4 mb-6">
+                        <div class="w-16 h-16 rounded-2xl bg-blue-500/10 border border-blue-500/30 text-blue-400 flex items-center justify-center text-3xl shadow-inner group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+                        <span class="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center gap-1.5">
+                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span> Operatiu
+                        </span>
+                    </div>
+
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight mb-3 group-hover:text-blue-300 transition-colors">
+                        Mossos d'Esquadra
+                    </h2>
+                    <p class="text-sm text-slate-400 leading-relaxed font-medium mb-6">
+                        Preparació integral dels àmbits A, B i C. Entrena amb milers de preguntes del temari oficial i competeix al rànquing autonòmic.
+                    </p>
+
+                    <!-- Punts destacats -->
+                    <ul class="space-y-2.5 text-xs text-slate-300 font-semibold mb-8">
+                        <li class="flex items-center gap-2.5">
+                            <i class="fa-solid fa-circle-check text-blue-400 text-sm"></i>
+                            <span>Simulacres d'avaluació cronometrats</span>
+                        </li>
+                        <li class="flex items-center gap-2.5">
+                            <i class="fa-solid fa-circle-check text-blue-400 text-sm"></i>
+                            <span>Rànquing diari d'opositors en temps real</span>
+                        </li>
+                        <li class="flex items-center gap-2.5">
+                            <i class="fa-solid fa-circle-check text-blue-400 text-sm"></i>
+                            <span>Minijocs tàctics (Triage, Penjat i Patrulla)</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Botó d'acció -->
+                <div class="w-full py-4 px-6 bg-brand-600 group-hover:bg-brand-500 text-white font-bold rounded-2xl text-sm transition-all shadow-lg shadow-brand-600/30 flex items-center justify-center gap-2 group-hover:gap-3">
+                    <span>Entrar a l'Acadèmia de Mossos</span>
+                    <i class="fa-solid fa-arrow-right text-xs"></i>
+                </div>
+            </a>
+
+            <!-- TARGETA 2: BOMBERS DE LA GENERALITAT (PRÒXIMAMENT / EN PREPARACIÓ) -->
+            <div class="relative rounded-3xl glass-card border border-slate-800/80 p-8 sm:p-10 flex flex-col justify-between opacity-85 hover:opacity-100 hover:border-slate-700 transition-all duration-300 overflow-hidden group">
+                <div class="absolute -right-4 -bottom-6 text-9xl text-red-500/5 pointer-events-none">
+                    <i class="fa-solid fa-fire-extinguisher"></i>
+                </div>
+
+                <div>
+                    <!-- Capçalera targeta -->
+                    <div class="flex items-center justify-between gap-4 mb-6">
+                        <div class="w-16 h-16 rounded-2xl bg-red-500/10 border border-red-500/20 text-red-400 flex items-center justify-center text-3xl shadow-inner">
+                            <i class="fa-solid fa-truck-fast"></i>
+                        </div>
+                        <span class="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider bg-amber-500/10 border border-amber-500/30 text-amber-400 flex items-center gap-1.5">
+                            <i class="fa-solid fa-clock-rotate-left text-[9px]"></i> Pròximament
+                        </span>
+                    </div>
+
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight mb-3">
+                        Bombers de la Generalitat
+                    </h2>
+                    <p class="text-sm text-slate-400 leading-relaxed font-medium mb-6">
+                        Temari tècnic especialitzat: Legislació, Física, Química, Hidràulica, Construcció i Mecànica del foc.
+                    </p>
+
+                    <!-- Punts destacats -->
+                    <ul class="space-y-2.5 text-xs text-slate-500 font-semibold mb-8">
+                        <li class="flex items-center gap-2.5">
+                            <i class="fa-solid fa-circle-dot text-slate-600 text-sm"></i>
+                            <span>Banc oficial de preguntes tècniques</span>
+                        </li>
+                        <li class="flex items-center gap-2.5">
+                            <i class="fa-solid fa-circle-dot text-slate-600 text-sm"></i>
+                            <span>Simulacres específics de convocatòria</span>
+                        </li>
+                        <li class="flex items-center gap-2.5">
+                            <i class="fa-solid fa-circle-dot text-slate-600 text-sm"></i>
+                            <span>Mecàniques de rescat i càlcul exprés</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Botó desactivat elegant -->
+                <div class="w-full py-4 px-6 bg-slate-900/80 border border-slate-800 text-slate-500 font-bold rounded-2xl text-sm flex items-center justify-center gap-2 cursor-not-allowed select-none">
+                    <i class="fa-solid fa-lock text-xs"></i>
+                    <span>En fase de desenvolupament</span>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- BARRA D'AVANTATGES DEL SISTEMA -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 w-full max-w-4xl mx-auto pt-6 border-t border-slate-800/80 animate-fade-in" style="animation-delay: 0.25s;">
+            <div class="flex items-center gap-3 p-3 bg-slate-900/40 rounded-2xl border border-slate-800/50">
+                <div class="w-9 h-9 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center shrink-0">
+                    <i class="fa-solid fa-stopwatch text-sm"></i>
+                </div>
+                <div>
+                    <h4 class="text-xs font-bold text-white leading-tight">Simulacres Reals</h4>
+                    <p class="text-[10px] text-slate-500 mt-0.5">30 minuts cronometrats</p>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-3 p-3 bg-slate-900/40 rounded-2xl border border-slate-800/50">
+                <div class="w-9 h-9 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center shrink-0">
+                    <i class="fa-solid fa-gamepad text-sm"></i>
+                </div>
+                <div>
+                    <h4 class="text-xs font-bold text-white leading-tight">Gamificació</h4>
+                    <p class="text-[10px] text-slate-500 mt-0.5">Memòria tàctica</p>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-3 p-3 bg-slate-900/40 rounded-2xl border border-slate-800/50">
+                <div class="w-9 h-9 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center shrink-0">
+                    <i class="fa-solid fa-trophy text-sm"></i>
+                </div>
+                <div>
+                    <h4 class="text-xs font-bold text-white leading-tight">Rànquing Diari</h4>
+                    <p class="text-[10px] text-slate-500 mt-0.5">Reinici a mitjanit</p>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-3 p-3 bg-slate-900/40 rounded-2xl border border-slate-800/50">
+                <div class="w-9 h-9 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center shrink-0">
+                    <i class="fa-solid fa-shield-check text-sm"></i>
+                </div>
+                <div>
+                    <h4 class="text-xs font-bold text-white leading-tight">100% Gratuït</h4>
+                    <p class="text-[10px] text-slate-500 mt-0.5">Sense quotes mensuals</p>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- FOOTER MINIMALISTA -->
+    <footer class="relative z-10 border-t border-slate-900 bg-slate-950/80 backdrop-blur py-6 px-4">
+        <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-semibold text-slate-500">
+            <div class="flex items-center gap-2">
+                <span>© 2026 OpposTest Catalunya.</span>
+                <span class="text-slate-700">•</span>
+                <span>Tots els drets reservats.</span>
+            </div>
+            
+            <div class="flex items-center gap-4 text-[11px] uppercase tracking-wider text-slate-500">
+                <span>Pròximament: Guàrdia Urbana · Agents Rurals</span>
+                <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-slate-400">Dev by Gerard</span>
+            </div>
+        </div>
+    </footer>
+
 </body>
 </html>
