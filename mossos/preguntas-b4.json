@@ -8,7 +8,7 @@
       "Únicament atenent al tenor literal del Codi civil espanyol."
     ],
     "correctAnswer": "De conformitat amb la Declaració Universal dels Drets Humans i els tractats internacionals ratificats per Espanya.",
-    "explanation": "L'article 10.2 de la CE i la primera idea força estableixen que les normes sobre drets fonamentals i llibertats s'han d'interpretar d'acord amb la Declaració Universal dels Drets Humans i els tractats internacionals ratificats per l'Estat[cite: 19, 20]."
+    "explanation": "L'article 10.2 de la CE i la primera idea força estableixen que les normes sobre drets fonamentals i llibertats s'han d'interpretar d'acord amb la Declaració Universal dels Drets Humans i els tractats internacionals ratificats per l'Estat."
   },
   {
     "question": "En quins tres grans grups es classifiquen els drets constitucionals previstos a la Constitució espanyola segons les idees força?",
@@ -19,7 +19,7 @@
       "Drets individuals, drets col·lectius i drets militars."
     ],
     "correctAnswer": "Drets personals, drets de participació, i drets econòmics i socials.",
-    "explanation": "Segons la segona idea força i el desenvolupament del tema, els drets constitucionals es classifiquen en personals, de participació, i econòmics i socials[cite: 19, 20]."
+    "explanation": "Segons la segona idea força i el desenvolupament del tema, els drets constitucionals es classifiquen en personals, de participació, i econòmics i socials."
   },
   {
     "question": "Quins són els quatre drets que s'han de respectar per garantir que els processos penals es desenvolupen d'acord amb la CE?",
@@ -30,7 +30,7 @@
       "Llibertat de circulació, dret de sindicació, dret al matrimoni i dret de reunió."
     ],
     "correctAnswer": "Dret a la llibertat, a la inviolabilitat del domicili, al secret de les comunicacions i a la tutela judicial efectiva.",
-    "explanation": "La tercera idea força recull que aquests quatre drets són imprescindibles per al correcte desenvolupament del procés penal[cite: 20]."
+    "explanation": "La tercera idea força recull que aquests quatre drets són imprescindibles per al correcte desenvolupament del procés penal."
   },
   {
     "question": "En quins tres grups es divideixen les garanties per a la protecció dels drets a la Constitució espanyola?",
@@ -41,7 +41,7 @@
       "Garanties primàries, secundàries i territorials."
     ],
     "correctAnswer": "Garanties normatives, institucionals i jurisdiccionals.",
-    "explanation": "La quarta idea força divideix les garanties en normatives, institucionals (el Defensor del Poble) i jurisdiccionals (recurs d'empara ordinari, constitucional i TEDH)[cite: 20]."
+    "explanation": "La quarta idea força divideix les garanties en normatives, institucionals (el Defensor del Poble) i jurisdiccionals (recurs d'empara ordinari, constitucional i TEDH)."
   },
   {
     "question": "Com s'ha d'interpretar sempre qualsevol suspensió dels drets constitucionals en un estat democràtic?",
@@ -52,7 +52,7 @@
       "A criteri exclusiu de l'autoritat militar competent."
     ],
     "correctAnswer": "Sempre de manera restrictiva.",
-    "explanation": "Segons la cinquena idea força, la suspensió ha de ser interpretada sempre de manera restrictiva, ja que només es justifica per defensar l'ordre constitucional[cite: 20]."
+    "explanation": "Segons la cinquena idea força, la suspensió ha de ser interpretada sempre de manera restrictiva, ja que només es justifica per defensar l'ordre constitucional."
   },
   {
     "question": "Quin document anglès de 1628 es destaca al text com a precedent de les declaracions de drets humans?",
@@ -63,7 +63,7 @@
       "La Carta Magna."
     ],
     "correctAnswer": "La Petition of Rights.",
-    "explanation": "El text destaca com a precedent del segle XVII en el moviment constitucionalista la Petition of Rights de 1628[cite: 19]."
+    "explanation": "El text destaca com a precedent del segle XVII en el moviment constitucionalista la Petition of Rights de 1628."
   },
   {
     "question": "Quina declaració de drets aprovada a les colònies americanes l'any 1776 és considerada la més important pel text?",
@@ -74,7 +74,7 @@
       "La Declaració de Massachusetts."
     ],
     "correctAnswer": "La Declaració de drets de Virgínia.",
-    "explanation": "Entre les cartes aprovades a les colònies britàniques d'Amèrica destaca la Declaració de drets de Virgínia de 1776[cite: 19]."
+    "explanation": "Entre les cartes aprovades a les colònies britàniques d'Amèrica destaca la Declaració de drets de Virgínia de 1776."
   },
   {
     "question": "Quin text històric fonamental de drets humans es va aprovar a França l'any 1789?",
@@ -85,7 +85,7 @@
       "El Codi Civil napoleònic."
     ],
     "correctAnswer": "La Declaració dels drets de l'home i del ciutadà.",
-    "explanation": "A França es va aprovar el 1789 la Declaració dels drets de l'home i del ciutadà com a text preconstitucional[cite: 19]."
+    "explanation": "A França es va aprovar el 1789 la Declaració dels drets de l'home i del ciutadà com a text preconstitucional."
   },
   {
     "question": "Quin fet històric va evidenciar la insuficiència de la protecció interna dels drets i va impulsar la seva internacionalització?",
@@ -96,7 +96,7 @@
       "La creació de la Comunitat Econòmica Europea."
     ],
     "correctAnswer": "Les greus vulneracions durant el període d'entreguerres i la Segona Guerra Mundial pels estats totalitaris.",
-    "explanation": "Els crims dels règims totalitaris (feixisme, nazisme, estalinisme) van posar de manifest la insuficiència de la regulació exclusivament estatal[cite: 19]."
+    "explanation": "Els crims dels règims totalitaris (feixisme, nazisme, estalinisme) van posar de manifest la insuficiència de la regulació exclusivament estatal."
   },
   {
     "question": "En quin any es va proclamar la Declaració Universal dels Drets Humans per l'Assemblea General de l'ONU?",
@@ -107,7 +107,7 @@
       "1950."
     ],
     "correctAnswer": "1948.",
-    "explanation": "La Declaració Universal dels Drets Humans va ser proclamada l'any 1948 com a fita de la internacionalització[cite: 19]."
+    "explanation": "La Declaració Universal dels Drets Humans va ser proclamada l'any 1948 com a fita de la internacionalització."
   },
   {
     "question": "En quin any es va aprovar el Conveni europeu de drets humans i de les llibertats fonamentals?",
@@ -118,7 +118,7 @@
       "2000."
     ],
     "correctAnswer": "1950.",
-    "explanation": "El Conveni europeu de drets humans i llibertats fonamentals data de l'any 1950[cite: 19]."
+    "explanation": "El Conveni europeu de drets humans i llibertats fonamentals data de l'any 1950."
   },
   {
     "question": "Quins dos pactes internacionals de drets de les Nacions Unides es van aprovar l'any 1966?",
@@ -129,7 +129,7 @@
       "El Protocol de Kyoto i la Carta de Niça."
     ],
     "correctAnswer": "El Pacte internacional de drets civils i polítics, i el de drets econòmics, socials i culturals.",
-    "explanation": "L'any 1966 es van aprovar el Pacte de drets civils i polítics i el Pacte de drets econòmics, socials i culturals[cite: 19]."
+    "explanation": "L'any 1966 es van aprovar el Pacte de drets civils i polítics i el Pacte de drets econòmics, socials i culturals."
   },
   {
     "question": "Quin instrument de drets es va proclamar l'any 2000 en el si de la Unió Europea?",
@@ -140,7 +140,7 @@
       "El Reglament de Dublín."
     ],
     "correctAnswer": "La Carta dels drets fonamentals de la Unió Europea.",
-    "explanation": "L'any 2000 es va aprovar la Carta dels drets fonamentals de la Unió Europea[cite: 19]."
+    "explanation": "L'any 2000 es va aprovar la Carta dels drets fonamentals de la Unió Europea."
   },
   {
     "question": "Quins articles de la Constitució espanyola comprenen els drets fonamentals i les llibertats públiques en sentit estricte?",
@@ -151,7 +151,7 @@
       "Els articles 39 a 52."
     ],
     "correctAnswer": "Els articles 15 a 29.",
-    "explanation": "Els drets fonamentals en sentit estricte es troben a la Secció 1a del Capítol II del Títol I, que comprèn els articles del 15 al 29[cite: 19]."
+    "explanation": "Els drets fonamentals en sentit estricte es troben a la Secció 1a del Capítol II del Títol I, que comprèn els articles del 15 al 29."
   },
   {
     "question": "Quina és la característica fonamental dels drets personals o de llibertat?",
@@ -162,7 +162,7 @@
       "Només tenen vigència durant les campanyes electorals."
     ],
     "correctAnswer": "Consagren un àmbit de llibertat en favor de l'individu on l'Estat ha d'abstenir-se d'intervenir.",
-    "explanation": "Aquests drets defineixen una esfera d'autonomia personal lliure d'ingerències públiques, vinculada a l'Estat de dret[cite: 19]."
+    "explanation": "Aquests drets defineixen una esfera d'autonomia personal lliure d'ingerències públiques, vinculada a l'Estat de dret."
   },
   {
     "question": "Quin article de la Constitució espanyola reconeix el dret a la vida i a la integritat física i moral?",
@@ -173,7 +173,7 @@
       "Article 17."
     ],
     "correctAnswer": "Article 15.",
-    "explanation": "L'article 15 de la CE consagra el dret a la vida i a la integritat física i moral[cite: 19]."
+    "explanation": "L'article 15 de la CE consagra el dret a la vida i a la integritat física i moral."
   },
   {
     "question": "Quins drets estan protegits a l'article 18 de la Constitució espanyola?",
@@ -184,7 +184,7 @@
       "Llibertat de residència i circulació."
     ],
     "correctAnswer": "Dret a l'honor, intimitat personal i familiar, pròpia imatge, inviolabilitat del domicili i secret de les comunicacions.",
-    "explanation": "L'article 18 CE protegeix l'honor, la intimitat, la imatge, el domicili i el secret de les comunicacions[cite: 19]."
+    "explanation": "L'article 18 CE protegeix l'honor, la intimitat, la imatge, el domicili i el secret de les comunicacions."
   },
   {
     "question": "Amb quin model d'Estat es relaciona directament el reconeixement dels drets de participació o polítics?",
@@ -195,7 +195,7 @@
       "Amb l'Estat feudal."
     ],
     "correctAnswer": "Amb l'Estat democràtic.",
-    "explanation": "Els drets polítics es vinculen a l'Estat democràtic per garantir el pluralisme i la formació de la voluntat estatal[cite: 19]."
+    "explanation": "Els drets polítics es vinculen a l'Estat democràtic per garantir el pluralisme i la formació de la voluntat estatal."
   },
   {
     "question": "Quin article de la Constitució recull el dret de reunió i manifestació?",
@@ -206,7 +206,7 @@
       "Article 22."
     ],
     "correctAnswer": "Article 21.",
-    "explanation": "L'article 21 de la CE regula el dret de reunió pacífica i sense armes i el de manifestació[cite: 19]."
+    "explanation": "L'article 21 de la CE regula el dret de reunió pacífica i sense armes i el de manifestació."
   },
   {
     "question": "Quin dret econòmic i social es reconeix a l'article 27 de la CE?",
@@ -217,7 +217,7 @@
       "El dret al treball."
     ],
     "correctAnswer": "El dret a l'educació.",
-    "explanation": "L'article 27 de la CE estableix el dret a l'educació i la llibertat d'ensenyament[cite: 19]."
+    "explanation": "L'article 27 de la CE estableix el dret a l'educació i la llibertat d'ensenyament."
   },
   {
     "question": "Quin article de la CE regula la titularitat dels drets per part de les persones estrangeres?",
@@ -228,7 +228,7 @@
       "L'article 23."
     ],
     "correctAnswer": "L'article 13.",
-    "explanation": "L'article 13 de la CE regula els drets de què gaudeixen els estrangers a Espanya d'acord amb els tractats i la llei[cite: 19]."
+    "explanation": "L'article 13 de la CE regula els drets de què gaudeixen els estrangers a Espanya d'acord amb els tractats i la llei."
   },
   {
     "question": "Quina sentència del Tribunal Constitucional va fixar la dignitat de la persona com a límit en el tractament dels drets dels estrangers?",
@@ -239,7 +239,7 @@
       "STC 31/2010."
     ],
     "correctAnswer": "STC 263/2007.",
-    "explanation": "La STC 263/2007, de 7 de novembre, va establir la dignitat de la persona com a paràmetre bàsic sobre els drets dels estrangers[cite: 19]."
+    "explanation": "La STC 263/2007, de 7 de novembre, va establir la dignitat de la persona com a paràmetre bàsic sobre els drets dels estrangers."
   },
   {
     "question": "De quin dret constitucional són titulars exclusivament els espanyols, amb l'excepció de les eleccions municipals per reciprocitat?",
@@ -250,7 +250,7 @@
       "Del dret a la integritat moral."
     ],
     "correctAnswer": "Dels drets reconeguts a l'article 23 (sufragi i accés a càrrecs públics).",
-    "explanation": "L'article 13.2 de la CE reserva als espanyols els drets de l'article 23, amb l'excepció municipal segons tractat o llei[cite: 19]."
+    "explanation": "L'article 13.2 de la CE reserva als espanyols els drets de l'article 23, amb l'excepció municipal segons tractat o llei."
   },
   {
     "question": "Quin és el termini màxim ordinari de la detenció preventiva previst a l'article 17.2 de la CE?",
@@ -261,7 +261,7 @@
       "5 dies."
     ],
     "correctAnswer": "72 hores.",
-    "explanation": "La detenció no pot durar més del temps necessari i com a límit absolut un màxim de 72 hores[cite: 19]."
+    "explanation": "La detenció no pot durar més del temps necessari i com a límit absolut un màxim de 72 hores."
   },
   {
     "question": "En què consisteix el procediment constitucional d'habeas corpus?",
@@ -272,7 +272,7 @@
       "En un judici ràpid per a faltes de trànsit."
     ],
     "correctAnswer": "En un procediment àgil per posar immediatament a disposició judicial qualsevol persona detinguda il·legalment.",
-    "explanation": "L'habeas corpus té com a fi que el jutge es pronunciï de forma immediata sobre la legalitat d'una detenció[cite: 19]."
+    "explanation": "L'habeas corpus té com a fi que el jutge es pronunciï de forma immediata sobre la legalitat d'una detenció."
   },
   {
     "question": "En quins tres supòsits és legítima l'entrada en un domicili privat segons l'article 18.2 de la CE?",
@@ -283,7 +283,7 @@
       "En qualsevol investigació d'ofici sense cap autorització."
     ],
     "correctAnswer": "Amb consentiment del morador, per delicte flagrant o amb autorització judicial.",
-    "explanation": "L'article 18.2 CE permet únicament l'entrada per consentiment, delicte flagrant o resolució judicial[cite: 19]."
+    "explanation": "L'article 18.2 CE permet únicament l'entrada per consentiment, delicte flagrant o resolució judicial."
   },
   {
     "question": "Quina validesa tenen les proves obtingudes vulnerant el dret a la inviolabilitat del domicili o al secret de les comunicacions?",
@@ -294,7 +294,7 @@
       "Són vàlides només en processos penals greus."
     ],
     "correctAnswer": "Són invàlides i no poden ser utilitzades en el procés.",
-    "explanation": "El text adverteix que les proves que vulnerin aquests drets són radicalment invàlides en el procés[cite: 19]."
+    "explanation": "El text adverteix que les proves que vulnerin aquests drets són radicalment invàlides en el procés."
   },
   {
     "question": "Quina condició és indispensable per autoritzar la intervenció de les comunicacions d'acord amb l'article 18.3 de la CE?",
@@ -305,7 +305,7 @@
       "Una denúncia anònima per internet."
     ],
     "correctAnswer": "Una resolució judicial motivada i proporcional.",
-    "explanation": "Només el jutge pot ordenar la intervenció mitjançant una resolució motivada i proporcional[cite: 19]."
+    "explanation": "Només el jutge pot ordenar la intervenció mitjançant una resolució motivada i proporcional."
   },
   {
     "question": "Quin article de la Constitució reconeix el dret a la tutela judicial efectiva?",
@@ -316,7 +316,7 @@
       "Article 28."
     ],
     "correctAnswer": "Article 24.",
-    "explanation": "L'article 24 de la CE consagra el dret fonamental a la tutela judicial efectiva dels jutges i tribunals[cite: 19]."
+    "explanation": "L'article 24 de la CE consagra el dret fonamental a la tutela judicial efectiva dels jutges i tribunals."
   },
   {
     "question": "Quina de les següents és una garantia específica del procés penal segons l'article 24.2 de la CE?",
@@ -327,7 +327,7 @@
       "L'execució directa de sancions per l'òrgan acusador."
     ],
     "correctAnswer": "El dret a no declarar contra si mateix i a no confessar-se culpable.",
-    "explanation": "En l'àmbit penal, l'acusat té dret a guardar silenci, a no autoincriminar-se i a la presumpció d'innocència[cite: 19]."
+    "explanation": "En l'àmbit penal, l'acusat té dret a guardar silenci, a no autoincriminar-se i a la presumpció d'innocència."
   },
   {
     "question": "Quina llei orgànica de 2022 recull les mesures de protecció integral sobre la violència sexual?",
@@ -338,7 +338,7 @@
       "La Llei orgànica 1/2004."
     ],
     "correctAnswer": "La Llei orgànica 10/2022, de garantia de la llibertat sexual.",
-    "explanation": "El text assenyala expressament la Llei orgànica 10/2022, de 6 de setembre, com a norma reguladora d'aquesta matèria[cite: 19]."
+    "explanation": "El text assenyala expressament la Llei orgànica 10/2022, de 6 de setembre, com a norma reguladora d'aquesta matèria."
   },
   {
     "question": "Què disposa l'article 53.1 de la CE sobre els drets del Capítol II del Títol I?",
@@ -349,7 +349,7 @@
       "Que poden ser modificats per ordre ministerial."
     ],
     "correctAnswer": "Que vinculen tots els poders públics.",
-    "explanation": "L'article 53.1 estableix la vinculació directa de tots els poders públics amb eficàcia normativa immediata[cite: 19]."
+    "explanation": "L'article 53.1 estableix la vinculació directa de tots els poders públics amb eficàcia normativa immediata."
   },
   {
     "question": "Quin rang legal s'exigeix per regular els drets fonamentals de la secció primera (articles 15 a 29)?",
@@ -360,7 +360,7 @@
       "Decret llei."
     ],
     "correctAnswer": "Llei orgànica.",
-    "explanation": "El desplegament directe dels articles 15 a 29 està reservat constitucionalment a la llei orgànica[cite: 18, 19]."
+    "explanation": "El desplegament directe dels articles 15 a 29 està reservat constitucionalment a la llei orgànica."
   },
   {
     "question": "Quin límit infranquejable té el legislador a l'hora de regular els drets constitucionals d'acord amb l'article 53.1 de la CE?",
@@ -371,7 +371,7 @@
       "Establir sancions privatives de llibertat monetàries."
     ],
     "correctAnswer": "Respectar-ne el contingut essencial.",
-    "explanation": "L'article 53.1 obliga expressament el legislador a respectar el contingut essencial de cada dret[cite: 19]."
+    "explanation": "L'article 53.1 obliga expressament el legislador a respectar el contingut essencial de cada dret."
   },
   {
     "question": "Quin procediment de reforma constitucional s'ha de seguir per modificar els articles 15 a 29 de la CE?",
@@ -382,7 +382,7 @@
       "Un decret aprovat pel Consell de Ministres."
     ],
     "correctAnswer": "El procediment agreujat de l'article 168.",
-    "explanation": "Els drets fonamentals de la Secció 1a exigeixen la via agreujada de l'article 168 amb majories de dos terços i referèndum[cite: 19]."
+    "explanation": "Els drets fonamentals de la Secció 1a exigeixen la via agreujada de l'article 168 amb majories de dos terços i referèndum."
   },
   {
     "question": "Com es defineix el Defensor del Poble a l'article 54 de la Constitució espanyola?",
@@ -393,7 +393,7 @@
       "Com a membre del Consell d'Estat en representació dels jutges."
     ],
     "correctAnswer": "Com a alt comissionat de les Corts Generals per a la defensa dels drets del Títol I.",
-    "explanation": "L'article 54 el configura com un alt comissionat parlamentari designat per supervisar l'Administració[cite: 19]."
+    "explanation": "L'article 54 el configura com un alt comissionat parlamentari designat per supervisar l'Administració."
   },
   {
     "question": "Per a quin període és escollit el Defensor del Poble per les Corts Generals?",
@@ -404,7 +404,7 @@
       "Sis anys."
     ],
     "correctAnswer": "Cinc anys.",
-    "explanation": "El Defensor del Poble és nomenat per un mandat de cinc anys per les Corts Generals[cite: 19]."
+    "explanation": "El Defensor del Poble és nomenat per un mandat de cinc anys per les Corts Generals."
   },
   {
     "question": "Quina majoria és necessària al Congrés i al Senat per elegir el Defensor del Poble?",
@@ -415,7 +415,7 @@
       "Majoria de dos terços."
     ],
     "correctAnswer": "Majoria de tres cinquenes parts.",
-    "explanation": "L'elecció requereix la majoria qualificada de les tres cinquenes parts d'ambdues cambres[cite: 19]."
+    "explanation": "L'elecció requereix la majoria qualificada de les tres cinquenes parts d'ambdues cambres."
   },
   {
     "question": "En quins dos principis processals s'ha de basar el procediment d'empara ordinari davant els tribunals ordinaris (art. 53.2 CE)?",
@@ -426,7 +426,7 @@
       "Gratuïtat i mediació."
     ],
     "correctAnswer": "Preferència i sumarietat.",
-    "explanation": "L'article 53.2 de la CE consagra la tutela judicial mitjançant un procediment basat en preferència i sumarietat[cite: 19]."
+    "explanation": "L'article 53.2 de la CE consagra la tutela judicial mitjançant un procediment basat en preferència i sumarietat."
   },
   {
     "question": "A més dels drets de la Secció 1a del Capítol II, quin altre dret pot ser objecte del recurs d'empara constitucional (art. 53.2 CE)?",
@@ -437,7 +437,7 @@
       "El dret a la negociació col·lectiva (art. 37)."
     ],
     "correctAnswer": "L'objecció de consciència (art. 30.2).",
-    "explanation": "L'article 53.2 CE inclou expressament en l'empara l'article 14, els articles 15 a 29 i l'objecció de consciència de l'article 30.2[cite: 19]."
+    "explanation": "L'article 53.2 CE inclou expressament en l'empara l'article 14, els articles 15 a 29 i l'objecció de consciència de l'article 30.2."
   },
   {
     "question": "Per què es diu que el recurs d'empara davant el Tribunal Constitucional té caràcter subsidiari?",
@@ -448,7 +448,7 @@
       "Perquè requereix la signatura d'un col·legi professional."
     ],
     "correctAnswer": "Perquè només es pot acudir a ell quan s'han exhaurit les vies de protecció judicials prèvies ordinàries.",
-    "explanation": "És subsidiari perquè exigeix haver esgotat prèviament tots els recursos davant la jurisdicció ordinària[cite: 19]."
+    "explanation": "És subsidiari perquè exigeix haver esgotat prèviament tots els recursos davant la jurisdicció ordinària."
   },
   {
     "question": "Quin termini hi ha per interposar el recurs d'empara constitucional contra actes o disposicions d'òrgans executius un cop finalitzat el procés judicial?",
@@ -459,7 +459,7 @@
       "Sis mesos."
     ],
     "correctAnswer": "Vint dies.",
-    "explanation": "Per a les vulneracions originades per òrgans executius, el termini és dels vint dies següents a la notificació[cite: 19]."
+    "explanation": "Per a les vulneracions originades per òrgans executius, el termini és dels vint dies següents a la notificació."
   },
   {
     "question": "Quin termini s'estableix per interposar recurs d'empara contra actes judicials un cop notificada la resolució ferma?",
@@ -470,7 +470,7 @@
       "Un any."
     ],
     "correctAnswer": "Trenta dies.",
-    "explanation": "Davant de violacions imputables a un òrgan judicial, el termini per interposar l'empara és de trenta dies[cite: 19]."
+    "explanation": "Davant de violacions imputables a un òrgan judicial, el termini per interposar l'empara és de trenta dies."
   },
   {
     "question": "Quin termini hi ha per acudir al Tribunal Europeu de Drets Humans un cop exhaurida la via judicial interna segons el text?",
@@ -481,7 +481,7 @@
       "Un any."
     ],
     "correctAnswer": "Sis mesos.",
-    "explanation": "El text indica que hi ha un termini de sis mesos des de la data de la decisió judicial interna ferma[cite: 19]."
+    "explanation": "El text indica que hi ha un termini de sis mesos des de la data de la decisió judicial interna ferma."
   },
   {
     "question": "Es poden suspendre drets constitucionals durant la vigència de l'estat d'alarma?",
@@ -492,7 +492,7 @@
       "Només a petició d'una comunitat autònoma."
     ],
     "correctAnswer": "No, durant l'estat d'alarma no es pot suspendre l'exercici de cap dret, només aplicar restriccions.",
-    "explanation": "El text aclareix que durant l'estat d'alarma no es poden suspendre drets, sinó únicament limitar-ne l'exercici[cite: 19]."
+    "explanation": "El text aclareix que durant l'estat d'alarma no es poden suspendre drets, sinó únicament limitar-ne l'exercici."
   },
   {
     "question": "Com es declara l'estat d'excepció a l'Estat espanyol?",
@@ -503,7 +503,7 @@
       "Directament per la Sala Penal del Tribunal Suprem."
     ],
     "correctAnswer": "Pel Govern mitjançant decret en Consell de Ministres, prèvia autorització del Congrés dels Diputats.",
-    "explanation": "L'estat d'excepció el declara el Govern mitjançant decret prèvia autorització preceptiva del Congrés[cite: 19]."
+    "explanation": "L'estat d'excepció el declara el Govern mitjançant decret prèvia autorització preceptiva del Congrés."
   },
   {
     "question": "Fins a quants dies es pot allargar la detenció governativa d'una persona durant l'estat d'excepció?",
@@ -514,7 +514,7 @@
       "Durant tot el temps que duri l'estat d'excepció."
     ],
     "correctAnswer": "Fins a un màxim de 10 dies.",
-    "explanation": "Durant l'estat d'excepció la persona pot ser detinguda per alteracions de l'ordre públic fins a un màxim de 10 dies[cite: 19]."
+    "explanation": "Durant l'estat d'excepció la persona pot ser detinguda per alteracions de l'ordre públic fins a un màxim de 10 dies."
   },
   {
     "question": "Qui declara l'estat de setge segons la Constitució espanyola?",
@@ -525,7 +525,7 @@
       "El Tribunal Constitucional."
     ],
     "correctAnswer": "La majoria absoluta del Congrés dels Diputats, a proposta del Govern.",
-    "explanation": "L'estat de setge requereix l'aprovació per majoria absoluta del Congrés dels Diputats a proposta governamental[cite: 19]."
+    "explanation": "L'estat de setge requereix l'aprovació per majoria absoluta del Congrés dels Diputats a proposta governamental."
   },
   {
     "question": "A quins col·lectius s'aplica la suspensió individual de drets prevista a l'article 55.2 de la CE?",
@@ -536,7 +536,7 @@
       "A persones que incompleixin l'ordre públic en manifestacions no comunicades."
     ],
     "correctAnswer": "A persones relacionades amb bandes armades o elements terroristes.",
-    "explanation": "L'article 55.2 CE preveu la suspensió individual en investigacions sobre bandes armades o terrorisme[cite: 19]."
+    "explanation": "L'article 55.2 CE preveu la suspensió individual en investigacions sobre bandes armades o terrorisme."
   },
   {
     "question": "Fins a quants dies es pot prorrogar la detenció preventiva en la suspensió individual per causes de terrorisme (art. 55.2 CE)?",
@@ -547,6 +547,6 @@
       "Fins a un mes sota secret de sumari."
     ],
     "correctAnswer": "Fins a cinc dies (prèvia autorització judicial abans de les 72 hores).",
-    "explanation": "En matèria antiterrorista, el termini de 72 hores es pot prorrogar amb autorització judicial fins a cinc dies en total[cite: 19]."
+    "explanation": "En matèria antiterrorista, el termini de 72 hores es pot prorrogar amb autorització judicial fins a cinc dies en total."
   }
 ]
