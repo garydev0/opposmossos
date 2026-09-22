@@ -1,0 +1,35 @@
+name: Espejo Exacto GitHub a Google Drive
+
+on:
+  push:
+    branches:
+      - main # Cambialo si tu rama principal se llama master o dev
+
+jobs:
+  rclone-sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar el codigo de mi repositorio
+        uses: actions/checkout@v4
+
+      - name: Instalar rclone en el servidor virtual
+        run: sudo apt-get update && sudo apt-get install -y rclone
+
+      - name: Configurar accesos de Google Drive
+        run: |
+          mkdir -p ~/.config/rclone
+          cat <<EOF > ~/.config/rclone/rclone.conf
+          [gdrive]
+          type = drive
+          scope = drive
+          service_account_credentials = ${{ secrets.GDRIVE_CREDENTIALS }}
+          root_folder_id = ${{ secrets.GDRIVE_FOLDER_ID }}
+          EOF
+
+      - name: Sincronizar clonando de forma estricta
+        run: |
+          rclone sync . gdrive: \
+            --exclude ".git/**" \
+            --exclude ".github/**" \
+            --drive-use-trash=false \
+            --verbose
