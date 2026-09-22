@@ -26,9 +26,6 @@ jobs:
           echo "scope = drive" >> ~/.config/rclone/rclone.conf
           echo "root_folder_id = ${{ secrets.GDRIVE_FOLDER_ID }}" >> ~/.config/rclone/rclone.conf
           echo "service_account_credentials = $GDRIVE_JSON" >> ~/.config/rclone/rclone.conf
-          
-          # Forzamos a que use el almacenamiento del propietario de la carpeta y no del robot
-          echo "upload_cutoff = 0" >> ~/.config/rclone/rclone.conf
 
       - name: Sincronizar clonando de forma estricta
         run: |
@@ -36,5 +33,6 @@ jobs:
             --exclude ".git/**" \
             --exclude ".github/**" \
             --drive-use-trash=false \
-            --drive-keep-revision-forever=false \
+            --drive-chunk-size 32M \
+            --drive-upload-cutoff 0 \
             --verbose
