@@ -1,4 +1,4 @@
-name: Espejo Exacto GitHub a Google Drive Personal
+name: Espejo Exacto GitHub a Google Drive
 
 on:
   push:
@@ -6,33 +6,16 @@ on:
       - main
 
 jobs:
-  rclone-sync:
+  sync-gdrive:
     runs-on: ubuntu-latest
     steps:
       - name: Descargar el codigo de mi repositorio
         uses: actions/checkout@v4
 
-      - name: Instalar rclone en el servidor virtual
-        run: sudo apt-get update && sudo apt-get install -y rclone
-
-      - name: Configurar accesos de Google Drive Personal
-        run: |
-          mkdir -p ~/.config/rclone
-          
-          cat <<EOF > ~/.config/rclone/rclone.conf
-          [gdrive]
-          type = drive
-          scope = drive
-          client_id = ${{ secrets.GDRIVE_CLIENT_ID }}
-          client_secret = ${{ secrets.GDRIVE_CLIENT_SECRET }}
-          root_folder_id = ${{ secrets.GDRIVE_FOLDER_ID }}
-          token = {"access_token":"","token_type":"Bearer","refresh_token":"${{ secrets.GDRIVE_REFRESH_TOKEN }}","expiry":"2030-01-01T00:00:00Z"}
-          EOF
-
-      - name: Sincronizar clonando de forma estricta
-        run: |
-          rclone sync . gdrive: \
-            --exclude ".git/**" \
-            --exclude ".github/**" \
-            --drive-use-trash=false \
-            --verbose
+      - name: Subir y Reemplazar Archivos en Google Drive
+        uses: adityak74/google-drive-upload-git-action@v2.2.2
+        with:
+          credentials: ${{ secrets.GDRIVE_CREDENTIALS }}
+          parent_folder_id: ${{ secrets.GDRIVE_FOLDER_ID }}
+          target: '.'
+          overwrite: true
