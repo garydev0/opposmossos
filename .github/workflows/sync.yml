@@ -3,7 +3,7 @@ name: Espejo Exacto GitHub a Google Drive
 on:
   push:
     branches:
-      - main # Cambialo si tu rama principal se llama master o dev
+      - main
 
 jobs:
   rclone-sync:
@@ -18,13 +18,11 @@ jobs:
       - name: Configurar accesos de Google Drive
         run: |
           mkdir -p ~/.config/rclone
-          cat <<EOF > ~/.config/rclone/rclone.conf
-          [gdrive]
-          type = drive
-          scope = drive
-          service_account_credentials = ${{ secrets.GDRIVE_CREDENTIALS }}
-          root_folder_id = ${{ secrets.GDRIVE_FOLDER_ID }}
-          EOF
+          echo "[gdrive]" > ~/.config/rclone/rclone.conf
+          echo "type = drive" >> ~/.config/rclone/rclone.conf
+          echo "scope = drive" >> ~/.config/rclone/rclone.conf
+          echo "root_folder_id = ${{ secrets.GDRIVE_FOLDER_ID }}" >> ~/.config/rclone/rclone.conf
+          echo "service_account_credentials = \${{ secrets.GDRIVE_CREDENTIALS }}" >> ~/.config/rclone/rclone.conf
 
       - name: Sincronizar clonando de forma estricta
         run: |
