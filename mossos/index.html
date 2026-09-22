@@ -167,7 +167,7 @@
 
         <!-- DASHBOARD SECTION -->
         <section id="sec-dashboard" class="tab-content hidden space-y-6">
-            <!-- WIDGET META PRINCIPAL AMB SEGONS -->
+            <!-- WIDGET META PRINCIPAL AMB COMPTE ENRERE DINÀMIC I SEGONS -->
             <div class="relative bg-gradient-to-br from-brand-900 via-slate-900 to-slate-950 rounded-3xl p-6 sm:p-8 border border-brand-500/30 shadow-2xl overflow-hidden group">
                 <div class="absolute top-0 right-0 w-64 h-64 bg-brand-500/10 rounded-full blur-3xl -mr-20 -mt-20 pointer-events-none"></div>
                 <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 relative z-10">
@@ -176,7 +176,6 @@
                         <h2 class="text-2xl sm:text-3xl font-extrabold text-white leading-tight">Primera prova de coneixements</h2>
                         <p class="text-brand-300 font-medium mt-1"><i class="fa-regular fa-calendar mr-2"></i>17 d'Octubre de 2026 (Estimada)</p>
                     </div>
-                    <!-- COMPTADOR DINÀMIC EN TEMPS REAL -->
                     <div class="bg-slate-950/50 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-4 flex gap-3 sm:gap-4 text-center min-w-[320px] shadow-inner justify-center">
                         <div class="flex-1"><span id="cd-days" class="block text-2xl sm:text-3xl font-black text-white">00</span><span class="text-[10px] text-slate-400 uppercase font-bold">Dies</span></div>
                         <div class="w-px bg-slate-800"></div>
@@ -251,6 +250,7 @@
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Títol net sense (30 Qs) -->
                     <div class="bg-slate-800/90 rounded-2xl p-6 border border-slate-700 shadow-lg flex flex-col justify-between hover:border-brand-500 transition-all cursor-pointer group" onclick="prepareExamMode('simulacre')">
                         <div>
                             <div class="w-12 h-12 rounded-xl bg-brand-500/10 text-brand-400 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform"><i class="fa-solid fa-clock"></i></div>
@@ -386,14 +386,13 @@
                     </div>
                 </div>
 
-                <!-- 3 JOCS EN LA MATEIXA FILA -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <!-- Triage Ràpid -->
+                    <!-- Triage Ràpid amb botons -->
                     <div class="bg-slate-800/90 rounded-2xl p-6 border border-slate-700 shadow-lg flex flex-col justify-between hover:border-pink-500 transition-all group">
                         <div>
                             <div class="w-12 h-12 rounded-xl bg-pink-500/10 text-pink-400 flex items-center justify-center text-xl mb-4"><i class="fa-solid fa-layer-group"></i></div>
                             <h3 class="text-lg font-bold text-white">Triage Ràpid</h3>
-                            <p class="text-slate-400 text-xs mt-2 leading-relaxed">Selecciona amb botons la competència correcta abans que s'esgoti el temps. Preguntes des de triage.json.</p>
+                            <p class="text-slate-400 text-xs mt-2 leading-relaxed">Selecciona amb botons la competència correcta abans que s'esgoti el temps. Preguntes directes des de triage.json.</p>
                         </div>
                         <button onclick="startTriageGame()" class="mt-6 w-full py-2.5 bg-pink-600 hover:bg-pink-500 text-white font-bold rounded-xl text-sm transition-all shadow flex items-center justify-center"><i class="fa-solid fa-bolt mr-2"></i> Iniciar Triage</button>
                     </div>
@@ -431,7 +430,6 @@
                 </div>
 
                 <div class="flex-1 relative flex flex-col items-center justify-center w-full max-w-xl mx-auto">
-                    <!-- TARGETA CENTRAL -->
                     <div id="triage-card" class="bg-gradient-to-b from-slate-800 to-slate-900 border-2 border-slate-600 rounded-3xl p-8 w-full max-w-md h-72 flex flex-col items-center justify-center text-center shadow-2xl z-10 transition-all duration-200 relative overflow-hidden">
                         <i class="fa-solid fa-scale-unbalanced text-3xl text-pink-500/40 mb-4"></i>
                         <h2 id="triage-concept" class="text-xl sm:text-2xl font-black text-white leading-snug">Carregant concepte...</h2>
@@ -442,12 +440,10 @@
                         </div>
                     </div>
 
-                    <!-- FEEDBACK D'ERROR O ENCERT -->
                     <div id="triage-feedback" class="absolute inset-0 z-20 flex items-center justify-center pointer-events-none opacity-0 transition-opacity duration-200">
                         <i id="triage-icon" class="fa-solid fa-check text-8xl text-emerald-500 drop-shadow-[0_0_30px_rgba(16,185,129,0.8)]"></i>
                     </div>
 
-                    <!-- BOTONERA DE RESPOSTA CLARA -->
                     <div class="w-full max-w-md grid grid-cols-2 gap-4 mt-6 z-20">
                         <button type="button" onclick="handleTriage(0)" id="triage-btn-l" class="p-5 rounded-2xl bg-slate-900 hover:bg-slate-800 border-2 border-slate-700 hover:border-pink-500 text-white font-bold text-center shadow-lg transition-all transform active:scale-95 flex flex-col items-center">
                             <span class="text-[10px] uppercase tracking-widest text-slate-400 mb-1">Opció A</span>
@@ -751,7 +747,7 @@
 
     <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-3 pointer-events-none"></div>
 
-    <!-- FIREBASE MODULE (INTEGRAT DIRECTE AMB EL RÀNQUING FUNCIONAL) -->
+    <!-- FIREBASE MODULE -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
@@ -914,7 +910,7 @@
                 if (lastReset !== today) { score = 0; answeredToday = 0; lastReset = today; }
                 
                 score += correctCount;
-                answeredToday += answeredOnlyCount; // Només compten les respostes fetes!
+                answeredToday += answeredOnlyCount;
                 lifetimeScore += correctCount;
                 
                 await setDoc(userRef, { score, answeredToday, lifetimeScore, lastResetDate: lastReset }, { merge: true });
@@ -922,7 +918,7 @@
             } catch (e) { console.warn("Error sincronitzant punts:", e); }
         }
 
-        // CARREGA DEFINITIVA DEL RÀNQUING (Dins el mòdul de Firebase per evitar errors)
+        // CARREGA DE RÀNQUING SEGURA AMB ESCAPE D'HTML
         window.loadGlobalRanking = async function() {
             const tableBody = document.getElementById('ranking-table-body');
             if (!tableBody) return;
@@ -938,7 +934,6 @@
                         const score = data.score || 0;
                         const answered = data.answeredToday || 0;
                         const acc = answered > 0 ? (score / answered) * 100 : 0;
-                        // Es mostra tothom amb almenys 1 pregunta contestada avui
                         if(answered >= 1) {
                             list.push({ 
                                 username: data.username || 'Anònim', 
@@ -959,6 +954,8 @@
                     return;
                 }
                 
+                const escapeHTML = (str) => String(str || '').replace(/[&<>"'`=\/]/g, s => `&#${s.charCodeAt(0)};`);
+                
                 let html = '';
                 list.forEach((u, i) => {
                     let posColor = 'bg-slate-900 text-slate-300';
@@ -976,7 +973,7 @@
 
                     html += `<tr class="hover:bg-slate-900/60 transition-colors border-b border-slate-800/50">
                         <td class="p-4 text-center font-bold"><span class="inline-block w-8 h-8 rounded-xl text-xs leading-8 ${posColor}">${i + 1}</span></td>
-                        <td class="p-4 font-bold text-white flex items-center h-16">${u.username} ${levelIcon} ${u.isPremium ? '<i class="fa-solid fa-star text-amber-500 ml-1 text-[10px]"></i>' : ''}</td>
+                        <td class="p-4 font-bold text-white flex items-center h-16">${escapeHTML(u.username)} ${levelIcon} ${u.isPremium ? '<i class="fa-solid fa-star text-amber-500 ml-1 text-[10px]"></i>' : ''}</td>
                         <td class="p-4 text-right font-black text-lg">${metricVal}</td>
                     </tr>`;
                 });
@@ -1348,7 +1345,6 @@
         window.openReportModal = () => document.getElementById('report-modal').classList.remove('hidden');
         window.closeReportModal = () => document.getElementById('report-modal').classList.add('hidden');
 
-        // RELOTGE META PRINCIPAL AMB SEGONS
         let targetCountdownInterval = null;
         function startTargetCountdown(dateStr = '2026-10-17T09:00:00') {
             if (targetCountdownInterval) clearInterval(targetCountdownInterval);
@@ -1612,8 +1608,8 @@
                     <label class="text-xs font-bold text-slate-400 uppercase block mb-2">Nombre de preguntes a practicar:</label>
                     <div class="flex gap-3">
                         <button onclick="examConfig.count=10; this.parentElement.querySelectorAll('button').forEach(b=>b.className='flex-1 py-3 bg-slate-800 text-slate-300 rounded-xl text-sm font-bold border border-slate-700'); this.className='flex-1 py-3 bg-emerald-600 text-white rounded-xl text-sm font-bold border border-emerald-500';" class="flex-1 py-3 bg-emerald-600 text-white rounded-xl text-sm font-bold border border-emerald-500">10</button>
-                        <button onclick="examConfig.count=30; this.parentElement.querySelectorAll('button').forEach(b=>b.className='flex-1 py-3 bg-slate-800 text-slate-300 rounded-xl text-sm font-bold border border-slate-700'); this.className='flex-1 py-3 bg-emerald-600 text-white rounded-xl text-sm font-bold border border-emerald-500';" class="flex-1 py-3 bg-slate-800 text-slate-300 rounded-xl text-sm font-bold border border-slate-700">30</button>
-                        <button onclick="examConfig.count=50; this.parentElement.querySelectorAll('button').forEach(b=>b.className='flex-1 py-3 bg-slate-800 text-slate-300 rounded-xl text-sm font-bold border border-slate-700'); this.className='flex-1 py-3 bg-emerald-600 text-white rounded-xl text-sm font-bold border border-emerald-500';" class="flex-1 py-3 bg-slate-800 text-slate-300 rounded-xl text-sm font-bold border border-slate-700">50</button>
+                        <button onclick="examConfig.count=30; this.parentElement.querySelectorAll('button').forEach(b=>b.className='flex-1 py-3 bg-slate-800 text-slate-300 rounded-xl text-sm font-bold border border-slate-700'); this.className='flex-1 py-3 bg-emerald-600 text-white rounded-xl text-sm font-bold border border-emerald-500';" class="flex-1 py-3 bg-emerald-600 text-white rounded-xl text-sm font-bold border border-emerald-500">30</button>
+                        <button onclick="examConfig.count=50; this.parentElement.querySelectorAll('button').forEach(b=>b.className='flex-1 py-3 bg-slate-800 text-slate-300 rounded-xl text-sm font-bold border border-slate-700'); this.className='flex-1 py-3 bg-emerald-600 text-white rounded-xl text-sm font-bold border border-emerald-500';" class="flex-1 py-3 bg-emerald-600 text-white rounded-xl text-sm font-bold border border-emerald-500">50</button>
                     </div>`;
                 examConfig.hasTimer = false; examConfig.count = 10;
             }
@@ -1845,7 +1841,7 @@
                 if(!hasAns) {
                     blank++;
                 } else {
-                    answeredOnly++; // Només comptabilitzem si s'ha respost
+                    answeredOnly++;
                     if (isCorrect) correct++;
                 }
                 
@@ -1890,7 +1886,6 @@
                 examHistory.lastStudyDate = todayStr;
             }
             
-            // OBJECTIU DIARI: SUMEN NOMÉS LES RESPOSTES FETES
             examHistory.dailyActivity[todayStr] = (examHistory.dailyActivity[todayStr] || 0) + answeredOnly;
             saveStatsToStorage();
 
@@ -1965,7 +1960,6 @@
             osc.start(); osc.stop(audioCtx.currentTime + 0.3);
         }
 
-        // MINIJOC TRIAGE RÀPID AMB BOTONS I CARREGA DE TRIAGE.JSON
         let triageQuestions = [];
         let triageTimerInt = null; 
         let triageScore = 0; 
@@ -2073,7 +2067,6 @@
             }, 1000);
         }
 
-        // MINIJOC EL PENJAT
         let hmDict = []; let hmWord = ""; let hmGuessed = []; let hmLives = 6; let hmCurrentScore = 0; let hmHighScore = 0;
         async function loadHangmanDict() {
             try { 
@@ -2174,7 +2167,6 @@
             }
         }
 
-        // MINIJOC PATRULLA
         let patrolPos = 0; let suspectPos = 3; let patrolQ = null;
         window.startPatrol = function() {
             if (window.questionBank.length === 0) return window.showToast("Banc de preguntes buit.", "error");
