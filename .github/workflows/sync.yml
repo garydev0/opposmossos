@@ -19,13 +19,15 @@ jobs:
         run: |
           mkdir -p ~/.config/rclone
           
-          echo "[gdrive]" > ~/.config/rclone/rclone.conf
-          echo "type = drive" >> ~/.config/rclone/rclone.conf
-          echo "scope = drive" >> ~/.config/rclone/rclone.conf
-          echo "client_id = ${{ secrets.GDRIVE_CLIENT_ID }}" >> ~/.config/rclone/rclone.conf
-          echo "client_secret = ${{ secrets.GDRIVE_CLIENT_SECRET }}" >> ~/.config/rclone/rclone.conf
-          echo "root_folder_id = ${{ secrets.GDRIVE_FOLDER_ID }}" >> ~/.config/rclone/rclone.conf
-          echo "token = {\"access_token\":\"\",\"token_type\":\"Bearer\",\"refresh_token\":\"${{ secrets.GDRIVE_REFRESH_TOKEN }}\",\"expiry\":\"2026-01-01T00:00:00Z\"}" >> ~/.config/rclone/rclone.conf
+          cat <<EOF > ~/.config/rclone/rclone.conf
+          [gdrive]
+          type = drive
+          scope = drive
+          client_id = ${{ secrets.GDRIVE_CLIENT_ID }}
+          client_secret = ${{ secrets.GDRIVE_CLIENT_SECRET }}
+          root_folder_id = ${{ secrets.GDRIVE_FOLDER_ID }}
+          token = {"access_token":"","token_type":"Bearer","refresh_token":"${{ secrets.GDRIVE_REFRESH_TOKEN }}","expiry":"2030-01-01T00:00:00Z"}
+          EOF
 
       - name: Sincronizar clonando de forma estricta
         run: |
