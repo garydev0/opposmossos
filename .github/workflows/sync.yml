@@ -21,14 +21,14 @@ jobs:
         run: |
           mkdir -p ~/.config/rclone
           
-          # Creamos la cabecera de la configuración básica
           echo "[gdrive]" > ~/.config/rclone/rclone.conf
           echo "type = drive" >> ~/.config/rclone/rclone.conf
           echo "scope = drive" >> ~/.config/rclone/rclone.conf
           echo "root_folder_id = ${{ secrets.GDRIVE_FOLDER_ID }}" >> ~/.config/rclone/rclone.conf
-          
-          # Volcamos el JSON de forma segura y directa usando la variable de entorno
           echo "service_account_credentials = $GDRIVE_JSON" >> ~/.config/rclone/rclone.conf
+          
+          # Forzamos a que use el almacenamiento del propietario de la carpeta y no del robot
+          echo "upload_cutoff = 0" >> ~/.config/rclone/rclone.conf
 
       - name: Sincronizar clonando de forma estricta
         run: |
@@ -36,4 +36,5 @@ jobs:
             --exclude ".git/**" \
             --exclude ".github/**" \
             --drive-use-trash=false \
+            --drive-keep-revision-forever=false \
             --verbose
