@@ -1,4 +1,4 @@
-name: Espejo Exacto GitHub a Google Drive
+name: Espejo Exacto GitHub a Google Drive Personal
 
 on:
   push:
@@ -15,17 +15,17 @@ jobs:
       - name: Instalar rclone en el servidor virtual
         run: sudo apt-get update && sudo apt-get install -y rclone
 
-      - name: Configurar accesos de Google Drive
-        env:
-          GDRIVE_JSON: ${{ secrets.GDRIVE_CREDENTIALS }}
+      - name: Configurar accesos de Google Drive Personal
         run: |
           mkdir -p ~/.config/rclone
           
           echo "[gdrive]" > ~/.config/rclone/rclone.conf
           echo "type = drive" >> ~/.config/rclone/rclone.conf
           echo "scope = drive" >> ~/.config/rclone/rclone.conf
+          echo "client_id = ${{ secrets.GDRIVE_CLIENT_ID }}" >> ~/.config/rclone/rclone.conf
+          echo "client_secret = ${{ secrets.GDRIVE_CLIENT_SECRET }}" >> ~/.config/rclone/rclone.conf
           echo "root_folder_id = ${{ secrets.GDRIVE_FOLDER_ID }}" >> ~/.config/rclone/rclone.conf
-          echo "service_account_credentials = $GDRIVE_JSON" >> ~/.config/rclone/rclone.conf
+          echo "token = {\"access_token\":\"\",\"token_type\":\"Bearer\",\"refresh_token\":\"${{ secrets.GDRIVE_REFRESH_TOKEN }}\",\"expiry\":\"2026-01-01T00:00:00Z\"}" >> ~/.config/rclone/rclone.conf
 
       - name: Sincronizar clonando de forma estricta
         run: |
@@ -33,6 +33,4 @@ jobs:
             --exclude ".git/**" \
             --exclude ".github/**" \
             --drive-use-trash=false \
-            --drive-chunk-size 32M \
-            --drive-upload-cutoff 0 \
             --verbose
